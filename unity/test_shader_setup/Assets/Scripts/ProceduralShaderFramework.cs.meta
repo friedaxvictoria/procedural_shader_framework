@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 25f93766583855b48b93e615878ca997
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - defaultShader: {fileID: 4800000, guid: 70fab4469ed44bd4fa46b24fcb92a434, type: 3}
+  - simpleNoiseShader: {fileID: 4800000, guid: fc5a7e0ed36d804479223c6a09dd2d21, type: 3}
+  - perlinNoiseShader: {fileID: 4800000, guid: a248e86ea07571041830551087efd559, type: 3}
+  - basicLightingShader: {fileID: 4800000, guid: 9bea7a5ad8c27424396556f95cd061d4, type: 3}
+  - toonLightingShader: {fileID: 4800000, guid: b759ec2adb3aeb648a59a761dcfd8d76, type: 3}
+  - rippleGeometryShader: {fileID: 4800000, guid: eed6ec7e72a2d2749aa2d6bf6c137569, type: 3}
+  - twistGeometryShader: {fileID: 4800000, guid: e883bd888264aed46b312392a3f01248, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

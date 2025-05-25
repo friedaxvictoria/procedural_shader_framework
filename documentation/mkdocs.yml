@@ -1,0 +1,48 @@
+site_name: Shader Documentation
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - content.code.link
+    - content.code.annotation
+    - content.code.copy  # Adds copy buttons to code blocks
+    - search.suggest     # Enhances search with suggestions
+    - search.highlight   # Highlights search terms
+
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: teal
+      accent: purple
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: teal
+      accent: lime
+plugins:
+  - search              # Enables full-text search
+markdown_extensions:
+  - pymdownx.highlight: # Syntax highlighting for code
+      anchor_linenums: true
+  - pymdownx.superfences # Advanced code block features
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.mark
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  
+
+  - attr_list           # For HTML attributes (e.g., video width)
+  - md_in_html          # For embedding videos or WebGL
+
+nav:
+  - Home: index.md
+  - Shaders: demoShader.md/   # Placeholder for future shader pages

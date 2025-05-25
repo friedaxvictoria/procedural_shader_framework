@@ -1,0 +1,7 @@
+{
+  "name": "com.tu_dresden.procedural_shaders",
+  "version": "1.0.0",
+  "displayName": "Procedural Shaders",
+  "description": "Reusable custom nodes for Shader Graph.",
+  "unity": "2022.5"
+}
