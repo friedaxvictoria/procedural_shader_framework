@@ -1,9 +1,0 @@
-[submodule "MKDocsTeamProject"]
-	path = MKDocsTeamProject
-	url = https://github.com/Jivandhamala22/MKDocsTeamProject.git
-[submodule "Procedural-Shaders"]
-	path = Procedural-Shaders
-	url = https://github.com/saeedelsayed/Procedural-Shaders.git
-[submodule "Procedural-Shader-Framework"]
-	path = Procedural-Shader-Framework
-	url = https://github.com/Utku-Alkan/Procedural-Shader-Framework.git
