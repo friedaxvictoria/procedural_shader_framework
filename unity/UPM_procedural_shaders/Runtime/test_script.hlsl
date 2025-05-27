@@ -1,40 +1,46 @@
-#ifndef ADDITIONAL_LIGHT_INCLUDED
-#define ADDITIONAL_LIGHT_INCLUDED
+#ifndef TEST_SHADER_FILE
+#define TEST_SHADER_FILE
+
+float2 _mousePoint;
 
 float rand(float2 co)
 {
-    return frac(sin(dot(co.xy ,float2(12.9898,78.233))) * 43758.5453);
+    return frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453);
 }
 
 float noise(float2 p)
 {
     float2 ip = floor(p);
     float2 u = frac(p);
-    u = u*u*(3.0-2.0*u);
+    u = u * u * (3.0 - 2.0 * u);
 
-    float res = lerp(lerp(rand(ip),rand(ip+float2(1.0,0.0)),u.x),
-                        lerp(rand(ip+float2(0.0,1.0)),rand(ip+float2(1.0,1.0)),u.x),u.y);
+    float res = lerp(lerp(rand(ip), rand(ip + float2(1.0, 0.0)), u.x),
+                        lerp(rand(ip + float2(0.0, 1.0)), rand(ip + float2(1.0, 1.0)), u.x), u.y);
     return res;
 }
 
-void perlin_noise_float(float2 uv, float scale, float4 noise_colour, out float4 colour){
-    float n = noise(uv*scale);
+void perlin_noise_float(float2 uv, float scale, float4 noise_colour, out float4 colour)
+{
+    float n = noise(uv * scale);
     colour = float4(n, n, n, 1) * noise_colour;
 }
 
-void simple_noise_float(float2 uv, float4 noise_colour, float3 user_input, out float4 colour){
+void simple_noise_float(float2 uv, float4 noise_colour, float3 user_input, out float4 colour)
+{
     float noise = frac(sin(dot(uv, user_input.xy)) * user_input.z);
     colour = float4(noise, noise, noise, 1) * noise_colour;
 }
 
-void ripple_geometry_float(float2 uv, float3 vertex, float speed, float frequency, float amplitude, out float3 out_vertex){
+void ripple_geometry_float(float2 uv, float3 vertex, float speed, float frequency, float amplitude, out float3 out_vertex)
+{
     float time = _Time.y * speed;
     float displacement = sin(uv.x * frequency + time) * amplitude;
     vertex.y += displacement;
     out_vertex = vertex;
 }
 
-void twist_geometry_float(float3 vertex, float twist_strength, out float3 out_vertex){
+void twist_geometry_float(float3 vertex, float twist_strength, out float3 out_vertex)
+{
     // Scale strength to a reasonable range
     float angle = vertex.y * twist_strength * 3.1415;
     float s = sin(angle);
@@ -51,131 +57,211 @@ void twist_geometry_float(float3 vertex, float twist_strength, out float3 out_ve
 }
 
 
-struct SDF {
-    int type;
-    float3 position;
-    float3 size;
-    float radius;
-};
+// ---------- Global State ----------
+float2 offsetA, offsetB = float2(0.00035, -0.00035), dummyVec = float2(-1.7, 1.7);
+float waveTime, globalTimeWrapped, noiseBias = 0.0, waveStrength = 0.0, globalAccum = 0.0;
+float3 controlPoint, rotatedPos, wavePoint, surfacePos, surfaceNormal, texSamplePos;
 
-SDF sdfArray[10];
+// ---------- Utilities ----------
 
-float sdRoundBox(float3 p, float3 b, float r)
+/**
+ * Computes a 2D rotation matrix.
+ */
+float2x2 computeRotationMatrix(float angle)
 {
-  float3 q = abs(p) - b + r;
-  return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
+    float c = cos(angle), s = sin(angle);
+    return float2x2(c, s, -s, c);
 }
 
+/**
+ * Legacy rotation matrix from original shader (unused).
+ */
+const float2x2 rotationMatrixSlow = float2x2(cos(0.023), sin(0.023), -cos(0.023), sin(0.023));
 
-float evalSDF(SDF s, float3 p)
+/**
+ * Hash-based procedural 3D noise.
+ * Returns: float in [0,1]
+ */
+float hashNoise(float3 p)
 {
-    if (s.type == 0) {
-        return length(p - s.position) - s.radius;
-    } else if (s.type == 1) {
-        return sdRoundBox(p - s.position, s.size, s.radius);
+    float3 f = floor(p), magic = float3(7, 157, 113);
+    p -= f;
+    float4 h = float4(0, magic.yz, magic.y + magic.z) + dot(f, magic);
+    p *= p * (3.0 - 2.0 * p);
+    h = lerp(frac(sin(h) * 43785.5), frac(sin(h + magic.x) * 43785.5), p.x);
+    h.xy = lerp(h.xz, h.yw, p.y);
+    return lerp(h.x, h.y, p.z);
+}
+
+// ---------- Wave Generation ----------
+
+/**
+ * Computes wave height using multi-octave sine-noise accumulation.
+ *
+ * Inputs:
+ *   pos         - vec3 : world-space position
+ *   iterationCount - int : number of noise layers
+ *   writeOut    - float: whether to export internal wave variables
+ *
+ * Returns:
+ *   float : signed height field
+ */
+float computeWave(float3 pos, int iterationCount, float writeOut)
+{
+    float3 warped = pos - float3(0, 0, globalTimeWrapped * 3.0);
+
+    float direction = sin(_Time.y * 0.15);
+    float angle = 0.001 * direction;
+    float2x2 rotation = computeRotationMatrix(angle);
+
+    float accum = 0.0, amplitude = 3.0;
+    for (int i = 0; i < iterationCount; i++)
+    {
+        accum += abs(sin(hashNoise(warped * 0.15) - 0.5) * 3.14) * (amplitude *= 0.51);
+        warped.xy = mul(warped.xy, rotation);
+        warped *= 1.75;
     }
-    return 1e5;
-}
 
-float smin(float a, float b, float k) {
-    float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
-    return lerp(b, a, h) - k * h * (1.0 - h);
-}
-
-
-float evaluateScene(float3 p)
-{
-    float d = 1e5;
-    for (int i = 0; i < 10; ++i) {
-        d = min(d, evalSDF(sdfArray[i], p));
+    if (writeOut > 0.0)
+    {
+        controlPoint = warped;
+        waveStrength = accum;
     }
-    return d;
+
+    float height = pos.y + accum;
+    height *= 0.5;
+    height += 0.3 * sin(_Time.y + pos.x * 0.3); // slight bobbing
+
+    return height;
 }
 
-// Signed distance to scene (only one object for now)
-float map(float3 p)
+/**
+ * Maps a point to distance field for raymarching.
+ */
+float2 evaluateDistanceField(float3 pos, float writeOut)
 {
-    return evaluateScene(p); // Sphere radius = 1.0
+    return float2(computeWave(pos, 7, writeOut), 5.0);
 }
 
-// Estimate normal by central differences
-float3 getNormal(float3 p)
+/**
+ * Performs raymarching against the wave surface SDF.
+ */
+float2 traceWater(float3 rayOrigin, float3 rayDir)
 {
-    float h = 0.0001;
-    float2 k = float2(1, -1);
-    return normalize(
-        k.xyy * map(p + k.xyy * h) +
-        k.yyx * map(p + k.yyx * h) +
-        k.yxy * map(p + k.yxy * h) +
-        k.xxx * map(p + k.xxx * h)
-    );
-}
-
-// Basic lighting
-float3 getLighting(float3 p, float3 eye)
-{
-    float3 lightDir = normalize(float3(0.0, 0.0, 0.3));
-    float3 normal = getNormal(p);
-    float diff = clamp(dot(normal, lightDir), 0.0, 1.0);
-    float3 color = float3(0.4, 0.7, 1.0) * diff;
-    return color;
-}
-
-// Raymarching function
-float raymarch(float3 ro, float3 rd, out float3 hitPos)
-{
-    float t = 0.0;
-    for (int i = 0; i < 100; i++) {
-        float3 p = ro + rd * t;
-        float d = map(p);
-        if (d < 0.001) {
-            hitPos = p;
-            return t;
-        }
-        if (t > 50.0) break;
-        t += d;
+    float2 d = float2(0.1, 0.1);
+    float2 hit = float2(0.1, 0.1);
+    for (int i = 0; i < 128; i++)
+    {
+        d = evaluateDistanceField(rayOrigin + rayDir * hit.x, 1.0);
+        if (d.x < 0.0001 || hit.x > 43.0)
+            break;
+        hit.x += d.x;
+        hit.y = d.y;
     }
-    return -1.0; // No hit
+    if (hit.x > 43.0)
+        hit.y = 0.0;
+    return hit;
 }
 
-void SDF_float(out float4 fragColor, in float2 fragCoord, in float2 screenParams)
+/**
+ * Constructs camera basis from forward and up vectors.
+ */
+float3x3 computeCameraBasis(float3 forward, float3 up)
 {
-    float2 uv = fragCoord / screenParams.xy * 2.0 - 1.0;
-    uv.x *= screenParams.x / screenParams.y;
+    float3 right = normalize(cross(forward, up));
+    float3 camUp = cross(right, forward);
+    return float3x3(right, camUp, forward);
+}
+
+/**
+ * Samples layered noise from texture for detail enhancement.
+ */
+float4 sampleNoiseTexture(float2 uv, sampler2D tex)
+{
+    float f = 0.0;
+    f += tex2D(tex, uv * 0.125).r * 0.5;
+    f += tex2D(tex, uv * 0.25).r * 0.25;
+    f += tex2D(tex, uv * 0.5).r * 0.125;
+    f += tex2D(tex, uv * 1.0).r * 0.125;
+    f = pow(f, 1.2);
+    return float4(f * 0.45 + 0.05, f * 0.45 + 0.05, f * 0.45 + 0.05, f * 0.45 + 0.05);
+}
+
+// ---------- Main Entry ----------
+
+#define CAMERA_POSITION float3(0.0, 2.5, 8.0)
+
+void water_surface_float(float4 fragCoord, float noise, out float4 fragColor)
+{
+    //float2 uv = (fragCoord.xy / _ScreenParams.xy - 0.5) / float2(_ScreenParams.y / _ScreenParams.x, 1.0);
+    // Calculate centered UV with aspect ratio correction
+    float2 uv = (fragCoord.xy - 0.5) / float2(_ScreenParams.y / _ScreenParams.x, 1.0);
+    //float2 uv = fragCoord.xy;
+    globalTimeWrapped = _Time.y % 62.83;
+
+    // Orbit camera: yaw/pitch from mouse
+    float2 m = (_mousePoint.xy == float2(0.0, 0.0)) ? float2(0.0, 0.0) : _mousePoint.xy / _ScreenParams.xy;
+    //float2 m = float2(0,0) / _ScreenParams.xy;
+    float yaw = 6.2831 * (m.x - 0.5);
+    float pitch = 1.5 * 3.1416 * (m.y - 0.5);
+    float cosPitch = cos(pitch);
+
+    float3 viewDir = normalize(float3(
+        sin(yaw) * cosPitch,
+        sin(pitch),
+        cos(yaw) * cosPitch
+    ));
     
-    SDF circle;
-    circle.type = 0;
-    circle.position = float3(0.0);
-    circle.size = float3(0.0);
-    circle.radius = 1.0;
-    SDF roundBox;
-    roundBox.type = 1;
-    roundBox.position = float3(1.2, 0.0, 0.0);
-    roundBox.size = float3(1.0, 1.0, 1.0);
-    roundBox.radius = 0.2;
-    SDF roundBox2;
-    roundBox.type = 1;
-    roundBox.position = float3(-1.7, 0.0, 0.0);
-    roundBox.size = float3(1.0, 1.0, 1.0);
-    roundBox.radius = 0.2;
-    sdfArray[0] = circle;
-    sdfArray[1] = roundBox;
-    sdfArray[2] = roundBox2;
 
-    float3 ro = float3(0, 0, 3); // Ray origin
-    float3 rd = normalize(float3(uv, -1)); // Ray direction
+    float3 rayOrigin = CAMERA_POSITION;
+    float3x3 cameraBasis = computeCameraBasis(viewDir, float3(0, 1, 0));
+    float3 rayDir = mul(normalize(float3(uv, 1.0)), cameraBasis);
+       
 
-    float3 hitPos;
-    float t = raymarch(ro, rd, hitPos);
+    // Default background color
+    float3 baseColor = float3(0.05, 0.07, 0.1);
+    float3 color = baseColor;
 
-    float3 color;
-    if (t > 0.0) {
-        color = getLighting(hitPos, ro);
-    } else {
-        color = float3(0.0); // Background
+    // Raymarching
+    float2 hit = traceWater(rayOrigin, rayDir);
+    
+    if (hit.y > 0.0)
+    {
+        surfacePos = rayOrigin + rayDir * hit.x;
+
+        // Gradient-based normal estimation
+        float3 grad = normalize(float3(
+            computeWave(surfacePos + float3(0.01, 0.0, 0.0), 7, 0.0) -
+            computeWave(surfacePos - float3(0.01, 0.0, 0.0), 7, 0.0),
+            0.02,
+            computeWave(surfacePos + float3(0.0, 0.0, 0.01), 7, 0.0) -
+            computeWave(surfacePos - float3(0.0, 0.0, 0.01), 7, 0.0)
+        ));
+
+        // Fresnel-style highlight
+        float fresnel = pow(1.0 - dot(grad, -rayDir), 5.0);
+        float highlight = clamp(fresnel * 1.5, 0.0, 1.0);
+
+        // Texture detail sampling
+        float texNoiseVal = noise;
+
+        // Water shading: deep vs bright
+        float3 deepColor = float3(0.05, 0.1, 0.6);
+        float3 brightColor = float3(0.1, 0.3, 0.9);
+        float shading = clamp(waveStrength * 0.1 + texNoiseVal * 0.8, 0.0, 1.0);
+        float3 waterColor = lerp(deepColor, brightColor, shading);
+
+        // Add highlight
+        waterColor += float3(1.0, 1, 1) * highlight * 0.4;
+
+        // Depth-based fog
+        float fog = exp(-0.00005 * hit.x * hit.x * hit.x);
+        color = lerp(baseColor, waterColor, fog);
     }
 
-    fragColor = float4(color, 1.0);
+    // Gamma correction
+    fragColor = float4(pow(color + globalAccum * 0.2 * float3(0.7, 0.2, 0.1), float3(0.55, 0.55, 0.55)), 1.0);
+
 }
 
 
