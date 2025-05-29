@@ -18,7 +18,8 @@
 		{
 			"Name": "ProceduralShaderFramework",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"CanHotReload": true
 		}
 	]
 }

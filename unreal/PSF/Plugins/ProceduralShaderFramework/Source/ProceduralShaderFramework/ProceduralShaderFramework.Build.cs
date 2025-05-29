@@ -18,11 +18,15 @@ public class ProceduralShaderFramework : ModuleRules
 		PrivateIncludePaths.AddRange(
 			new string[] {
 				// ... add other private include paths required here ...
-			}
+            }
 			);
-			
-		
-		PublicDependencyModuleNames.AddRange(
+
+
+
+
+
+
+        PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Core",
@@ -38,6 +42,10 @@ public class ProceduralShaderFramework : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+                "Projects",
+				"RenderCore",
+                "ShaderPreprocessor",
+                "ShaderCompilerCommon"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
