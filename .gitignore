@@ -70,3 +70,31 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 [Aa]ssets/[Ss]treamingAssets/aa.meta
 [Aa]ssets/[Ss]treamingAssets/aa/*
+
+
+# UNREAL ENGINE
+# Ignore intermediate and binary files
+/unreal/PSF/Intermediate/
+/unreal/PSF/Saved/
+/unreal/PSF/DerivedDataCache/
+/unreal/PSF/Binaries/
+/unreal/PSF/Build/
+
+# Ignore user settings
+.vscode/
+*.VC.db
+*.sdf
+*.opensdf
+*.suo
+*.user
+*.userprefs
+*.log
+*.tlog
+*.tmp
+*.csproj
+*.sln
+
+# Ignore plugin-specific binaries
+/unreal/PSF/Plugins/*/Binaries/
+/unreal/PSF/Plugins/*/Intermediate/
+/unreal/PSF/Plugins/*/Saved/
