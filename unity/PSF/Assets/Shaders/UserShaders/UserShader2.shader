@@ -13,6 +13,22 @@ Shader "Custom/UserShader2"
         _Mouse ("Mouse", Vector) = (0.5, 0.5, 0.5, 0.5)
         [ToggleUI] _GammaCorrect ("Gamma Correction", Float) = 1
         _Resolution ("Resolution (Change if AA is bad)", Range(1, 1024)) = 1
+
+        _TorusColor ("Torus Color", Vector) = (1.0, 0.2, 0.2)
+        _TorusRadius ("Torus Radius", Float) = 0.2
+        _TorusSize ("Torus Size", Vector) = (1.0, 5.0, 1.5)
+        _TorusPosition ("Torus Position", Vector) = (0.0, 0.0, 0.0)
+
+        _CubeColor ("Cube Color", Vector) = (0.2, 1, 0.2)
+        _CubeSize ("Cube Size", Vector) = (1.0, 1.0, 1.0)
+        _CubePosition1 ("Cube Position 1", Vector) = (1.9, 0.0, 0.0)
+        _CubePosition2 ("Cube Position 2", Vector) = (-1.9, 0.0, 0.0)
+
+        _SphereColor ("Sphere Color", Vector) = (0.2, 0.2, 1.0)
+        _SphereRadius ("Sphere Radius", Float) = 1
+        _SpherePosition ("Sphere Position", Vector) = (0.0, 0.0, 0.0)
+
+        _LightPosition ("Light Position", Vector) = (5.0, 5.0, 5.0)
     }
 
     SubShader
@@ -43,6 +59,18 @@ Shader "Custom/UserShader2"
 
             float4 _Color;
             float _TimeSpeed;
+            float3 _TorusColor;
+            float _TorusRadius;
+            float3 _TorusSize;
+            float3 _TorusPosition;
+            float3 _CubeColor;
+            float3 _CubeSize;
+            float3 _CubePosition1;
+            float3 _CubePosition2;
+            float3 _SphereColor;
+            float _SphereRadius;
+            float3 _SpherePosition;
+            float3 _LightPosition;
 
             Varyings vert (Attributes IN)
             {
@@ -65,9 +93,16 @@ Shader "Custom/UserShader2"
 
                 float4 color4;
                 float3 color3;
-                Integration(IN.uv, color4);
-                color3 = ApplyPerlinNoise(color4.rgb, IN.worldPos, _TimeSpeed);
-                color4.rgb = color3;
+
+                // Integration(IN.uv, color4);
+
+                Integration(IN.uv, color4, 
+                    _TorusColor, _TorusRadius, _TorusSize, _TorusPosition
+                    , _CubeColor, _CubeSize, _CubePosition1, _CubePosition2
+                    , _SphereColor, _SphereRadius, _SpherePosition,
+                    _LightPosition
+                    );
+                
                 return color4;
             }
             ENDHLSL

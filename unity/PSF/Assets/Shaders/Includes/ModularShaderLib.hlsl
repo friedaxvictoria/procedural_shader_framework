@@ -452,7 +452,12 @@ float raymarch(float3 ro, float3 rd, out float3 hitPos)
     return -1.;
 }
 
-void Integration(float2 INuv, out float4 frgColor3)
+void Integration(float2 INuv, out float4 frgColor3, 
+float3 torusColor = float3(1., 0.2, 0.2), float torusRadius = 0.2, float3 torusSize = float3(1.0, 5.0, 1.5), float3 torusPosition = float3(0.0, 0.0, 0.0),
+float3 cubeColor = float3(0.2, 1., 0.2), float3 cubeSize = float3(1.0, 1.0, 1.0), float3 cubePosition1 = float3(1.9, 0.0, 0.0), float3 cubePosition2 = float3(-1.9, 0.0, 0.0),
+float3 sphereColor = float3(0.2, 0.2, 1.), float sphereRadius = 1.0, float3 spherePosition = float3(0.0, 0.0, 0.0),
+float3 lightPosition = float3(5.0, 5.0, 5.0)
+)
 {
     float4 frgColor = 0;
     float2 fragCoord = INuv * _Resolution;
@@ -463,34 +468,34 @@ void Integration(float2 INuv, out float4 frgColor3)
 
     SDF circle;
     circle.type = 0;
-    circle.position = float3(0.0, 0.0, 0.0);
+    circle.position = spherePosition;
     circle.size = float3(0.0, 0.0, 0.0);
-    circle.radius = 1.0;
+    circle.radius = sphereRadius;
 
     SDF roundBox;
     roundBox.type = 1;
-    roundBox.position = float3(1.9, 0.0, 0.0);
-    roundBox.size = float3(1.0, 1.0, 1.0);
+    roundBox.position = cubePosition1;
+    roundBox.size = cubeSize;
     roundBox.radius = 0.2;
 
     SDF roundBox2;
     roundBox2.type = 1;
-    roundBox2.position = float3(-1.9, 0.0, 0.0);
-    roundBox2.size = float3(1.0, 1.0, 1.0);
+    roundBox2.position = cubePosition2;
+    roundBox2.size = cubeSize;
     roundBox2.radius = 0.2;
 
     SDF torus;
     torus.type = 2;
-    torus.position = float3(0.0, 0.0, 0.0);
-    torus.size = float3(1.0, 5.0, 1.5);
-    torus.radius = 0.2;
+    torus.position = torusPosition;
+    torus.size = torusSize;
+    torus.radius = torusRadius;
 
     sdfArray[0] = circle;
     sdfArray[1] = roundBox;
     sdfArray[2] = roundBox2;
     sdfArray[3] = torus;
-    float3 ro = float3(0, 0, 7);
-    float3 rd = normalize(float3(uv, -1));
+    float3 ro = float3(0, 0, 7); // Camera position
+    float3 rd = normalize(float3(uv, -1)); // Ray direction
     float3 hitPos;
     float t = raymarch(ro, rd, hitPos);
     float3 color;
@@ -498,7 +503,7 @@ void Integration(float2 INuv, out float4 frgColor3)
     {
         float3 normal = getNormal(hitPos);
         float3 viewDir = normalize(ro - hitPos);
-        float3 lightPos = float3(5., 5., 5.);
+        float3 lightPos = lightPosition;
         float3 lightColor = ((float3) 1.);
         float3 L = normalize(lightPos - hitPos);
         float3 ambientCol = ((float3) 0.1);
@@ -512,16 +517,16 @@ void Integration(float2 INuv, out float4 frgColor3)
         MaterialParams mat;
         if (gHitID == 0)
         {
-            mat = makePlastic(float3(0.2, 0.2, 1.));
+            mat = makePlastic(sphereColor);
         }
         else if (gHitID == 1 || gHitID == 2)
         {
-            mat = makePlastic(float3(0.2, 1., 0.2));
+            mat = makePlastic(cubeColor);
         }
         else if (gHitID == 3)
         {
             mat = createDefaultMaterialParams();
-            mat.baseColor = float3(1., 0.2, 0.2);
+            mat.baseColor = torusColor;
             mat.shininess = 64.;
         }
         else
