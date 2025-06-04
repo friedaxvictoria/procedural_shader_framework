@@ -6,6 +6,22 @@
 //   (e.g., cloud layer) using step-based integration along a ray.
 // ==========================================
 
+uniform sampler2D NoiseTex;
+uniform vec2 Resolution; 
+
+// ------------------------------------------------------------
+// Volume Sample
+// Description:
+//   Represents the **local physical properties** of a single point
+//   sampled along a ray through a volumetric medium.
+// Note:
+//   This structure may be extended to support heterogeneous volumes with additional attributes.
+// ------------------------------------------------------------
+struct VolumeSample{
+    float density;
+    float emission;
+};
+
 // ------------------------------------------------------------
 // Integrate Cloud
 // Inputs:
@@ -29,9 +45,6 @@
 //   - Integrates using adaptive step size `dt`, with noise offset.
 //   - Stops when accumulated alpha > 0.99 or t exceeds volume bounds.
 // ------------------------------------------------------------
-uniform sampler2D NoiseTex;
-uniform vec2 Resolution; 
-
 vec4 integrateCloud(vec3 rayOrigin, vec3 rayDir, float rayLength,
                     float stepCount, vec3 lightDir, vec3 lightColor, 
                     vec3 ambient, VolMaterialParams mat) {
