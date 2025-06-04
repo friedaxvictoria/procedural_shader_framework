@@ -102,11 +102,13 @@ float map(in vec3 p, int oct) {
     return clamp(f * heightFalloff + 0.1, 0.0, 1.0); 
 }
 
-// === Volume Structs ===
+// === Volume Sample ===
+// Reference implementation from repo "shaders/lighting/volume_lighting/vol_integration.glsl"
 struct VolumeSample {
     float density;
     float emission;
 };
+// === Volume Sample End ===
 
 // === Volume Lighting ===
 // Reference implementation from repo "shaders/lighting/volume_lighting/vol_lit_context.glsl"
