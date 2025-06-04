@@ -14,9 +14,7 @@
 // Local Volumetric Cloud Lighting (used for cloud)
 // Input:
 //   VolumeSample s:
-//      - vec3: position       : world-space sample position
 //      - float: density       : local sample density
-//      - vec3: baseColor      : intrinsic color at this point
 //      - float: emission      : emission value at this point
 //
 //   VolCtxLocal ctx:
