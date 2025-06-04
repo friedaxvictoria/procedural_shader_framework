@@ -84,6 +84,7 @@ float snoise(vec3 v) {
 // === Simplex Noise End === 
 
 // === FBM Density Map ===
+// This function implements a specialized version of FBM noise for volumetric cloud modeling.
 float map(in vec3 p, int oct) {
     vec3 q = p - vec3(0.0, 0.1, 1.0) * iTime;
 
@@ -101,6 +102,7 @@ float map(in vec3 p, int oct) {
     f = mix(f * 0.1 - 0.5, f, g * g);
     return clamp(f * heightFalloff + 0.1, 0.0, 1.0); 
 }
+// === FBM Density Map End ===
 
 // === Volume Sample ===
 // Reference implementation from repo "shaders/lighting/volume_lighting/vol_integration.glsl"
