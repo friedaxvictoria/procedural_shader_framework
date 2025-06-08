@@ -7,8 +7,6 @@ struct SDF
     float radius; // For sphere this is the radius, for round box, this is the corner radius
 };
 
-int gHitID; // ID of the closest hit shape
-
 //SDF sdfArray[10]; // Array to hold SDF shapes
 float _sdfType[10];
 float4 _sdfPosition[10];
@@ -54,7 +52,7 @@ float evalSDF(float3 sdfPosition, float sdfRadius, float3 sdfSize, int sdfType, 
     return 1e5;
 }
 // Evaluate the scene by checking all SDF shapes
-float evaluateScene(float3 p)
+float evaluateScene(float3 p, out int gHitID)
 {
     float d = 1e5;
     int bestID = -1;
@@ -75,11 +73,12 @@ float3 getNormal(float3 p)
 {
     float h = 0.0001;
     float2 k = float2(1, -1);
+    int gHitID;
     return normalize(
-        k.xyy * evaluateScene(p + k.xyy * h) +
-        k.yyx * evaluateScene(p + k.yyx * h) +
-        k.yxy * evaluateScene(p + k.yxy * h) +
-        k.xxx * evaluateScene(p + k.xxx * h)
+        k.xyy * evaluateScene(p + k.xyy * h, gHitID) +
+        k.yyx * evaluateScene(p + k.yyx * h, gHitID) +
+        k.yxy * evaluateScene(p + k.yxy * h, gHitID) +
+        k.xxx * evaluateScene(p + k.xxx * h, gHitID)
     );
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,178 +157,6 @@ float fbm_n31(float3 p, int octaves)
     return value;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                          material module                                          //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-struct MaterialParams
-{
-    float3 baseColor;
-    float3 specularColor;
-    float specularStrength;
-    float shininess;
-
-    float roughness;
-    float metallic;
-    float rimPower;
-    float fakeSpecularPower;
-    float3 fakeSpecularColor;
-
-    float ior;
-    float refractionStrength;
-    float3 refractionTint;
-};
-
-MaterialParams createDefaultMaterialParams()
-{
-    MaterialParams mat;
-    mat.baseColor = float3(1.0, 1.0, 1.0);
-    mat.specularColor = float3(1.0, 1.0, 1.0);
-    mat.specularStrength = 1.0;
-    mat.shininess = 32.0;
-
-    mat.roughness = 0.5;
-    mat.metallic = 0.0;
-    mat.rimPower = 2.0;
-    mat.fakeSpecularPower = 32.0;
-    mat.fakeSpecularColor = float3(1.0, 1.0, 1.0);
-
-    mat.ior = 1.45;
-    mat.refractionStrength = 0.0;
-    mat.refractionTint = float3(1.0, 1.0, 1.0);
-    return mat;
-}
-
-MaterialParams makePlastic(float3 color)
-{
-    MaterialParams mat = createDefaultMaterialParams();
-    mat.baseColor = color;
-    mat.metallic = 0.0;
-    mat.roughness = 0.4;
-    mat.specularStrength = 0.5;
-    return mat;
-}
-
-struct LightingContext
-{
-    float3 position; // World-space fragment position
-    float3 normal; // Normal at the surface point (normalized)
-    float3 viewDir; // Direction from surface to camera (normalized)
-    float3 lightDir; // Direction from surface to light (normalized)
-    float3 lightColor; // RGB intensity of the light source
-    float3 ambient; // Ambient light contribution
-};
-
-float3 applyPhongLighting(LightingContext ctx, MaterialParams mat)
-{
-    float diff = max(dot(ctx.normal, ctx.lightDir), 0.0); // Lambertian diffuse
-
-    float3 R = reflect(-ctx.lightDir, ctx.normal); // Reflected light direction
-    float spec = pow(max(dot(R, ctx.viewDir), 0.0), mat.shininess); // Phong specular
-
-    float3 diffuse = diff * mat.baseColor * ctx.lightColor;
-    float3 specular = spec * mat.specularColor * mat.specularStrength;
-    
-    return ctx.ambient + diffuse + specular;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Raymarching function
-float raymarch(float3 ro, float3 rd, out float3 hitPos)
-{
-    float t = 0.0;
-    for (int i = 0; i < 100; i++)
-    {
-        float3 p = ro + rd * t; // Current point in the ray
-        float noise = fbmPseudo3D(p, 1); // here you can replace fbmPseudo3D with fbm_n31 for different noise
-        float d = evaluateScene(p) + noise * 0.3; // Evaluate the scene SDF at the current point, add noise
-        if (d < 0.001)
-        {
-            hitPos = p;
-            return t;
-        }
-        if (t > 50.0)
-            break;
-        t += d;
-    }
-    return -1.0; // No hit
-}
-
-
-void mainImage_float(float2 fragCoord, out float4 fragColor)
-{
-
-    
-     // replcae fragCoord and iResolution with your engine variables
-    float2 uv = (fragCoord.xy * 2.0 - 1.0) / float2(_ScreenParams.y / _ScreenParams.x, 1.);
-
-        float3 ro = float3(0, 0, 7); // Ray origin
-        float3 rd = normalize(float3(uv, -1)); // Ray direction
-
-        float3 hitPos;
-        float t = raymarch(ro, rd, hitPos); // Raymarching to find the closest hit point
-        
-        float3 color;
-        if (t > 0.0)
-        {
-            float3 normal = getNormal(hitPos); // Estimate normal at the hit point
-            float3 viewDir = normalize(ro - hitPos); // Direction from hit point to camera
-    
-            float3 lightPos = float3(5.0, 5.0, 5.0); // Light position in world space
-        float3 lightColor = float3(1.0, 1.0, 1.0); // Light color (white)
-            float3 L = normalize(lightPos - hitPos); // Direction from hit point to light source
-        
-        float3 ambientCol = float3(0.1, 0.1, 0.1); // Ambient light color
-    
-    // Prepare lighting context
-            LightingContext ctx;
-            ctx.position = hitPos;
-            ctx.normal = normal;
-            ctx.viewDir = viewDir;
-            ctx.lightDir = L;
-            ctx.lightColor = lightColor;
-            ctx.ambient = ambientCol;
-    
-            MaterialParams mat; // Material parameters for the hit object
-    
-            if (gHitID == 0)
-            { // Sphere
-                mat = makePlastic(float3(0.2, 0.2, 1.0)); // red sphere
-            }
-            else if (gHitID == 1 || gHitID == 2)
-            { // Round boxes
-                mat = makePlastic(float3(0.2, 1.0, 0.2)); // green boxes
-            }
-            else if (gHitID == 3)
-            { // Torus
-                mat = createDefaultMaterialParams();
-                mat.baseColor = float3(1.0, 0.2, 0.2); // blue torus
-                mat.shininess = 64.0;
-            }
-            else
-            {
-                mat = createDefaultMaterialParams();
-            }
-
-            color = applyPhongLighting(ctx, mat); // final color 
-        }
-        else
-        {
-            color = float3(0.0, 0.0, 0.0); // Background
-        }
-
-        fragColor = float4(color, 1.0);
-    }
-
-
-
-
-
-
-
 
 static float3 ro = float3(0, 0, 7); // Ray origin
 
@@ -357,20 +184,37 @@ void evalSDF_float(float3 sdfPosition, float sdfRadius, float3 sdfSize, int sdfT
     if (sdfType == 0)
     {
         sdfValue = sdSphere((p - sdfPosition), sdfRadius);
+        return;
     }
     else if (sdfType == 1)
     {
         sdfValue = sdRoundBox(p - sdfPosition, sdfSize, sdfRadius);
+        return;
     }
     else if (sdfType == 2)
         sdfValue = sdTorus(p - sdfPosition, sdfSize.yz);
+    return;
     sdfValue = 1e5;
 }
 
-void raymarch_float(float2 uv, float noiseType, out float t, out float3 hitPos)
+void addSphere_float(float3 position, float radius, float index, out float indexOut)
 {
+    for (int i = 0; i < 10; i++)
+    {
+        if (i == index)
+        {
+            _sdfType[i] = 0;
+            _sdfPosition[i] = float4(position, 1);
+            _sdfSize[i] = float4(0, 0, 0, 0);
+            _sdfRadius[i] = radius;
+            break;
+        }
+    }
+    indexOut = index + 1;
+}
 
-    
+void raymarch_float(float2 uv, float numSDF, out float t, out float3 hitPos, out float gHitID)
+{
     float3 rd = normalize(float3(uv, -1)); // Ray direction
 
     t = 0.0;
@@ -378,12 +222,17 @@ void raymarch_float(float2 uv, float noiseType, out float t, out float3 hitPos)
     for (int i = 0; i < 100; i++)
     {
         float3 p = ro + rd * t; // Current point in the ray
-        float noise = fbmPseudo3D(p, 1); // here you can replace fbmPseudo3D with fbm_n31 for different noise
+#ifdef _NOISETYPE_FBM
+            float noise = fbmPseudo3D(p, 1); // here you can replace fbmPseudo3D with fbm_n31 for different noise
+#else
+        float noise = 0;
+#endif
         float d = 1e5;
         int bestID = -1;
-        for (int i = 0; i < 10; ++i)
+        for (int i = 0; i <= numSDF; ++i)
         {
-            float di = evalSDF(_sdfPosition[i].xyz, _sdfRadius[i], _sdfSize[i].xyz, _sdfType[i], p);
+            float di;
+            evalSDF_float(_sdfPosition[i].xyz, _sdfRadius[i], _sdfSize[i].xyz, _sdfType[i], p, di);
             if (di < d)
             {
                 d = di; // Update the closest distance
@@ -408,8 +257,78 @@ void raymarch_float(float2 uv, float noiseType, out float t, out float3 hitPos)
     }
 }
 
-void applyPhongLighting_float(float3 normal, float3 lightDir, float3 viewDir, float shininess, float3 baseColor, float3 lightColor, float3 specularColor, 
-float specularStrength, float3 ambientColor, out float3 lightingColor)
+void raymarchSphere_float(float2 uv, float3 position, float radius, out float t, out float3 hitPos, out float gHitID, out float d)
+{
+    float3 rd = normalize(float3(uv, -1)); // Ray direction
+
+    t = 0.0;
+    bool hit = false;
+    for (int j = 0; j < 100; j++)
+    {
+        float3 p = ro + rd * t; // Current point in the ray
+#ifdef _NOISETYPE_FBM
+            float noise = fbmPseudo3D(p, 1); // here you can replace fbmPseudo3D with fbm_n31 for different noise
+#else
+        float noise = 0;
+#endif
+        d = 1e5;
+        int bestID = -1;
+        d = sdSphere(p - position, radius);
+        gHitID = bestID; // Store the ID of the closest hit shape
+        d = d + noise * 0.3; // Evaluate the scene SDF at the current point, add noise
+        if (d < 0.001)
+        {
+            hitPos = p;
+            hit = true;
+            break;
+        }
+        if (t > 50.0)
+            break;
+        t += d;
+    }
+    if (!hit)
+    {
+        t = -1;
+    }
+}
+
+void raymarchTorus_float(float2 uv, float3 position, float innerRadius, float outerRadius, out float t, out float3 hitPos, out float gHitID, out float d)
+{
+    float3 rd = normalize(float3(uv, -1)); // Ray direction
+
+    t = 0.0;
+    bool hit = false;
+    for (int j = 0; j < 100; j++)
+    {
+        float3 p = ro + rd * t; // Current point in the ray
+#ifdef _NOISETYPE_FBM
+            float noise = fbmPseudo3D(p, 1); // here you can replace fbmPseudo3D with fbm_n31 for different noise
+#else
+        float noise = 0;
+#endif
+        d = 1e5;
+        int bestID = -1;
+        d = sdTorus(p - position, float2(innerRadius, outerRadius));
+        gHitID = bestID; // Store the ID of the closest hit shape
+        d = d + noise * 0.3; // Evaluate the scene SDF at the current point, add noise
+        if (d < 0.001)
+        {
+            hitPos = p;
+            hit = true;
+            break;
+        }
+        if (t > 50.0)
+            break;
+        t += d;
+    }
+    if (!hit)
+    {
+        t = -1;
+    }
+}
+
+void applyPhongLighting_float(float3 normal, float3 viewDir, float3 lightDir, float3 lightColor, float3 ambientColor, float3 baseColor, float3 specularColor,
+float specularStrength, float shininess, out float3 lightingColor)
 {
     float diff = max(dot(normal, lightDir), 0.0); // Lambertian diffuse
 
@@ -434,48 +353,32 @@ out float3 ambientColor)
     ambientColor = float3(0.1, 0.1, 0.1); // Ambient light color<
 }
 
-void createDefaultMaterialParams_float(out float3 baseColor, out float3 specularColor, out float specularStrength, 
+void createDefaultMaterialParams_float(float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
+float shininessIn, float roughnessIn, float metallicIn, float rimPowerIn, float fakeSpecularPowerIn, float3 fakeSpecularColorIn,
+float iorIn, float refractionStrengthIn, float3 refractionTintIn,
+out float3 baseColor, out float3 specularColor, out float specularStrength,
 out float shininess, out float roughness, out float metallic, out float rimPower, out float fakeSpecularPower, out float3 fakeSpecularColor,
 out float ior, out float refractionStrength, out float3 refractionTint)
 {
-    baseColor = float3(1.0, 1.0, 1.0);
-    specularColor = float3(1.0, 1.0, 1.0);
-    specularStrength = 1.0;
-    shininess = 32.0;
+    baseColor = baseColorIn;
+    specularColor = specularColorIn;
+    specularStrength = specularStrengthIn;
+    shininess = shininessIn;
 
-    roughness = 0.5;
-    metallic = 0.0;
-    rimPower = 2.0;
-    fakeSpecularPower = 32.0;
-    fakeSpecularColor = float3(1.0, 1.0, 1.0);
+    roughness = roughnessIn;
+    metallic = metallicIn;
+    rimPower = rimPowerIn;
+    fakeSpecularPower = fakeSpecularPowerIn;
+    fakeSpecularColor = fakeSpecularColorIn;
 
-    ior = 1.45;
-    refractionStrength = 0.0;
-    refractionTint = float3(1.0, 1.0, 1.0);
-}
-
-void makePlastic_float(float3 color, out float3 baseColor, out float3 specularColor, out float specularStrength,
-out float shininess, out float roughness, out float metallic, out float rimPower, out float fakeSpecularPower, out float3 fakeSpecularColor,
-out float ior, out float refractionStrength, out float3 refractionTint)
-{
-    baseColor = color;
-    specularColor = float3(1.0, 1.0, 1.0);
-    specularStrength = 1.0;
-    shininess = 32.0;
-
-    roughness = 0.4;
-    metallic = 0.0;
-    rimPower = 2.0;
-    fakeSpecularPower = 32.0;
-    fakeSpecularColor = float3(1.0, 1.0, 1.0);
-
-    ior = 1.45;
-    refractionStrength = 0.5;
-    refractionTint = float3(1.0, 1.0, 1.0);
+    ior = iorIn;
+    refractionStrength = refractionStrengthIn;
+    refractionTint = refractionTintIn;
 }
 
 void scene_float(float3 colour, float t, out float4 FragCol)
 {
+
     if (t > 0.0)
     {
         FragCol = float4(colour, 1.0);
@@ -484,25 +387,26 @@ void scene_float(float3 colour, float t, out float4 FragCol)
     {
         FragCol = float4(0.0, 0.0, 0.0, 1.0);
     }
-
 }
 
-void sdfSphere_float(float3 p, float3 centre, float radius, out float sighedDistance)
+void getMin_float(float3 Inpos1, float d1, float t1, float3 Inpos2, float d2, float t2, float3 Inpos3, float d3, float t3, out float3 pos, out float d, out float t)
 {
-    sighedDistance = length((p - centre)) - radius;
-}
-
-void sdfRoundBox_float(float3 p, float3 centre, float3 size, float radius, out float sighedDistance)
-{
-    float3 p2 = p - centre;
-    float3 q = abs(p2) - size + radius;
-    sighedDistance = length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - radius;
-}
-
-void sdfTorus_float(float3 p, float3 centre, float3 size, out float sighedDistance)
-{
-    float3 p2 = p - centre;
-    // length(p.xy) - radius.x measures how far this point is from the torus ring center in the XY-plane.
-    float2 q = float2(length(p.xy) - size.x, p2.z);
-    sighedDistance = length(q) - size.y;
+    if (d1 > d2 && d3 > d2)
+    {
+        d = d2;
+        pos = Inpos2;
+        t = t2;
+    }
+    else if (d2 > d1 && d3 > d1)
+    {
+        d = d1;
+        pos = Inpos1;
+        t = t1;
+    }
+    else if (d2 > d3 && d1 > d3)
+    {
+        d = d3;
+        pos = Inpos3;
+        t = t3;
+    }
 }
