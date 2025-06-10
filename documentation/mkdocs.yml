@@ -1,11 +1,13 @@
 site_name: Shader Documentation
 theme:
   name: material
+  icon:
+    logo: material/circle-opacity
   features:
+    - navigation.path
     - navigation.tabs
-    - navigation.sections
-    - toc.integrate
-    - navigation.top
+    - navigation.expand
+    - navigation.indexes
     - content.code.link
     - content.code.annotation
     - content.code.copy  # Adds copy buttons to code blocks
@@ -18,13 +20,13 @@ theme:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
       primary: teal
-      accent: purple
+      accent: teal
     - scheme: slate
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
       primary: teal
-      accent: lime
+      accent: teal
 plugins:
   - search              # Enables full-text search
 markdown_extensions:
@@ -46,3 +48,10 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Shaders: demoShader.md/   # Placeholder for future shader pages
+  - Engines: 
+      - Unity: 
+        - unity/index.md
+        - Shader Graph: unity/shader_graph.md
+        - Shader Code: unity/shader_code.md
+      - Unreal: unreal.md
+      - Godot: godot.md
