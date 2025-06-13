@@ -91,8 +91,7 @@ Shader "Custom/UserShader2"
             float4 frag (Varyings IN) : SV_Target
             {
 
-                float4 color4;
-                float3 color3;
+                float4 color4 = float4(1,1,1,1);
 
                 // Integration(IN.uv, color4);
 
@@ -102,6 +101,9 @@ Shader "Custom/UserShader2"
                     , _SphereColor, _SphereRadius, _SpherePosition,
                     _LightPosition
                     );
+
+                // float3 color;
+                // ApplyWaterEffect(IN.uv, color);
                 
                 return color4;
             }
