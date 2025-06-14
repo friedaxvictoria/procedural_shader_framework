@@ -452,7 +452,47 @@ float raymarch(float3 ro, float3 rd, out float3 hitPos)
     return -1.;
 }
 
-void Integration(float2 INuv, out float4 frgColor3, 
+
+SDF createSphere(float3 position, float radius)
+{
+    SDF s;
+    s.type = 0; // 0 = Sphere
+    s.position = position;
+    s.size = float3(0, 0, 0);
+    s.radius = radius;
+    return s;
+}
+
+SDF createRoundedBox(float3 position, float3 size, float radius)
+{
+    SDF s;
+    s.type = 1; // 1 = Rounded Box
+    s.position = position;
+    s.size = size;
+    s.radius = radius;
+    return s;
+}
+
+SDF createTorus(float3 position, float3 size, float radius)
+{
+    SDF s;
+    s.type = 2; // 2 = Torus
+    s.position = position;
+    s.size = size;
+    s.radius = radius;
+    return s;
+}
+
+struct ObjectInput
+{
+    int type; // 0 = sphere, 1 = box, 2 = torus
+    float3 position;
+    float3 size;
+    float radius;
+    float3 color;
+};
+
+void Integration(float2 INuv, out float4 frgColor3,
 float3 torusColor = float3(1., 0.2, 0.2), float torusRadius = 0.2, float3 torusSize = float3(1.0, 5.0, 1.5), float3 torusPosition = float3(0.0, 0.0, 0.0),
 float3 cubeColor = float3(0.2, 1., 0.2), float3 cubeSize = float3(1.0, 1.0, 1.0), float3 cubePosition1 = float3(1.9, 0.0, 0.0), float3 cubePosition2 = float3(-1.9, 0.0, 0.0),
 float3 sphereColor = float3(0.2, 0.2, 1.), float sphereRadius = 1.0, float3 spherePosition = float3(0.0, 0.0, 0.0),
@@ -545,6 +585,74 @@ float3 lightPosition = float3(5.0, 5.0, 5.0)
         
     frgColor3 = frgColor;
 }
+
+
+#define MAX_OBJECTS 10
+
+void IntegrationFlexible(float2 INuv, out float4 frgColor3, ObjectInput objInputs[MAX_OBJECTS], int inputCount, float3 lightPosition = float3(5.0, 5.0, 5.0))
+{
+    float4 frgColor = 0;
+    float2 fragCoord = INuv * _Resolution;
+    float2 uv = fragCoord / iResolution.xy * 2. - 1.;
+    uv.x *= iResolution.x / iResolution.y;
+
+    for (int i = 0; i < inputCount; ++i)
+    {
+        int t = objInputs[i].type;
+        if (t == 0)
+            sdfArray[i] = createSphere(objInputs[i].position, objInputs[i].radius);
+        else if (t == 1)
+            sdfArray[i] = createRoundedBox(objInputs[i].position, objInputs[i].size, objInputs[i].radius);
+        else if (t == 2)
+            sdfArray[i] = createTorus(objInputs[i].position, objInputs[i].size, objInputs[i].radius);
+    }
+
+    float3 ro = float3(0, 0, 7); // Camera origin
+    float3 rd = normalize(float3(uv, -1)); // Ray direction
+    float3 hitPos;
+    float t = raymarch(ro, rd, hitPos);
+    float3 color;
+
+    if (t > 0.)
+    {
+        float3 normal = getNormal(hitPos);
+        float3 viewDir = normalize(ro - hitPos);
+        float3 lightColor = float3(1., 1., 1.);
+        float3 L = normalize(lightPosition - hitPos);
+        float3 ambientCol = float3(0.1, 0.1, 0.1);
+
+        LightingContext ctx;
+        ctx.position = hitPos;
+        ctx.normal = normal;
+        ctx.viewDir = viewDir;
+        ctx.lightDir = L;
+        ctx.lightColor = lightColor;
+        ctx.ambient = ambientCol;
+
+        MaterialParams mat;
+        if (gHitID >= 0 && gHitID < MAX_OBJECTS)
+        {
+            mat = makePlastic(objInputs[gHitID].color);
+        }
+        else
+        {
+            mat = createDefaultMaterialParams();
+        }
+
+        color = applyPhongLighting(ctx, mat);
+    }
+    else
+    {
+        color = float3(0.0, 0.0, 0.0);
+    }
+
+    frgColor = float4(color, 1.0);
+    if (_GammaCorrect)
+        frgColor.rgb = pow(frgColor.rgb, 2.2);
+
+    frgColor3 = frgColor;
+}
+
 
 
 
