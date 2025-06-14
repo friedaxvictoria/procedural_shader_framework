@@ -1,3 +1,71 @@
+﻿struct CameraState {
+    vec3 eye;     // Camera position (origin)
+    vec3 target;  // Look-at point
+    vec3 up;      // Up direction
+};
+
+// ===============================
+// === Camera animation config ===
+// ===============================
+struct CameraAnimParams {
+    int mode;         // Animation mode: 0=static, 1=orbit, 2=ping-pong, 3=first-person
+    float speed;      // Playback speed
+    float offset;     // Time offset
+    vec3 center;      // Center point to look at
+    float radius;     // Radius for orbiting
+};
+
+// ======================================
+// === Build camera direction matrix  ===
+// ======================================
+mat3 get_camera_matrix(CameraState cam) {
+    vec3 f = normalize(cam.target - cam.eye);   // Forward direction
+    vec3 r = normalize(cross(f, cam.up));       // Right direction
+    vec3 u = cross(r, f);                       // Recomputed up
+    return mat3(r, u, -f);  // Column-major: [right, up, -forward]
+}
+
+
+
+CameraState animate_camera(float time, CameraAnimParams param) {
+    CameraState cam;
+    float t = time * param.speed + param.offset;
+
+    if (param.mode == 0) {
+        // Static camera
+        cam.eye = vec3(0.0, 2.0, 5.0);
+        cam.target = param.center;
+    }
+    else if (param.mode == 1) {
+        // Orbit around center (Y-axis)
+    float angle = t;
+    float x = param.center.x + param.radius * cos(angle);
+    float z = param.center.z + param.radius * sin(angle);
+    float y = param.center.y + 2.0; // Optional elevation
+    cam.eye = vec3(x, y, z);
+    cam.target = param.center;
+    }
+    else if (param.mode == 2) {
+        // Back-and-forth (Z-axis)
+        cam.eye = vec3(0.0, 1.5, sin(t) * param.radius + 5.0);
+        cam.target = param.center;
+    }
+    else if (param.mode == 3) {
+        // First-person forward movement
+        cam.eye = vec3(t * param.radius, 1.0, 0.0);
+        cam.target = cam.eye + vec3(0.0, 0.0, -1.0);
+    }
+    else {
+        // Fallback
+        cam.eye = vec3(0.0, 1.5, 5.0);
+        cam.target = param.center;
+    }
+
+    cam.up = vec3(0.0, 1.0, 0.0);
+    return cam;
+}
+
+
 // structure for SDF functions
 struct SDF {
     int   type;       // 0 for sphere, 1 for round box, 2 for torus
@@ -212,6 +280,49 @@ vec3 applyPhongLighting(LightingContext ctx, MaterialParams mat) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                         animation module                                          //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// ===== Time modulation =====
+// mode = 0 → linear
+// mode = 1 → sin(t)
+// mode = 2 → abs(sin(t))
+float applyTimeMode(float t, int mode) {
+    if (mode == 1) return sin(t);
+    if (mode == 2) return abs(sin(t));
+    return t;
+}
+
+// ===== Type 1: Sinusoidal translation =====
+void forwardBackword(int sdfIndx, float t, vec4 param, int mode) {
+    t = applyTimeMode(t, mode);
+    vec3 dir = param.xyz;
+    float speed = param.w;
+    sdfArray[sdfIndx].position += dir * sin(t * speed);
+}
+
+// ===== Type 1: Sinusoidal translation =====
+void backwordForward(int sdfIndx, float t, vec4 param, int mode) {
+    t = applyTimeMode(t, mode);
+    vec3 dir = param.xyz;
+    float speed = param.w;
+    sdfArray[sdfIndx].position -= dir * sin(t * speed);
+}
+
+
+// ===== Type 2: Rotation around own axis =====
+void animateRotateSelf(int sdfIndx, float t, vec4 axisSpeed, int mode) {
+    t = applyTimeMode(t, mode);
+    float speed = axisSpeed.w;
+    if (speed < 0.0001)
+    vec3 axis = normalize(axisSpeed.xyz);
+    float angle = t * speed;
+    // No change to position yet; placeholder for normal rotation
+}
+
+
 // Raymarching function
 float raymarch(vec3 ro, vec3 rd, out vec3 hitPos) {
     float t = 0.0;
@@ -245,8 +356,20 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     sdfArray[2] = roundBox2;
     sdfArray[3] = torus;
 
-    vec3 ro = vec3(0, 0, 7);         // Ray origin
-    vec3 rd = normalize(vec3(uv, -1)); // Ray direction
+    CameraAnimParams camParams = CameraAnimParams(1, 1.5, 4.0, vec3(0), 12.0);
+    CameraState camState;
+    camState = animate_camera(iTime, camParams);
+    mat3 camMat = get_camera_matrix(camState);
+    
+    forwardBackword(3, iTime, vec4(0.0, 0.0, 4.0, 0.5), 0);
+    backwordForward(0, iTime, vec4(0.0, 0.0, 4.0, 0.5), 0);
+    forwardBackword(1, iTime, vec4(4.0, 0.0, 0.0, 0.5), 0);
+    backwordForward(2, iTime, vec4(4.0, 0.0, 0.0, 0.5), 0);
+
+    // vec3 ro = camState.eye;
+    vec3 ro = vec3(0.0, 0.0, 8.0);         // Ray origin
+    //vec3 rd = normalize(camMat * normalize(vec3(uv, -1))); // Ray direction
+    vec3 rd = normalize(vec3(uv, -1));
 
     vec3 hitPos;
     float t = raymarch(ro, rd, hitPos);  // Raymarching to find the closest hit point
