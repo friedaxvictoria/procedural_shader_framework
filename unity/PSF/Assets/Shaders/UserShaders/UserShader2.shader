@@ -102,8 +102,7 @@ Shader "Custom/UserShader2"
                     _LightPosition
                     );
 
-                // float3 color;
-                // ApplyWaterEffect(IN.uv, color);
+                // ApplyWaterEffect(IN.uv, color4);
                 
                 return color4;
             }

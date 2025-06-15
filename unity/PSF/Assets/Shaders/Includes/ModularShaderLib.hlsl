@@ -190,7 +190,7 @@ float4 sampleNoiseTexture(float2 uv, sampler2D tex)
 #define CAMERA_POSITION float3(0., 2.5, 8.)
 
 // --- Main Water Effect ---
-void ApplyWaterEffect(float2 INuv, out float3 frgColor3)
+void ApplyWaterEffect(float2 INuv, out float4 frgColor4)
 {
     float4 frgColor = 0;
     float2 fragCoord = INuv * _Resolution;
@@ -226,7 +226,7 @@ void ApplyWaterEffect(float2 INuv, out float3 frgColor3)
     frgColor = float4(pow(color + globalAccum * 0.2 * float3(0.7, 0.2, 0.1), ((float3) 0.55)), 1.);
     if (_GammaCorrect)
         frgColor.rgb = pow(frgColor.rgb, 2.2);
-    frgColor3 = frgColor.rgb;
+    frgColor4 = float4(frgColor.rgb, 1);
 }
 
 
@@ -586,10 +586,11 @@ float3 lightPosition = float3(5.0, 5.0, 5.0)
     frgColor3 = frgColor;
 }
 
-
+#ifndef MAX_OBJECTS
 #define MAX_OBJECTS 10
+#endif
 
-void IntegrationFlexible(float2 INuv, out float4 frgColor3, ObjectInput objInputs[MAX_OBJECTS], int inputCount, float3 lightPosition = float3(5.0, 5.0, 5.0))
+void IntegrationFlexible(float2 INuv, out float4 frgColor3, ObjectInput objInputs[MAX_OBJECTS], int inputCount, float3 lightPosition = float3(5.0, 5.0, 5.0), int combineWater = 0)
 {
     float4 frgColor = 0;
     float2 fragCoord = INuv * _Resolution;
@@ -643,7 +644,16 @@ void IntegrationFlexible(float2 INuv, out float4 frgColor3, ObjectInput objInput
     }
     else
     {
-        color = float3(0.0, 0.0, 0.0);
+        if (combineWater == 1)
+        {
+            ApplyWaterEffect(INuv, frgColor);
+            frgColor3 = frgColor;
+            return;
+        }
+        else
+        {
+            color = float3(0.0, 0.0, 0.0);  
+        }
     }
 
     frgColor = float4(color, 1.0);

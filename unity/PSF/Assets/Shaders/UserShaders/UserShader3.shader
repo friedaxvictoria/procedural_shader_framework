@@ -28,6 +28,9 @@ Shader "Custom/UserShader3"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+
+            // #define MAX_OBJECTS 10
+
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Assets/Shaders/Includes/ModularShaderLib.hlsl"
 
@@ -127,7 +130,13 @@ Shader "Custom/UserShader3"
                 inputs[7].color = float3(1.0, 1.0, 0);
 
                 float4 colorOut;
-                IntegrationFlexible(IN.uv, colorOut, inputs, 8, _LightPosition);
+
+
+
+                // ApplyWaterEffect(IN.uv, colorOut);
+                IntegrationFlexible(IN.uv, colorOut, inputs, 8, _LightPosition, 1);
+
+
                 
                 return colorOut;
             }
