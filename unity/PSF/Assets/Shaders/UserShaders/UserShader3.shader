@@ -82,7 +82,7 @@ Shader "Custom/UserShader3"
                 }
 
                 inputs[0].type = 0;
-                inputs[0].position = float3(0, 0, 0);
+                inputs[0].position = float3(0, 0, 1);
                 inputs[0].size = float3(0, 0, 0);
                 inputs[0].radius = 1.0;
                 inputs[0].color = float3(0.2, 0.2, 1.0);
@@ -94,7 +94,7 @@ Shader "Custom/UserShader3"
                 inputs[1].color = float3(0.2, 1.0, 0.2);
 
                 inputs[2].type = 1;
-                inputs[2].position = float3(-1.9, 0.0, 0.0);
+                inputs[2].position = float3(-2.9, 0.0, 0.0);
                 inputs[2].size = float3(1.0, 1.0, 1.0);
                 inputs[2].radius = 0.2;
                 inputs[2].color = float3(0.2, 1.0, 0.2);
@@ -112,13 +112,13 @@ Shader "Custom/UserShader3"
                 inputs[4].color = float3(1.0, 0.2, 0.2);
 
                 inputs[5].type = 1;
-                inputs[5].position = float3(0, 1.9, 0.0);
+                inputs[5].position = float3(16, 0, -10.0);
                 inputs[5].size = float3(1.0, 1.0, 1.0);
                 inputs[5].radius = 0.2;
                 inputs[5].color = float3(0.2, 1.0, 0.2);
 
                 inputs[6].type = 1;
-                inputs[6].position = float3(0, -1.9, 0.0);
+                inputs[6].position = float3(0, -2.9, 0.0);
                 inputs[6].size = float3(1.0, 1.0, 1.0);
                 inputs[6].radius = 0.2;
                 inputs[6].color = float3(0.2, 1.0, 0.2);
