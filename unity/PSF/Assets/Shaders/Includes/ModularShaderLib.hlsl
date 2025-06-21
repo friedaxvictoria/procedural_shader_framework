@@ -613,8 +613,34 @@ void IntegrationFlexible(float2 INuv, out float4 frgColor3, ObjectInput objInput
     float3 hitPos;
     float t = raymarch(ro, rd, hitPos);
     float3 color;
+    bool sdfHitSuccess = t > 0.;
+    
+    float2 waterHit = traceWater(ro, rd);
+    float waterT = waterHit.x;
+    bool waterHitSuccess = waterHit.y > 0.;
+    
+    
+    bool hitWaterFirst = false;
+    float3 finalColor;
 
-    if (t > 0.)
+    if (waterHitSuccess && sdfHitSuccess)
+    {
+        hitWaterFirst = waterT < t;
+    }
+    else if (waterHitSuccess)
+    {
+        hitWaterFirst = true;
+    }
+    
+    
+
+    if (hitWaterFirst && combineWater)
+    {
+        ApplyWaterEffect(INuv, frgColor);
+        frgColor3 = frgColor;
+        return;
+    }
+    else if (t > 0.)
     {
         float3 normal = getNormal(hitPos);
         float3 viewDir = normalize(ro - hitPos);

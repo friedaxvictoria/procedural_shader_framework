@@ -101,3 +101,60 @@ vec4 integrateCloud(vec3 rayOrigin, vec3 rayDir, float rayLength,
 
     return clamp(accum, 0.0, 1.0);
 }
+
+// ------------------------------------------------------------
+// Integrate Fog
+// Inputs:
+//   - vec3 rayOrigin     : Start point of the viewing ray
+//   - vec3 rayDir        : Direction of the ray (normalized)
+//   - float rayLength    : Total distance the ray can travel
+//   - float stepCount    : Max number of integration steps
+//   - vec3 lightDir      : Direction to light source (normalized)
+//   - vec3 lightColor    : Light source color/intensity
+//   - vec3 ambient       : Global ambient light
+//   - VolMaterialParams mat : Volumetric material parameters
+//
+// Output:
+//   - vec4 RGBA color with accumulated light and alpha
+//     (pre-multiplied alpha for compositing)
+//
+// Notes:
+//   - Performs uniform raymarching from rayOrigin to rayLength.
+//   - Fog density is smooth and altitude-based, no hard volume bounds.
+//   - Optional noise can be added for realism inside sampleFogDensity().
+//   - Stops when accumulated alpha > 0.99 or t exceeds rayLength.
+// ------------------------------------------------------------
+vec4 integrateFog(vec3 rayOrigin, vec3 rayDir, float rayLength,
+                  float stepCount, vec3 lightDir, vec3 lightColor, 
+                  vec3 ambient, VolMaterialParams mat) {
+    vec4 accum = vec4(0.0);
+
+    float jitter = fract(sin(dot(rayOrigin.xz, vec2(12.9898, 78.233))) * 43758.5453 + iTime);
+    float t = 0.1 + 0.2 * jitter;
+
+    for (int i = 0; i < int(stepCount); ++i) {
+        float dt = 0.2;
+        vec3 p = rayOrigin + t * rayDir;
+
+        float density = FogDensity(p, rayOrigin);
+        if (density > 0.001) {
+            VolumeSample s;
+            s.density = density * mat.densityScale;
+            s.emission = 0.0;
+
+            VolCtxLocal ctx = createVolCtxLocal(
+                p, -rayDir, lightDir, lightColor, ambient, dt
+            );
+
+            vec4 local = applyVolLitFog(s, ctx, mat);
+
+            accum.rgb += (1.0 - accum.a) * local.a * local.rgb;
+            accum.a += (1.0 - accum.a) * local.a;
+        }
+
+        t += dt;
+        if (t > rayLength || accum.a > 0.99) break;
+    }
+
+    return clamp(accum, 0.0, 1.0);
+}

@@ -91,4 +91,20 @@ MaterialParams makeToon(vec3 color, float edgeSharpness) {
     return mat;
 }
 
+// ------------------------------------------
+// Water material preset
+// ------------------------------------------
+MaterialParams makeWater(vec3 color) {
+    MaterialParams mat = createDefaultMaterialParams();
+    mat.baseColor = color;
+    mat.fakeSpecularColor = vec3(1.0);
+    mat.fakeSpecularPower = 64.0;
+    mat.specularColor = vec3(1.5);
+    mat.specularStrength = 1.5; 
+    mat.shininess = 64.0; 
+    mat.ior = 1.333;
+    mat.refractionStrength = 0.0;
+    return mat;
+}
+
 #endif // MATERIAL_PRESETS_GLSL

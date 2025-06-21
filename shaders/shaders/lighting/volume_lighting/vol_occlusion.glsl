@@ -35,3 +35,34 @@ float computeCloudOcclusion(vec3 startPos, vec3 lightDir) {
     float occlusion = 1.0 - exp(-accumulatedDensity * extinctionScale);
     return clamp(occlusion, 0.0, 1.0);
 }
+
+// ------------------------------------------------------------
+// Fog Occlusion Function
+// Inputs:
+//   - vec3: startPos: World-space starting point (typically shading point)
+//   - vec3: lightDir: Direction to light source (normalized)
+//   - vec3: rayOrigin: Camera position
+//
+// Output:
+//   - float: occlusion: Scalar value in [0, 1], where 1 = fully occluded
+// ------------------------------------------------------------
+float computeFogOcclusion(vec3 startPos, vec3 lightDir, vec3 rayOrigin) {
+    const float maxDistance = 8.0; 
+    const float stepSize = 0.25;
+    const float extinctionScale = 1.2;
+
+    float t = 0.1;
+    float accumulatedDensity = 0.0;
+
+    for (int i = 0; i < 32; ++i) {
+        vec3 samplePos = startPos + t * lightDir;
+        float fogDensity = FogDensity(samplePos, rayOrigin);
+        accumulatedDensity += fogDensity * stepSize;
+
+        t += stepSize;
+        if (t > maxDistance) break;
+    }
+
+    float occlusion = 1.0 - exp(-accumulatedDensity * extinctionScale);
+    return clamp(occlusion, 0.0, 1.0);
+}
