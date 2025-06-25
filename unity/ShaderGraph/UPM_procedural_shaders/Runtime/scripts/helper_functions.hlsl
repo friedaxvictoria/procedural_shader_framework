@@ -1,7 +1,7 @@
 #ifndef HELPER_FILE
 #define HELPER_FILE
 
-int _NoiseType = 0;
+#include "global_variables.hlsl"
 
 float sdSphere(float3 position, float radius)
 {
@@ -39,12 +39,11 @@ float evalSDF(float3 sdfPosition, float sdfRadius, float3 sdfSize, int sdfType, 
     return 1e5;
 }
 
-void lightingContext(float3 hitPos, float3 rayOrigin, out float3 viewDir, out float3 lightDir, out float3 lightColor,
+void lightingContext(float3 hitPos, float3 lightPosition, out float3 viewDir, out float3 lightDir, out float3 lightColor,
 out float3 ambientColor)
 {
-    viewDir = normalize(rayOrigin - hitPos); // Direction from hit point to camera
-    float3 baseLightDir = float3(5.0, 5.0, 5.0); // Light position in world space
-    lightDir = normalize(baseLightDir - hitPos);
+    viewDir = normalize(_rayOrigin - hitPos); // Direction from hit point to camera
+    lightDir = normalize(lightPosition - hitPos);
     lightColor = float3(1.0, 1.0, 1.0); // Light color (white)
     ambientColor = float3(0.1, 0.1, 0.1); // Ambient light color<
 }
@@ -107,6 +106,14 @@ float3 get_normal(float3 position, float radius, float3 size, int type, float3 p
     float normal3 = evalSDF(position, radius, size, type, p + k.yxy * h);
     float normal4 = evalSDF(position, radius, size, type, p + k.xxx * h);
     return normalize(k.xyy * normal1 + k.yyx * normal2 + k.yxy * normal3 + k.xxx * normal4);
+}
+
+float3x3 computeCameraMatrix(float3 lookAtPos, float3 eye)
+{
+    float3 f = normalize(lookAtPos - eye); // Forward direction
+    float3 r = normalize(cross(f, float3(0, 1, 0))); // Right direction
+    float3 u = cross(r, f); // Recomputed up
+    return float3x3(r, u, -f); // Column-major: [right, up, -forward]
 }
 
 #endif
