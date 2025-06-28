@@ -219,7 +219,7 @@
         "preventRotation": false
     },
     "m_Path": "PSF/SDF",
-    "m_GraphPrecision": 1,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": "546f8a316eba47d7a7e9d05ddc463a61"

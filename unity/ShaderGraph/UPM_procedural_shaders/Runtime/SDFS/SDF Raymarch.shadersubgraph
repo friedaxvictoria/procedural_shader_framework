@@ -91,20 +91,6 @@
                 "m_Node": {
                     "m_Id": "4eb642ce784144eba2d56b0df5a63767"
                 },
-                "m_SlotId": 7
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "a280d2d6e64b460887796af99518793d"
-                },
-                "m_SlotId": 3
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "4eb642ce784144eba2d56b0df5a63767"
-                },
                 "m_SlotId": 9
             },
             "m_InputSlot": {
@@ -263,7 +249,7 @@
         "preventRotation": false
     },
     "m_Path": "PSF/SDF",
-    "m_GraphPrecision": 1,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": "a280d2d6e64b460887796af99518793d"
@@ -332,21 +318,6 @@
         "y": 0.0,
         "z": 0.0
     },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "0caa18c71a134ff798ac27f90917a665",
-    "m_Id": 7,
-    "m_DisplayName": "SDFID",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "SDFID",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
     "m_Labels": []
 }
 
@@ -661,9 +632,6 @@
         },
         {
             "m_Id": "0468c6c9d38a47a6b5a2cd4aa9efb2db"
-        },
-        {
-            "m_Id": "0caa18c71a134ff798ac27f90917a665"
         },
         {
             "m_Id": "72bfa2e2577742a0a8c4c0589106b6d4"
