@@ -58,7 +58,7 @@
         "preventRotation": false
     },
     "m_Path": "PSF/Camera",
-    "m_GraphPrecision": 1,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": "b214eb5370f24bd79578f12365f60c3c"
