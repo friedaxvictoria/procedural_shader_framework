@@ -57,8 +57,6 @@ vec2 dolphinAnimation(float position, float time, float timeOffset) {
     return vec2(finalAngle, thickness);
 }
 
-// generates a 3D animation offset vector used to animate some aspect of the dolphin
-
 // Modified movement function with instance parameters
 vec3 dolphinMovement(float time, float timeOffset, vec3 basePosition, float speed, vec3 direction) {
     float adjustedTime = time + timeOffset;
@@ -74,37 +72,6 @@ vec3 dolphinMovement(float time, float timeOffset, vec3 basePosition, float spee
     vec3 worldOffset = vec3(0.0, 0.0, mod(-speed * time, 10.0) - 5.0);
     
     return basePosition + finalMovement + worldOffset;
-}
-
-float dolphinSignedDistance(vec3 point, Dolphin dolphin, float time) {
-
-    // We translate the point to be in local space of the dolphin, so all calculations can be done as if the dolphin is centered at the origin.
-	// Get the Dolphin's Current Animation Offset
-	    vec3 startPoint = dolphinMovement(time, dolphin.timeOffset, dolphin.position, dolphin.speed, dolphin.direction);
-	// initialize to a very large number
-	float x = 100000.0;
-
-	for(int i=0; i<NO_OF_SEGMENTS; i++)
-	{
-		// Calculate the position of the dolphin's body segment
-		float segmentPosition = float(i)/F_NO_OF_SEGMENTS;
-		// Get Animation for this Segment
-		vec2 segmentAnimation = dolphinAnimation(segmentPosition, time, dolphin.timeOffset);
-		// the length of segments
-		float segmentLength = 0.48; if( i==0 ) segmentLength=0.655;
-		// endPoint is the end point of the current segment. The orientation of the segment is controlled by angles (segmentAnimation.x, segmentAnimation.y). This creates a wavy, sinuous body as the dolphin swims.
-		vec3 endPoint = startPoint + segmentLength*normalize(vec3(sin(segmentAnimation.y), sin(segmentAnimation.x), cos(segmentAnimation.x)));
-		// Calculate the distance from the point to the line segment defined by startPoint and endPoint
-		vec2 dist = lineSegmentDistance(point, startPoint, endPoint);
-		float factor = segmentPosition+dist.y/F_NO_OF_SEGMENTS;
-		// the radius of the dolphin's body at that point.
-		float radius = 0.04 + factor*(1.0-factor)*(1.0-factor)*2.7;
-		// Update the Minimum Distance
-		x = min(x, sqrt(dist.x) - radius);
-		// Update the startPoint for the next segment
-		startPoint = endPoint;
-	}
-	return 0.75*x; // The function returns the signed distance from point to the dolphin body.
 }
 
 //returning: res.x: The signed distance from point p to the dolphin. res.y: A parameter h that stores a normalized position along the dolphin's body (used for further shaping/decorating).

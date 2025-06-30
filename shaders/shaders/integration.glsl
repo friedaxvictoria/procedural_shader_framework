@@ -2,6 +2,80 @@
 #define NO_OF_SEGMENTS 11
 #define F_NO_OF_SEGMENTS 11.0
 
+// Global variables for sunrise lighting
+vec2 totalDepthRM;
+vec3 I_R, I_M;
+const vec3 bR = vec3(58e-7, 135e-7, 331e-7); // Rayleigh scattering coefficient
+const vec3 bMs = vec3(2e-5); // Mie scattering coefficients
+const vec3 bMe = bMs * 1.1;
+
+struct SunriseLight {
+    vec3 sundir;
+    vec3 earthCenter;
+    float earthRadius;
+    float atmosphereRadius;
+    float sunIntensity;
+};
+
+void initSunriseLight(out SunriseLight light, float time) {
+    light.sundir = normalize(vec3(.5, .4 * (1. + sin(.5 * time)), -1.));
+    light.earthCenter = vec3(0., -6360e3, 0.);
+    light.earthRadius = 6360e3;
+    light.atmosphereRadius = 6380e3;
+    light.sunIntensity = 10.0;
+}
+
+vec2 densitiesRM(vec3 p, SunriseLight light) {
+    float h = max(0., length(p - light.earthCenter) - light.earthRadius);
+    return vec2(exp(-h/8e3), exp(-h/12e2));
+}
+
+float escape(vec3 p, vec3 d, float R, vec3 earthCenter) {
+    vec3 v = p - earthCenter;
+    float b = dot(v, d);
+    float det = b * b - dot(v, v) + R*R;
+    if (det < 0.) return -1.;
+    det = sqrt(det);
+    float t1 = -b - det, t2 = -b + det;
+    return (t1 >= 0.) ? t1 : t2;
+}
+
+vec2 scatterDepthInt(vec3 o, vec3 d, float L, float steps, SunriseLight light) {
+    vec2 depthRMs = vec2(0.);
+    L /= steps; d *= L;
+    
+    for (float i = 0.; i < steps; ++i)
+        depthRMs += densitiesRM(o + d * i, light);
+
+    return depthRMs * L;
+}
+
+void scatterIn(vec3 o, vec3 d, float L, float steps, SunriseLight light) {
+    L /= steps; d *= L;
+
+    for (float i = 0.; i < steps; ++i) {
+        vec3 p = o + d * i;
+        vec2 dRM = densitiesRM(p, light) * L;
+        totalDepthRM += dRM;
+        vec2 depthRMsum = totalDepthRM + scatterDepthInt(p, light.sundir, escape(p, light.sundir, light.atmosphereRadius, light.earthCenter), 4., light);
+        vec3 A = exp(-bR * depthRMsum.x - bMe * depthRMsum.y);
+        I_R += A * dRM.x;
+        I_M += A * dRM.y;
+    }
+}
+
+vec3 applySunriseLighting(vec3 o, vec3 d, float L, vec3 Lo, SunriseLight light) {
+    totalDepthRM = vec2(0.);
+    I_R = I_M = vec3(0.);
+    scatterIn(o, d, L, 16., light);
+
+    float mu = dot(d, light.sundir);
+    return Lo + Lo * exp(-bR * totalDepthRM.x - bMe * totalDepthRM.y)
+        + light.sunIntensity * (1. + mu * mu) * (
+            I_R * bR * .0597 +
+            I_M * bMs * .0196 / pow(1.58 - 1.52 * mu, 1.5));
+}
+
 // dolphin global variables
 float jumping;
 float time;
@@ -74,40 +148,9 @@ vec3 dolphinMovement(float time, float timeOffset, vec3 basePosition, float spee
     finalMovement.x += 0.1*sin(0.1 - 1.0*adjustedTime)*(1.0-jumping);
     
     // Apply linear movement
-    vec3 worldOffset = vec3(0.0, 0.0, mod(-speed * time, 10.0) - 5.0);
+    vec3 worldOffset = vec3(0.0, 0.0, mod(-speed * time, 20.0) - 15.0);
     
     return basePosition + finalMovement + worldOffset;
-}
-
-float dolphinSignedDistance(vec3 point, Dolphin dolphin, float time) {
-
-    // We translate the point to be in local space of the dolphin, so all calculations can be done as if the dolphin is centered at the origin.
-	// Get the Dolphin's Current Animation Offset
-	    vec3 startPoint = dolphinMovement(time, dolphin.timeOffset, dolphin.position, dolphin.speed, dolphin.direction);
-	// initialize to a very large number
-	float x = 100000.0;
-
-	for(int i=0; i<NO_OF_SEGMENTS; i++)
-	{
-		// Calculate the position of the dolphin's body segment
-		float segmentPosition = float(i)/F_NO_OF_SEGMENTS;
-		// Get Animation for this Segment
-		vec2 segmentAnimation = dolphinAnimation(segmentPosition, time, dolphin.timeOffset);
-		// the length of segments
-		float segmentLength = 0.48; if( i==0 ) segmentLength=0.655;
-		// endPoint is the end point of the current segment. The orientation of the segment is controlled by angles (segmentAnimation.x, segmentAnimation.y). This creates a wavy, sinuous body as the dolphin swims.
-		vec3 endPoint = startPoint + segmentLength*normalize(vec3(sin(segmentAnimation.y), sin(segmentAnimation.x), cos(segmentAnimation.x)));
-		// Calculate the distance from the point to the line segment defined by startPoint and endPoint
-		vec2 dist = lineSegmentDistance(point, startPoint, endPoint);
-		float factor = segmentPosition+dist.y/F_NO_OF_SEGMENTS;
-		// the radius of the dolphin's body at that point.
-		float radius = 0.04 + factor*(1.0-factor)*(1.0-factor)*2.7;
-		// Update the Minimum Distance
-		x = min(x, sqrt(dist.x) - radius);
-		// Update the startPoint for the next segment
-		startPoint = endPoint;
-	}
-	return 0.75*x; // The function returns the signed distance from point to the dolphin body.
 }
 
 //returning: res.x: The signed distance from point p to the dolphin. res.y: A parameter h that stores a normalized position along the dolphin's body (used for further shaping/decorating).
@@ -485,14 +528,83 @@ float raymarch(vec3 ro, vec3 rd, out vec3 hitPos) {
     return -1.0; // No hit
 }
 
+struct CameraAnimParams {
+    int mode;         // Animation mode: 0=static, 1=orbit, 2=ping-pong, 3=first-person
+    float speed;      // Playback speed
+    float offset;     // Time offset
+    vec3 center;      // Center point to look at
+    float radius;     // Radius for orbiting
+};
+
+struct CameraState {
+    vec3 eye;     // Camera position (origin)
+    vec3 target;  // Look-at point
+    vec3 up;      // Up direction
+};
+
+
+mat3 get_camera_matrix(CameraState cam) {
+    vec3 f = normalize(cam.target - cam.eye);   // Forward direction
+    vec3 r = normalize(cross(f, cam.up));       // Right direction
+    vec3 u = cross(r, f);                       // Recomputed up
+    return mat3(r, u, -f);  // Column-major: [right, up, -forward]
+}
+
+CameraState animate_camera(float time, CameraAnimParams param) {
+    CameraState cam;
+    float t = time * param.speed + param.offset;
+
+    if (param.mode == 0) {
+        // Static camera
+        cam.eye = vec3(0.0, 2.0, 5.0);
+        cam.target = param.center;
+    }
+    else if (param.mode == 1) {
+        // Orbit around center (Y-axis)
+    float angle = t;
+    float x = param.center.x + param.radius * cos(angle);
+    float z = param.center.z + param.radius * sin(angle);
+    float y = param.center.y + 2.0; // Optional elevation
+    cam.eye = vec3(x, y, z);
+    cam.target = param.center;
+    }
+    else if (param.mode == 2) {
+        // Back-and-forth (Z-axis)
+        cam.eye = vec3(0.0, 1.5, sin(t) * param.radius + 5.0);
+        cam.target = param.center;
+    }
+    else if (param.mode == 3) {
+        // First-person forward movement
+        cam.eye = vec3(t * param.radius, 1.0, 0.0);
+        cam.target = cam.eye + vec3(0.0, 0.0, -1.0);
+    }
+    else {
+        // Fallback
+        cam.eye = vec3(0.0, 1.5, 5.0);
+        cam.target = param.center;
+    }
+
+    cam.up = vec3(0.0, 1.0, 0.0);
+    return cam;
+}
+
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
      // replcae fragCoord and iResolution with your engine variables
     vec2 uv = fragCoord / iResolution.xy * 2.0 - 1.0;  
     uv.x *= iResolution.x / iResolution.y;
     
+    CameraAnimParams camParams = CameraAnimParams(1, 1.5, 4.0, vec3(0), 12.0);
+    CameraState camState;
+    camState = animate_camera(iTime, camParams);
+    mat3 camMat = get_camera_matrix(camState);
+    
+    // Initialize sunrise lighting
+    SunriseLight sunrise;
+    initSunriseLight(sunrise, iTime);
+    
     vec3 lightPos   = vec3(5.0, 5.0, 5.0);  // Light position in world space
-    vec3 lightColor = vec3(1.0);
+    vec3 lightColor = vec3(0.0);
     vec3 ambientCol = vec3(0.1);     // Ambient light color
     vec3 color;
     
@@ -527,8 +639,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     
     int dolphinCount = 2;   // used to draw all dolphins
 
-    vec3 ro = vec3(0.0, 0.0, 8.0);         // Ray origin
-    vec3 rd = normalize(vec3(uv, -1));
+    vec3 ro = camState.eye;
+    //vec3 ro = vec3(0.0, 0.0, 8.0);         // Ray origin
+    vec3 rd = normalize(camMat * normalize(vec3(uv, -1))); // Ray direction
+   // vec3 rd = normalize(vec3(uv, -1));
 
     vec3 hitPos;
     float t = raymarch(ro, rd, hitPos);  // Raymarching to find the closest hit point
@@ -536,17 +650,21 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3 viewDir = normalize(ro-hitPos); // Direction from hit point to camera
     
     if (t > 0.0) {
+    
     if(gHitID < 10){
+    
     vec3 normal = SDFsNormal(hitPos);  // Estimate normal at the hit point
-
     
     vec3 BaseColor;
     vec3 SpecularColor;
     float SpecularStrength;
     float Shininess;
+    // calculate the sunlight 
+    float atmosphereDist = escape(hitPos, -rd, sunrise.atmosphereRadius, sunrise.earthCenter);
+    vec3 sunColor = applySunriseLighting(hitPos, -rd, atmosphereDist, vec3(0.0), sunrise);
     
     MakePlasticMaterial(sdfArray[gHitID].color,vec3(1.0), 1.0, 32.0,BaseColor,SpecularColor,SpecularStrength,Shininess);    
-    applyPhongLighting(hitPos, normal, viewDir, lightPos, lightColor, ambientCol, BaseColor, SpecularColor, SpecularStrength, Shininess, color);
+    applyPhongLighting(hitPos, normal, viewDir, sunrise.sundir, sunColor, ambientCol, BaseColor, SpecularColor, SpecularStrength, Shininess, color);
     }
     
     else
@@ -563,19 +681,23 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             dot(hitPos-ccp, bitangentV),
             segmentIdx
         );
-        
+        // calculate the sunlight 
+        float atmosphereDist = escape(hitPos, -rd, sunrise.atmosphereRadius, sunrise.earthCenter);
+        vec3 sunColor = applySunriseLighting(hitPos, -rd, atmosphereDist, color, sunrise);
+       
         getDolhpinColor(position, dolphinColor);
-        	float diff = max(0.0, dot(normal, lightPos)); // Lambertian diffuse lighting 
+        float diff = max(0.0, dot(normal, lightPos)); // Lambertian diffuse lighting 
 
         vec3 BRDF = 20.0*diff*vec3(4.00,2.20,1.40);
         dolphinColor*=BRDF;
 
-    applyPhongLighting(hitPos, normal, viewDir, lightPos, lightColor, ambientCol, dolphinColor, vec3(0.0), 0.0, 0.0, color);
-    
+    applyPhongLighting(hitPos, normal, viewDir, sunrise.sundir, sunColor, ambientCol, dolphinColor, vec3(0.0), 0.0, 0.0, color);
     }
     }
     else {
-        color = vec3(0.0); // Background
+        // Just show sunrise for background
+        float atmosphereDist = escape(ro, rd, sunrise.atmosphereRadius, sunrise.earthCenter);
+        color = applySunriseLighting(ro, rd, atmosphereDist, vec3(0.0), sunrise);
     }
 
     fragColor = vec4(color, 1.0);
