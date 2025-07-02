@@ -81,7 +81,7 @@ Shader "Custom/UserShader5"
 
                 float2 uv;
                 float index;
-                float3x3 mat = float3x3( 1,0,0, 0,1,0, 0,0,1 );
+                float3x3 camMat = float3x3( 1,0,0, 0,1,0, 0,0,1 );
                 float3 hitpos;
                 float hitID;
                 float3 normal;
@@ -89,16 +89,25 @@ Shader "Custom/UserShader5"
 
 
                 computeUV_float(IN.uv, uv);
-                addSphere_float(float3(-1,0,0), 2, 0, float3(0.2,0.2,0.2), float3(0.1,0.1,0.8), 2, 1, index);
-                addCube_float(float3(5,0,-5), 2, 0, index, float3(0.2,0.2,0.2), float3(0.8,0.2,0.2), 2, 1, index);
-                raymarch_float(index, uv, mat, hitpos, normal);
+                addSphere_float(float3(-2,0,0), 2, 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, index);
+                addCube_float(float3(5,0,-5), 2, 0, index, float3(0.2,0.2,0.8), float3(0.8,0.1,0.1), 2, 1, index);
+                addTorus_float(float3(1.5,4.5,0), 2, 0.2, index, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+                addTorus_float(float3(-4.5,4.5,0), 2, 0.2, index, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+                addTorus_float(float3(-1.5,4.5,0), 2, 0.2, index, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+                addTorus_float(float3(4.5,4.5,0), 2, 0.2, index, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
 
 
-                //applyPhongLighting_float(hitpos, _LightPosition, normal, colorOut);
-                float3 rd = normalize(float3(uv, -1));
-                float3 L = normalize(_LightPosition - hitpos);
+                raymarch_float(index, uv, camMat, hitpos, normal);
 
-                _dolphinColor(hitpos, normal, rd,  0.1, 0.1, 0, float3(0.2,0.2,0.2), 1, L, colorOut);
+
+                
+                // float3 rd = normalize(float3(uv, -1));
+                // float3 L = normalize(_LightPosition - hitpos);
+
+                // _dolphinColor(hitpos, normal, rd,  0.1, 0.1, 0, 1, L, colorOut);
+
+                applyPhongLighting_float(hitpos, _LightPosition, normal, colorOut);
+
 
 
                 
