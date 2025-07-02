@@ -25,10 +25,24 @@ Procedural textures built using noise functions like Perlin.
 
 (*Coming soon*)  
 
-### 🔷 Geometry Shaders
-Shaders that alter or generate shapes, forms, or patterns procedurally.
 
-(*Coming soon*)  
+### 🔷 Geometry Shaders
+
+Shaders that generate or modify geometry procedurally.
+
+<details>
+  <summary><strong>🔵 Raymarching SDF</strong> — Procedural SDF shapes using ray marching</summary>
+
+<p>✅ <strong>Implementations available in:</strong></p>
+
+<ul>
+  <li>🧩 <a href="../../engines/unity/raymarching_sdf.md">Unity</a></li>
+  <li>🎮 <a href="../../engines/godot/raymarching_sdf.md">Godot</a></li>
+  <li>🎬 <a href="../../engines/unreal/raymarching_sdf.md">Unreal Engine</a></li>
+</ul>
+
+</details>
+
 
 
 ---

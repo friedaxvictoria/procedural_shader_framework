@@ -1,74 +1,61 @@
-# ✈️ TIE Fighter Animation Shader
+# 🛠️ Engine Integration Overview
 
-<img src="../../../static/images/demo_tf.gif" alt="TIE Fighter" width="400" height="225">
+Welcome to the **Engine Integration Hub** — your guide to bringing our procedural shaders into real-time engines like **Unity**, **Unreal**, and **Godot**.
 
-- **Category:** Animation
-- **Author:** Ruimin Ma
-- **Shader Type:** Time-driven animation
-- **Input:** `T` — looped time from 0 to 40
-
----
-
-## 🧠 Algorithm
-
-### 1. `tiePos(vec3 p, float t)`
-- Simulates fighter movement:
-- Lateral sway (`cos(t * 0.7)`)
-- Up/down bobbing (`cos(t)`)
-- Depth wobble (`sin(t * 1.1)`)
-- Adds slight roll via 2D rotation.
-
-### 2. `getCamera(float T, out vec3 ro, out vec3 lookAt)`
-- Smooth camera transition using `smoothstep()`.
-- Starts as a follow cam, ends as an orbit cam.
+Each integration includes:
+- Engine setup instructions
+- Shader adaptation (GLSL → HLSL/GodotShader)
+- Node setups or code breakdowns
+- Visual demos and performance tips
 
 ---
 
- ## 🎛️ Parameters
+> 🎨 Want to understand how shaders work under the hood?  
+> 👉 [Go to Shader Library](../shaders/shaderPage.md)
 
-| Name | Description          | Range | Notes |
-|------|-------------------|-------|-------|
-| `T` | Looped time input | `0.0 – 40.0` | Required to drive the animation |
-| `p` | Fighter body position | — | Used as input to `tiePos` |
+---
+
+## 🎮 Unity Integrations
+
+Unity implementations use **Shader Graph** or custom HLSL in the **Universal Render Pipeline (URP)**.
+
+| 🔧 Shader Name | 🧩 Integration Type | 🔗 Link |
+|---------------|---------------------|--------|
+| ✈️ TIE Fighter | Shader Graph         | [View Integration](unity/tie_fighter_unity.md) |
+| *Coming Soon* | —                   | —      |
+
+---
+
+## 🎮 Unreal Engine Integrations
+
+Unreal integrations are built using the **Material Editor**, with node-based logic and optional HLSL custom expressions.
+
+| 🔧 Shader Name | 🧩 Integration Type | 🔗 Link |
+|---------------|---------------------|--------|
+| *Coming Soon* | —                   | —      |
+
+---
+
+## 🎮 Godot Engine Integrations
+
+Godot integrations are implemented using **GodotShader Language** and `.gdshaderinc` includes, ideal for raymarching and procedural visuals.
+
+| 🔧 Shader Name     | 🧩 Integration Type     | 🔗 Link |
+|--------------------|-------------------------|--------|
+| 🌀 Raymarching SDF | Godot Shader + Includes | [View Integration](godot/raymarching_sdf.md) |
+
+---
+
+## 🔄 Cross-Engine Notes
+
+While shader logic is shared across engines, implementation details vary:
+
+- **Unity** is best for modular visual editing via Shader Graph.
+- **Unreal** offers tighter material performance tuning and post-process control.
+- **Godot** excels with raw shader scripting and flexible custom pipelines.
+
+Use the integration pages to compare techniques and results across platforms.
+
+---
 
 
-
-
-
-## 💻 Code
-shader code description here....
-
-```glsl
-
-#ifndef TF_ANIMATION_GLSL
-#define TF_ANIMATION_GLSL
-
-/** Fighter body motion */
-vec3 tiePos(vec3 p, float t)
-{
-    float x = cos(t * 0.7);
-    p += vec3(x,                  // lateral sway
-              cos(t),             // bob up/down
-              sin(t * 1.1));      // depth sway
-    p.xy *= mat2(cos(-x*0.1), sin(-x*0.1),
-                -sin(-x*0.1), cos(-x*0.1)); // slight roll
-    return p;
-}
-
-/** Camera path: follow lead for 5 s, then pull out. */
-void getCamera(float T, out vec3 ro, out vec3 lookAt)
-{
-    float t = smoothstep(0.0, 5.0, T);          // 0→1 over first 5 seconds
-
-    lookAt = mix(vec3(0,0,6) - tiePos(vec3(0), T-0.2),
-                 vec3(2.5,0,0), t);
-
-    ro = mix( lookAt - vec3(0,0,1),             // close follow
-              vec3(4.0 + cos(T),
-                   0.2 * sin(T),
-                  -8.0 + 6.0 * cos(T * 0.2)),   // pulled-out orbit
-              t);
-}
-#endif
-
-```

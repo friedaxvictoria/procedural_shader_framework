@@ -1,74 +1,102 @@
-# ✈️ TIE Fighter Animation Shader
+# 🧩 SDF Animation Shader
 
-<img src="../../../static/images/demo_tf.gif" alt="TIE Fighter" width="400" height="225">
+- **Category:** Animation / SDF / Scene
+- **Author:** Wanzhang He
+## 📥 Input Requirements
 
-- **Category:** Animation
-- **Author:** Ruimin Ma
-- **Shader Type:** Time-driven animation
-- **Input:** `T` — looped time from 0 to 40
+This shader animation module depends on the following inputs:
+
+### ⏱ Time Input
+- `iTime` (`float`) – global shader time (in seconds)
+- `timeMode` (`int`) – animation time modulation mode
+  - `0`: linear time
+  - `1`: `sin(t)`
+  - `2`: `abs(sin(t))`
+
+### 🎛 Animation Control Parameters
+- `animationType` (`int`) – selects the animation type:
+  - 1 = Translate
+  - 2 = Orbit
+  - 3 = Self Rotate
+  - 4 = Pulse Scale
+  - 5 = TIE Path
+- `translateParam` (`vec4`) – direction (xyz), speed (w)
+- `orbitParam` (`vec4`) – center (xyz), angular speed (w)
+- `selfRotateParam` (`vec4`) – axis (xyz), angular speed (w)
+- `pulseParam` (`vec2`) – frequency, amplitude
+
+### 🧩 SDF Object Parameters
+- `_sdfTypeFloat[]` (`float`) – object type (0=Sphere, 1=Box, etc.)
+- `_sdfPositionFloat[]` (`vec3`) – object positions
+- `_sdfSizeFloat[]` (`vec3`) – size/scale per object
+- `_sdfRadiusFloat[]` (`float`) – object radius (for spheres, torus)
+
+> These parameters define the structure and behavior of the animated SDF objects. The animation matrix is applied to these objects dynamically during rendering.
 
 ---
 
 ## 🧠 Algorithm
 
-### 1. `tiePos(vec3 p, float t)`
-- Simulates fighter movement:
-- Lateral sway (`cos(t * 0.7)`)
-- Up/down bobbing (`cos(t)`)
-- Depth wobble (`sin(t * 1.1)`)
-- Adds slight roll via 2D rotation.
+This shader implements a modular animation system for SDF-based objects.
+It supports several animation types with matrix-based transformations.
 
-### 2. `getCamera(float T, out vec3 ro, out vec3 lookAt)`
-- Smooth camera transition using `smoothstep()`.
-- Starts as a follow cam, ends as an orbit cam.
+### 1. Animation Modes
+
+Supported animation types:
+- **Translate**: sinusoidal movement along a direction
+- **Orbit**: rotate around a given point
+- **Self Rotate**: spin around own axis
+- **Pulse Scale**: object expands/contracts periodically
+- **TIE Path**: figure-8 path with additional rotation
+
+### 2. Time Modulation
+
+Time is modulated with three modes:
+- `t` (linear)
+- `sin(t)`
+- `abs(sin(t))`
+
+This allows for smooth, oscillatory, or one-direction movement patterns.
+
+### 3. Matrix Composition
+
+Each animation mode returns a `mat4` transformation matrix.
+These are composed in `getAnimationMatrix(...)` to produce:
+- `animationMatrix`: applied to SDF object
+- `inverseAnimationMatrix`: used for raymarching transform
+
+### 4. SDF Integration
+
+Objects are described by arrays like `_sdfTypeFloat`, `_sdfPositionFloat`, etc.
+Each object's ray is transformed by the matrix before raymarching, enabling animation.
 
 ---
 
- ## 🎛️ Parameters
-
-| Name | Description          | Range | Notes |
-|------|-------------------|-------|-------|
-| `T` | Looped time input | `0.0 – 40.0` | Required to drive the animation |
-| `p` | Fighter body position | — | Used as input to `tiePos` |
-
-
-
-
-
 ## 💻 Code
-shader code description here....
+
+### 1. SDF Object Configuration
 
 ```glsl
-
-#ifndef TF_ANIMATION_GLSL
-#define TF_ANIMATION_GLSL
-
-/** Fighter body motion */
-vec3 tiePos(vec3 p, float t)
-{
-    float x = cos(t * 0.7);
-    p += vec3(x,                  // lateral sway
-              cos(t),             // bob up/down
-              sin(t * 1.1));      // depth sway
-    p.xy *= mat2(cos(-x*0.1), sin(-x*0.1),
-                -sin(-x*0.1), cos(-x*0.1)); // slight roll
-    return p;
-}
-
-/** Camera path: follow lead for 5 s, then pull out. */
-void getCamera(float T, out vec3 ro, out vec3 lookAt)
-{
-    float t = smoothstep(0.0, 5.0, T);          // 0→1 over first 5 seconds
-
-    lookAt = mix(vec3(0,0,6) - tiePos(vec3(0), T-0.2),
-                 vec3(2.5,0,0), t);
-
-    ro = mix( lookAt - vec3(0,0,1),             // close follow
-              vec3(4.0 + cos(T),
-                   0.2 * sin(T),
-                  -8.0 + 6.0 * cos(T * 0.2)),   // pulled-out orbit
-              t);
-}
-#endif
+// ===== SDF Variables =====
+#define SDF_COUNT 10
+float _sdfTypeFloat[SDF_COUNT];
+vec3 _sdfPositionFloat[SDF_COUNT];
+vec3 _sdfSizeFloat[SDF_COUNT];
+float _sdfRadiusFloat[SDF_COUNT];
 
 ```
+
+### 2. Animation Parameters
+
+```glsl
+// ===== Animation Variables =====
+int animationType = 1;
+int timeMode = 1;
+
+vec4 translateParam = vec4(1.0, 0.0, 0.0, 2.0);
+vec4 orbitParam     = vec4(0.0, 0.0, 0.0, 1.0);
+vec4 selfRotateParam = vec4(0.0, 1.0, 0.0, 1.5);
+vec2 pulseParam     = vec2(3.0, 0.2);
+
+```
+

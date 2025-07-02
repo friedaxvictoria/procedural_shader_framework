@@ -47,13 +47,13 @@ markdown_extensions:
 nav:
   - Home: index.md
 
-  - Shaders:
-      - Overview: shaders/shaderPage.md
-      - Animation:
-          - TIE Fighter: shaders/animation/tie_fighter.md
+  #-- - Shaders:
+     # - Overview: shaders/shaderPage.md
+     # - Animation:
+      #    - TIE Fighter: shaders/animation/tie_fighter.md
       # You can add more categories like this:
       # - Noise:
-      #     - Cloud FBM: shaders/noise/cloud_fbm.md
+      #     - Cloud FBM: shaders/noise/cloud_fbm.md -->
   - Engines:
       - Overview: engines/enginePage.md
       - Unity : 
