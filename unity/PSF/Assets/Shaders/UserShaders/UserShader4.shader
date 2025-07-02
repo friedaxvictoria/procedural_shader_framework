@@ -1,4 +1,4 @@
-Shader "Custom/UserShader3"
+Shader "Custom/UserShader4"
 {
     Properties
     {
@@ -29,7 +29,7 @@ Shader "Custom/UserShader3"
             #pragma vertex vert
             #pragma fragment frag
 
-            // #define MAX_OBJECTS 10
+            #define MAX_OBJECTS 8
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Assets/Shaders/Includes/ModularShaderLib.hlsl"
@@ -71,71 +71,71 @@ Shader "Custom/UserShader3"
             float4 frag (Varyings IN) : SV_Target
             {
 
-                ObjectInput inputs[10];
+                ObjectInput inputs[MAX_OBJECTS];
 
-                for (int i = 0; i < 10; ++i) {
-                    inputs[i].type = -1;                      // Mark as unused
-                    inputs[i].position = float3(0, 0, 0);
-                    inputs[i].size = float3(0, 0, 0);
-                    inputs[i].radius = 0.0;
-                    inputs[i].color = float3(0, 0, 0);
-                    inputs[i].animate = 0;
-                }
+                
 
                 inputs[0].type = 0;
                 inputs[0].position = float3(0, 0, 1);
                 inputs[0].size = float3(0, 0, 0);
                 inputs[0].radius = 1.0;
                 inputs[0].color = float3(0.2, 0.2, 1.0);
+                inputs[0].animate = 3;
 
                 inputs[1].type = 1;
-                inputs[1].position = float3(1.9, 0.0, 0.0);
+                inputs[1].position = float3(2.9, 0.0, 0.0);
                 inputs[1].size = float3(1.0, 1.0, 1.0);
                 inputs[1].radius = 0.2;
                 inputs[1].color = float3(0.2, 1.0, 0.2);
+                inputs[1].animate = 2;
 
-                inputs[2].type = 1;
-                inputs[2].position = float3(-2.9, 0.0, 0.0);
+                inputs[2].type = -1;
+                inputs[2].position = float3(-4, 0.0, 0.0);
                 inputs[2].size = float3(1.0, 1.0, 1.0);
                 inputs[2].radius = 0.2;
                 inputs[2].color = float3(0.2, 1.0, 0.2);
+                inputs[2].animate = 0;
 
                 inputs[3].type = 2;
                 inputs[3].position = float3(-2, 0, 0.0);
                 inputs[3].size = float3(0.5, 2.5, 0.75);
                 inputs[3].radius = 0.1;
                 inputs[3].color = float3(1.0, 0.2, 0.2);
+                inputs[3].animate = 1;
 
-                inputs[4].type = 2;
-                inputs[4].position = float3(2, 0, 0.0);
+                inputs[4].type = -2;
+                inputs[4].position = float3(20, 0, -35.0);
                 inputs[4].size = float3(0.5, 2.5, 0.75);
                 inputs[4].radius = 0.1;
                 inputs[4].color = float3(1.0, 0.2, 0.2);
+                inputs[4].animate = 0;
 
                 inputs[5].type = 1;
                 inputs[5].position = float3(16, 0, -10.0);
                 inputs[5].size = float3(1.0, 1.0, 1.0);
                 inputs[5].radius = 0.2;
                 inputs[5].color = float3(0.2, 1.0, 0.2);
+                inputs[5].animate = 0;
 
                 inputs[6].type = 1;
-                inputs[6].position = float3(0, -2.9, 0.0);
+                inputs[6].position = float3(0, -3.1, 2.0);
                 inputs[6].size = float3(1.0, 1.0, 1.0);
                 inputs[6].radius = 0.2;
                 inputs[6].color = float3(0.2, 1.0, 0.2);
+                inputs[6].animate = 0;
 
                 inputs[7].type = 0;
                 inputs[7].position = float3(5.0, 5.0, 0.0);
                 inputs[7].size = float3(0, 0, 0);
                 inputs[7].radius = 1;
                 inputs[7].color = float3(1.0, 1.0, 0);
+                inputs[7].animate = 0;
 
                 float4 colorOut;
 
 
 
-                // ApplyWaterEffect(IN.uv, colorOut);
-                IntegrationFlexible(IN.uv, colorOut, inputs, 8, _LightPosition, 1);
+                IntegrationFlexible(IN.uv, colorOut, inputs, MAX_OBJECTS, _LightPosition, 1);
 
 
                 

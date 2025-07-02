@@ -13,6 +13,26 @@ extern float _Resolution;
 #define iResolution float3(_Resolution, _Resolution, _Resolution)
 #define glsl_mod(x,y) (((x)-(y)*floor((x)/(y))))
 
+float3 animateUpDown(float3 pos, float time, float amplitude = 0.5, float frequency = 2.0)
+{
+    pos.y += sin(time * frequency) * amplitude;
+    return pos;
+}
+
+float3 animateCircularXZ(float3 pos, float time, float radius = 0.5, float speed = 1.0)
+{
+    float angle = time * speed;
+    pos.x += sin(angle) * radius;
+    pos.z += cos(angle) * radius;
+    return pos;
+}
+
+float3 animateSwayX(float3 pos, float time, float amplitude = 0.3, float frequency = 1.5)
+{
+    pos.x += sin(time * frequency) * amplitude;
+    return pos;
+}
+
 
 float SimpleNoise(float2 p)
 {
@@ -490,6 +510,7 @@ struct ObjectInput
     float3 size;
     float radius;
     float3 color;
+    int animate;
 };
 
 void Integration(float2 INuv, out float4 frgColor3,
@@ -504,7 +525,7 @@ float3 lightPosition = float3(5.0, 5.0, 5.0)
     float2 uv = fragCoord / iResolution.xy * 2. - 1.;
     uv.x *= iResolution.x / iResolution.y;
 
-    uv.x *= iResolution.x / iResolution.y;
+    // uv.x *= iResolution.x / iResolution.y;
 
     SDF circle;
     circle.type = 0;
@@ -586,6 +607,79 @@ float3 lightPosition = float3(5.0, 5.0, 5.0)
     frgColor3 = frgColor;
 }
 
+float mapScene(float3 p)
+{
+    float noise = fbmPseudo3D(p, 1);
+    return evaluateScene(p) + noise * 0.3;
+}
+
+float dolphinShadow(float3 ro, float3 rd, float mint, float k)
+{
+    float result = 1.0;
+    float t = mint;
+    for (int i = 0; i < 25; ++i)
+    {
+        float3 p = ro + t * rd;
+        float dist = mapScene(p);
+        result = min(result, k * dist / t);
+        t += clamp(dist, 0.05, 0.5);
+        if (dist < 0.0001)
+            break;
+    }
+    return saturate(result);
+}
+
+float3 dolphinColor(float3 pos, float3 nor, float3 rd, float glossy, float glossy2, float shadows, float3 col, float occlusion, float3 light)
+{
+    float3 halfWay = normalize(light - rd);
+    float3 reflection = reflect(rd, nor);
+
+    float sky = saturate(nor.y);
+    float ground = saturate(-nor.y);
+    float diff = max(0.0, dot(nor, light));
+    float back = max(0.3 + 0.7 * dot(nor, -float3(light.x, 0.0, light.z)), 0.0);
+
+    float shadow = 1.0 - shadows;
+    if (shadows * diff > 0.001)
+    {
+        shadow = dolphinShadow(pos + 0.01 * nor, light, 0.0005, 32.0);
+    }
+
+    float fresnel = pow(saturate(1.0 + dot(nor, rd)), 5.0);
+    float specular = pow(saturate(dot(halfWay, nor)), 0.01 + glossy);
+    float sss = pow(saturate(1.0 + dot(nor, rd)), 2.0);
+
+    float sh = 1.0;
+    if (shadows > 0.0)
+    {
+        float3 reflDir = normalize(reflection + float3(0.0, 1.0, 0.0));
+        sh = dolphinShadow(pos + 0.01 * nor, reflDir, 0.0005, 8.0);
+    }
+
+    float3 BRDF = 0.0;
+    
+
+    BRDF += 1.0 * diff * float3(4.00, 2.20, 1.40) * float3(sh, sh * 0.5 + 0.5 * sh * sh, sh * sh);
+    BRDF += 5.5 * sky * float3(0.20, 0.40, 0.55) * (0.5 + 0.5 * occlusion);
+    BRDF += 1.0 * back * float3(0.40, 0.60, 0.70);
+    BRDF += 11.0 * ground * float3(0.05, 0.30, 0.50);
+    BRDF += 5.0 * sss * float3(0.40, 0.40, 0.40) * (0.3 + 0.7 * diff * sh) * glossy * occlusion;
+    BRDF += 0.8 * specular * float3(1.30, 1.00, 0.90) * sh * diff * (0.1 + 0.9 * fresnel) * glossy * glossy;
+    BRDF += sh * 40.0 * glossy * float3(1.0, 1.0, 1.0) * occlusion *
+            smoothstep(-0.3 + 0.3 * glossy2, 0.2, reflection.y) *
+            (0.5 + 0.5 * smoothstep(-0.2 + 0.2 * glossy2, 1.0, reflection.y)) *
+            (0.04 + 0.96 * fresnel);
+
+    float3 finalColor = col * BRDF;
+    finalColor += sh * (0.1 + 1.6 * fresnel) * occlusion * glossy2 * glossy2 * 40.0 * float3(1.0, 0.9, 0.8) *
+                  smoothstep(0.0, 0.2, reflection.y) *
+                  (0.5 + 0.5 * smoothstep(0.0, 1.0, reflection.y));
+
+    finalColor += 1.2 * glossy * pow(specular, 4.0) * float3(1.4, 1.1, 0.9) * sh * diff * (0.04 + 0.96 * fresnel) * occlusion;
+
+    return finalColor;
+}
+
 #ifndef MAX_OBJECTS
 #define MAX_OBJECTS 10
 #endif
@@ -599,14 +693,25 @@ void IntegrationFlexible(float2 INuv, out float4 frgColor3, ObjectInput objInput
 
     for (int i = 0; i < inputCount; ++i)
     {
+        float3 pos = objInputs[i].position;
+    
+        if (objInputs[i].animate == 1)
+            pos = animateUpDown(pos, _Time.y, 2, 2);
+        else if (objInputs[i].animate == 2)
+            pos = animateCircularXZ(pos, _Time.y, 3, 1);
+        else if (objInputs[i].animate == 3)
+            pos = animateSwayX(pos, _Time.y, 2, 1);
+
+
         int t = objInputs[i].type;
         if (t == 0)
-            sdfArray[i] = createSphere(objInputs[i].position, objInputs[i].radius);
+            sdfArray[i] = createSphere(pos, objInputs[i].radius);
         else if (t == 1)
-            sdfArray[i] = createRoundedBox(objInputs[i].position, objInputs[i].size, objInputs[i].radius);
+            sdfArray[i] = createRoundedBox(pos, objInputs[i].size, objInputs[i].radius);
         else if (t == 2)
-            sdfArray[i] = createTorus(objInputs[i].position, objInputs[i].size, objInputs[i].radius);
+            sdfArray[i] = createTorus(pos, objInputs[i].size, objInputs[i].radius);
     }
+    
 
     float3 ro = float3(0, 0, 7); // Camera origin
     float3 rd = normalize(float3(uv, -1)); // Ray direction
@@ -655,18 +760,20 @@ void IntegrationFlexible(float2 INuv, out float4 frgColor3, ObjectInput objInput
         ctx.lightDir = L;
         ctx.lightColor = lightColor;
         ctx.ambient = ambientCol;
-
+        float3 lightDirection1 = float3(0.86, 0.15, 0.48);
         MaterialParams mat;
         if (gHitID >= 0 && gHitID < MAX_OBJECTS)
         {
-            mat = makePlastic(objInputs[gHitID].color);
+            // mat = makePlastic(objInputs[gHitID].color);
+            color = dolphinColor(hitPos, normal, rd, 0, 0, 0, objInputs[gHitID].color, 1, L);
         }
         else
         {
             mat = createDefaultMaterialParams();
+            color = applyPhongLighting(ctx, mat);
+            
         }
 
-        color = applyPhongLighting(ctx, mat);
     }
     else
     {
