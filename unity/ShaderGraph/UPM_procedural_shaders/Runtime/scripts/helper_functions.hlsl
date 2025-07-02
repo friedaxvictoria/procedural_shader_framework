@@ -255,16 +255,13 @@ float evalSDF(int i, float3 p)
 {
     int sdfType = _sdfTypeFloat[i];
     float dist = 1e5;
+    float3 probePt = mul((p - _sdfPositionFloat[i]), _sdfRotation[i]);
     if (sdfType == 0)
-    {
-        dist = sdSphere((p - _sdfPositionFloat[i]), _sdfRadiusFloat[i]);
-    }
+        dist = sdSphere(probePt, _sdfRadiusFloat[i]);
     else if (sdfType == 1)
-    {
-        dist = sdRoundBox(p - _sdfPositionFloat[i], _sdfSizeFloat[i], _sdfRadiusFloat[i]);
-    }
+        dist = sdRoundBox(probePt, _sdfSizeFloat[i], _sdfRadiusFloat[i]);
     else if (sdfType == 2)
-        dist = sdTorus(p - _sdfPositionFloat[i], _sdfSizeFloat[i].yz);
+        dist = sdTorus(probePt, _sdfSizeFloat[i].yz);
     else if (sdfType == 3)
         dist = dolphinDistance(p, _sdfPositionFloat[i], _timeOffsetDolphinFloat[i], _speedDolphinFloat[i], _directionDolphinFloat[i], 0.6 + 2.0 * _Time.y - 20.0).x;
     return dist;
@@ -339,12 +336,23 @@ float3 get_normal(int i, float3 p)
     return normalize(k.xyy * normal1 + k.yyx * normal2 + k.yxy * normal3 + k.xxx * normal4);
 }
 
-float3x3 computeCameraMatrix(float3 lookAtPos, float3 eye)
+float3x3 computeCameraMatrix(float3 lookAtPos, float3 eye, float3x3 mat)
 {
     float3 f = normalize(lookAtPos - eye); // Forward direction
-    float3 r = normalize(cross(f, float3(0, 1, 0))); // Right direction
+    float3 r = normalize(cross(f, mul(float3(0, 1, 0), mat))); // Right direction
     float3 u = cross(r, f); // Recomputed up
     return float3x3(r, u, -f); // Column-major: [right, up, -forward]
+}
+
+float3x3 computeRotationMatrix(float3 axis, float angle)
+{
+    float c = cos(angle);
+    float s = sin(angle);
+    float minusC = 1 - c;
+    
+    return float3x3(c + axis.x * axis.x * minusC, axis.x * axis.y * minusC - axis.z * s, axis.x * axis.z * minusC + axis.y * s,
+    axis.y * axis.x * minusC + axis.z * s, c + axis.y * axis.y * minusC, axis.y * axis.z * minusC - axis.x * s,
+    axis.z * axis.x * minusC - axis.y * s, axis.z * axis.y * minusC + axis.x * s, c + axis.z * axis.z * minusC);
 }
 
 #endif

@@ -6,31 +6,10 @@
 
 #define PI 3.1415926538
 
-float3x3 rotateX(float theta)
-{
-    float c = cos(theta);
-    float s = sin(theta);
-    return float3x3(1, 0, 0, 0, c, s, 0, -s, c);
-}
-
-float3x3 rotateY(float theta)
-{
-    float c = cos(theta);
-    float s = sin(theta);
-    return float3x3(c, 0, -s, 0, 1, 0, s, 0, c);
-}
-
-float3x3 rotateZ(float theta)
-{
-    float c = cos(theta);
-    float s = sin(theta);
-    return float3x3(c, s, 0, -s, c, 0, 0, 0, 1);
-}
-
-void orbitY_float(float speed, out float3x3 mat)
+void orbitY_float(float3 axis, float speed, out float3x3 mat)
 {
     float angle = _Time.y * speed;
-    mat = rotateY(angle);
+    mat = computeRotationMatrix(normalize(axis), angle);
 }
 
 void backAndForth_float(float speed, out float3x3 mat)
@@ -44,18 +23,77 @@ void backAndForth_float(float speed, out float3x3 mat)
 void moveViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
-    //mouse.y = mouse.y-1;
 
-    mat = mul(rotateY(lerp(-PI, PI, mouse.x)), rotateX(mouse.y * -PI));
+    mat = mul(computeRotationMatrix(float3(0, 1, 0), lerp(-PI, PI, mouse.x)), computeRotationMatrix(float3(1, 0, 0), mouse.y * -PI));
 
 }
 
-// an animation ALWAYS has to end with this node!!
+// a camera animation ALWAYS has to end with this node!!
 void finishAnimation_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPos, out float3x3 camMatrix)
 {
     float3x3 combinedMat = mul(mat1, mat2);
     _rayOrigin = mul(float3(0, 0, distance), combinedMat);
-    camMatrix = computeCameraMatrix(lookAtPos, _rayOrigin);
+    camMatrix = computeCameraMatrix(lookAtPos, _rayOrigin, combinedMat);
 }
 
+float applyTimeMode(float t, int mode)
+{
+    if (mode == 1)
+        return sin(t);
+    if (mode == 2)
+        return abs(sin(t));
+    return t;
+}
+
+void translate_float(int index, float3 dir, float speed, int mode, out int outIndex)
+{
+    float t = applyTimeMode(_Time.y, mode);
+    for (int i = 0; i <= 10; i++)
+    {
+        if (i == index-1)
+        {
+            _sdfPositionFloat[i] += dir * sin(t * speed);
+            break;
+        }
+    }
+    outIndex = index;
+}
+
+void orbitPoint_float(int index, float3 center, float3 axis, float radius, float speed, float angleOffset, out int outIndex)
+{
+    axis = normalize(axis);
+    float angle = _Time.y * speed + angleOffset * PI/180;
+    
+    float3x3 rotationMatrix = computeRotationMatrix(axis, angle);
+    
+    float3 radiusAxis = (float3(1, 1, 1) - axis) * radius;
+
+    for (int i = 0; i <= 10; i++)
+    {
+        if (i == index-1)
+        {
+            float3 p = _sdfPositionFloat[i] + radiusAxis - center;
+            _sdfPositionFloat[i] = center + cos(angle) * p + sin(angle) * cross(axis, p) + (1 - cos(angle)) * dot(axis, p) * axis;
+            _sdfRotation[i] = rotationMatrix;
+            break;
+        }
+    }
+    outIndex = index;
+}
+
+void pulse_float(int index, float freq, float amp, int mode, out int outIndex)
+{
+    float t = applyTimeMode(_Time.y, mode);
+    float scale = 1.0 + sin(t * freq) * amp;
+    for (int i = 0; i <= 10; i++)
+    {
+        if (i == index-1)
+        {
+            _sdfSizeFloat[i] *= scale;
+            _sdfRadiusFloat[i] *= scale;
+            break;
+        }
+    }
+    outIndex = index;
+}
 #endif

@@ -1,6 +1,8 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
 
+#define IDENTITY_MATRIX (1, 0, 0, 0, 1, 0, 0, 0, 1)
+
 //uniforms
 extern int _NoiseType = 0;
 extern float2 _mousePoint;
@@ -14,6 +16,7 @@ float _sdfTypeFloat[10];
 float3 _sdfPositionFloat[10];
 float3 _sdfSizeFloat[10];
 float _sdfRadiusFloat[10];
+float3x3 _sdfRotation[10];
 
 float3 _baseColorFloat[10];
 float3 _specularColorFloat[10];
