@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0xj6veshdpq1"]
+
+[ext_resource type="Script" uid="uid://crb4mjgtnglhv" path="res://addons/utility_nodes/camera/camera_shader_controller.gd" id="1_4m1pm"]
+[ext_resource type="Material" uid="uid://dkx765vdgqi38" path="res://sdf_material.tres" id="2_coddb"]
+
+[node name="sdfspheretest" type="Node3D"]
+
+[node name="CameraShaderController" type="Camera3D" parent="."]
+transform = Transform3D(-0.143562, 0, -0.989641, 0, 1, 0, 0.989641, 0, -0.143562, -2.65816, -3.10342, 0.00817347)
+script = ExtResource("1_4m1pm")
+materials = Array[Material]([ExtResource("2_coddb")])
+metadata/_custom_type_script = "uid://crb4mjgtnglhv"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = ExtResource("2_coddb")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 832.0

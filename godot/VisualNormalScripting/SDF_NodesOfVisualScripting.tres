@@ -1,0 +1,273 @@
+[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://k6j6u7vutf8y"]
+
+[ext_resource type="Script" uid="uid://d1mlwoe0g18bq" path="res://addons/NodesOfVisualShader/SDFRaymarch.gd" id="1_8dk6c"]
+[ext_resource type="Script" uid="uid://caikxarqfgqla" path="res://addons/NodesOfVisualShader/PhongLighting.gd" id="2_rsg3v"]
+[ext_resource type="Script" uid="uid://cbo2x0ykgyndu" path="res://addons/NodesOfVisualShader/AddSphere.gd" id="3_fw1m6"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8dk6c"]
+initialized = true
+script = ExtResource("1_8dk6c")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_rsg3v"]
+initialized = true
+script = ExtResource("2_rsg3v")
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_fw1m6"]
+constant = Vector3(5, 5, 5)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_8dk6c"]
+input_name = "screen_uv"
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_gjjaw"]
+initialized = true
+script = ExtResource("3_fw1m6")
+
+[sub_resource type="VisualShaderNodeIntConstant" id="VisualShaderNodeIntConstant_2f7p8"]
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_c54l4"]
+constant = Vector3(-1, 0, 0)
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_68q8y"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_m3hrr"]
+constant = Vector3(1, 0, 0)
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_3j6xt"]
+constant = Vector3(1, 1, 1)
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_713mc"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_j00rv"]
+constant = 1.0
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDFRaymarch
+// === Global Uniforms for SDF Visual Shader System ===
+
+const int MAX_OBJECTS = 10;
+
+// === Geometry Parameters (used in AddSphereNode.gd) ===
+uniform int obj_type[MAX_OBJECTS];
+uniform vec3 obj_position[MAX_OBJECTS];
+uniform vec3 obj_size[MAX_OBJECTS];
+uniform float obj_radius[MAX_OBJECTS];
+
+// === Material Parameters (used in SetMaterialParamsNode.gd / AddSphereNode.gd) ===
+uniform vec3 u_baseColorFloat[MAX_OBJECTS];
+uniform vec3 u_specularColorFloat[MAX_OBJECTS];
+uniform float u_specularStrengthFloat[MAX_OBJECTS];
+uniform float u_shininessFloat[MAX_OBJECTS];
+
+// === Raymarching Context (used in SDFRaymarchNode.gd) ===
+uniform vec3 _rayOrigin; // Typically camera position
+uniform vec2 screen_resolution;
+
+// === Scene Control ===
+uniform int inputCount = 0; // Actual number of active SDFs
+
+// === Runtime State Variables ===
+// === Lighting Parameters ===
+uniform vec3 u_lightPosition; // Position of the main light
+
+float sdSphere(vec3 p, float radius) {
+	return length(p) - radius;
+}
+
+float sdRoundBox(vec3 p, vec3 b, float r) {
+	vec3 q = abs(p) - b + r;
+	return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - r;
+}
+
+float sdTorus(vec3 p, vec2 radius) {
+	vec2 q = vec2(length(p.xy) - radius.x, p.z);
+	return length(q) - radius.y;
+}
+
+float evalSDF(int i, vec3 p) {
+	int t = int(obj_type[i]);
+	float dist = 1e5;
+	if (t == 0)
+		dist = sdSphere(p - obj_position[i], obj_radius[i]);
+	else if (t == 1)
+		dist = sdRoundBox(p - obj_position[i], obj_size[i], obj_radius[i]);
+	else if (t == 2)
+		dist = sdTorus(p - obj_position[i], obj_size[i].yz);
+	return dist;
+}
+
+vec3 get_normal(int i, vec3 p) {
+	float h = 0.0001;
+	vec2 k = vec2(1.0, -1.0);
+	return normalize(
+		k.xyy * evalSDF(i, p + k.xyy * h) +
+		k.yyx * evalSDF(i, p + k.yyx * h) +
+		k.yxy * evalSDF(i, p + k.yxy * h) +
+		k.xxx * evalSDF(i, p + k.xxx * h)
+	);
+}
+
+// ApplyPhongLighting
+
+// Lighting Helpers
+void lightingContext(vec3 hitPos, vec3 lightPos, out vec3 viewDir, out vec3 lightDir, out vec3 lightColor, out vec3 ambientColor) {
+	vec3 ro = vec3(0.0, 0.0, 7.0); // Static camera
+	viewDir = normalize(ro - hitPos);
+	lightDir = normalize(lightPos - hitPos);
+	lightColor = vec3(1.0);
+	ambientColor = vec3(0.1);
+}
+
+void applyPhongLighting_float(vec3 hitPos, vec3 lightPosition, vec3 normal, int hitID, out vec3 lightingColor) {
+	vec3 viewDir, lightDir, lightColor, ambientColor;
+	lightingContext(hitPos, lightPosition, viewDir, lightDir, lightColor, ambientColor);
+
+	float diff = max(dot(normal, lightDir), 0.0);
+	vec3 R = reflect(-lightDir, normal);
+	float spec = pow(max(dot(R, viewDir), 0.0), u_shininessFloat[hitID]);
+
+	vec3 colour = u_baseColorFloat[hitID];
+	vec3 diffuse = diff * colour * lightColor;
+	vec3 specular = spec * u_specularColorFloat[hitID] * u_specularStrengthFloat[hitID];
+
+	lightingColor = ambientColor + diffuse + specular;
+
+	if (hitPos.z == 0.0) {
+		lightingColor = vec3(0.0);
+	}
+}
+
+
+void fragment() {
+// IntConstant:3
+	int n_out3p0 = 0;
+
+
+// Vector3Constant:4
+	vec3 n_out4p0 = vec3(-1.000000, 0.000000, 0.000000);
+
+
+// FloatConstant:5
+	float n_out5p0 = 1.000000;
+
+
+// Vector3Constant:6
+	vec3 n_out6p0 = vec3(1.000000, 0.000000, 0.000000);
+
+
+// Vector3Constant:7
+	vec3 n_out7p0 = vec3(1.000000, 1.000000, 1.000000);
+
+
+// FloatConstant:8
+	float n_out8p0 = 1.000000;
+
+
+// FloatConstant:9
+	float n_out9p0 = 1.000000;
+
+
+	int n_out2p0;
+// AddSphere:2
+	{
+		n_out2p0 = n_out3p0 + 1;
+	}
+
+
+// Input:16
+	vec2 n_out16p0 = SCREEN_UV;
+
+
+	vec3 n_out13p0;
+	vec3 n_out13p1;
+	int n_out13p2;
+// SDFRaymarch:13
+	{
+		
+		vec3 ro = vec3(0.0, 0.0, 7.0);
+		vec3 rd = normalize(vec3(n_out16p0, -1.0));
+		
+		float t = 0.0;
+		vec3 p = vec3(0.0);
+		int bestID = -1;
+		n_out13p0 = vec3(0.0);
+		n_out13p2 = -1;
+		
+		for (int i = 0; i < 100; i++) {
+			p = ro + rd * t;
+			float d = 1e5;
+			for (int j = 0; j < n_out2p0; ++j) {
+				float dj = evalSDF(j, p);
+				if (dj < d) {
+					d = dj;
+					bestID = j;
+				}
+			}
+			if (d < 0.001) {
+				n_out13p0 = p;
+				n_out13p1 = get_normal(bestID, p);
+				n_out13p2 = bestID;
+				break;
+			}
+			if (t > 50.0) break;
+			t += d;
+		}
+	}
+
+
+// Vector3Constant:15
+	vec3 n_out15p0 = vec3(5.000000, 5.000000, 5.000000);
+
+
+	vec4 n_out14p0;
+// ApplyPhongLighting:14
+	{
+		
+			vec3 tempColor = vec3(0.0);
+			applyPhongLighting_float(n_out13p0, n_out15p0, n_out13p1, n_out13p2, tempColor);
+			n_out14p0 = vec4(tempColor, 1.0);
+			
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out14p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-13.0535, -195.524)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(2360, -60)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_gjjaw")
+nodes/fragment/2/position = Vector2(260, 120)
+nodes/fragment/3/node = SubResource("VisualShaderNodeIntConstant_2f7p8")
+nodes/fragment/3/position = Vector2(-380, 200)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVec3Constant_c54l4")
+nodes/fragment/4/position = Vector2(-780, 380)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatConstant_68q8y")
+nodes/fragment/5/position = Vector2(-540, 600)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVec3Constant_m3hrr")
+nodes/fragment/6/position = Vector2(-800, 780)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVec3Constant_3j6xt")
+nodes/fragment/7/position = Vector2(-840, 1000)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatConstant_713mc")
+nodes/fragment/8/position = Vector2(-680, 1220)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatConstant_j00rv")
+nodes/fragment/9/position = Vector2(-680, 1440)
+nodes/fragment/13/node = SubResource("VisualShaderNodeCustom_8dk6c")
+nodes/fragment/13/position = Vector2(780, 40)
+nodes/fragment/14/node = SubResource("VisualShaderNodeCustom_rsg3v")
+nodes/fragment/14/position = Vector2(1660, 20)
+nodes/fragment/15/node = SubResource("VisualShaderNodeVec3Constant_fw1m6")
+nodes/fragment/15/position = Vector2(760, 580)
+nodes/fragment/16/node = SubResource("VisualShaderNodeInput_8dk6c")
+nodes/fragment/16/position = Vector2(20, -240)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 0, 4, 0, 2, 1, 5, 0, 2, 2, 6, 0, 2, 3, 7, 0, 2, 4, 8, 0, 2, 5, 9, 0, 2, 6, 2, 0, 13, 0, 13, 0, 14, 0, 13, 1, 14, 2, 13, 2, 14, 3, 15, 0, 14, 1, 14, 0, 0, 0, 16, 0, 13, 1)

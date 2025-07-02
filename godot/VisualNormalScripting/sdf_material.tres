@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dkx765vdgqi38"]
+
+[ext_resource type="Shader" uid="uid://c2n5s7uhdvxst" path="res://sdf_sphere_camera.gdshader" id="1_6q266"]
+
+[resource]
+shader = ExtResource("1_6q266")
+shader_parameter/u_camera_position = Vector3(-2.65816, -3.10342, 0.00817347)
+shader_parameter/u_camera_direction = Vector3(0.989641, 0, 0.143562)
+shader_parameter/u_resolution = Vector2(1024, 768)
+shader_parameter/u_enable_rotation = true
+shader_parameter/u_enable_camera_rotation = true
+shader_parameter/u_animation_speed = 2.0
+shader_parameter/u_background_color = Color(0.992157, 0.976471, 0.988235, 1)
+shader_parameter/u_primitive_type = 0
+shader_parameter/u_ambient_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/u_diffuse_color = Color(1, 1, 1, 1)
+shader_parameter/u_specular_color = Color(1, 1, 1, 1)
+shader_parameter/u_shininess = 100.0
+shader_parameter/u_light_position = Vector3(10, 10, 10)
+shader_parameter/u_fresnel_strength = 0.2

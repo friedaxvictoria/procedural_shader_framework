@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3wlhlp6aqiex"]
+
+[ext_resource type="Script" uid="uid://crb4mjgtnglhv" path="res://addons/utility_nodes/camera/camera_shader_controller.gd" id="1_ofxc6"]
+[ext_resource type="Material" uid="uid://b585sangyyxm" path="res://camera_input_test_material.tres" id="2_pjlnt"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_lw7br"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CameraShaderController" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.27349)
+script = ExtResource("1_ofxc6")
+materials = Array[Material]([ExtResource("2_pjlnt")])
+metadata/_custom_type_script = "uid://crb4mjgtnglhv"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_lw7br")
+surface_material_override/0 = ExtResource("2_pjlnt")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://vvv60he5trhy"]
+
+[ext_resource type="Material" uid="uid://ccf0kr2ggjohc" path="res://modular_sdf_scene.tres" id="1_qs43m"]
+[ext_resource type="Script" uid="uid://crb4mjgtnglhv" path="res://addons/utility_nodes/camera/camera_shader_controller.gd" id="2_ss62t"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("1_qs43m")
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 1140.0
+offset_bottom = 642.0
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="CameraShaderController" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05311, 0, 2.12209)
+script = ExtResource("2_ss62t")
+metadata/_custom_type_script = "uid://crb4mjgtnglhv"

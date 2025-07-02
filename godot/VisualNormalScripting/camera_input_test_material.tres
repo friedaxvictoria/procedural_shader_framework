@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b585sangyyxm"]
+
+[ext_resource type="Shader" uid="uid://dka38486cdp4r" path="res://camera_input_test_visualshader.tres" id="1_b7lm2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_b7lm2")
+shader_parameter/u_camera_position = Vector3(0, 0, 0)
+shader_parameter/u_camera_direction = Vector3(0, 0, 0)

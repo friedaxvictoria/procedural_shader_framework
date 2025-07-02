@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ccf0kr2ggjohc"]
+
+[ext_resource type="Shader" uid="uid://b705bwjabvtb1" path="res://modular_sdf_scene.gdshader" id="1_sift1"]
+
+[resource]
+shader = ExtResource("1_sift1")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://caas2difx0tpp"]
+
+[ext_resource type="Shader" uid="uid://k6j6u7vutf8y" path="res://SDF_NodesOfVisualScripting.tres" id="2_b4l74"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ynai"]
+shader = ExtResource("2_b4l74")
+shader_parameter/obj_type = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_position = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_size = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_radius = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/u_baseColorFloat = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/u_specularColorFloat = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/u_specularStrengthFloat = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/u_shininessFloat = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/_rayOrigin = Vector3(0, 0, 0)
+shader_parameter/screen_resolution = Vector2(0, 0)
+shader_parameter/inputCount = 0
+shader_parameter/u_lightPosition = Vector3(0, 0, 0)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0ynai")
+offset_right = 1150.0
+offset_bottom = 662.0
