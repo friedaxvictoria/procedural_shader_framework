@@ -42,10 +42,12 @@ Learn how to use shaders across different engines:
 
 
 | Engine             | Features             | Integration Guide                 |
-|------             |--------               |-----------------                  |         
-| **🎬 Unreal Engine** | Material Editor • HLSL Support  | **[Setup Guide →](engines/enginePage.md#unreal-engine)** |
-| **🧩 Unity** | Shader Graph • HLSL Support • Animation Timeline | **[Setup Guide →](engines/enginePage.md#unity)** |
-| **🚀 Godot** | GDScript Control • ShaderMaterial • Scene Integration | **[Setup Guide →](engines/enginePage.md#godot)** |
+|------             |--------               |-----------------                  | 
+| **🚀 Godot** | GDScript Control • ShaderMaterial • Scene Integration | **[Setup Guide →](engines/godot.md#godot)** |        
+| **🎬 Unreal Engine** | Material Editor • HLSL Support  | **[Setup Guide →](engines/unreal.md#unreal-engine)** |
+| **🧩 Unity** | Shader Graph • HLSL Support • Animation Timeline | **[Setup Guide →](engines/unity.md#unity)** |
+
+
 
 
 ### 🔧 **What Each Engine Section Includes:**

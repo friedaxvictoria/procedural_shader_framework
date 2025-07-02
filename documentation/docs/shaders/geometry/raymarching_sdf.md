@@ -33,8 +33,7 @@ This shader implements **raymarching** using **signed distance fields (SDFs)** t
 
 - The scene is described using **mathematical distance functions** for each shape.
 - A **raymarch loop** iteratively steps forward from the camera along the ray until a surface is hit or the max steps/distance is reached.
-- Complex shapes are formed by combining primitive SDFs using operations like union, subtraction, and smooth blend.
-- **Lighting** is applied using surface normal approximation (via finite differences) for basic diffuse or stylized shading.
+- **Lighting** is applied using surface normal approximation using phong lighting model.
 
 This makes it perfect for real-time visuals with minimal mesh overhead — and easily portable across engines like Unity, Godot, and Unreal.
 
