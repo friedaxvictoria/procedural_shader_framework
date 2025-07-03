@@ -26,11 +26,14 @@ or, external link like of a github can be added -->
 
 - **Category:** [e.g., Animation / Noise / Scene]
 - **Author:** [Contributor Name]
+- **Shader Type:** Raymarching with SDFs  
 - **Input Requirements:** [Time / UV / Mouse / etc.]
 
 ---
 
 ## 🧠 Algorithm
+
+### 🔷 Core Concept
 
 Explain the logic used in this shader.
 
@@ -39,23 +42,43 @@ Explain the logic used in this shader.
 - Camera path, lighting, deformation, etc.
 
 ---
-
-## 💻 Code
-
-```glsl
-    // Paste full GLSL or HLSL code here
-
-  ```
-
----
- 
-<!-- ## 🎛️ Parameters
+## 🎛️ Parameters
 
 | Name | Description | Range | Default |
 |------|-------------|-------|---------|
 | `T`  | Looping time | 0–40  | —       |
 | ...  | ...          | ...   | ...     |
 
--->
+---
 
---
+## 💻 Shader Code & Includes
+<!--
+if you want to put small code snippet
+-->
+```glsl
+    // Paste full GLSL or HLSL code here
+
+  ```
+
+<!--
+if you want to put small code snippet and make it appereable and dissapear
+-->
+??? note "📄 sdf_updated.gdshader"
+    ```glsl
+        shader_type canvas_item;
+
+        #include "res://addons/includes/sdf_updated.gdshaderinc"
+        void fragment() {
+            vec4 color;
+        vec3 lightPosition = camera_position;
+        IntegrationFlexible(UV, color, lightPosition);
+            COLOR = color;
+
+        }
+    ```
+<!--
+if we want to link the github repo
+-->
+🔗 [View Full Shader Code on GitHub](https://github.com/your-org/your-repo/blob/main/path/to/tie_fighter.glsl)
+
+---

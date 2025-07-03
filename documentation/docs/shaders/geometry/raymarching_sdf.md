@@ -51,6 +51,8 @@ This makes it perfect for real-time visuals with minimal mesh overhead — and e
 
 ## 💻 Shader Code & Includes
 
+🔗 [View Full Shader Code on GitHub](https://github.com/your-org/your-repo/blob/main/path/to/tie_fighter.glsl)
+
 ??? note "📄 sdf_updated.gdshader"
     ```glsl
         shader_type canvas_item;
