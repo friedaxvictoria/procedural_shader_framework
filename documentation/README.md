@@ -16,13 +16,16 @@ docs/
 │   └── shader_template.md      → Template for all shader entries
 │
 ├── engines/                    → Engine integration section
+│   ├── godot.md               →  Godot integration hub
+│   ├── unity.md               →  Unity integration hub
+│   ├── unreal.md               →  Unreal integration hub
 │   ├── unity/
 │   │   └── tie_fighter_unity.md
 │   ├── godot/
 │   │   └── raymarching_sdf.md
 │   ├── unreal/
 │   │   └── (future entries)
-│   └── engine_template.md      → Template for engine integration docs
+│   └── engine_template.md      → Template for engine integration docs to follw 
 │
 ├── static/
 │   ├── images/                 → GIFs / screenshots
@@ -40,14 +43,18 @@ This documentation site is organized into several main sections:
 
 ### 🎨 Shader Library (`shaders/`)
 - **animation/** - Movement and animated effects
-- **geometry/** - Geometric transformations and rendering techniques, and we can add similar sub structure line, Noise/ .....
-- **shader_template.md** - Standardized template for all shader entries
+- **geometry/** - Geometric transformations and rendering techniques, and we can add similar sub structure like, noise/ ..... for their specific 
+- **shader_template.md** - Standardized template for all shader entries, for the code snippets to be added into the corresponding shader page, I have included both way, 
+                           directly including in the page or either add a link to the github repo. 
 
 ### 🎮 Engine Integration (`engines/`)
-- **unity/** - Unity-specific implementations
-- **godot/** - Godot engine examples
-- **unreal/** - Unreal Engine integration (planned)
+- **unity/** - folder to put Unity-specific implementations
+- **godot/** - folder to put Godot-specific implementations
+- **unreal/** - folder to put Unreal-specific implementations
 - **engine_template.md** - Template for engine-specific documentation
+- **godot.md** -- landing page for godot details
+- **unity.md** -- landing page for unity details
+- **unreal.md** -- landing page for unreal details
 
 ### 📁 Static Assets (`static/`)
 - **images/** - Screenshots, GIFs, and visual examples
