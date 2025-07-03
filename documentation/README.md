@@ -8,12 +8,15 @@
 docs/
 ├── index.md                 → Main landing page
 ├── shaders/                    → Shader library
-│   ├── shaderPage.md           → (hidden) overview for all shaders
+│   ├── shader_template.md      → Template for all shader entries
+│   ├── shaderPage.md           → (hidden) overview page for all shaders
 │   ├── animation/
 │   │   └── tie_fighter.md      → Example animation shader
 │   ├── geometry/
 │   │   └── raymarching_sdf.md  → Example geometry shader
-│   └── shader_template.md      → Template for all shader entries
+│   ├── ....../                  → similar sub structure can be added like noise, lighting ....
+│   │   └── .....md              → corresponding .md files for eaxh sub structure
+│   └── 
 │
 ├── engines/                    → Engine integration section
 │   ├── godot.md               →  Godot integration hub
