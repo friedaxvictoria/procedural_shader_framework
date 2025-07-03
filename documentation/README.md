@@ -1,5 +1,61 @@
 
 ---
+# Project Documentation Structure
+
+## Directory Layout
+
+```
+docs/
+├── index.md                 → Main landing page
+├── shaders/                    → Shader library
+│   ├── shaderPage.md           → (hidden) overview for all shaders
+│   ├── animation/
+│   │   └── tie_fighter.md      → Example animation shader
+│   ├── geometry/
+│   │   └── raymarching_sdf.md  → Example geometry shader
+│   └── shader_template.md      → Template for all shader entries
+│
+├── engines/                    → Engine integration section
+│   ├── unity/
+│   │   └── tie_fighter_unity.md
+│   ├── godot/
+│   │   └── raymarching_sdf.md
+│   ├── unreal/
+│   │   └── (future entries)
+│   └── engine_template.md      → Template for engine integration docs
+│
+├── static/
+│   ├── images/                 → GIFs / screenshots
+│   └── videos/                 → Preview videos
+│
+└── mkdocs.yml                  → MkDocs config (site navigation)
+```
+
+## Overview
+
+This documentation site is organized into several main sections:
+
+### 📄 Core Pages
+- **index.md** - Main landing page and project introduction
+
+### 🎨 Shader Library (`shaders/`)
+- **animation/** - Movement and animated effects
+- **geometry/** - Geometric transformations and rendering techniques, and we can add similar sub structure line, Noise/ .....
+- **shader_template.md** - Standardized template for all shader entries
+
+### 🎮 Engine Integration (`engines/`)
+- **unity/** - Unity-specific implementations
+- **godot/** - Godot engine examples
+- **unreal/** - Unreal Engine integration (planned)
+- **engine_template.md** - Template for engine-specific documentation
+
+### 📁 Static Assets (`static/`)
+- **images/** - Screenshots, GIFs, and visual examples
+- **videos/** - Preview videos and demonstrations
+
+### ⚙️ Configuration
+- **mkdocs.yml** - Site navigation and build configuration
+---
 
 ## ✏️ How to Contribute
 
