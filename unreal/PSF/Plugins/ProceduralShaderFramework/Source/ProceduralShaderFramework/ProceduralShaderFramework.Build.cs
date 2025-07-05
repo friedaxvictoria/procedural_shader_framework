@@ -30,6 +30,7 @@ public class ProceduralShaderFramework : ModuleRules
 			new string[]
 			{
 				"Core",
+				"MaterialEditor"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -45,7 +46,10 @@ public class ProceduralShaderFramework : ModuleRules
                 "Projects",
 				"RenderCore",
                 "ShaderPreprocessor",
-                "ShaderCompilerCommon"
+                "ShaderCompilerCommon",
+				"MaterialShaderQualitySettings",
+				"Renderer",
+				"MaterialEditor"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
