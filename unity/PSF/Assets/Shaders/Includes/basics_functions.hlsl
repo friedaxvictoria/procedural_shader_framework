@@ -12,9 +12,11 @@ void computeUV_float(float2 fragCoord, out float2 uv)
     _rayOrigin = float3(0, 0, 7);
 }
 
-void combinedColour_half(half3 hitPos1, half3 hitPos2, half4 colour1, half4 colour2, out half4 colour)
+void combinedColour_float(float3 hitPos1, float3 hitPos2, float3 colour1, float3 colour2, out float3 colour)
 {
-    if (hitPos1.z < hitPos2.z && hitPos1.z != 0)
+    float dist1 = distance(hitPos1, _rayOrigin);
+    float dist2 = distance(hitPos2, _rayOrigin);
+    if (dist1 < dist2)
     {
         colour = colour1;
     }

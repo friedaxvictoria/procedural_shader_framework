@@ -29,14 +29,14 @@ Shader "Custom/UserShader5"
             #pragma vertex vert
             #pragma fragment frag
 
-            #define MAX_OBJECTS 8
-
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             // #include "Assets/Shaders/Includes/ModularShaderLib.hlsl"
             #include "Assets/Shaders/Includes/sdf_functions.hlsl"
             #include "Assets/Shaders/Includes/basics_functions.hlsl"
             #include "Assets/Shaders/Includes/lighting_functions.hlsl"
             #include "Assets/Shaders/Includes/animation_functions.hlsl"
+            #include "Assets/Shaders/Includes/water_surface.hlsl"
+
 
 
 
@@ -82,22 +82,75 @@ Shader "Custom/UserShader5"
                 float2 uv;
                 float index;
                 float3x3 camMat = float3x3( 1,0,0, 0,1,0, 0,0,1 );
-                float3 hitpos;
+
+                float3 hitPos1;
+                float3 hitPos2;
+
                 float hitID;
                 float3 normal;
+
+                float3 colorOut1;
+                float3 colorOut2;
+
                 float3 colorOut;
+                float t;
+
+
 
 
                 computeUV_float(IN.uv, uv);
-                addSphere_float(float3(-2,0,0), 2, 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, index);
-                addCube_float(float3(5,0,-5), 2, 0, index, float3(0.2,0.2,0.8), float3(0.8,0.1,0.1), 2, 1, index);
-                addTorus_float(float3(1.5,4.5,0), 2, 0.2, index, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
-                addTorus_float(float3(-4.5,4.5,0), 2, 0.2, index, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
-                addTorus_float(float3(-1.5,4.5,0), 2, 0.2, index, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
-                addTorus_float(float3(4.5,4.5,0), 2, 0.2, index, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+
+                addSphere_float(float3(-2,0,0), 2, 0, float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, index);
+
+                addCube_float(float3(5,0,-5), 2, 0, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), float3(0.8,0.1,0.1), 2, 1, index);
+
+                translate_float(index, float3(-4,-8,0), 5, 1, index);
+                orbitPoint_float(index, float3(3,3,-2), float3(1,2,0), 0.2, 0.8, 0.1, index);
+                cycleColor_float(index, 2, index);
+                pulse_float(index, 2, 1, 0, index);
+                // shake_float(index, 0.4, 1, index);
 
 
-                raymarch_float(index, uv, camMat, hitpos, normal);
+
+                addTorus_float(float3(1.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+                addTorus_float(float3(-4.5,4.5,0), 2, 0.2, index,float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+                addTorus_float(float3(-1.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+                addTorus_float(float3(4.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+
+
+                raymarch_float(index, uv, camMat, hitPos1, normal, t);
+                applyPhongLighting_float(hitPos1, _LightPosition, normal, colorOut1);
+
+
+                colorOut = colorOut1;
+
+                // computeWater_float(uv, camMat, colorOut2, hitPos2);
+
+
+
+                // float3 ro = float3(0, 0, 7);
+                // float3 rd = normalize(float3(uv, -1));
+                // float2 waterHit = traceWater(ro, rd);
+
+
+                // float waterT = waterHit.x;
+
+                
+
+                // if(waterT > t && t > 0.)
+                // {
+                //     colorOut = colorOut1;
+                // }
+                // else if(t > 0.)
+                // {
+                //     colorOut = colorOut2;
+                // }else{
+                //     colorOut = float3(0, 0, 0);            
+                // }
+
+
+
+
 
 
                 
@@ -106,7 +159,8 @@ Shader "Custom/UserShader5"
 
                 // _dolphinColor(hitpos, normal, rd,  0.1, 0.1, 0, 1, L, colorOut);
 
-                applyPhongLighting_float(hitpos, _LightPosition, normal, colorOut);
+
+
 
 
 

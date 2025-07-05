@@ -176,7 +176,7 @@ float dolphinShadow(float3 ro, float3 rd, float mint, float k, float dist)
     return saturate(result);
 }
 
-void _dolphinColor(float3 pos, float3 nor, float3 rd, float glossy, float glossy2, float shadows,  float occlusion, float3 light, out float3 finalColor)
+void _dolphinColor(float3 pos, float3 nor, float3 rd, float glossy, float glossy2, float shadows, float occlusion, float3 light, out float3 finalColor)
 {
     float3 halfWay = normalize(light - rd);
     float3 reflection = reflect(rd, nor);

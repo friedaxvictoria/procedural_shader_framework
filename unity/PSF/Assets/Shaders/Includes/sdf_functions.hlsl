@@ -4,7 +4,7 @@
 #include "helper_functions.hlsl"
 #include "global_variables.hlsl"
 
-void addSphere_float(float3 position, float radius, float index, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
+void addSphere_float(float3 position, float radius, float index, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
 float shininessIn, out float indexOut)
 {
     for (int i = 0; i <= 10; i++)
@@ -20,13 +20,14 @@ float shininessIn, out float indexOut)
             _specularColorFloat[i] = specularColorIn;
             _specularStrengthFloat[i] = specularStrengthIn;
             _shininessFloat[i] = shininessIn;
+            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
             break;
         }
     }
     indexOut = index + 1;
 }
 
-void addTorus_float(float3 position, float radius, float thickness, float index, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
+void addTorus_float(float3 position, float radius, float thickness, float index, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
 float shininessIn, out float indexOut)
 {
     for (int i = 0; i <= 10; i++)
@@ -42,13 +43,14 @@ float shininessIn, out float indexOut)
             _specularColorFloat[i] = specularColorIn;
             _specularStrengthFloat[i] = specularStrengthIn;
             _shininessFloat[i] = shininessIn;
+            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
             break;
         }
     }
     indexOut = index + 1;
 }
 
-void addCube_float(float3 position, float3 size, float radius, float index, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
+void addCube_float(float3 position, float3 size, float radius, float index, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
 float shininessIn, out float indexOut)
 {
     for (int i = 0; i <= 10; i++)
@@ -64,6 +66,7 @@ float shininessIn, out float indexOut)
             _specularColorFloat[i] = specularColorIn;
             _specularStrengthFloat[i] = specularStrengthIn;
             _shininessFloat[i] = shininessIn;
+            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle*PI/180);
             break;
         }
     }
@@ -85,16 +88,17 @@ void addDolphin_float(float index, float3 position, float timeOffset, float spee
             _specularColorFloat[i] = float3(0, 0, 0);
             _specularStrengthFloat[i] = 0;
             _shininessFloat[i] = 1e-5;
+            _sdfRotation[i] = IDENTITY_MATRIX;
             break;
         }
     }
     indexOut = index + 1;
 }
 
-void raymarch_float(float numSDF, float2 uv, float3x3 camMatrix, out float3 hitPos, out float3 normal)
+void raymarch_float(float numSDF, float2 uv, float3x3 camMatrix, out float3 hitPos, out float3 normal, out float t)
 {
-    float3 rayDirection = normalize(mul(float3(uv, -1.0), camMatrix));
-    float t = 0.0;
+    float3 rayDirection = normalize(mul(float3(uv,-1), camMatrix));
+    t = 0.0;
     hitPos = float3(0, 0, 0);
     for (int i = 0; i < 100; i++)
     {
