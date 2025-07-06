@@ -248,32 +248,53 @@ float sdTorus(float3 p, float2 radius)
     float2 q = float2(length(p.xy) - radius.x, p.z);
     return length(q) - radius.y;
 }
+
+float sdHexPrism(float3 p, float2 height)
+{
+    const float3 k = float3(-0.8660254, 0.5, 0.57735);
+    p = abs(p);
+    p.xy -= 2.0 * min(dot(k.xy, p.xy), 0.0) * k.xy;
+    float2 d = float2(
+       length(p.xy - float2(clamp(p.x, -k.z * height.x, k.z * height.x), height.x)) * sign(p.y - height.x),
+       p.z - height.y);
+    return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
+}
+
+float sdOctahedron(float3 p, float s)
+{
+    p = abs(p);
+    return (p.x + p.y + p.z - s) * 0.57735027;
+}
+
+float sdEllipsoid(float3 p, float3 r)
+{
+    float k0 = length(p / r);
+    float k1 = length(p / (r * r));
+    return k0 * (k0 - 1.0) / k1;
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Evaluate the signed distance function for a given SDF shape
 float evalSDF(int i, float3 p)
 {
     int sdfType = _sdfTypeFloat[i];
-    float dist = 1e5;
     float3 probePt = mul((p - _sdfPositionFloat[i]), _sdfRotation[i]);
+    
     if (sdfType == 0)
-        dist = sdSphere(probePt, _sdfRadiusFloat[i]);
+        return sdSphere(probePt, _sdfRadiusFloat[i]);
     else if (sdfType == 1)
-        dist = sdRoundBox(probePt, _sdfSizeFloat[i], _sdfRadiusFloat[i]);
+        return sdRoundBox(probePt, _sdfSizeFloat[i], _sdfRadiusFloat[i]);
     else if (sdfType == 2)
-        dist = sdTorus(probePt, _sdfSizeFloat[i].yz);
+        return sdTorus(probePt, _sdfSizeFloat[i].yz);
     else if (sdfType == 3)
-        dist = dolphinDistance(p, _sdfPositionFloat[i], _timeOffsetDolphinFloat[i], _speedDolphinFloat[i], _directionDolphinFloat[i], 0.6 + 2.0 * _Time.y - 20.0).x;
-    return dist;
-}
-
-void lightingContext(float3 hitPos, float3 lightPosition, out float3 viewDir, out float3 lightDir, out float3 lightColor,
-out float3 ambientColor)
-{
-    viewDir = normalize(_rayOrigin - hitPos); // Direction from hit point to camera
-    lightDir = normalize(lightPosition - hitPos);
-    lightColor = float3(1.0, 1.0, 1.0); // Light color (white)
-    ambientColor = float3(0.1, 0.1, 0.1); // Ambient light color<
+        return dolphinDistance(p, _sdfPositionFloat[i], _timeOffsetDolphinFloat[i], _speedDolphinFloat[i], _directionDolphinFloat[i], 0.6 + 2.0 * _Time.y - 20.0).x;
+    else if (sdfType == 4)
+        return sdHexPrism(probePt, _sdfRadiusFloat[i]);
+    else if (sdfType == 5)
+        return sdOctahedron(probePt, _sdfRadiusFloat[i]);
+    else if (sdfType == 6)
+        return sdEllipsoid(probePt, _sdfSizeFloat[i]);
+    return 1e5;
 }
 
 float2 GetGradient(float2 intPos, float t)
@@ -313,15 +334,6 @@ float fbmPseudo3D(float3 p, int octaves)
     }
 
     return result;
-}
-
-float get_noise(float3 p)
-{
-    if (_NoiseType == 1)
-    {
-        return fbmPseudo3D(p, 1);
-    }
-    return 0;
 }
 
 float3 get_normal(int i, float3 p)

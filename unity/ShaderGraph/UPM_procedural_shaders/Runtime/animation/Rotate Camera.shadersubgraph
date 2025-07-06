@@ -115,7 +115,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "orbitY (Custom Function)",
+    "m_Name": "rotateCamera (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -149,7 +149,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "orbitY",
+    "m_FunctionName": "rotateCamera",
     "m_FunctionSource": "abaf33b1ebcd6ed4cb8a3961cc1de3e3",
     "m_FunctionBody": "Enter function body here..."
 }

@@ -4,9 +4,7 @@
 #include "helper_functions.hlsl"
 #include "global_variables.hlsl"
 
-#define PI 3.1415926538
-
-void orbitY_float(float3 axis, float speed, out float3x3 mat)
+void rotateCamera_float(float3 axis, float speed, out float3x3 mat)
 {
     float angle = _Time.y * speed;
     mat = computeRotationMatrix(normalize(axis), angle);
@@ -19,7 +17,6 @@ void backAndForth_float(float speed, out float3x3 mat)
 }
 
 // from https://www.shadertoy.com/view/NsS3Ww
-
 void moveViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
@@ -29,7 +26,7 @@ void moveViaMouse_float(out float3x3 mat)
 }
 
 // a camera animation ALWAYS has to end with this node!!
-void finishAnimation_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPos, out float3x3 camMatrix)
+void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPos, out float3x3 camMatrix)
 {
     float3x3 combinedMat = mul(mat1, mat2);
     _rayOrigin = mul(float3(0, 0, distance), combinedMat);
@@ -40,60 +37,36 @@ float applyTimeMode(float t, int mode)
 {
     if (mode == 1)
         return sin(t);
-    if (mode == 2)
+    else if (mode == 2)
         return abs(sin(t));
     return t;
 }
 
-void translate_float(int index, float3 dir, float speed, int mode, out int outIndex)
+void translateObject_float(float3 seedPosition, float3 dir, float speed, int mode, out float3 position)
 {
     float t = applyTimeMode(_Time.y, mode);
-    for (int i = 0; i <= 10; i++)
-    {
-        if (i == index-1)
-        {
-            _sdfPositionFloat[i] += dir * sin(t * speed);
-            break;
-        }
-    }
-    outIndex = index;
+    position = seedPosition + dir * sin(t * speed);
 }
 
-void orbitPoint_float(int index, float3 center, float3 axis, float radius, float speed, float angleOffset, out int outIndex)
+void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axis, float radius, float speed, float angleOffset, out float3 position, out float angle)
 {
     axis = normalize(axis);
-    float angle = _Time.y * speed + angleOffset * PI/180;
-    
-    float3x3 rotationMatrix = computeRotationMatrix(axis, angle);
-    
+    angle = _Time.y * speed + angleOffset * PI / 180;
+        
     float3 radiusAxis = (float3(1, 1, 1) - axis) * radius;
-
-    for (int i = 0; i <= 10; i++)
-    {
-        if (i == index-1)
-        {
-            float3 p = _sdfPositionFloat[i] + radiusAxis - center;
-            _sdfPositionFloat[i] = center + cos(angle) * p + sin(angle) * cross(axis, p) + (1 - cos(angle)) * dot(axis, p) * axis;
-            _sdfRotation[i] = rotationMatrix;
-            break;
-        }
-    }
-    outIndex = index;
+    
+    float3 p = seedPosition + radiusAxis - center;
+    position = center + cos(angle) * p + sin(angle) * cross(axis, p) + (1 - cos(angle)) * dot(axis, p) * axis;
+    
+    angle = angle * 180 / PI;
 }
 
-void pulse_float(int index, float freq, float amp, int mode, out int outIndex)
+void pulseObject_float(float3 seedSize, float seedRadius, float freq, float amp, int mode, out float3 size, out float radius)
 {
     float t = applyTimeMode(_Time.y, mode);
     float scale = 1.0 + sin(t * freq) * amp;
-    for (int i = 0; i <= 10; i++)
-    {
-        if (i == index-1)
-        {
-            _sdfSizeFloat[i] *= scale;
-            _sdfRadiusFloat[i] *= scale;
-            break;
-        }
-    }
-    outIndex = index;
+    
+    size = seedSize * scale;
+    radius = seedRadius * scale;
 }
 #endif

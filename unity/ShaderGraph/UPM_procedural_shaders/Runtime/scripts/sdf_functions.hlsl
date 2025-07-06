@@ -5,7 +5,7 @@
 #include "global_variables.hlsl"
 
 void addSphere_float(float3 position, float radius, float index, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
-float shininessIn, out float indexOut)
+float shininessIn, float noiseIn, out float indexOut)
 {
     for (int i = 0; i <= 10; i++)
     {
@@ -21,6 +21,7 @@ float shininessIn, out float indexOut)
             _specularStrengthFloat[i] = specularStrengthIn;
             _shininessFloat[i] = shininessIn;
             _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
+            _sdfNoise[i] = noiseIn;
             break;
         }
     }
@@ -28,7 +29,7 @@ float shininessIn, out float indexOut)
 }
 
 void addTorus_float(float3 position, float radius, float thickness, float index, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
-float shininessIn, out float indexOut)
+float shininessIn, float noiseIn, out float indexOut)
 {
     for (int i = 0; i <= 10; i++)
     {
@@ -44,6 +45,7 @@ float shininessIn, out float indexOut)
             _specularStrengthFloat[i] = specularStrengthIn;
             _shininessFloat[i] = shininessIn;
             _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
+            _sdfNoise[i] = noiseIn;
             break;
         }
     }
@@ -51,7 +53,7 @@ float shininessIn, out float indexOut)
 }
 
 void addCube_float(float3 position, float3 size, float radius, float index, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
-float shininessIn, out float indexOut)
+float shininessIn, float noiseIn, out float indexOut)
 {
     for (int i = 0; i <= 10; i++)
     {
@@ -67,6 +69,7 @@ float shininessIn, out float indexOut)
             _specularStrengthFloat[i] = specularStrengthIn;
             _shininessFloat[i] = shininessIn;
             _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle*PI/180);
+            _sdfNoise[i] = noiseIn;
             break;
         }
     }
@@ -88,22 +91,99 @@ void addDolphin_float(float index, float3 position, float timeOffset, float spee
             _specularColorFloat[i] = float3(0, 0, 0);
             _specularStrengthFloat[i] = 0;
             _shininessFloat[i] = 1e-5;
-            _sdfRotation[i] = IDENTITY_MATRIX;
+            _sdfRotation[i] = float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1);
+            _sdfNoise[i] = 0;
             break;
         }
     }
     indexOut = index + 1;
 }
 
-void raymarch_float(float numSDF, float2 uv, float3x3 camMatrix, out float3 hitPos, out float3 normal)
+void addHexPrism_float(int index, float3 position, float height , float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
+float shininessIn, float noiseIn, out int indexOut)
 {
-    float3 rayDirection = normalize(mul(float3(uv,-1), camMatrix));
+    for (int i = 0; i <= 10; i++)
+    {
+        if (i == index)
+        {
+            _sdfTypeFloat[i] = 4;
+            _sdfPositionFloat[i] = position;
+            _sdfSizeFloat[i] = float3(0.0, 0.0, 0.0);;
+            _sdfRadiusFloat[i] = height;
+            
+            _baseColorFloat[i] = baseColorIn;
+            _specularColorFloat[i] = specularColorIn;
+            _specularStrengthFloat[i] = specularStrengthIn;
+            _shininessFloat[i] = shininessIn;
+            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
+            _sdfNoise[i] = noiseIn;
+            break;
+        }
+    }
+    indexOut = index + 1;
+}
+
+void addOctahedron_float(int index, float3 position, float size, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
+float shininessIn, float noiseIn, out int indexOut)
+{
+    for (int i = 0; i <= 10; i++)
+    {
+        if (i == index)
+        {
+            _sdfTypeFloat[i] = 5;
+            _sdfPositionFloat[i] = position;
+            _sdfSizeFloat[i] = float3(0.0, 0.0, 0.0);;
+            _sdfRadiusFloat[i] = size;
+            
+            _baseColorFloat[i] = baseColorIn;
+            _specularColorFloat[i] = specularColorIn;
+            _specularStrengthFloat[i] = specularStrengthIn;
+            _shininessFloat[i] = shininessIn;
+            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
+            _sdfNoise[i] = noiseIn;
+            break;
+        }
+    }
+    indexOut = index + 1;
+}
+
+void addEllipsoid_float(int index, float3 position, float3 radius, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
+float shininessIn, float noiseIn, out int indexOut)
+{
+    for (int i = 0; i <= 10; i++)
+    {
+        if (i == index)
+        {
+            _sdfTypeFloat[i] = 6;
+            _sdfPositionFloat[i] = position;
+            _sdfSizeFloat[i] = radius;
+            _sdfRadiusFloat[i] = 0.0;
+            
+            _baseColorFloat[i] = baseColorIn;
+            _specularColorFloat[i] = specularColorIn;
+            _specularStrengthFloat[i] = specularStrengthIn;
+            _shininessFloat[i] = shininessIn;
+            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
+            _sdfNoise[i] = noiseIn;
+            break;
+        }
+    }
+    indexOut = index + 1;
+}
+
+void raymarch_float(float condition, float numSDF, float2 uv, float3x3 camMatrix, out float4 hitPos, out float3 normal, out float3 rayDirection)
+{
+    if (condition == 0)
+    {
+        camMatrix = computeCameraMatrix(float3(0, 0, 0), _rayOrigin, float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1));
+    }
+    
+    rayDirection = normalize(mul(float3(uv,-1), camMatrix));
     float t = 0.0;
-    hitPos = float3(0, 0, 0);
+    hitPos = float4(0, 0, 0, 0);
     for (int i = 0; i < 100; i++)
     {
         float3 p = _rayOrigin + rayDirection * t; // Current point in the ray
-        half noise = get_noise(p);
         float d = 1e5;
         int bestID = -1;
         for (int j = 0; j < numSDF; ++j)
@@ -116,17 +196,18 @@ void raymarch_float(float numSDF, float2 uv, float3x3 camMatrix, out float3 hitP
             }
         }
         hitID = bestID; // Store the ID of the closest hit shape
-        d = _sdfTypeFloat[hitID]==3? d: d + noise * 0.3; // Evaluate the scene SDF at the current point, add noise
+        d += _sdfNoise[hitID] * 0.3; // Evaluate the scene SDF at the current point, add noise
         if (d < 0.001)
         {
-            hitPos = p;
+            hitPos.xyz = p;
             normal = get_normal(hitID, p);
             break;
         }
-        if (t > 50.0)
+        if (t > _raymarchStoppingCriterium)
             break;
         t += d;
     }
+    hitPos.w = t;
 }
 
 #endif

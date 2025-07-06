@@ -286,29 +286,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "75d35524a5a048f1a6a99d1688042afc",
-    "m_Id": 2,
-    "m_DisplayName": "hitPosition",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "hitPosition",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Matrix3MaterialSlot",
     "m_ObjectId": "7c04a4c81081440db5973b479b48d12b",
     "m_Id": 0,
@@ -353,6 +330,31 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "860afcdcc9a24e32b3ea2d3f27d0c678",
+    "m_Id": 4,
+    "m_DisplayName": "hitPos",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "hitPos",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -448,7 +450,7 @@
             "m_Id": "f2d010d4314545ee8a8faeeb6c8f1ca7"
         },
         {
-            "m_Id": "ffcd4b037de74760b31547b6eb5e736f"
+            "m_Id": "860afcdcc9a24e32b3ea2d3f27d0c678"
         }
     ],
     "synonyms": [
@@ -512,7 +514,7 @@
             "m_Id": "631ddbbdf5d140edb293e880adf88743"
         },
         {
-            "m_Id": "75d35524a5a048f1a6a99d1688042afc"
+            "m_Id": "fcc8fb28ec854504b837938c5ea4a4d7"
         }
     ],
     "synonyms": [],
@@ -572,23 +574,25 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "ffcd4b037de74760b31547b6eb5e736f",
-    "m_Id": 4,
-    "m_DisplayName": "hitPos",
-    "m_SlotType": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "fcc8fb28ec854504b837938c5ea4a4d7",
+    "m_Id": 2,
+    "m_DisplayName": "hitPosition",
+    "m_SlotType": 0,
     "m_Hidden": false,
-    "m_ShaderOutputName": "hitPos",
+    "m_ShaderOutputName": "hitPosition",
     "m_StageCapability": 3,
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 0.0,
+        "w": 0.0
     },
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 0.0,
+        "w": 0.0
     },
     "m_Labels": []
 }

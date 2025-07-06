@@ -721,7 +721,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "finishAnimation (Custom Function)",
+    "m_Name": "getCameraMatrix (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -761,7 +761,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "finishAnimation",
+    "m_FunctionName": "getCameraMatrix",
     "m_FunctionSource": "abaf33b1ebcd6ed4cb8a3961cc1de3e3",
     "m_FunctionBody": "Enter function body here..."
 }
