@@ -1,6 +1,6 @@
 # 🧩 Hash Utility Functions
 
-<img src="../../../shaders/screenshots/noise/hash_function_visualization.png" alt="Hash Function Visualization" width="400" height="225">
+<img src="../../../../shaders/screenshots/noise/hash_function_visualization.png" alt="Hash Function Visualization" width="400" height="225">
 
 ---
 
