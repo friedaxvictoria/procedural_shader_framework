@@ -1,6 +1,6 @@
-# 🌫️ Fractal Brownian Motion (FBM) Shader
+# 🧩 Fractal Brownian Motion (FBM) Shader
 
----
+<img src="../../../../shaders/screenshots/noise/2d_FBM_effect.png" alt="2D FBM Effect" width="400" height="225">
 
 - **Category:** Noise  
 - **Author:** Xunyu Zhang  
@@ -36,7 +36,6 @@ This module provides several FBM variants:
 ---
 
 ## 💻 Shader Code
-
 ```glsl
 #ifndef FBM_GLSL
 #define FBM_GLSL
@@ -98,3 +97,25 @@ float fbm_n31(vec3 p, int octaves) {
 #endif
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/noise/fbm.glsl)
+### Example Use
+```glsl
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    // Normalize pixel coordinates to [0,1]
+    vec2 uv = fragCoord.xy / iResolution.xy;
+
+    // Center and scale UV coordinates for better detail visibility
+    vec2 pos = (uv - 0.5) * 4.0;
+
+    // Add time-based animation offset
+    pos += vec2(iTime * 0.1, 0.0);
+
+    // Compute 2D fractal Brownian motion (FBM) noise
+    float f = fbm(pos, 6);
+
+    // Map FBM value to grayscale color
+    vec3 color = vec3(f);
+
+    fragColor = vec4(color, 1.0);
+}
+```
