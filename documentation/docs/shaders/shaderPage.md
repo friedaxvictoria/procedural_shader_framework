@@ -20,12 +20,48 @@ Shaders that control movement over time, often using sine/cosine functions or ti
 
 - [TIE Fighter](animation/tie_fighter.md)
 
-### ☁️ Noise Shaders
-Procedural textures built using noise functions like Perlin.
+### ☁️ Noise Shaders  
+Procedural textures using hash-based value, gradient, and fractal noise.  
+Grouped by functional type for clarity:
 
-(*Coming soon*)  
+#### 🧩 Core Modules  
+Unified entry point and hash support.
 
+- [noise.glsl](noise/noise.md) — Main include file, collects all noise types  
+- [hash.glsl](noise/hash.md) — Random number and hash utilities
 
+#### 🎛️ Classic Noise  
+Basic, smooth procedural noise generators.
+
+- [1D_noise.glsl](noise/1d_noise.md) — 1D interpolated value noise  
+- [2D_noise.glsl](noise/2d_noise.md) — 2D grid-based value noise  
+- [3D_Perlin_noise.glsl](noise/3d_perlin_noise.md) — Classic 3D gradient noise  
+- [simplex_noise.glsl](noise/simplex_noise.md) — Fast, low-artifact simplex noise  
+
+#### 🧱 Spatial Noise  
+Noise patterns structured around space and proximity.
+
+- [cell_noise.glsl](noise/cell_noise.md) — 2D Voronoi cell structure with jitter
+
+#### 🌫️ Fractal Noise  
+Multi-octave patterns for natural surfaces.
+
+- [fbm.glsl](noise/fbm.md) — Fractal Brownian Motion
+
+#### 🔧 Utility Noise  
+Variants and helpers used for animation or visual variation.
+
+- [3D_noise.glsl](noise/pseudo3d.md) — Time-varying pseudo 3D gradient noise  
+- [grayScale_noise.glsl](noise/grayscale.md) — Grayscale noise helper  
+
+#### ✨ Noise-based Effects  
+Visual effects built using the above noise modules.
+
+- [Stellar_Corona.glsl](noise/stellar_corona.md) — Radiating solar atmosphere using FBM  
+- [stylized_glow_and_star_shape.glsl](noise/stylized_glow.md) — Stylized star shape and bloom  
+- [TIE Fighter_noise.glsl](noise/tie_fighter.md) — Procedural engine trail + noise shading
+
+---
 ### 🔷 Geometry Shaders
 
 Shaders that generate or modify geometry procedurally.
