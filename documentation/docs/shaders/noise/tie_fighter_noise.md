@@ -1,6 +1,5 @@
 # 🧩 TIE Fighter Noise Shader
 
----
 
 - **Category:** Noise  
 - **Author:** Ruimin Ma  
