@@ -61,7 +61,6 @@ Visual effects built using the above noise modules.
 - [stylized_glow_and_star_shape.glsl](noise/stylized_glow.md) — Stylized star shape and bloom  
 - [TIE Fighter_noise.glsl](noise/tie_fighter_noise.md) — Procedural engine trail + noise shading
 
----
 ### 🔷 Geometry Shaders
 
 Shaders that generate or modify geometry procedurally.
