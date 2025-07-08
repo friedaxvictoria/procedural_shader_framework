@@ -68,7 +68,7 @@ float shininessIn, float noiseIn, out float indexOut)
             _specularColorFloat[i] = specularColorIn;
             _specularStrengthFloat[i] = specularStrengthIn;
             _shininessFloat[i] = shininessIn;
-            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle*PI/180);
+            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
             _sdfNoise[i] = noiseIn;
             break;
         }
@@ -99,7 +99,7 @@ void addDolphin_float(float index, float3 position, float timeOffset, float spee
     indexOut = index + 1;
 }
 
-void addHexPrism_float(int index, float3 position, float height , float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
+void addHexPrism_float(int index, float3 position, float height, float3 axis, float angle, float3 baseColorIn, float3 specularColorIn, float specularStrengthIn,
 float shininessIn, float noiseIn, out int indexOut)
 {
     for (int i = 0; i <= 10; i++)
@@ -178,7 +178,7 @@ void raymarch_float(float condition, float numSDF, float2 uv, float3x3 camMatrix
         camMatrix = computeCameraMatrix(float3(0, 0, 0), _rayOrigin, float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1));
     }
     
-    rayDirection = normalize(mul(float3(uv,-1), camMatrix));
+    rayDirection = normalize(mul(float3(uv, -1), camMatrix));
     float t = 0.0;
     hitPos = float4(0, 0, 0, 0);
     for (int i = 0; i < 100; i++)

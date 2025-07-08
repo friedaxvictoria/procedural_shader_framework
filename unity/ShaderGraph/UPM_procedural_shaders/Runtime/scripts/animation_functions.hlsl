@@ -69,4 +69,35 @@ void pulseObject_float(float3 seedSize, float seedRadius, float freq, float amp,
     size = seedSize * scale;
     radius = seedRadius * scale;
 }
+
+void cycleColor_float(float3 seedColor, float speed, out float3 color)
+{
+    float t = _Time.y * speed;
+    float hue = frac(t);
+    float3 hsv = float3(hue, 1.0, 1.0);
+    float3 rgb = saturate(abs(frac(hsv.x + float3(0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0);
+    
+    color = rgb * seedColor;
+}
+
+
+float hash11(float x)
+{
+    return frac(sin(x * 17.23) * 43758.5453);
+}
+
+void shake_float(float3 seedPosition, float intensity, float speed, out float3 position)
+{
+    float t = _Time.y * speed;
+
+    float x = hash11(t + 1.1) - 0.5;
+    float y = hash11(t + 2.3) - 0.5;
+    float z = hash11(t + 3.7) - 0.5;
+
+    float3 jitter = float3(x, y, z) * intensity;
+
+    position = seedPosition + jitter;
+}
+
+
 #endif

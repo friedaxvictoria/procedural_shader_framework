@@ -6,7 +6,7 @@
 
 void computeUV_float(float2 fragCoord, out float2 uv)
 {
-    uv = fragCoord.xy* 2 - 1;
+    uv = fragCoord.xy * 2 - 1;
 
     //necessary because instantiations are not used in compiled code --> define in the beginning for default value that can be overridden
     _rayOrigin = float3(0, 0, 7);
