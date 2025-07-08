@@ -51,15 +51,15 @@ Multi-octave patterns for natural surfaces.
 #### 🔧 Utility Noise  
 Variants and helpers used for animation or visual variation.
 
-- [3D_noise.glsl](noise/pseudo3d.md) — Time-varying pseudo 3D gradient noise  
-- [grayScale_noise.glsl](noise/grayscale.md) — Grayscale noise helper  
+- [3D_noise.glsl](noise/3d_noise.md) — Time-varying pseudo 3D gradient noise  
+- [grayScale_noise.glsl](noise/grayScale_noise.md) — Grayscale noise helper  
 
 #### ✨ Noise-based Effects  
 Visual effects built using the above noise modules.
 
 - [Stellar_Corona.glsl](noise/stellar_corona.md) — Radiating solar atmosphere using FBM  
 - [stylized_glow_and_star_shape.glsl](noise/stylized_glow.md) — Stylized star shape and bloom  
-- [TIE Fighter_noise.glsl](noise/tie_fighter.md) — Procedural engine trail + noise shading
+- [TIE Fighter_noise.glsl](noise/tie_fighter_noise.md) — Procedural engine trail + noise shading
 
 ---
 ### 🔷 Geometry Shaders
