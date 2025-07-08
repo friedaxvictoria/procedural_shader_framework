@@ -36,8 +36,14 @@ Basic, smooth procedural noise generators.
 - [1D_noise.glsl](noise/1d_noise.md) — 1D interpolated value noise  
 - [2D_noise.glsl](noise/2d_noise.md) — 2D grid-based value noise  
 - [3D_Perlin_noise.glsl](noise/3d_perlin_noise.md) — Classic 3D gradient noise  
-- [simplex_noise.glsl](noise/simplex_noise.md) — Fast, low-artifact simplex noise  
+- [simplex_noise.glsl](noise/simplex_noise.md) — Fast, low-artifact simplex noise
+  
+#### 🔧 Utility Noise  
+Variants and helpers used for animation or visual variation.
 
+- [3D_noise.glsl](noise/3d_noise.md) — Time-varying pseudo 3D gradient noise  
+- [grayScale_noise.glsl](noise/grayScale_noise.md) — Grayscale noise helper
+  
 #### 🧱 Spatial Noise  
 Noise patterns structured around space and proximity.
 
@@ -48,16 +54,9 @@ Multi-octave patterns for natural surfaces.
 
 - [fbm.glsl](noise/fbm.md) — Fractal Brownian Motion
 
-#### 🔧 Utility Noise  
-Variants and helpers used for animation or visual variation.
-
-- [3D_noise.glsl](noise/3d_noise.md) — Time-varying pseudo 3D gradient noise  
-- [grayScale_noise.glsl](noise/grayScale_noise.md) — Grayscale noise helper  
-
 #### ✨ Noise-based Effects  
 Visual effects built using the above noise modules.
 
-- [Stellar_Corona.glsl](noise/stellar_corona.md) — Radiating solar atmosphere using FBM  
 - [stylized_glow_and_star_shape.glsl](noise/stylized_glow.md) — Stylized star shape and bloom  
 - [TIE Fighter_noise.glsl](noise/tie_fighter_noise.md) — Procedural engine trail + noise shading
 
