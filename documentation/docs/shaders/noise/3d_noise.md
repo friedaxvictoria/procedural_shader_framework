@@ -2,7 +2,7 @@
 
 ---
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/3D_noise.png" alt="3D Noise Example" width="400" height="225">
+<img src="../../../../shaders/screenshots/noise/3D_noise.png" alt="3D Noise Example" width="400" height="225">
 
 - **Category:** Noise  
 - **Author:** Xuetong Fu  
@@ -102,3 +102,78 @@ float fbm3D(in vec3 p, int oct) {
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/noise/3D_noise.glsl)
+### Example Use
+
+```glsl
+// noise function from 3D_noise.glsl
+vec2 GetGradient(vec2 intPos, float t) {
+    
+    // Uncomment for calculated rand
+    float rand = fract(sin(dot(intPos, vec2(12.9898, 78.233))) * 43758.5453);;
+    
+    // Texture-based rand (a bit faster on my GPU)
+    //float rand = texture(iChannel0, intPos / 64.0).r;
+    
+    // Rotate gradient: random starting rotation, random rotation rate
+    float angle = 6.283185 * rand + 4.0 * t * rand;
+    return vec2(cos(angle), sin(angle));
+}
+float Pseudo3dNoise(vec3 pos) {
+    vec2 i = floor(pos.xy);
+    vec2 f = pos.xy - i;
+    vec2 blend = f * f * (3.0 - 2.0 * f);
+    float noiseVal = 
+        mix(
+            mix(
+                dot(GetGradient(i + vec2(0, 0), pos.z), f - vec2(0, 0)),
+                dot(GetGradient(i + vec2(1, 0), pos.z), f - vec2(1, 0)),
+                blend.x),
+            mix(
+                dot(GetGradient(i + vec2(0, 1), pos.z), f - vec2(0, 1)),
+                dot(GetGradient(i + vec2(1, 1), pos.z), f - vec2(1, 1)),
+                blend.x),
+        blend.y
+    );
+    return noiseVal / 0.7; // normalize to about [-1..1]
+}
+// using Pseudo3dNoise()
+float fbm3D(in vec3 p, int oct)
+{
+    if (oct > 8) return 0.0;
+
+    vec3 q = p - vec3(0.0, 0.1, 1.0) * iTime; 
+    float g = 0.5 + 0.5 * Pseudo3dNoise(q * 0.3);
+    float f = 0.5 * Pseudo3dNoise(q);
+    float amp = 0.5;
+
+    for(int i = 1; i < oct; i++){
+        f += amp * Pseudo3dNoise(q);
+        q *= scales[i-1];
+        amp *= 0.5;
+    }
+
+    f += amp * Pseudo3dNoise(q);
+    f = mix(f * 0.1 - 0.5, f, g * g);
+    return 1.5 * f - 0.5 - p.y;
+}
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    // Normalize pixel coordinates to [0,1]
+    vec2 uv = fragCoord.xy / iResolution.xy;
+
+    // Map to [-1,1] and fix aspect ratio
+    vec2 xy = uv * 2.0 - 1.0;
+    xy.x *= iResolution.x / iResolution.y;
+
+    // Create 3D position by adding time as Z
+    vec3 p = vec3(xy * 2.0, iTime * 0.2);
+
+    // Evaluate 3D FBM noise with 6 octaves
+    float f = fbm3D(p, 6);
+
+    // Convert to grayscale color
+    vec3 color = vec3(f);
+
+    fragColor = vec4(color, 1.0);
+}
+```
