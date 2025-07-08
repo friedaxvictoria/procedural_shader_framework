@@ -19,19 +19,19 @@ Welcome to the **Shader Library**, a central hub for exploring all procedural sh
 Shaders that control movement over time, often using sine/cosine functions or time-based interpolation.
 
 - [TIE Fighter](animation/tie_fighter.md)
-- [SDF Animation](sdf_animation_shader.md)
+- [SDF Animation](animation/sdf_animation_shader.md)
 
 ### ☁️ Noise Shaders  
 Procedural textures using hash-based value, gradient, and fractal noise.  
 Grouped by functional type for clarity:
 
-#### 🧩 Core Modules  
+#### Core Modules  
 Unified entry point and hash support.
 
 - [noise.glsl](noise/noise.md) — Main include file, collects all noise types  
 - [hash.glsl](noise/hash.md) — Random number and hash utilities
 
-#### 🎛️ Classic Noise  
+#### Classic Noise  
 Basic, smooth procedural noise generators.
 
 - [1D_noise.glsl](noise/1d_noise.md) — 1D interpolated value noise  
@@ -39,23 +39,23 @@ Basic, smooth procedural noise generators.
 - [3D_Perlin_noise.glsl](noise/3d_perlin_noise.md) — Classic 3D gradient noise  
 - [simplex_noise.glsl](noise/simplex_noise.md) — Fast, low-artifact simplex noise
   
-#### 🔧 Utility Noise  
+#### Utility Noise  
 Variants and helpers used for animation or visual variation.
 
 - [3D_noise.glsl](noise/3d_noise.md) — Time-varying pseudo 3D gradient noise  
 - [grayScale_noise.glsl](noise/grayScale_noise.md) — Grayscale noise helper
   
-#### 🧱 Spatial Noise  
+#### Spatial Noise  
 Noise patterns structured around space and proximity.
 
 - [cell_noise.glsl](noise/cell_noise.md) — 2D Voronoi cell structure with jitter
 
-#### 🌫️ Fractal Noise  
+#### Fractal Noise  
 Multi-octave patterns for natural surfaces.
 
 - [fbm.glsl](noise/fbm.md) — Fractal Brownian Motion
 
-#### ✨ Noise-based Effects  
+#### Noise-based Effects  
 Visual effects built using the above noise modules.
 
 - [stylized_glow_and_star_shape.glsl](noise/stylized_glow.md) — Stylized star shape and bloom  
