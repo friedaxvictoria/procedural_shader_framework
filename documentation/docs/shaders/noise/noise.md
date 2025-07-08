@@ -1,9 +1,5 @@
 # 🧩 Noise Shader Collection
 
-<!-- You can optionally add image previews -->
-<img src="../../static/images/noise_preview.png" alt="Noise Shader Examples" width="400" height="225">
-
----
 
 - **Category:** Noise
 - **Author:** Xunyu Zhang
