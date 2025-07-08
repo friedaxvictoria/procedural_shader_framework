@@ -1,6 +1,6 @@
 # 🧩 Hash Utility Functions
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/hash.png?raw=true" alt="Hash Function Visualization" width="400" height="225">
+<img src="../../../shaders/screenshots/noise/hash_function_visualization.png" alt="Hash Function Visualization" width="400" height="225">
 
 ---
 
@@ -38,7 +38,7 @@ All outputs are in **[0, 1]** or **[0, 1]^n** range. No global state or uniform 
 
 ---
 
-## 💻 Example Use
+## 💻 Shader Code
 
 ```glsl
 // Hash function for float values
@@ -96,3 +96,28 @@ vec2 rand2(vec2 p) {
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/noise/hash.glsl)
+### Example Use
+```glsl
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = fragCoord.xy / iResolution.xy;
+    uv *= 10.0;                  // tile to show cells
+
+    vec2 cell = floor(uv);
+    vec2 local = fract(uv);
+
+    // random offset for current cell
+    vec2 randOffset = rand2(cell);
+
+    // distance to random center in current cell
+    float d = distance(local, randOffset);
+
+    // color = based on distance to random center (circle visual)
+    float brightness = smoothstep(0.1, 0.0, d);
+
+    // random color per cell via rand()
+    float cellColor = rand(cell);
+
+    fragColor = vec4(vec3(cellColor * brightness), 1.0);
+}
+```
