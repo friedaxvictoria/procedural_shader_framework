@@ -73,7 +73,7 @@ float hashNoise(float3 p)
  * Returns:
  *   float : signed height field
  */
-float computeWave(float3 pos, int iterationCount)
+float computeWave(float3 pos)
 {
     float3 warped = pos - float3(0, 0, _Time.y % 62.83 * 3.0);
 
@@ -82,7 +82,7 @@ float computeWave(float3 pos, int iterationCount)
     float2x2 rotation = computeRotationMatrix(angle);
 
     float accum = 0.0, amplitude = 3.0;
-    for (int i = 0; i < iterationCount; i++)
+    for (int i = 0; i < 7; i++)
     {
         accum += abs(sin(hashNoise(warped * 0.15) - 0.5) * 3.14) * (amplitude *= 0.51);
         warped.xy = mul(warped.xy, rotation);
@@ -100,36 +100,32 @@ float computeWave(float3 pos, int iterationCount)
 }
 
 /**
- * Maps a point to distance field for raymarching.
- */
-float2 evaluateDistanceField(float3 pos)
-{
-    return float2(computeWave(pos, 7), 5.0);
-}
-
-/**
  * Performs raymarching against the wave surface SDF.
  */
-float2 traceWater(float3 rayOrigin, float3 rayDir)
+float4 traceWater(float3 rayOrigin, float3 rayDir)
 {
-    float2 d = float2(0.1, 0.1);
-    float2 hit = float2(0.1, 0.1);
-    for (int i = 0; i < 128; i++)
+    float d = 0;
+    float t = 0;
+    float3 hitPos = float3(0, 0, 0);
+    for (int i = 0; i < 100; i++)
     {
-        d = evaluateDistanceField(rayOrigin + rayDir * hit.x);
-        if (d.x < 0.0001 || hit.x > 43.0)
+        float3 p = rayOrigin + rayDir * t;
+        d = computeWave(p);
+        if (d < 0.0001)
+        {
+            hitPos = p;
             break;
-        hit.x += d.x;
-        hit.y = d.y;
+        }
+        t += d;
+        if (t > _raymarchStoppingCriterium)
+            break;
     }
-    if (hit.x > 43.0)
-        hit.y = 0.0;
-    return hit;
+    return float4(hitPos, t);
 }
 
 // ---------- Main Entry ----------
 
-void computeWater_float(float2 uv, float3x3 camMatrix, out float3 fragColor, out float3 hitPos)
+void computeWater_float(float2 uv, float3x3 camMatrix, out float3 fragColor, out float4 hitPos)
 {
     float3 rayDirection = normalize(mul(float3(uv, -1), camMatrix));
 
@@ -138,19 +134,16 @@ void computeWater_float(float2 uv, float3x3 camMatrix, out float3 fragColor, out
     float3 color = baseColor;
 
     // Raymarching
-    float2 hit = traceWater(_rayOrigin, rayDirection);
-    
-    if (hit.y > 0.0)
+    hitPos = traceWater(_rayOrigin, rayDirection);
+    if (hitPos.w < _raymarchStoppingCriterium)
     {
-        hitPos = _rayOrigin + rayDirection * hit.x;
-
         // Gradient-based normal estimation
         float3 grad = normalize(float3(
-            computeWave(hitPos + float3(0.01, 0.0, 0.0), 7) -
-            computeWave(hitPos - float3(0.01, 0.0, 0.0), 7),
+            computeWave(hitPos.xyz + float3(0.01, 0.0, 0.0)) -
+            computeWave(hitPos.xyz - float3(0.01, 0.0, 0.0)),
             0.02,
-            computeWave(hitPos + float3(0.0, 0.0, 0.01), 7) -
-            computeWave(hitPos - float3(0.0, 0.0, 0.01), 7)
+            computeWave(hitPos.xyz + float3(0.0, 0.0, 0.01)) -
+            computeWave(hitPos.xyz - float3(0.0, 0.0, 0.01))
         ));
 
         // Fresnel-style highlight
@@ -167,12 +160,12 @@ void computeWater_float(float2 uv, float3x3 camMatrix, out float3 fragColor, out
         waterColor += float3(1.0, 1, 1) * highlight * 0.4;
 
         // Depth-based fog
-        float fog = exp(-0.00005 * hit.x * hit.x * hit.x);
+        float fog = exp(-0.00005 * hitPos.x * hitPos.x * hitPos.x);
         color = lerp(baseColor, waterColor, fog);
     }
 
     // Gamma correction
-    fragColor = float3(pow(color, 1));
+    fragColor = float3(pow(color, float3(0.55, 0.55, 0.55)));
 
 }
 

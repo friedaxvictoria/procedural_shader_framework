@@ -4,9 +4,7 @@
 #include "helper_functions.hlsl"
 #include "global_variables.hlsl"
 
-#define PI 3.1415926538
-
-void orbitY_float(float3 axis, float speed, out float3x3 mat)
+void rotateCamera_float(float3 axis, float speed, out float3x3 mat)
 {
     float angle = _Time.y * speed;
     mat = computeRotationMatrix(normalize(axis), angle);
@@ -19,7 +17,6 @@ void backAndForth_float(float speed, out float3x3 mat)
 }
 
 // from https://www.shadertoy.com/view/NsS3Ww
-
 void moveViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
@@ -29,7 +26,7 @@ void moveViaMouse_float(out float3x3 mat)
 }
 
 // a camera animation ALWAYS has to end with this node!!
-void finishAnimation_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPos, out float3x3 camMatrix)
+void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPos, out float3x3 camMatrix)
 {
     float3x3 combinedMat = mul(mat1, mat2);
     _rayOrigin = mul(float3(0, 0, distance), combinedMat);
@@ -40,77 +37,47 @@ float applyTimeMode(float t, int mode)
 {
     if (mode == 1)
         return sin(t);
-    if (mode == 2)
+    else if (mode == 2)
         return abs(sin(t));
     return t;
 }
 
-void translate_float(int index, float3 dir, float speed, int mode, out int outIndex)
+void translateObject_float(float3 seedPosition, float3 dir, float speed, int mode, out float3 position)
 {
     float t = applyTimeMode(_Time.y, mode);
-    for (int i = 0; i <= 10; i++)
-    {
-        if (i == index-1)
-        {
-            _sdfPositionFloat[i] += dir * sin(t * speed);
-            break;
-        }
-    }
-    outIndex = index;
+    position = seedPosition + dir * sin(t * speed);
 }
 
-void orbitPoint_float(int index, float3 center, float3 axis, float radius, float speed, float angleOffset, out int outIndex)
+void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axis, float radius, float speed, float angleOffset, out float3 position, out float angle)
 {
     axis = normalize(axis);
-    float angle = _Time.y * speed + angleOffset * PI/180;
-    
-    float3x3 rotationMatrix = computeRotationMatrix(axis, angle);
-    
+    angle = _Time.y * speed + angleOffset * PI / 180;
+        
     float3 radiusAxis = (float3(1, 1, 1) - axis) * radius;
-
-    for (int i = 0; i <= 10; i++)
-    {
-        if (i == index-1)
-        {
-            float3 p = _sdfPositionFloat[i] + radiusAxis - center;
-            _sdfPositionFloat[i] = center + cos(angle) * p + sin(angle) * cross(axis, p) + (1 - cos(angle)) * dot(axis, p) * axis;
-            _sdfRotation[i] = rotationMatrix;
-            break;
-        }
-    }
-    outIndex = index;
+    
+    float3 p = seedPosition + radiusAxis - center;
+    position = center + cos(angle) * p + sin(angle) * cross(axis, p) + (1 - cos(angle)) * dot(axis, p) * axis;
+    
+    angle = angle * 180 / PI;
 }
 
-void pulse_float(int index, float freq, float amp, int mode, out int outIndex)
+void pulseObject_float(float3 seedSize, float seedRadius, float freq, float amp, int mode, out float3 size, out float radius)
 {
     float t = applyTimeMode(_Time.y, mode);
     float scale = 1.0 + sin(t * freq) * amp;
-    for (int i = 0; i <= 10; i++)
-    {
-        if (i == index-1)
-        {
-            _sdfSizeFloat[i] *= scale;
-            _sdfRadiusFloat[i] *= scale;
-            break;
-        }
-    }
-    outIndex = index;
+    
+    size = seedSize * scale;
+    radius = seedRadius * scale;
 }
 
-
-void cycleColor_float(int index, float speed, out int outIndex)
+void cycleColor_float(float3 seedColor, float speed, out float3 color)
 {
     float t = _Time.y * speed;
-    float3 color = float3(sin(t), sin(t + 2.094), sin(t + 4.188)) * 0.5 + 0.5; // RGB phase shifted
-    for (int i = 0; i <= 10; i++)
-    {
-        if (i == index - 1)
-        {
-            _baseColorFloat[i] = color;
-            break;
-        }
-    }
-    outIndex = index;
+    float hue = frac(t);
+    float3 hsv = float3(hue, 1.0, 1.0);
+    float3 rgb = saturate(abs(frac(hsv.x + float3(0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0);
+    
+    color = rgb * seedColor;
 }
 
 
@@ -119,27 +86,18 @@ float hash11(float x)
     return frac(sin(x * 17.23) * 43758.5453);
 }
 
-void shake_float(int index, float intensity, float speed, out int outIndex)
+void shake_float(float3 seedPosition, float intensity, float speed, out float3 position)
 {
-    float t = _Time.y * speed * 0.00001;
-    float3 offset = float3(
-        hash11(t + index * 1.1) - 0.5,
-        hash11(t + index * 2.3) - 0.5,
-        hash11(t + index * 3.7) - 0.5
-    ) * intensity;
-    
-    for (int i = 0; i <= 10; i++)
-    {
-        if (i == index - 1)
-        {
-            _sdfPositionFloat[i] += offset;
-            break;
-        }
-    }
-    outIndex = index;
+    float t = _Time.y * speed;
+
+    float x = hash11(t + 1.1) - 0.5;
+    float y = hash11(t + 2.3) - 0.5;
+    float z = hash11(t + 3.7) - 0.5;
+
+    float3 jitter = float3(x, y, z) * intensity;
+
+    position = seedPosition + jitter;
 }
-
-
 
 
 #endif

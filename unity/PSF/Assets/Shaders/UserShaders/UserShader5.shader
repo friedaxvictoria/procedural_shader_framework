@@ -78,13 +78,12 @@ Shader "Custom/UserShader5"
 
             float4 frag (Varyings IN) : SV_Target
             {
-
                 float2 uv;
                 float index;
                 float3x3 camMat = float3x3( 1,0,0, 0,1,0, 0,0,1 );
 
-                float3 hitPos1;
-                float3 hitPos2;
+                float4 hitPos1;
+                float4 hitPos2;
 
                 float hitID;
                 float3 normal;
@@ -93,71 +92,69 @@ Shader "Custom/UserShader5"
                 float3 colorOut2;
 
                 float3 colorOut;
-                float t;
+                float3 rayDir;
 
 
-
+                // all temps
+                float temp;
+                float3 size_temp;
+                float radius_temp;
+                float3 position_temp;
+                float3 color_temp;
 
                 computeUV_float(IN.uv, uv);
 
-                addSphere_float(float3(-2,0,0), 2, 0, float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, index);
-
-                addCube_float(float3(5,0,-5), 2, 0, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), float3(0.8,0.1,0.1), 2, 1, index);
-
-                translate_float(index, float3(-4,-8,0), 5, 1, index);
-                orbitPoint_float(index, float3(3,3,-2), float3(1,2,0), 0.2, 0.8, 0.1, index);
-                cycleColor_float(index, 2, index);
-                pulse_float(index, 2, 1, 0, index);
-                // shake_float(index, 0.4, 1, index);
+                addSphere_float(float3(-2,0,-5), float3(2,2,2), 0, float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, 0, index);
 
 
 
-                addTorus_float(float3(1.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
-                addTorus_float(float3(-4.5,4.5,0), 2, 0.2, index,float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
-                addTorus_float(float3(-1.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
-                addTorus_float(float3(4.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, index);
+
+                translateObject_float(float3(5,0,-5), float3(-4,-8,0), 5, 1, position_temp);
+                orbitObjectAroundPoint_float(position_temp, float3(3,3,-2), float3(1,2,0), 0.2, 0.8, 0.1, position_temp, temp);
+                // shake_float(position_temp, 0.4, 1, position_temp);
+
+                pulseObject_float(float3(2,2,2), 0, 2, 1, 0, size_temp, radius_temp);
+
+                cycleColor_float(float3(0.8,0.1,0.1), 0.5, color_temp);
+
+                addCube_float(position_temp, size_temp, radius_temp, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), color_temp, 2, 1, 0, index);
 
 
-                raymarch_float(index, uv, camMat, hitPos1, normal, t);
-                applyPhongLighting_float(hitPos1, _LightPosition, normal, colorOut1);
 
 
-                colorOut = colorOut1;
+
+                addTorus_float(float3(0,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                addTorus_float(float3(-4.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                addTorus_float(float3(-1.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                addTorus_float(float3(4.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+
+
+                raymarch_float(1, index, uv, camMat, hitPos1, normal, rayDir);
+
+                //pointLight_float(hitPos1, normal, _LightPosition, float3(1,1,1), colorOut1);
+                //sunriseLight_float(hitPos1, normal, rayDir, colorOut2);
+
+                applyRimLighting_float(hitPos1, _LightPosition, normal, colorOut1);
+                applyToonLighting_float(hitPos1, _LightPosition, normal, colorOut2);
+
+
+                // float3 rd = normalize(float3(uv, -1));
+                // float3 L = normalize(_LightPosition - hitPos1);
+                // _dolphinColor(hitPos1, normal, rd,  0.1, 0.1, 0, 1, L, colorOut1);
+
+
+                colorOut = colorOut1 + colorOut2;
 
                 // computeWater_float(uv, camMat, colorOut2, hitPos2);
 
 
 
-                // float3 ro = float3(0, 0, 7);
-                // float3 rd = normalize(float3(uv, -1));
-                // float2 waterHit = traceWater(ro, rd);
-
-
-                // float waterT = waterHit.x;
-
-                
-
-                // if(waterT > t && t > 0.)
-                // {
-                //     colorOut = colorOut1;
-                // }
-                // else if(t > 0.)
-                // {
-                //     colorOut = colorOut2;
-                // }else{
-                //     colorOut = float3(0, 0, 0);            
-                // }
-
-
 
 
 
 
                 
-                // float3 rd = normalize(float3(uv, -1));
-                // float3 L = normalize(_LightPosition - hitpos);
 
-                // _dolphinColor(hitpos, normal, rd,  0.1, 0.1, 0, 1, L, colorOut);
 
 
 
