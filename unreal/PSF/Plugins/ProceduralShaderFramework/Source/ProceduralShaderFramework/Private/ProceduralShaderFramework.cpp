@@ -2,6 +2,10 @@
 
 #include "ProceduralShaderFramework.h"
 #include "ShaderCompiler.h"
+#include "ShaderCore.h"
+#include "ShaderCompilerCore.h"
+#include "ShaderCore.h"
+#include "ShaderCompiler.h"
 
 #define LOCTEXT_NAMESPACE "FProceduralShaderFrameworkModule"
 
@@ -11,7 +15,9 @@ void FProceduralShaderFrameworkModule::StartupModule()
 	CopyShaderFilesToProject();
 	UE_LOG(LogTemp, Log, TEXT("FROM STARTUP MODULE"));
 	FString ShaderDir = FPaths::Combine(FPaths::ProjectDir(), TEXT("Shaders"));
-	AddShaderSourceDirectoryMapping(TEXT("/ProceduralShaderFramework"), ShaderDir);
+	if(!AllShaderSourceDirectoryMappings().Contains(TEXT("/ProceduralShaderFramework"))) {
+		AddShaderSourceDirectoryMapping(TEXT("/ProceduralShaderFramework"), ShaderDir);
+	}
 }
 
 void FProceduralShaderFrameworkModule::ShutdownModule()
