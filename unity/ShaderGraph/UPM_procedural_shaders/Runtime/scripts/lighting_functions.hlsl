@@ -83,10 +83,8 @@ float3 applySunriseLighting(float3 o, float3 d, float L, float3 Lo, SunriseLight
             I_M * bMs * .0196 / pow(1.58 - 1.52 * mu, 1.5));
 }
 
-void sunriseLight_float(float index, float3 inputColor, float4 hitPos, float3 normal, float3 rayDir, out float outIndex, out float3 lightingColor)
-{   
-    outIndex = index + 1;
-        
+void sunriseLight_float(float3 inputColor, float4 hitPos, float3 normal, float3 rayDir, out float3 lightingColor)
+{           
     SunriseLight sunrise;
     sunrise.sundir = normalize(float3(.5, .4 * (1. + sin(.5 * time)), -1.));
     sunrise.earthCenter = float3(0., -6360e3, 0.);
@@ -101,7 +99,7 @@ void sunriseLight_float(float index, float3 inputColor, float4 hitPos, float3 no
         
     if (hitPos.w > _raymarchStoppingCriterium)
     {
-        lightingColor = lerp(inputColor, lightColor, 1 / outIndex);
+        lightingColor = inputColor + lightColor;
         return;
     }
         
@@ -120,14 +118,13 @@ void sunriseLight_float(float index, float3 inputColor, float4 hitPos, float3 no
     float attenuation = 1;
     
     float3 currentColor = attenuation * (ambientColor + diffuseColor + specularColor);
-    lightingColor = lerp(inputColor, currentColor, 1 / outIndex);
+    lightingColor = inputColor + currentColor;
 }
 
 
-void pointLight_float(float index, float3 inputColor, float4 hitPos, float3 normal, float3 lightPosition, float3 lightColor, out float outIndex, out
+void pointLight_float(float3 inputColor, float4 hitPos, float3 normal, float3 lightPosition, float3 lightColor, out
 float3 lightingColor)
 {
-    outIndex = index + 1;
     float3 materialColor = _sdfTypeFloat[hitID] == 3 ? getDolphinColor(hitPos.xyz, normal, lightPosition) : _baseColorFloat[hitID];
 
     if (hitPos.w > _raymarchStoppingCriterium)
@@ -150,7 +147,8 @@ float3 lightingColor)
     float attenuation = clamp(10.0 / distance(lightPosition, hitPos.xyz), 0.0, 1.0);
     
     float3 currentColor = attenuation * (ambientColor + diffuseColor + specularColor);
-    lightingColor = lerp(inputColor, currentColor, 1 / outIndex);
+    lightingColor = inputColor + currentColor;
+
 }
 
 #endif

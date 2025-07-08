@@ -31,6 +31,7 @@
 
 // ---------- Global Configuration ----------
 #include "global_variables.hlsl"
+#include "helper_functions.hlsl"
 
 // ---------- Global State ----------
 float waveStrength = 0.0;
@@ -73,6 +74,7 @@ float hashNoise(float3 p)
  * Returns:
  *   float : signed height field
  */
+
 float computeWave(float3 pos)
 {
     float3 warped = pos - float3(0, 0, _Time.y % 62.83 * 3.0);
@@ -95,8 +97,49 @@ float computeWave(float3 pos)
     float height = pos.y + accum;
     height *= 0.5;
     height += 0.3 * sin(_Time.y + pos.x * 0.3); // slight bobbing
-
     return height;
+}
+
+void computeWave_float(float3 pos, out float3 heightPos)
+{
+        // Start with a reasonable guess (e.g. sea level or midpoint of wave height range)
+    float y = pos.y;
+    
+    // Binary search or Newton-Raphson style iteration
+    float stepSize = 0.05; // Small steps downwards
+
+    for (int i = 0; i < 100; i++)
+    {
+        pos.y = y;
+        float h = computeWave(pos);
+        if (h < 0.01) // We've reached the surface
+            break;
+        y -= stepSize;
+    }
+    heightPos = float3(pos.x, y, pos.z);
+
+}
+
+
+float3 getNormal(float3 pos, float delta)
+{
+    return normalize(float3(
+            computeWave(pos + float3(delta, 0.0, 0.0)) -
+            computeWave(pos - float3(delta, 0.0, 0.0)),
+            0.02,
+            computeWave(pos + float3(0.0, 0.0, delta)) -
+            computeWave(pos - float3(0.0, 0.0, delta))
+        ));
+}
+
+void adaptableNormal_float(float3 pos, float3 offset, float influence, float sampleRadius, out float3 normal)
+{
+    float3 normal1 = getNormal(pos + float3(sampleRadius, 0.0, 0.0), 1);
+    float3 normal2 = getNormal(pos - float3(sampleRadius, 0.0, 0.0), 1);
+    float3 normal3 = getNormal(pos + float3(0, 0.0, sampleRadius), 1);
+    float3 normal4 = getNormal(pos - float3(0, 0.0, sampleRadius), 1);
+    normal = influence * (normal1 + normal2 + normal3 + normal4)/4 + offset;
+
 }
 
 /**
@@ -107,6 +150,7 @@ float4 traceWater(float3 rayOrigin, float3 rayDir)
     float d = 0;
     float t = 0;
     float3 hitPos = float3(0, 0, 0);
+    float3 outputPos;
     for (int i = 0; i < 100; i++)
     {
         float3 p = rayOrigin + rayDir * t;
@@ -125,8 +169,13 @@ float4 traceWater(float3 rayOrigin, float3 rayDir)
 
 // ---------- Main Entry ----------
 
-void computeWater_float(float2 uv, float3x3 camMatrix, out float3 fragColor, out float4 hitPos)
+void computeWater_float(float condition, float2 uv, float3x3 camMatrix, out float3 fragColor, out float4 hitPos)
 {
+    if (condition == 0)
+    {
+        camMatrix = computeCameraMatrix(float3(0, 0, 0), _rayOrigin, float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1));
+    }
+    
     float3 rayDirection = normalize(mul(float3(uv, -1), camMatrix));
 
     // Default background color
@@ -138,13 +187,7 @@ void computeWater_float(float2 uv, float3x3 camMatrix, out float3 fragColor, out
     if (hitPos.w < _raymarchStoppingCriterium)
     {
         // Gradient-based normal estimation
-        float3 grad = normalize(float3(
-            computeWave(hitPos.xyz + float3(0.01, 0.0, 0.0)) -
-            computeWave(hitPos.xyz - float3(0.01, 0.0, 0.0)),
-            0.02,
-            computeWave(hitPos.xyz + float3(0.0, 0.0, 0.01)) -
-            computeWave(hitPos.xyz - float3(0.0, 0.0, 0.01))
-        ));
+        float3 grad = getNormal(hitPos.xyz, 0.01);
 
         // Fresnel-style highlight
         float fresnel = pow(1.0 - dot(grad, -rayDirection), 5.0);
