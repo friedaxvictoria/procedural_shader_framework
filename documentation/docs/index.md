@@ -6,7 +6,7 @@ Welcome to the **Shader Snippets Documentation Site** — a collaborative knowle
 
 ## 🧠 What Are Shaders?
 
-**Shaders** are small programs that run on the GPU to control how objects are drawn on the screen — controlling color, shape, lighting, animation, and more. Procedural shaders use **mathematical functions** to generate visuals dynamically without relying on textures or models.
+**Shaders** are small programs that run on the GPU to control how objects are drawn on the screen controlling color, shape, lighting, animation, and more. Procedural shaders use **mathematical functions** to generate visuals dynamically without relying on textures or models.
 
 ---
 
@@ -23,11 +23,12 @@ Game engines like **Unity**, **Unreal Engine**, and **Godot** provide tools and 
 ## 🔄 How Are Shaders Rendered in Engines?
 
 Engines convert your shader logic into **renderable materials** that can be applied to objects in the scene. Each engine may use:
+
 - **Visual Node Graphs** (like Shader Graph in Unity or Material Editor in Unreal)
 - **Code-based shaders** (HLSL, GLSL, or Godot Shading Language)
 - **Runtime scripting** to animate or parameterize shader behavior
 
-This documentation bridges that gap — taking reusable shader logic and adapting it to each platform’s workflow. This documentation helps shader developers and engine integrators:
+This documentation bridges that gap, taking reusable shader logic and adapting it to each platform’s workflow. This documentation helps shader developers and engine integrators:
 
 - Understand how each shader works (algorithm, parameters, results).
 - Learn how to use these shaders in different game engines.
