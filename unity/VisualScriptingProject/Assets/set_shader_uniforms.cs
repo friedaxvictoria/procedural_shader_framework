@@ -8,6 +8,8 @@ public class set_shader_uniforms : MonoBehaviour
 
     void Start()
     {
+        Shader.SetGlobalVector("_rayOrigin", new Vector3(0,0,7));
+        Shader.SetGlobalFloat("_raymarchStoppingCriterium", 50);
     }
 
     void OnValidate()

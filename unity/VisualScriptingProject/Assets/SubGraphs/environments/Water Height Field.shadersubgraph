@@ -141,7 +141,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "computeWave (Custom Function)",
+    "m_Name": "sampleHeightField (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -172,7 +172,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "computeWave",
+    "m_FunctionName": "sampleHeightField",
     "m_FunctionSource": "9d1a586a96fb5544699b7beefe44b1f7",
     "m_FunctionBody": "Enter function body here..."
 }

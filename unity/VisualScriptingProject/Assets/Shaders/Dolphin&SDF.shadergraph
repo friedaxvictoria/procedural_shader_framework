@@ -1382,6 +1382,12 @@
             "m_Id": "0d790bf40b9142a99504714347d82bb3"
         },
         {
+            "m_Id": "43448451fb2241f798068c41b0694d51"
+        },
+        {
+            "m_Id": "7c781b6664ff4dafb6422b16549cbe34"
+        },
+        {
             "m_Id": "aa4a7bba205644cba1b227b599224386"
         },
         {
@@ -1409,7 +1415,9 @@
         "4faa078a-5b3f-455e-8323-a8ea3e345438",
         "029bf7e5-53cb-494d-a6b6-3d651e662f09",
         "034a7908-3bfd-4d15-a4e9-0d6cb9b8878f",
-        "0169f5f6-8808-4020-a5ff-df465a7ac62c"
+        "0169f5f6-8808-4020-a5ff-df465a7ac62c",
+        "c8c4c595-e2b8-44f6-80c4-8e5621e8d5eb",
+        "5a3aea52-4928-47ac-9620-af45a0b228e6"
     ],
     "m_PropertyIds": [
         525764943,
@@ -1420,7 +1428,9 @@
         -670545144,
         667186326,
         -1378544664,
-        726726657
+        726726657,
+        828967820,
+        -1106169524
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -1597,6 +1607,21 @@
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "43448451fb2241f798068c41b0694d51",
+    "m_Id": 828967820,
+    "m_DisplayName": "dropPower",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_dropPower",
+    "m_StageCapability": 3,
+    "m_Value": 5.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -2027,7 +2052,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "_timeOffset",
     "m_StageCapability": 3,
-    "m_Value": 5.0,
+    "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -2066,6 +2091,21 @@
     "m_Property": {
         "m_Id": "0d6199d0bc0e4f1d96678224fa25622d"
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "7c781b6664ff4dafb6422b16549cbe34",
+    "m_Id": -1106169524,
+    "m_DisplayName": "atmosphericDecay",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_atmosphericDecay",
+    "m_StageCapability": 3,
+    "m_Value": 0.05000000074505806,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -2350,6 +2390,21 @@
     "m_ShaderOutputName": "_hitIndex",
     "m_StageCapability": 3,
     "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "984570a3fe544f4a93c1da5452b6fb1d",
+    "m_Id": -1106169524,
+    "m_DisplayName": "atmosphericDecay",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_atmosphericDecay",
+    "m_StageCapability": 3,
+    "m_Value": 0.05000000074505806,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -3061,7 +3116,7 @@
     "m_ShaderOutputName": "_position",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 10.0,
+        "x": 0.0,
         "y": 0.0,
         "z": 0.0
     },
@@ -3871,6 +3926,12 @@
             "m_Id": "c23a2da0a07d4fa7bd3adc4772fc46ef"
         },
         {
+            "m_Id": "fd11133f2ba746a1a5c6872778a98c54"
+        },
+        {
+            "m_Id": "984570a3fe544f4a93c1da5452b6fb1d"
+        },
+        {
             "m_Id": "34ed741512a74a3eb82833648f82c828"
         },
         {
@@ -3898,7 +3959,9 @@
         "6bdc30d7-5922-439c-9b5b-4c7f21bb5a48",
         "029bf7e5-53cb-494d-a6b6-3d651e662f09",
         "034a7908-3bfd-4d15-a4e9-0d6cb9b8878f",
-        "0169f5f6-8808-4020-a5ff-df465a7ac62c"
+        "0169f5f6-8808-4020-a5ff-df465a7ac62c",
+        "c8c4c595-e2b8-44f6-80c4-8e5621e8d5eb",
+        "5a3aea52-4928-47ac-9620-af45a0b228e6"
     ],
     "m_PropertyIds": [
         655359871,
@@ -3909,7 +3972,9 @@
         525764943,
         667186326,
         -1378544664,
-        726726657
+        726726657,
+        828967820,
+        -1106169524
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -4069,6 +4134,21 @@
     "m_ShaderOutputName": "_distance",
     "m_StageCapability": 3,
     "m_Value": 8.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "fd11133f2ba746a1a5c6872778a98c54",
+    "m_Id": 828967820,
+    "m_DisplayName": "dropPower",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_dropPower",
+    "m_StageCapability": 3,
+    "m_Value": 5.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }

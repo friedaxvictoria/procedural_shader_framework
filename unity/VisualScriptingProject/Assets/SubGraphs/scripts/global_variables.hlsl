@@ -1,32 +1,26 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
 
-#define MAX_NUM_SDFS 10
-
 //uniforms
 extern float2 _mousePoint;
-float3 _rayOrigin;
-extern float _GammaCorrect;
+extern float3 _rayOrigin;
+extern float _raymarchStoppingCriterium;
 
-float _raymarchStoppingCriterium = 50;
-
-const static int maxNumSDFs = 10;
-
-//floating point global variables
-float _sdfTypeFloat[10];
-float3 _sdfPositionFloat[10];
-float3 _sdfSizeFloat[10];
-float _sdfRadiusFloat[10];
+//sdf arrays
+float _sdfType[10];
+float3 _sdfPosition[10];
+float3 _sdfSize[10];
+float _sdfRadius[10];
 float3x3 _sdfRotation[10];
 float _sdfNoise[10];
 
+//material array --> number of sdfs + 1 for water shader
+float3 _baseColor[11];
+float3 _specularColor[11];
+float _specularStrength[11];
+float _shininess[11];
 
-float3 _baseColorFloat[11];
-float3 _specularColorFloat[11];
-float _specularStrengthFloat[11];
-float _shininessFloat[11];
-
-//dolphin stuff
-float _timeOffsetDolphinFloat[10];
-float _speedDolphinFloat[10];
+//dolphin specific arrays
+float _timeOffsetDolphin[10];
+float _speedDolphin[10];
 #endif
