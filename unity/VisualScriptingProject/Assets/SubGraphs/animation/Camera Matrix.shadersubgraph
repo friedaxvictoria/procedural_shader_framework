@@ -150,6 +150,54 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Matrix3MaterialSlot",
+    "m_ObjectId": "0965a474397b4bc9abc6e141c157c7fc",
+    "m_Id": 1,
+    "m_DisplayName": "matrix1",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "matrix1",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "e00": 1.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 1.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 1.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 1.0
+    },
+    "m_DefaultValue": {
+        "e00": 1.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 1.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 1.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "1225539e349e45d2bdcca0b846803fd2",
     "m_Group": {
@@ -284,12 +332,60 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Matrix3MaterialSlot",
-    "m_ObjectId": "48f2faa9043540319075386d99dabf0c",
-    "m_Id": 1,
-    "m_DisplayName": "mat1",
+    "m_ObjectId": "40406af302734d18aa2989cd47e939d7",
+    "m_Id": 2,
+    "m_DisplayName": "matrix2",
     "m_SlotType": 0,
     "m_Hidden": false,
-    "m_ShaderOutputName": "mat1",
+    "m_ShaderOutputName": "matrix2",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "e00": 1.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 1.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 1.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 1.0
+    },
+    "m_DefaultValue": {
+        "e00": 1.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 1.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 1.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Matrix3MaterialSlot",
+    "m_ObjectId": "42afab669595435b8cc88a4d026ec60f",
+    "m_Id": 0,
+    "m_DisplayName": "cameraMatrix",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "cameraMatrix",
     "m_StageCapability": 3,
     "m_Value": {
         "e00": 1.0,
@@ -355,58 +451,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Matrix3MaterialSlot",
     "m_ObjectId": "5bcef395d22746f4ab34683f136fb373",
     "m_Id": 0,
-    "m_DisplayName": "matrix 2",
+    "m_DisplayName": "matrix2",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "e00": 1.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 1.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 1.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 1.0
-    },
-    "m_DefaultValue": {
-        "e00": 1.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 1.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 1.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 1.0
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Matrix3MaterialSlot",
-    "m_ObjectId": "7366e975a66e48cd99d0867d893af991",
-    "m_Id": 0,
-    "m_DisplayName": "combinedMatrix",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "combinedMatrix",
     "m_StageCapability": 3,
     "m_Value": {
         "e00": 1.0,
@@ -453,10 +501,10 @@
     "m_Guid": {
         "m_GuidSerialized": "d19bd3aa-5c9b-4e91-bc34-9dd8426ece57"
     },
-    "m_Name": "matrix 1",
+    "m_Name": "matrix1",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "matrix 1",
-    "m_DefaultReferenceName": "_matrix_1",
+    "m_RefNameGeneratedByDisplayName": "matrix1",
+    "m_DefaultReferenceName": "_matrix1",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
@@ -467,54 +515,6 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "e00": 1.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 1.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 1.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 1.0
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Matrix3MaterialSlot",
-    "m_ObjectId": "8ff84d3d5c7a4202874b07e86cfe095b",
-    "m_Id": 2,
-    "m_DisplayName": "mat2",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "mat2",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "e00": 1.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 1.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 1.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 1.0
-    },
-    "m_DefaultValue": {
         "e00": 1.0,
         "e01": 0.0,
         "e02": 0.0,
@@ -681,10 +681,10 @@
     "m_Guid": {
         "m_GuidSerialized": "3a90c050-d7de-48f6-b990-102051a99ada"
     },
-    "m_Name": "matrix 2",
+    "m_Name": "matrix2",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "matrix 2",
-    "m_DefaultReferenceName": "_matrix_2",
+    "m_RefNameGeneratedByDisplayName": "matrix2",
+    "m_DefaultReferenceName": "_matrix2",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
@@ -734,10 +734,10 @@
     },
     "m_Slots": [
         {
-            "m_Id": "48f2faa9043540319075386d99dabf0c"
+            "m_Id": "0965a474397b4bc9abc6e141c157c7fc"
         },
         {
-            "m_Id": "8ff84d3d5c7a4202874b07e86cfe095b"
+            "m_Id": "40406af302734d18aa2989cd47e939d7"
         },
         {
             "m_Id": "3a17be19ed004ea6aa7106cbbf6a9319"
@@ -746,7 +746,7 @@
             "m_Id": "400200909c744e39a35e346945f6c253"
         },
         {
-            "m_Id": "7366e975a66e48cd99d0867d893af991"
+            "m_Id": "42afab669595435b8cc88a4d026ec60f"
         }
     ],
     "synonyms": [
@@ -807,7 +807,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Matrix3MaterialSlot",
     "m_ObjectId": "c8f54ec082c744c092ed33ec4e1fe95d",
     "m_Id": 0,
-    "m_DisplayName": "matrix 1",
+    "m_DisplayName": "matrix1",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

@@ -326,10 +326,10 @@
     "m_Guid": {
         "m_GuidSerialized": "5982e833-585b-4696-8694-6ccbea6300b5"
     },
-    "m_Name": "specular color",
+    "m_Name": "specularColor",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "specular color",
-    "m_DefaultReferenceName": "_specular_color",
+    "m_RefNameGeneratedByDisplayName": "specularColor",
+    "m_DefaultReferenceName": "_specularColor",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -506,6 +506,21 @@
     "m_Property": {
         "m_Id": "e53ece10917c477c88528c277c594ad1"
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "458b0e8d8ba449dabb0ea4d9a7fcb5f4",
+    "m_Id": 1,
+    "m_DisplayName": "indexOut",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "indexOut",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -727,10 +742,10 @@
     "m_Guid": {
         "m_GuidSerialized": "f94d8702-20ef-495d-9f13-cef0f3507146"
     },
-    "m_Name": "specular strength",
+    "m_Name": "specularStrength",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "specular strength",
-    "m_DefaultReferenceName": "_specular_strength",
+    "m_RefNameGeneratedByDisplayName": "specularStrength",
+    "m_DefaultReferenceName": "_specularStrength",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -740,7 +755,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -768,7 +783,7 @@
     },
     "m_Slots": [
         {
-            "m_Id": "91611a9990d74b2f836e870404953dcd"
+            "m_Id": "458b0e8d8ba449dabb0ea4d9a7fcb5f4"
         }
     ],
     "synonyms": [],
@@ -789,10 +804,10 @@
     "m_Guid": {
         "m_GuidSerialized": "8661bca1-a3ed-4dc8-a640-1c7219e5d5d7"
     },
-    "m_Name": "base color",
+    "m_Name": "baseColor",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "base color",
-    "m_DefaultReferenceName": "_base_color",
+    "m_RefNameGeneratedByDisplayName": "baseColor",
+    "m_DefaultReferenceName": "_baseColor",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -803,9 +818,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5,
         "w": 0.0
     }
 }
@@ -928,27 +943,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 32.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "91611a9990d74b2f836e870404953dcd",
-    "m_Id": 1,
-    "m_DisplayName": "colour",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "colour",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": []
 }
 
 {
@@ -1124,7 +1124,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "ba9519f51c6d47819b19429ef952a532",
     "m_Id": 0,
-    "m_DisplayName": "base color",
+    "m_DisplayName": "baseColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1252,7 +1252,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "e10541097aa74131864b6cc5dc57a3f1",
     "m_Id": 0,
-    "m_DisplayName": "specular color",
+    "m_DisplayName": "specularColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1275,7 +1275,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "e1bfe8a1d4234784ae8d2558636eea8d",
     "m_Id": 0,
-    "m_DisplayName": "specular strength",
+    "m_DisplayName": "specularStrength",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

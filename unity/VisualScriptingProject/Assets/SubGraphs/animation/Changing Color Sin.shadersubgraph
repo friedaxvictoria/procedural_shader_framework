@@ -220,10 +220,10 @@
     "m_Guid": {
         "m_GuidSerialized": "b33371ae-9be8-4bad-8d2d-ca54a78daaee"
     },
-    "m_Name": "seed color",
+    "m_Name": "seedColor",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "seed color",
-    "m_DefaultReferenceName": "_seed_color",
+    "m_RefNameGeneratedByDisplayName": "seedColor",
+    "m_DefaultReferenceName": "_seedColor",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -335,7 +335,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "b6260f2d9dda4bdb8a9edb5fc6b6696d",
     "m_Id": 0,
-    "m_DisplayName": "seed color",
+    "m_DisplayName": "seedColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -431,10 +431,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1.0000404119491578,
-            "y": 0.000007152557373046875,
-            "width": 85.49996185302735,
-            "height": 76.99998474121094
+            "x": -53.0,
+            "y": -74.0,
+            "width": 85.5,
+            "height": 77.0
         }
     },
     "m_Slots": [

@@ -135,10 +135,10 @@
     "m_Guid": {
         "m_GuidSerialized": "c037e020-129b-42d2-b10b-fd4ea5cd6264"
     },
-    "m_Name": "seed position",
+    "m_Name": "seedPosition",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "seed position",
-    "m_DefaultReferenceName": "_seed_position",
+    "m_RefNameGeneratedByDisplayName": "seedPosition",
+    "m_DefaultReferenceName": "_seedPosition",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -227,7 +227,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "3af2d58b973c401b94c90564e2b2970f",
     "m_Id": 0,
-    "m_DisplayName": "seed position",
+    "m_DisplayName": "seedPosition",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -265,7 +265,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -321,10 +321,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": -44.5,
+            "y": -47.5,
+            "width": 96.5,
+            "height": 77.0
         }
     },
     "m_Slots": [
@@ -542,7 +542,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,

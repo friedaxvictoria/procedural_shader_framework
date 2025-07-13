@@ -4,6 +4,7 @@
 #include "global_variables.hlsl"
 #include "helper_functions.hlsl"
 
+//LOCAL HELPERS
 float waveStrength = 0.0;
 
 float2x2 compute2DRotationMatrix(float angle)
@@ -80,14 +81,15 @@ float4 traceWater(float3 rayDirection)
     return float4(hitPosition, t);
 }
 
-void computeWater_float(float condition, float2 uv, float3x3 cameraMatrix, out float3 normal, out float4 hitPosition, out float hitIndex)
+//CUSTOM NODE FUNCTIONS
+void computeWater_float(float condition, float3x3 cameraMatrix, float2 uv, out float4 hitPosition, out float3 normal, out float hitIndex, out float3 rayDirection)
 {
     if (condition == 0)
     {
         cameraMatrix = computeCameraMatrix(float3(0, 0, 0), _rayOrigin, float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1));
     }
     
-    float3 rayDirection = normalize(mul(float3(uv, -1), cameraMatrix));
+    rayDirection = normalize(mul(float3(uv, -1), cameraMatrix));
 
     //default background color
     float3 baseColor = float3(0.05, 0.07, 0.1);
@@ -117,12 +119,12 @@ void computeWater_float(float condition, float2 uv, float3x3 cameraMatrix, out f
     }
 
     //gamma correction
-    _baseColor[10] = pow(color, float3(0.55, 0.55, 0.55));
-    _specularColor[10] = pow(color, float3(0.55, 0.55, 0.55));
-    _specularStrength[10] = 1;
-    _shininess[10] = 1;
+    _objectBaseColor[WATER_INDEX] = pow(color, float3(0.55, 0.55, 0.55));
+    _objectSpecularColor[WATER_INDEX] = pow(color, float3(0.55, 0.55, 0.55));
+    _objectSpecularStrength[WATER_INDEX] = 1;
+    _objectShininess[WATER_INDEX] = 32;
     //hard-coded hit index for the water
-    hitIndex = 10;
+    hitIndex = WATER_INDEX;
 }
 
 void sampleHeightField_float(float3 position, out float3 heightPosition)

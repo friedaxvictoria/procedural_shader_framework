@@ -3,13 +3,14 @@
 
 #include "global_variables.hlsl"
 
+//CUSTOM NODE FUNCTIONS
 void computeUV_float(float2 fragCoord, out float2 uv)
 {
     uv = fragCoord.xy * 2 - 1;
 }
 
 //use after lighting function
-void combinedColour_float(float4 hitPosition1, float4 hitPosition2, float3 color1, float3 color2, out float3 color)
+void combinedColor_float(float4 hitPosition1, float3 color1, float4 hitPosition2, float3 color2, out float3 color)
 {
     if (hitPosition1.w > _raymarchStoppingCriterium && hitPosition2.w > _raymarchStoppingCriterium)
         color = float3(0, 0, 0);
@@ -21,7 +22,7 @@ void combinedColour_float(float4 hitPosition1, float4 hitPosition2, float3 color
 
 
 //use before lighting function
-void getMinimum_float(float4 hitPosition1, float4 hitPosition2, float3 normal1, float3 normal2, float hitIndex1, float hitIndex2, out float4 hitPosition, out float3 normal, out float hitIndex)
+void getMinimum_float(float4 hitPosition1, float3 normal1, float hitIndex1, float4 hitPosition2, float3 normal2, float hitIndex2, out float4 hitPosition, out float3 normal, out float hitIndex)
 {
     if (hitPosition1.w < hitPosition2.w && hitPosition1.w < _raymarchStoppingCriterium)
     {

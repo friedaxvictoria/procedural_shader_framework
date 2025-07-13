@@ -1,26 +1,30 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
 
+#define MAX_OBJECTS 10
+//water index is the first value possible after the object indices
+#define WATER_INDEX 10
+
 //uniforms
 extern float2 _mousePoint;
 extern float3 _rayOrigin;
 extern float _raymarchStoppingCriterium;
 
 //sdf arrays
-float _sdfType[10];
-float3 _sdfPosition[10];
-float3 _sdfSize[10];
-float _sdfRadius[10];
-float3x3 _sdfRotation[10];
-float _sdfNoise[10];
+float _sdfType[MAX_OBJECTS];
+float3 _sdfPosition[MAX_OBJECTS];
+float3 _sdfSize[MAX_OBJECTS];
+float _sdfRadius[MAX_OBJECTS];
+float3x3 _sdfRotation[MAX_OBJECTS];
+float _sdfNoise[MAX_OBJECTS];
 
 //material array --> number of sdfs + 1 for water shader
-float3 _baseColor[11];
-float3 _specularColor[11];
-float _specularStrength[11];
-float _shininess[11];
+float3 _objectBaseColor[MAX_OBJECTS+1];
+float3 _objectSpecularColor[MAX_OBJECTS+1];
+float _objectSpecularStrength[MAX_OBJECTS+1];
+float _objectShininess[MAX_OBJECTS+1];
 
 //dolphin specific arrays
-float _timeOffsetDolphin[10];
-float _speedDolphin[10];
+float _timeOffsetDolphin[MAX_OBJECTS];
+float _speedDolphin[MAX_OBJECTS];
 #endif

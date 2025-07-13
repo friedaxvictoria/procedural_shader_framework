@@ -1,6 +1,7 @@
 #ifndef DOLPHIN_FILE
 #define DOLPHIN_FILE
 
+//SPECIAL HELPERS FOR DOLPHIN
 float distanceToBox(float3 p, float3 halfExtent, float radius)
 {
     float3 distanceToBox = abs(p) - halfExtent;

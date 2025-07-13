@@ -74,7 +74,9 @@ float3 applySunriseLighting(float3 position, float3 direction, float atmospheric
             I_M * bMs * .0196 / pow(1.58 - 1.52 * mu, 1.5));
 }
 
-void sunriseLight_float(float4 hitPosition, float3 normal, float3 rayDirection, float hitIndex, out float3 lightingColor)
+
+//CUSTOM NODE FUNCTIONS
+void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 rayDirection, out float3 lightingColor)
 { 
     SunriseLight sunrise;
     sunrise.sundir = normalize(float3(0.5, 0.4 * (1. + sin(0.5 * _Time.y)), -1.));
@@ -99,16 +101,16 @@ void sunriseLight_float(float4 hitPosition, float3 normal, float3 rayDirection, 
     float3 ambientColor = float3(0, 0, 0);
 
     float diffuseValue = max(dot(normal, lightDirection), 0.0);
-    float specularValue = pow(max(dot(reflectedDirection, viewDirection), 0.0), _shininess[hitIndex]);
+    float specularValue = pow(max(dot(reflectedDirection, viewDirection), 0.0), _objectShininess[hitIndex]);
     
-    float3 diffuseColor = diffuseValue * (0.5 * _baseColor[hitIndex] + 0.5 * lightColor);
-    float3 specularColor = specularValue * _specularColor[hitIndex] * _specularStrength[hitIndex];
+    float3 diffuseColor = diffuseValue * (0.5 * _objectBaseColor[hitIndex] + 0.5 * lightColor);
+    float3 specularColor = specularValue * _objectSpecularColor[hitIndex] * _objectSpecularStrength[hitIndex];
         
     lightingColor = ambientColor + diffuseColor + specularColor;
 }
 
 
-void pointLight_float(float4 hitPosition, float3 normal, float3 lightPosition, float3 lightColor, float dropPower, float atmosphericDecay, float3 rayDirection, float hitIndex, out float3 lightingColor)
+void pointLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 rayDirection, float3 lightPosition, float3 lightColor, float dropPower, float atmosphericDecay, out float3 lightingColor)
 {
     //raymarch the environment    
     float t = 0;
@@ -139,10 +141,10 @@ void pointLight_float(float4 hitPosition, float3 normal, float3 lightPosition, f
     float3 ambientColor = float3(0, 0, 0);
     
     float diffuseValue = max(dot(normal, lightDirection), 0.0);
-    float specularValue = pow(max(dot(reflectedDirection, viewDirection), 0.0), _shininess[hitIndex]);
+    float specularValue = pow(max(dot(reflectedDirection, viewDirection), 0.0), _objectShininess[hitIndex]);
 
-    float3 diffuseColor = diffuseValue * _baseColor[hitIndex] * pixelLightColor;
-    float3 specularColor = specularValue * _specularColor[hitIndex] * _specularStrength[hitIndex];
+    float3 diffuseColor = diffuseValue * _objectBaseColor[hitIndex] * pixelLightColor;
+    float3 specularColor = specularValue * _objectSpecularColor[hitIndex] * _objectSpecularStrength[hitIndex];
     
     lightingColor = ambientColor + diffuseColor + specularColor;
 }
@@ -160,7 +162,7 @@ void applyLambertLighting_float(float4 hitPosition, float3 lightPosition, float3
     lightingColor = ambientColor + diffuseColor;
 }
 
-void applyBlinnPhongLighting_float(float4 hitPosition, float3 lightPosition, float3 normal, float hitIndex, out
+void applyBlinnPhongLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
@@ -170,15 +172,15 @@ float3 lightingColor)
 
     float3 halfVec = normalize(viewDirection + lightDirection);
     float diffuseValue = max(dot(normal, lightDirection), 0.0);
-    float specularValue = pow(max(dot(normal, halfVec), 0.0), _shininess[hitIndex]);
+    float specularValue = pow(max(dot(normal, halfVec), 0.0), _objectShininess[hitIndex]);
 
-    float3 diffuseColor = diffuseValue * _baseColor[hitIndex] * lightColor;
-    float3 specular = specularValue * _specularColor[hitIndex] * _specularStrength[hitIndex];
+    float3 diffuseColor = diffuseValue * _objectBaseColor[hitIndex] * lightColor;
+    float3 specular = specularValue * _objectSpecularColor[hitIndex] * _objectSpecularStrength[hitIndex];
 
     lightingColor = ambientColor + diffuseColor + specular;
 }
 
-void applyToonLighting_float(float4 hitPosition, float3 lightPosition, float3 normal, float hitIndex, out
+void applyToonLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
@@ -203,10 +205,10 @@ float3 lightingColor)
         diffuseValue > step2 ? 0.7 :
         diffuseValue > step1 ? 0.4 : 0.1;
 
-    lightingColor = ambientColor + toonDiff * _baseColor[hitIndex] * lightColor;
+    lightingColor = ambientColor + toonDiff * _objectBaseColor[hitIndex] * lightColor;
 }
 
-void applyRimLighting_float(float4 hitPosition, float3 lightPosition, float3 normal, float hitIndex, out
+void applyRimLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
@@ -223,11 +225,11 @@ float3 lightingColor)
     float rim = 1.0 - saturate(dot(viewDirection, normal));
     rim = pow(rim, 4.0);
 
-    float3 baseColor = _baseColor[hitIndex];
-    lightingColor = ambientColor + baseColor * lightColor + rim * _specularColor[hitIndex];
+    float3 baseColor = _objectBaseColor[hitIndex];
+    lightingColor = ambientColor + baseColor * lightColor + rim * _objectSpecularColor[hitIndex];
 }
 
-void applySoftSSLighting_float(float4 hitPosition, float3 lightPosition, float3 normal, float hitIndex, out
+void applySoftSSLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
@@ -238,7 +240,7 @@ float3 lightingColor)
     float diffuseValue = max(dot(normal, lightDirection), 0.0);
     float backLight = max(dot(-normal, lightDirection), 0.0);
 
-    float3 baseColor = _baseColor[hitIndex];
+    float3 baseColor = _objectBaseColor[hitIndex];
     float3 sssColor = float3(1.0, 0.5, 0.5);
 
     float3 diffuseColor = diffuseValue * baseColor * lightColor;
@@ -247,7 +249,7 @@ float3 lightingColor)
     lightingColor = ambientColor + diffuseColor + sss;
 }
 
-void applyFresnelLighting_float(float4 hitPosition, float3 lightPosition, float3 normal, float hitIndex, out
+void applyFresnelLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
@@ -263,10 +265,10 @@ float3 lightingColor)
     float fresnel = pow(1.0 - saturate(dot(viewDirection, normal)), 3.0);
     float rimStrength = 1.2;
 
-    lightingColor = ambientColor + _baseColor[hitIndex] * lightColor + rimStrength * fresnel * _specularColor[hitIndex];
+    lightingColor = ambientColor + _objectBaseColor[hitIndex] * lightColor + rimStrength * fresnel * _objectSpecularColor[hitIndex];
 }
 
-void applyUVGradientLighting_float(float4 hitPosition, float3 lightPosition, float3 normal, float2 _uv, out float3 lightingColor)
+void applyUVGradientLighting_float(float4 hitPosition, float3 normal, float2 uv, float3 lightPosition, out float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
@@ -274,19 +276,19 @@ void applyUVGradientLighting_float(float4 hitPosition, float3 lightPosition, flo
     float3 ambientColor = float3(0.1, 0.1, 0.1);
 
     float diffuseValue = max(dot(normal, lightDirection), 0.0);
-    float3 gradientColor = lerp(float3(0.2, 0.4, 0.9), float3(1.0, 0.6, 0.0), _uv.y);
+    float3 gradientColor = lerp(float3(0.2, 0.4, 0.9), float3(1.0, 0.6, 0.0), uv.y);
 
     lightingColor = ambientColor + diffuseValue * gradientColor * lightColor;
 }
 
-void applyUVAnisotropicLighting_float(float4 hitPosition, float3 lightPosition, float3 normal, float2 _uv, float hitIndex, out
+void applyUVAnisotropicLighting_float(float4 hitPosition, float3 normal, float hitIndex, float2 uv, float3 lightPosition, out
 float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
     float3 halfVec = normalize(viewDirection + lightDirection);
 
-    float angle = _uv.x * 6.2831853; // 2π
+    float angle = uv.x * 6.2831853; // 2π
     float3 localTangent = float3(cos(angle), sin(angle), 0.0);
     float3 tangent = normalize(localTangent - normal * dot(localTangent, normal));
     float3 bitangent = cross(normal, tangent);
@@ -298,6 +300,6 @@ float3 lightingColor)
 
     float3 ambientColor = float3(0.1, 0.1, 0.1);
 
-    lightingColor = ambientColor + diffuseValue * _baseColor[hitIndex] + spectralAnisotropic * _specularColor[hitIndex];
+    lightingColor = ambientColor + diffuseValue * _objectBaseColor[hitIndex] + spectralAnisotropic * _objectSpecularColor[hitIndex];
 }
 #endif

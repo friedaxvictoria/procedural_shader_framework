@@ -187,7 +187,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "04930e3b2f22414087c8a606532c2c01",
     "m_Id": 0,
-    "m_DisplayName": "seed radius",
+    "m_DisplayName": "seedRadius",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -357,7 +357,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "4fe4667d4d4d491a92c3d582791e5bcb",
     "m_Id": 0,
-    "m_DisplayName": "seed size",
+    "m_DisplayName": "seedSize",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -395,7 +395,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -652,10 +652,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": -58.5,
+            "y": -74.0,
+            "width": 85.5,
+            "height": 101.0
         }
     },
     "m_Slots": [
@@ -684,10 +684,10 @@
     "m_Guid": {
         "m_GuidSerialized": "0c535091-2be1-49d2-82b0-e96e505c0718"
     },
-    "m_Name": "seed size",
+    "m_Name": "seedSize",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "seed size",
-    "m_DefaultReferenceName": "_seed_size",
+    "m_RefNameGeneratedByDisplayName": "seedSize",
+    "m_DefaultReferenceName": "_seedSize",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -748,10 +748,10 @@
     "m_Guid": {
         "m_GuidSerialized": "761b99bd-0624-4cd3-a553-66d79f9afeed"
     },
-    "m_Name": "seed radius",
+    "m_Name": "seedRadius",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "seed radius",
-    "m_DefaultReferenceName": "_seed_radius",
+    "m_RefNameGeneratedByDisplayName": "seedRadius",
+    "m_DefaultReferenceName": "_seedRadius",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -789,7 +789,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,

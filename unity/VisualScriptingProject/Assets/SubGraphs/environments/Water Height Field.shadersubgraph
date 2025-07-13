@@ -91,12 +91,12 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "14774d966f0a4e13b6568760970d2fc7",
+    "m_ObjectId": "50a29e84e89543f290742b565f2e49e3",
     "m_Id": 2,
-    "m_DisplayName": "outPosition",
+    "m_DisplayName": "positionOut",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "outPosition",
+    "m_ShaderOutputName": "positionOut",
     "m_StageCapability": 3,
     "m_Value": {
         "x": 0.0,
@@ -157,7 +157,7 @@
             "m_Id": "f7e07e96a4914501a84e1c42f8abb392"
         },
         {
-            "m_Id": "14774d966f0a4e13b6568760970d2fc7"
+            "m_Id": "50a29e84e89543f290742b565f2e49e3"
         }
     ],
     "synonyms": [
@@ -224,10 +224,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": -164.99998474121095,
+            "y": -90.5,
+            "width": 96.49999237060547,
+            "height": 77.00000762939453
         }
     },
     "m_Slots": [

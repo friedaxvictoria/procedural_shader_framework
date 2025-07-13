@@ -19,10 +19,10 @@ float shininess, float timeOffset, float speed){
             _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
             _sdfNoise[i] = noise;
             
-            _baseColor[i] = baseColor;
-            _specularColor[i] = specularColor;
-            _specularStrength[i] = specularStrength;
-            _shininess[i] = shininess;
+            _objectBaseColor[i] = baseColor;
+            _objectSpecularColor[i] = specularColor;
+            _objectSpecularStrength[i] = specularStrength;
+            _objectShininess[i] = shininess;
 
             _timeOffsetDolphin[i] = timeOffset;
             _speedDolphin[i] = speed;
@@ -108,21 +108,21 @@ float3 getNormal(int i, float3 p)
 }
 
 //CUSTOM NODE FUNCTIONS
-void addSphere_float(float3 position, float radius, float index, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
+void addSphere_float(float index, float3 position, float radius, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
 float shininess, float noise, out float indexOut)
 {
     addSDF(index, 0, position, float3(0,0,0), radius, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
     indexOut = index + 1;
 }
 
-void addCube_float(float3 position, float3 size, float radius, float index, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
+void addCube_float(float index, float3 position, float3 size, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
 float shininess, float noise, out float indexOut)
 {
     addSDF(index, 1, position, size, 0, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
     indexOut = index + 1;
 }
 
-void addTorus_float(float3 position, float radius, float thickness, float index, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
+void addTorus_float(float index, float3 position, float radius, float thickness, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
 float shininess, float noise, out float indexOut)
 {
     addSDF(index, 2, position, float3(0, radius, thickness), 0, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
@@ -157,7 +157,7 @@ float shininess, out float indexOut)
     indexOut = index + 1;
 }
 
-void raymarch_float(float condition, float numSDF, float2 uv, float3x3 cameraMatrix, out float4 hitPosition, out float3 normal, out float3 rayDirection, out int hitIndex)
+void raymarch_float(float condition, float3x3 cameraMatrix, float numberSDFs, float2 uv, out float4 hitPosition, out float3 normal, out int hitIndex, out float3 rayDirection)
 {
     if (condition == 0)
     {
@@ -172,7 +172,7 @@ void raymarch_float(float condition, float numSDF, float2 uv, float3x3 cameraMat
         float3 currentPosition = _rayOrigin + rayDirection * t; 
         float d = 1e5;
         int bestIndex = -1;
-        for (int j = 0; j < numSDF; ++j)
+        for (int j = 0; j < numberSDFs; ++j)
         {
             float dj = evalSDF(j, currentPosition);
             if (dj < d)

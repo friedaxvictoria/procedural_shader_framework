@@ -14,6 +14,7 @@ float applyTimeMode(float time, int mode)
     return time;
 }
 
+//CUSTOM NODE FUNCTIONS
 //CAMERA ANIMATIONS
 void rotateCamera_float(float3 axis, float speed, out float3x3 mat)
 {

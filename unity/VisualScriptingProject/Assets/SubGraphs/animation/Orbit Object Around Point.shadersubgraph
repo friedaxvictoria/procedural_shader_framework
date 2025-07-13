@@ -237,7 +237,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "1196630d82ef4c339a6ff13d23e98e92",
     "m_Id": 0,
-    "m_DisplayName": "angel offset",
+    "m_DisplayName": "angleOffset",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -259,10 +259,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 213.50003051757813,
-            "y": 151.49998474121095,
-            "width": 98.99996948242188,
-            "height": 76.99998474121094
+            "x": -61.999977111816409,
+            "y": 108.5,
+            "width": 96.49998474121094,
+            "height": 101.0
         }
     },
     "m_Slots": [
@@ -291,10 +291,10 @@
     "m_Guid": {
         "m_GuidSerialized": "747cb82f-a82e-4662-9744-232edcfba4ea"
     },
-    "m_Name": "angel offset",
+    "m_Name": "angleOffset",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "angel offset",
-    "m_DefaultReferenceName": "_angel_offset",
+    "m_RefNameGeneratedByDisplayName": "angleOffset",
+    "m_DefaultReferenceName": "_angleOffset",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -416,7 +416,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "3d3aa11814184ef0b6609dd1744cb3d3",
     "m_Id": 0,
-    "m_DisplayName": "seed position",
+    "m_DisplayName": "seedPosition",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -497,10 +497,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -758.0,
-            "y": 190.5,
-            "width": 97.5,
-            "height": 33.99998474121094
+            "x": -757.9999389648438,
+            "y": 183.99998474121095,
+            "width": 97.49993896484375,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -528,10 +528,10 @@
     "m_Guid": {
         "m_GuidSerialized": "eb96586f-1366-43f2-983e-f66630f62663"
     },
-    "m_Name": "seed position",
+    "m_Name": "seedPosition",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "seed position",
-    "m_DefaultReferenceName": "_seed_position",
+    "m_RefNameGeneratedByDisplayName": "seedPosition",
+    "m_DefaultReferenceName": "_seedPosition",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -646,9 +646,9 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -775.0,
-            "y": 163.49998474121095,
+            "y": 150.0,
             "width": 140.0,
-            "height": 34.00004577636719
+            "height": 33.99998474121094
         }
     },
     "m_Slots": [
@@ -674,7 +674,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "6fb11562ec954c5d824a930039530ec7",
     "m_Id": 0,
-    "m_DisplayName": "center point",
+    "m_DisplayName": "centrePoint",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -862,10 +862,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -786.0,
-            "y": 125.00003051757813,
-            "width": 147.0,
-            "height": 33.999969482421878
+            "x": -784.0,
+            "y": 115.49999237060547,
+            "width": 147.00006103515626,
+            "height": 34.00000762939453
         }
     },
     "m_Slots": [
@@ -971,10 +971,10 @@
     "m_Guid": {
         "m_GuidSerialized": "616ad6fa-b400-41f2-aaa8-3a145c007032"
     },
-    "m_Name": "center point",
+    "m_Name": "centrePoint",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "center point",
-    "m_DefaultReferenceName": "_center_point",
+    "m_RefNameGeneratedByDisplayName": "centrePoint",
+    "m_DefaultReferenceName": "_centrePoint",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
