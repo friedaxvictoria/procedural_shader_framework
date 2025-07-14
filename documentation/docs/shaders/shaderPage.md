@@ -66,7 +66,13 @@ Visual effects built using the above noise modules.
 Shaders that generate or modify geometry procedurally.
 
 - [SDF Raymarching](geometry/raymarching_sdf.md)
+  
+### 🔷 Scenes Shaders
 
+Shaders that render complete background or environmental elements such as sky, sun, clouds, or horizon effects. These shaders are not limited to lighting or material computation but instead define the overall visual atmosphere of a scene.
+
+- [Sun And Halo](scenes/SunAndHalo.md)
+  
 ---
 
 **📘 How to Read a Shader Page**
