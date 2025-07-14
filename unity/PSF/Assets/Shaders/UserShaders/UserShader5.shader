@@ -29,6 +29,7 @@ Shader "Custom/UserShader5"
             #pragma vertex vert
             #pragma fragment frag
 
+
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             // #include "Assets/Shaders/Includes/ModularShaderLib.hlsl"
             #include "Assets/Shaders/Includes/sdf_functions.hlsl"
@@ -82,17 +83,32 @@ Shader "Custom/UserShader5"
                 float index;
                 float3x3 camMat = float3x3( 1,0,0, 0,1,0, 0,0,1 );
 
+
+                float4 hitPos;
                 float4 hitPos1;
                 float4 hitPos2;
 
                 float hitID;
+                float hitID1;
+                float hitID2;
+
+
                 float3 normal;
+                float3 normal1;
+                float3 normal2;
+
+                float3 rayDir;
+                float3 rayDir1;
+                float3 rayDir2;
+
 
                 float3 colorOut1;
                 float3 colorOut2;
+                float3 colorOut3;
 
                 float3 colorOut;
-                float3 rayDir;
+                
+                
 
 
                 // all temps
@@ -102,48 +118,47 @@ Shader "Custom/UserShader5"
                 float3 position_temp;
                 float3 color_temp;
 
+
+                moveViaMouseCentered_float(camMat);
+
+
                 computeUV_float(IN.uv, uv);
 
-                addSphere_float(float3(-2,0,-5), float3(2,2,2), 0, float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, 0, index);
 
-
-
+                addSphere_float(0, float3(-2,0,-5), float3(2,2,2), float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, 0, index);
 
                 translateObject_float(float3(5,0,-5), float3(-4,-8,0), 5, 1, position_temp);
                 orbitObjectAroundPoint_float(position_temp, float3(3,3,-2), float3(1,2,0), 0.2, 0.8, 0.1, position_temp, temp);
-                // shake_float(position_temp, 0.4, 1, position_temp);
-
+                //shake_float(position_temp, 0.4, 1, position_temp);
                 pulseObject_float(float3(2,2,2), 0, 2, 1, 0, size_temp, radius_temp);
-
                 cycleColor_float(float3(0.8,0.1,0.1), 0.5, color_temp);
 
-                addCube_float(position_temp, size_temp, radius_temp, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), color_temp, 2, 1, 0, index);
+                addCube_float(index, position_temp, size_temp, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), color_temp, 2, 1, 0, index);
+
+                addTorus_float(index, float3(0,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                addTorus_float(index, float3(-4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                addTorus_float(index, float3(-1.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                addTorus_float(index, float3(4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                addTorus_float(index, float3(0,0,3), 2, 0.4, float3(0, 1, 0), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 1, 1, 0, index);
 
 
 
+                raymarch_float(1, camMat, index, uv, hitPos1, normal1, hitID1, rayDir1);
+
+                computeWater_float(1, camMat, uv, hitPos2, normal2, hitID2, rayDir2);
+
+                getMinimum_float(hitPos1, normal1, hitID1, hitPos2, normal2, hitID2, hitPos, normal, hitID);
 
 
-                addTorus_float(float3(0,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
-                addTorus_float(float3(-4.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
-                addTorus_float(float3(-1.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
-                addTorus_float(float3(4.5,4.5,0), 2, 0.2, index, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                pointLight_float(hitPos, normal, hitID, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05,  colorOut1);
+                sunriseLight_float(hitPos, normal, hitID, rayDir1, colorOut3);
+                applyToonLighting_float(hitPos, normal, hitID, _LightPosition, colorOut2);
 
 
-                raymarch_float(1, index, uv, camMat, hitPos1, normal, rayDir);
-
-                //pointLight_float(hitPos1, normal, _LightPosition, float3(1,1,1), colorOut1);
-                //sunriseLight_float(hitPos1, normal, rayDir, colorOut2);
-
-                applyRimLighting_float(hitPos1, _LightPosition, normal, colorOut1);
-                applyToonLighting_float(hitPos1, _LightPosition, normal, colorOut2);
+                
 
 
-                // float3 rd = normalize(float3(uv, -1));
-                // float3 L = normalize(_LightPosition - hitPos1);
-                // _dolphinColor(hitPos1, normal, rd,  0.1, 0.1, 0, 1, L, colorOut1);
-
-
-                colorOut = colorOut1 + colorOut2;
+                colorOut = colorOut1 + colorOut2 + colorOut3;
 
                 // computeWater_float(uv, camMat, colorOut2, hitPos2);
 

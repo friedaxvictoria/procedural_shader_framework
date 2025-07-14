@@ -1,31 +1,30 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
 
+#define MAX_OBJECTS 10
+//water index is the first value possible after the object indices
+#define WATER_INDEX 10
+
 //uniforms
 extern float2 _mousePoint;
-float3 _rayOrigin;
-extern float _GammaCorrect;
+extern float3 _rayOrigin;
+extern float _raymarchStoppingCriterium;
 
-float _raymarchStoppingCriterium = 50;
+//sdf arrays
+float _sdfType[MAX_OBJECTS];
+float3 _sdfPosition[MAX_OBJECTS];
+float3 _sdfSize[MAX_OBJECTS];
+float _sdfRadius[MAX_OBJECTS];
+float3x3 _sdfRotation[MAX_OBJECTS];
+float _sdfNoise[MAX_OBJECTS];
 
-float hitID;
+//material array --> number of sdfs + 1 for water shader
+float3 _objectBaseColor[MAX_OBJECTS+1];
+float3 _objectSpecularColor[MAX_OBJECTS+1];
+float _objectSpecularStrength[MAX_OBJECTS+1];
+float _objectShininess[MAX_OBJECTS+1];
 
-//floating point global variables
-float _sdfTypeFloat[10];
-float3 _sdfPositionFloat[10];
-float3 _sdfSizeFloat[10];
-float _sdfRadiusFloat[10];
-float3x3 _sdfRotation[10];
-float _sdfNoise[10];
-
-
-float3 _baseColorFloat[10];
-float3 _specularColorFloat[10];
-float _specularStrengthFloat[10];
-float _shininessFloat[10];
-
-//dolphin stuff
-float _timeOffsetDolphinFloat[10];
-float _speedDolphinFloat[10];
-float3 _directionDolphinFloat[10];
+//dolphin specific arrays
+float _timeOffsetDolphin[MAX_OBJECTS];
+float _speedDolphin[MAX_OBJECTS];
 #endif

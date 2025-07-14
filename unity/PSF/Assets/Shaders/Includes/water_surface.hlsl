@@ -1,54 +1,18 @@
 #ifndef WATER_SURFACE_FILE
 #define WATER_SURFACE_FILE
 
-// ==========================================
-// Shader: Procedural Water Surface Shader
-// Category: Surface Rendering & Reflections
-// Description: Generates a time-evolving water surface with procedural waves, SDF raymarching, and specular lighting. Adapted from "Dante's natty vessel" by evvvvil on ShaderToy
-// URL: https://www.shadertoy.com/view/Nds3W7
-// ==========================================
-
-/*
- * This shader simulates an animated water surface using signed distance field (SDF) raymarching.
- * Procedural waves are generated using multi-octave hash-based noise, and visual features include:
- *
- * - computeWave(): Computes layered wave height field with time-based distortion.
- * - evaluateDistanceField(): Encodes the wave surface as an SDF for raymarching.
- * - traceWater(): Traces rays against the SDF surface to find intersection points.
- * - estimateNormal(): Approximates normals from SDF gradient for shading.
- * - sampleNoiseTexture(): Adds texture-based detail to enhance realism.
- * - Fresnel-based highlight + fog = pseudo-lighting and depth fading.
- *
- * Inputs:
- *   iTime        - float: animation time
- *   iMouse       - float2 : camera yaw/pitch control
- *   iChannel0    - sampler2D: noise texture for wave detail modulation
- *   iResolution  - float2 : screen resolution
- *
- * Output:
- *   float4 : RGBA pixel color with animated wave surface and visual depth cues
- */
-
-// ---------- Global Configuration ----------
 #include "global_variables.hlsl"
+#include "helper_functions.hlsl"
 
-// ---------- Global State ----------
+//LOCAL HELPERS
 float waveStrength = 0.0;
-// ---------- Utilities ----------
 
-/**
- * Computes a 2D rotation matrix.
- */
-float2x2 computeRotationMatrix(float angle)
+float2x2 compute2DRotationMatrix(float angle)
 {
     float c = cos(angle), s = sin(angle);
     return float2x2(c, s, -s, c);
 }
 
-/**
- * Hash-based procedural 3D noise.
- * Returns: float in [0,1]
- */
 float hashNoise(float3 p)
 {
     float3 f = floor(p), magic = float3(7, 157, 113);
@@ -60,113 +24,134 @@ float hashNoise(float3 p)
     return lerp(h.x, h.y, p.z);
 }
 
-// ---------- Wave Generation ----------
-
-/**
- * Computes wave height using multi-octave sine-noise accumulation.
- *
- * Inputs:
- *   pos         - vec3 : world-space position
- *   iterationCount - int : number of noise layers
- *   writeOut    - float: whether to export internal wave variables
- *
- * Returns:
- *   float : signed height field
- */
-float computeWave(float3 pos)
+float computeWave(float3 position)
 {
-    float3 warped = pos - float3(0, 0, _Time.y % 62.83 * 3.0);
+    float3 warped = position - float3(0, 0, _Time.y % 62.83 * 3.0);
 
     float direction = sin(_Time.y * 0.15);
     float angle = 0.001 * direction;
-    float2x2 rotation = computeRotationMatrix(angle);
+    float2x2 rotation = compute2DRotationMatrix(angle);
 
-    float accum = 0.0, amplitude = 3.0;
+    float accumulated = 0.0, amplitude = 3.0;
     for (int i = 0; i < 7; i++)
     {
-        accum += abs(sin(hashNoise(warped * 0.15) - 0.5) * 3.14) * (amplitude *= 0.51);
+        accumulated += abs(sin(hashNoise(warped * 0.15) - 0.5) * 3.14) * (amplitude *= 0.51);
         warped.xy = mul(warped.xy, rotation);
         warped *= 1.75;
     }
-
     
-    waveStrength = accum;
+    waveStrength = accumulated;
 
-    float height = pos.y + accum;
+    float height = position.y + accumulated;
     height *= 0.5;
-    height += 0.3 * sin(_Time.y + pos.x * 0.3); // slight bobbing
-
+    height += 0.3 * sin(_Time.y + position.x * 0.3); // slight bobbing
     return height;
 }
 
-/**
- * Performs raymarching against the wave surface SDF.
- */
-float4 traceWater(float3 rayOrigin, float3 rayDir)
+float3 getNormal(float3 position, float delta)
+{
+    return normalize(float3(
+            computeWave(position + float3(delta, 0.0, 0.0)) -
+            computeWave(position - float3(delta, 0.0, 0.0)),
+            0.02,
+            computeWave(position + float3(0.0, 0.0, delta)) -
+            computeWave(position - float3(0.0, 0.0, delta))
+        ));
+}
+
+float4 traceWater(float3 rayDirection)
 {
     float d = 0;
     float t = 0;
-    float3 hitPos = float3(0, 0, 0);
+    float3 hitPosition = float3(0, 0, 0);
+    float3 outputPos;
     for (int i = 0; i < 100; i++)
     {
-        float3 p = rayOrigin + rayDir * t;
+        float3 p = _rayOrigin + rayDirection * t;
         d = computeWave(p);
         if (d < 0.0001)
         {
-            hitPos = p;
+            hitPosition = p;
             break;
         }
         t += d;
         if (t > _raymarchStoppingCriterium)
             break;
     }
-    return float4(hitPos, t);
+    return float4(hitPosition, t);
 }
 
-// ---------- Main Entry ----------
-
-void computeWater_float(float2 uv, float3x3 camMatrix, out float3 fragColor, out float4 hitPos)
+//CUSTOM NODE FUNCTIONS
+void computeWater_float(float condition, float3x3 cameraMatrix, float2 uv, out float4 hitPosition, out float3 normal, out float hitIndex, out float3 rayDirection)
 {
-    float3 rayDirection = normalize(mul(float3(uv, -1), camMatrix));
+    if (condition == 0)
+    {
+        cameraMatrix = computeCameraMatrix(float3(0, 0, 0), _rayOrigin, float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1));
+    }
+    
+    rayDirection = normalize(mul(float3(uv, -1), cameraMatrix));
 
-    // Default background color
+    //default background color
     float3 baseColor = float3(0.05, 0.07, 0.1);
     float3 color = baseColor;
 
-    // Raymarching
-    hitPos = traceWater(_rayOrigin, rayDirection);
-    if (hitPos.w < _raymarchStoppingCriterium)
+    hitPosition = traceWater(rayDirection);
+    if (hitPosition.w < _raymarchStoppingCriterium)
     {
-        // Gradient-based normal estimation
-        float3 grad = normalize(float3(
-            computeWave(hitPos.xyz + float3(0.01, 0.0, 0.0)) -
-            computeWave(hitPos.xyz - float3(0.01, 0.0, 0.0)),
-            0.02,
-            computeWave(hitPos.xyz + float3(0.0, 0.0, 0.01)) -
-            computeWave(hitPos.xyz - float3(0.0, 0.0, 0.01))
-        ));
+        normal = getNormal(hitPosition.xyz, 0.01);
 
-        // Fresnel-style highlight
-        float fresnel = pow(1.0 - dot(grad, -rayDirection), 5.0);
+        //fresnel-style highlight
+        float fresnel = pow(1.0 - dot(normal, -rayDirection), 5.0);
         float highlight = clamp(fresnel * 1.5, 0.0, 1.0);
 
-        // Water shading: deep vs bright
+        //water shading: deep vs bright
         float3 deepColor = float3(0.05, 0.1, 0.6);
         float3 brightColor = float3(0.1, 0.3, 0.9);
         float shading = clamp(waveStrength * 0.1, 0.0, 1.0);
         float3 waterColor = lerp(deepColor, brightColor, shading);
 
-        // Add highlight
+        //add highlight
         waterColor += float3(1.0, 1, 1) * highlight * 0.4;
 
-        // Depth-based fog
-        float fog = exp(-0.00005 * hitPos.x * hitPos.x * hitPos.x);
+        //depth-based fog
+        float fog = exp(-0.00005 * hitPosition.x * hitPosition.x * hitPosition.x);
         color = lerp(baseColor, waterColor, fog);
     }
 
-    // Gamma correction
-    fragColor = float3(pow(color, float3(0.55, 0.55, 0.55)));
+    //gamma correction
+    _objectBaseColor[WATER_INDEX] = pow(color, float3(0.55, 0.55, 0.55));
+    _objectSpecularColor[WATER_INDEX] = pow(color, float3(0.55, 0.55, 0.55));
+    _objectSpecularStrength[WATER_INDEX] = 1;
+    _objectShininess[WATER_INDEX] = 32;
+    //hard-coded hit index for the water
+    hitIndex = WATER_INDEX;
+}
 
+void sampleHeightField_float(float3 position, out float3 heightPosition)
+{
+    float y = position.y;
+    
+    //binary search or Newton-Raphson style iteration
+    float stepSize = 0.05; 
+
+    for (int i = 0; i < 100; i++)
+    {
+        position.y = y;
+        float height = computeWave(position);
+        if (height < 0.01)
+            break;
+        y -= stepSize;
+    }
+    heightPosition = float3(position.x, y, position.z);
+}
+
+void adaptableNormal_float(float3 position, float3 offset, float influence, float sampleRadius, out float3 normal)
+{
+    float3 normal1 = getNormal(position + float3(sampleRadius, 0.0, 0.0), 1);
+    float3 normal2 = getNormal(position - float3(sampleRadius, 0.0, 0.0), 1);
+    float3 normal3 = getNormal(position + float3(0, 0.0, sampleRadius), 1);
+    float3 normal4 = getNormal(position - float3(0, 0.0, sampleRadius), 1);
+    normal = influence * (normal1 + normal2 + normal3 + normal4)/4 + offset;
 }
 
 #endif
