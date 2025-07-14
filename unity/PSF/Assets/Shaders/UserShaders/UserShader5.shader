@@ -37,6 +37,8 @@ Shader "Custom/UserShader5"
             #include "Assets/Shaders/Includes/lighting_functions.hlsl"
             #include "Assets/Shaders/Includes/animation_functions.hlsl"
             #include "Assets/Shaders/Includes/water_surface.hlsl"
+            #include "Assets/Shaders/Includes/tween_functions.hlsl"
+
 
 
 
@@ -129,17 +131,21 @@ Shader "Custom/UserShader5"
 
                 translateObject_float(float3(5,0,-5), float3(-4,-8,0), 5, 1, position_temp);
                 orbitObjectAroundPoint_float(position_temp, float3(3,3,-2), float3(1,2,0), 0.2, 0.8, 0.1, position_temp, temp);
-                //shake_float(position_temp, 0.4, 1, position_temp);
+                //shakeObject_float(position_temp, 0.4, 1, position_temp);
                 pulseObject_float(float3(2,2,2), 0, 2, 1, 0, size_temp, radius_temp);
                 cycleColor_float(float3(0.8,0.1,0.1), 0.5, color_temp);
 
                 addCube_float(index, position_temp, size_temp, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), color_temp, 2, 1, 0, index);
 
+
                 addTorus_float(index, float3(0,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
                 addTorus_float(index, float3(-4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
                 addTorus_float(index, float3(-1.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
                 addTorus_float(index, float3(4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
-                addTorus_float(index, float3(0,0,3), 2, 0.4, float3(0, 1, 0), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 1, 1, 0, index);
+
+                float3 movedPos;
+                tween3D_float(float3(0,0,3), float3(5,5,3), 5.0, TWEEN_QUINTIC_INOUT, 0.0, 1, movedPos);
+                addTorus_float(index, movedPos, 2, 0.4, float3(0, 1, 0), 0, float3(0.2,1,0.2), float3(0.8,0.1,0.1), 1, 1, 0, index);
 
 
 
@@ -164,19 +170,6 @@ Shader "Custom/UserShader5"
 
 
 
-
-
-
-
-                
-
-
-
-
-
-
-
-                
                 return float4(colorOut,1);
             }
             ENDHLSL

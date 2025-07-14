@@ -725,6 +725,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c61b6f7d6ef1534c89f5f5bf9e42217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowMovement: 1
+  movementSpeed: 10
+  rayOrigin: {x: 0, y: 0, z: 10}
 --- !u!4 &1133086495
 Transform:
   m_ObjectHideFlags: 0
