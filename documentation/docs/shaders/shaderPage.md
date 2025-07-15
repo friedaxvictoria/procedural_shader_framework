@@ -76,6 +76,7 @@ Shaders that generate or modify geometry procedurally.
 Shaders that render complete background or environmental elements such as sky, sun, clouds, or horizon effects. These shaders are not limited to lighting or material computation but instead define the overall visual atmosphere of a scene.
 
 - [Sun And Halo](scenes/SunAndHalo.md)
+- [Volumetric FBM Cloud](scenes/Cloud_fbm.md)
   
 ---
 
