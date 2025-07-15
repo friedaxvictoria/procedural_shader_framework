@@ -19,7 +19,9 @@ Welcome to the **Shader Library**, a central hub for exploring all procedural sh
 Shaders that control movement over time, often using sine/cosine functions or time-based interpolation.
 
 - [TIE Fighter](animation/tie_fighter.md)
+- [Camera Orientation Setup Shader](animation/calcLookAtMatrix.md)
 - [SDF Animation](animation/sdf_animation_shader.md)
+
 
 ### ☁️ Noise Shaders  
 Procedural textures using hash-based value, gradient, and fractal noise.  
