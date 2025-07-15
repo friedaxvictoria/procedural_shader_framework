@@ -71,6 +71,12 @@ Shaders that generate or modify geometry procedurally.
 - [SDF Sphere](geometry/SDF_Sphere.md)
 - [SDF Square](geometry/SDF_Square.md)
   
+### 💡 Lighting Shaders
+
+Compute surface lighting effects including diffuse, specular, rim, and reflection. Often used in combination with geometry to produce realism or stylized appearances.
+
+- [Rim Reflection Lighting](lighting/Rim_lighting_and_reflection.md)
+  
 ### 🔷 Scenes Shaders
 
 Shaders that render complete background or environmental elements such as sky, sun, clouds, or horizon effects. These shaders are not limited to lighting or material computation but instead define the overall visual atmosphere of a scene.
