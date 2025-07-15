@@ -1,6 +1,6 @@
 # 🧩 SDF Sphere Raymarch Shader
 
-<img src="../../../shaders/screenshots/geometry/SDF_Sphere.png" alt="SDF Sphere Output" width="400" height="225">
+<img src="../../../../shaders/screenshots/geometry/SDF_Sphere.png" alt="SDF Sphere Output" width="400" height="225">
 
 ---
 
