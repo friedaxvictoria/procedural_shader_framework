@@ -66,6 +66,8 @@ Visual effects built using the above noise modules.
 Shaders that generate or modify geometry procedurally.
 
 - [SDF Raymarching](geometry/raymarching_sdf.md)
+- [SDF Sphere](geometry/SDF_Sphere.md)
+- [SDF Square](geometry/SDF_Square.md)
   
 ### 🔷 Scenes Shaders
 
