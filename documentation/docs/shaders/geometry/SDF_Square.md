@@ -2,9 +2,9 @@
 
 <img src="../../../../shaders/screenshots/geometry/square.png" alt="Square Shader Output" width="400" height="225">
 
----
 
-- **Category:** Geometry  
+- **Category:** Geometry
+- **Author:** Wanzhang He
 - **Shader Type:** 2D Primitive (SDF)  
 - **Input Requirements:** `fragCoord`, `iResolution`  
 - **Output:** Red square in white background using SDF logic
