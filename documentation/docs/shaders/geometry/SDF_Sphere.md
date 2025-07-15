@@ -2,9 +2,8 @@
 
 <img src="../../../../shaders/screenshots/geometry/SDF_Sphere.png" alt="SDF Sphere Output" width="400" height="225">
 
----
-
-- **Category:** Geometry / SDF Raymarching  
+- **Category:** Geometry 
+- **Author:** Wanzhang He
 - **Shader Type:** 3D primitive via signed distance field  
 - **Input Requirements:** `fragCoord`, `iResolution`  
 - **Output:** Raymarched red sphere with basic diffuse lighting
