@@ -145,4 +145,4 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     }
 }
 ```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/geometry/Rock.glsl)
+🔗 [View Full Shader Code on GitHub](../../../../shadersshaders/geometry/SDF_Rock.glsl)
