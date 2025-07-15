@@ -34,7 +34,7 @@ Unity implementations use **Shader Graph** or custom HLSL in the **Universal Ren
 
 | Shader Name | Integration Type | Link |
 |-------------|------------------|------|
-| ✈️ TIE Fighter | Shader Graph    | [View Integration](unity/tie_fighter_unity.md) |
+| ✈️ TIE Fighter | Shader Graph    | [View Integration](unity/cameraRotation.md) |
 | *More coming soon* | — | — |
 
 ---
