@@ -79,6 +79,7 @@ Shader "Custom/UserShader3"
                     inputs[i].size = float3(0, 0, 0);
                     inputs[i].radius = 0.0;
                     inputs[i].color = float3(0, 0, 0);
+                    inputs[i].animate = 0;
                 }
 
                 inputs[0].type = 0;

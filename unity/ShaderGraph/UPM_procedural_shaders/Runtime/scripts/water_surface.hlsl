@@ -1,0 +1,219 @@
+#ifndef WATER_SURFACE_FILE
+#define WATER_SURFACE_FILE
+
+// ==========================================
+// Shader: Procedural Water Surface Shader
+// Category: Surface Rendering & Reflections
+// Description: Generates a time-evolving water surface with procedural waves, SDF raymarching, and specular lighting. Adapted from "Dante's natty vessel" by evvvvil on ShaderToy
+// URL: https://www.shadertoy.com/view/Nds3W7
+// ==========================================
+
+/*
+ * This shader simulates an animated water surface using signed distance field (SDF) raymarching.
+ * Procedural waves are generated using multi-octave hash-based noise, and visual features include:
+ *
+ * - computeWave(): Computes layered wave height field with time-based distortion.
+ * - evaluateDistanceField(): Encodes the wave surface as an SDF for raymarching.
+ * - traceWater(): Traces rays against the SDF surface to find intersection points.
+ * - estimateNormal(): Approximates normals from SDF gradient for shading.
+ * - sampleNoiseTexture(): Adds texture-based detail to enhance realism.
+ * - Fresnel-based highlight + fog = pseudo-lighting and depth fading.
+ *
+ * Inputs:
+ *   iTime        - float: animation time
+ *   iMouse       - float2 : camera yaw/pitch control
+ *   iChannel0    - sampler2D: noise texture for wave detail modulation
+ *   iResolution  - float2 : screen resolution
+ *
+ * Output:
+ *   float4 : RGBA pixel color with animated wave surface and visual depth cues
+ */
+
+// ---------- Global Configuration ----------
+#include "global_variables.hlsl"
+#include "helper_functions.hlsl"
+
+// ---------- Global State ----------
+float waveStrength = 0.0;
+// ---------- Utilities ----------
+
+/**
+ * Computes a 2D rotation matrix.
+ */
+float2x2 computeRotationMatrix(float angle)
+{
+    float c = cos(angle), s = sin(angle);
+    return float2x2(c, s, -s, c);
+}
+
+/**
+ * Hash-based procedural 3D noise.
+ * Returns: float in [0,1]
+ */
+float hashNoise(float3 p)
+{
+    float3 f = floor(p), magic = float3(7, 157, 113);
+    p -= f;
+    float4 h = float4(0, magic.yz, magic.y + magic.z) + dot(f, magic);
+    p *= p * (3.0 - 2.0 * p);
+    h = lerp(frac(sin(h) * 43785.5), frac(sin(h + magic.x) * 43785.5), p.x);
+    h.xy = lerp(h.xz, h.yw, p.y);
+    return lerp(h.x, h.y, p.z);
+}
+
+// ---------- Wave Generation ----------
+
+/**
+ * Computes wave height using multi-octave sine-noise accumulation.
+ *
+ * Inputs:
+ *   pos         - vec3 : world-space position
+ *   iterationCount - int : number of noise layers
+ *   writeOut    - float: whether to export internal wave variables
+ *
+ * Returns:
+ *   float : signed height field
+ */
+
+float computeWave(float3 pos)
+{
+    float3 warped = pos - float3(0, 0, _Time.y % 62.83 * 3.0);
+
+    float direction = sin(_Time.y * 0.15);
+    float angle = 0.001 * direction;
+    float2x2 rotation = computeRotationMatrix(angle);
+
+    float accum = 0.0, amplitude = 3.0;
+    for (int i = 0; i < 7; i++)
+    {
+        accum += abs(sin(hashNoise(warped * 0.15) - 0.5) * 3.14) * (amplitude *= 0.51);
+        warped.xy = mul(warped.xy, rotation);
+        warped *= 1.75;
+    }
+
+    
+    waveStrength = accum;
+
+    float height = pos.y + accum;
+    height *= 0.5;
+    height += 0.3 * sin(_Time.y + pos.x * 0.3); // slight bobbing
+    return height;
+}
+
+void computeWave_float(float3 pos, out float3 heightPos)
+{
+        // Start with a reasonable guess (e.g. sea level or midpoint of wave height range)
+    float y = pos.y;
+    
+    // Binary search or Newton-Raphson style iteration
+    float stepSize = 0.05; // Small steps downwards
+
+    for (int i = 0; i < 100; i++)
+    {
+        pos.y = y;
+        float h = computeWave(pos);
+        if (h < 0.01) // We've reached the surface
+            break;
+        y -= stepSize;
+    }
+    heightPos = float3(pos.x, y, pos.z);
+
+}
+
+
+float3 getNormal(float3 pos, float delta)
+{
+    return normalize(float3(
+            computeWave(pos + float3(delta, 0.0, 0.0)) -
+            computeWave(pos - float3(delta, 0.0, 0.0)),
+            0.02,
+            computeWave(pos + float3(0.0, 0.0, delta)) -
+            computeWave(pos - float3(0.0, 0.0, delta))
+        ));
+}
+
+void adaptableNormal_float(float3 pos, float3 offset, float influence, float sampleRadius, out float3 normal)
+{
+    float3 normal1 = getNormal(pos + float3(sampleRadius, 0.0, 0.0), 1);
+    float3 normal2 = getNormal(pos - float3(sampleRadius, 0.0, 0.0), 1);
+    float3 normal3 = getNormal(pos + float3(0, 0.0, sampleRadius), 1);
+    float3 normal4 = getNormal(pos - float3(0, 0.0, sampleRadius), 1);
+    normal = influence * (normal1 + normal2 + normal3 + normal4)/4 + offset;
+
+}
+
+/**
+ * Performs raymarching against the wave surface SDF.
+ */
+float4 traceWater(float3 rayOrigin, float3 rayDir)
+{
+    float d = 0;
+    float t = 0;
+    float3 hitPos = float3(0, 0, 0);
+    float3 outputPos;
+    for (int i = 0; i < 100; i++)
+    {
+        float3 p = rayOrigin + rayDir * t;
+        d = computeWave(p);
+        if (d < 0.0001)
+        {
+            hitPos = p;
+            break;
+        }
+        t += d;
+        if (t > _raymarchStoppingCriterium)
+            break;
+    }
+    return float4(hitPos, t);
+}
+
+// ---------- Main Entry ----------
+
+void computeWater_float(float condition, float2 uv, float3x3 camMatrix, out float3 normal, out float4 hitPos, out float hitIndex)
+{
+    if (condition == 0)
+    {
+        camMatrix = computeCameraMatrix(float3(0, 0, 0), _rayOrigin, float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1));
+    }
+    
+    float3 rayDirection = normalize(mul(float3(uv, -1), camMatrix));
+
+    // Default background color
+    float3 baseColor = float3(0.05, 0.07, 0.1);
+    float3 color = baseColor;
+
+    // Raymarching
+    hitPos = traceWater(_rayOrigin, rayDirection);
+    if (hitPos.w < _raymarchStoppingCriterium)
+    {
+        // Gradient-based normal estimation
+        normal = getNormal(hitPos.xyz, 0.01);
+
+        // Fresnel-style highlight
+        float fresnel = pow(1.0 - dot(normal, -rayDirection), 5.0);
+        float highlight = clamp(fresnel * 1.5, 0.0, 1.0);
+
+        // Water shading: deep vs bright
+        float3 deepColor = float3(0.05, 0.1, 0.6);
+        float3 brightColor = float3(0.1, 0.3, 0.9);
+        float shading = clamp(waveStrength * 0.1, 0.0, 1.0);
+        float3 waterColor = lerp(deepColor, brightColor, shading);
+
+        // Add highlight
+        waterColor += float3(1.0, 1, 1) * highlight * 0.4;
+
+        // Depth-based fog
+        float fog = exp(-0.00005 * hitPos.x * hitPos.x * hitPos.x);
+        color = lerp(baseColor, waterColor, fog);
+    }
+
+    // Gamma correction
+    _baseColorFloat[maxNumSDFs] = pow(color, float3(0.55, 0.55, 0.55));
+    _specularColorFloat[maxNumSDFs] = pow(color, float3(0.55, 0.55, 0.55));
+    _specularStrengthFloat[maxNumSDFs] = 1;
+    _shininessFloat[maxNumSDFs] = 1;
+    // hard-coded hit index for the water
+    hitIndex = maxNumSDFs;
+}
+
+#endif

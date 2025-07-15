@@ -5,21 +5,6 @@ using UnityEngine;
 public class set_shader_uniforms : MonoBehaviour
 {
     private Vector4 mousePos;
-    [SerializeField]
-    public bool Gamma_Correct = false;
-    [SerializeField]
-    public float Resolution = 1;
-    [SerializeField]
-    public Texture MainTex;
-    [SerializeField]
-    public Vector3 rayOrigin = new Vector3(0,0,7);
-    public enum NoiseType
-    {
-        None,
-        FBM
-    }
-
-    public NoiseType noiseType = new NoiseType();
 
     void Start()
     {
@@ -27,11 +12,7 @@ public class set_shader_uniforms : MonoBehaviour
 
     void OnValidate()
     {
-        Shader.SetGlobalFloat("_GammaCorrect", Gamma_Correct ? 1 : 0);
-        Shader.SetGlobalTexture("_MainTex", MainTex);
-        Shader.SetGlobalFloat("_Resolution", Resolution);
-        Shader.SetGlobalVector("_RayOrigin", rayOrigin);
-        Shader.SetGlobalFloat("_NoiseType", (int)noiseType);
+        //Shader.SetGlobalFloat("_GammaCorrect", Gamma_Correct ? 1 : 0);
     }
 
     // Update is called once per frame

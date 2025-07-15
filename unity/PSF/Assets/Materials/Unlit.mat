@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Unlit
-  m_Shader: {fileID: 4800000, guid: a6ab14f408776e2458a082ee7bb175eb, type: 3}
+  m_Shader: {fileID: 4800000, guid: 936b011763790084091e3c213cec2df5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -20,7 +20,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: 
+  m_LockedProperties: _Mouse
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
