@@ -2,7 +2,7 @@
 #define TWEEN_FILE
 
 // ENUMS FOR TWEEN TYPES
-#define TWEEN_LINEAR                0
+#define TWEEN_LINEAR               0
 #define TWEEN_QUADRATIC_IN         1
 #define TWEEN_QUADRATIC_OUT        2
 #define TWEEN_QUADRATIC_INOUT      3
@@ -179,14 +179,14 @@ float applyTweenFunction(float t, int tweenType)
     return t; // fallback
 }
 
-float getTweenProgress(float startTime, float duration, int pingpong)
+float getTweenProgress(float startTime, float duration, bool pingpong)
 {
     float t = (_Time.y - startTime) / duration;
 
     if (t < 0)
         return 0;
 
-    if (pingpong == 1)
+    if (pingpong == true)
     {
         // Double duration for full ping-pong cycle
         float cycleTime = fmod(t, 2.0); // 0–2
@@ -200,7 +200,7 @@ float getTweenProgress(float startTime, float duration, int pingpong)
 
 
 // MOVE TWEEN
-void tween3D_float(float3 start, float3 end, float duration, int tweenType, float startTime, int pingpong, out float3 position)
+void tween3D_float(float3 start, float3 end, float duration, int tweenType, float startTime, bool pingpong, out float3 position)
 {
     float t = getTweenProgress(startTime, duration, pingpong);
 
@@ -209,7 +209,7 @@ void tween3D_float(float3 start, float3 end, float duration, int tweenType, floa
 }
 
 // SCALE TWEEN
-void tween1D_float(float start, float end, float duration, int tweenType, float startTime, int pingpong, out float scale)
+void tween1D_float(float start, float end, float duration, int tweenType, float startTime, bool pingpong, out float scale)
 {
     float t = getTweenProgress(startTime, duration, pingpong);
 

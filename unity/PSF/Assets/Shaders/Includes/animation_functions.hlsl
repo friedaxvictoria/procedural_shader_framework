@@ -28,13 +28,14 @@ void backAndForth_float(float speed, out float3x3 mat)
     mat = half3x3(1, 0, 0, 0, 1, 0, 0, 0, abs(sin(t)));
 }
 
+/*
 //inspired by https://www.shadertoy.com/view/NsS3Ww
 void moveViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
     mat = mul(computeRotationMatrix(float3(0, 1, 0), lerp(-PI, PI, mouse.x)), computeRotationMatrix(float3(1, 0, 0), mouse.y * -PI));
 
-}
+}*/
 
 //a camera animation ALWAYS has to end with this node!!
 void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPosition, out float3x3 cameraMatrix)
@@ -103,9 +104,7 @@ void changingColorSin_float(float3 seedColor, float speed, out float3 color)
     color = 0.5 + 0.5 * sin(_Time.y * speed * rootColor);
 }
 
-
-
-void moveViaMouseCentered_float(out float3x3 mat)
+void moveViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
 

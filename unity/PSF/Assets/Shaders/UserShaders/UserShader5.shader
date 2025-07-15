@@ -31,7 +31,6 @@ Shader "Custom/UserShader5"
 
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            // #include "Assets/Shaders/Includes/ModularShaderLib.hlsl"
             #include "Assets/Shaders/Includes/sdf_functions.hlsl"
             #include "Assets/Shaders/Includes/basics_functions.hlsl"
             #include "Assets/Shaders/Includes/lighting_functions.hlsl"
@@ -121,7 +120,7 @@ Shader "Custom/UserShader5"
                 float3 color_temp;
 
 
-                moveViaMouseCentered_float(camMat);
+                moveViaMouse_float(camMat);
 
 
                 computeUV_float(IN.uv, uv);
@@ -137,15 +136,19 @@ Shader "Custom/UserShader5"
 
                 addCube_float(index, position_temp, size_temp, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), color_temp, 2, 1, 0, index);
 
+                tween1D_float(2, 5, 5.0, TWEEN_ELASTIC_INOUT, 5.0, true, temp);
 
-                addTorus_float(index, float3(0,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+                addTorus_float(index, float3(0,4.5,0), temp, 0.2, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
                 addTorus_float(index, float3(-4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
                 addTorus_float(index, float3(-1.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
                 addTorus_float(index, float3(4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
 
-                float3 movedPos;
-                tween3D_float(float3(0,0,3), float3(5,5,3), 5.0, TWEEN_QUINTIC_INOUT, 0.0, 1, movedPos);
-                addTorus_float(index, movedPos, 2, 0.4, float3(0, 1, 0), 0, float3(0.2,1,0.2), float3(0.8,0.1,0.1), 1, 1, 0, index);
+                tween3D_float(float3(0,0,3), float3(5,5,3), 5.0, TWEEN_BOUNCE_INOUT, 0.0, true, position_temp);
+                addTorus_float(index, position_temp, 2, 0.4, float3(0, 1, 0), 0, float3(0.2,1,0.2), float3(0.8,0.1,0.1), 1, 1, 0, index);
+
+                addDolphin_float(index, float3(3,-0.5,8), 1, 2, float3(0, 1, 0), 45, float3(0.2,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
+                addDolphin_float(index, float3(3.5,-0.5,8), 1, 2, float3(0, 1, 0), 60, float3(0.5,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
+                addDolphin_float(index, float3(4,-0.5,8), 1, 2, float3(0, 1, 0), 30, float3(0.2,0.5,0.5), float3(0.2,0.5,0.2), 1, 1, index);
 
 
 
