@@ -70,6 +70,8 @@ Shaders that generate or modify geometry procedurally.
 - [SDF Raymarching](geometry/raymarching_sdf.md)
 - [SDF Sphere](geometry/SDF_Sphere.md)
 - [SDF Square](geometry/SDF_Square.md)
+- [SDF Rock](geometry/SDF_Rock.md)
+- [SDF Cactus](geometry/SDF_Cactus.md)
   
 ### 💡 Lighting Shaders
 
