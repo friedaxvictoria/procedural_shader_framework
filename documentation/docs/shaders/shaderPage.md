@@ -72,12 +72,20 @@ Shaders that generate or modify geometry procedurally.
 - [SDF Square](geometry/SDF_Square.md)
 - [SDF Rock](geometry/SDF_Rock.md)
 - [SDF Cactus](geometry/SDF_Cactus.md)
-  
+
+### 🧱 Material Shaders
+
+Define the visual appearance of surfaces by specifying physical or stylized material properties such as color, roughness, metallicity, and transparency. Used alongside lighting models to produce realistic or artistic effect.
+
+- [Material System](material/material_system.md)
+
 ### 💡 Lighting Shaders
 
 Compute surface lighting effects including diffuse, specular, rim, and reflection. Often used in combination with geometry to produce realism or stylized appearances.
 
 - [Rim Reflection Lighting](lighting/Rim_lighting_and_reflection.md)
+- [Lighting Functions](lighting/lighting_functions.md)
+- [Lighting Context](lighting/lighting_context.md)
   
 ### 🔷 Scenes Shaders
 
@@ -85,6 +93,8 @@ Shaders that render complete background or environmental elements such as sky, s
 
 - [Sun And Halo](scenes/SunAndHalo.md)
 - [Volumetric FBM Cloud](scenes/Cloud_fbm.md)
+- [Water Surface](scenes/water_surface.md)
+- [Cloud Volume](scenes/cloud_volume.md)
   
 ---
 
