@@ -1,14 +1,12 @@
 ﻿#ifndef HELPER_FILE
 #define HELPER_FILE
 
-#include "global_variables.hlsl"
-
-float3x3 computeCameraMatrix(float3 lookAtPos, float3 eye, float3x3 mat)
+float3x3 computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)
 {
-    float3 f = normalize(lookAtPos - eye); // Forward direction
-    float3 r = normalize(cross(f, mul(float3(0, 1, 0), mat))); // Right direction
-    float3 u = cross(r, f); // Recomputed up
-    return float3x3(r, u, -f); // Column-major: [right, up, -forward]
+    float3 forward = normalize(lookAtPosition - eye);
+    float3 right = normalize(cross(forward, mul(float3(0, 1, 0), mat))); 
+    float3 up = cross(right, forward);
+    return float3x3(right, up, -forward); 
 }
 
 float3x3 computeRotationMatrix(float3 axis, float angle)

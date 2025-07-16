@@ -22,13 +22,13 @@ void rotateCamera_float(float3 axis, float speed, out float3x3 mat)
 
 ### Inputs:
 - ```float3 axis```: The axis around which the camera rotates 
-    - *ShaderGraph default value*: float3(0,1,0)
+> *ShaderGraph default value*: ```float3(0,1,0)```
 - ```float speed```: The speed with which the rotation is applied
-    - *ShaderGraph default value*: 1
+> *ShaderGraph default value*: 1
 
 ### Outputs:
 - ```float3x3 mat```: The rotation matrix 
-    - This output __needs to be__ plugged into the [Camera Matrix](cameraMatrix.md) before it can be used within the rest of the pipeline. This is necessary to apply the rotation matrix to the ray origin and to compute the correct camera matrix.
+> This output __needs to be__ plugged into the [Camera Matrix](cameraMatrix.md) before it can be used within the rest of the pipeline. This is necessary to apply the rotation matrix to the ray origin and to compute the correct camera matrix.
 
 ---
 

@@ -119,12 +119,12 @@ void computeWater_float(float condition, float3x3 cameraMatrix, float2 uv, out f
     }
 
     //gamma correction
-    _objectBaseColor[WATER_INDEX] = pow(color, float3(0.55, 0.55, 0.55));
-    _objectSpecularColor[WATER_INDEX] = pow(color, float3(0.55, 0.55, 0.55));
-    _objectSpecularStrength[WATER_INDEX] = 1;
-    _objectShininess[WATER_INDEX] = 32;
+    _objectBaseColor[MAX_OBJECTS] = pow(color, float3(0.55, 0.55, 0.55));
+    _objectSpecularColor[MAX_OBJECTS] = pow(color, float3(0.55, 0.55, 0.55));
+    _objectSpecularStrength[MAX_OBJECTS] = 1;
+    _objectShininess[MAX_OBJECTS] = 32;
     //hard-coded hit index for the water
-    hitIndex = WATER_INDEX;
+    hitIndex = MAX_OBJECTS;
 }
 
 void sampleHeightField_float(float3 position, out float3 heightPosition)

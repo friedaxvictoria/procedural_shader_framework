@@ -57,14 +57,6 @@ void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axi
     angle = angle * 180 / PI;
 }
 
-void pulseObject_float(float3 seedSize, float seedRadius, float frequency, float amplitude, out float3 size, out float radius)
-{
-    float scale = 1.0 + sin(_Time.y * frequency) * amplitude;
-    
-    size = seedSize * scale;
-    radius = seedRadius * scale;
-}
-
 void shakeObject_float(float3 seedPosition, float intensity, float speed, out float3 position)
 {
     float time = _Time.y * speed;

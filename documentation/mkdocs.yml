@@ -64,16 +64,18 @@ nav:
   - Godot: engines/godot.md
   - Unity:
     - Integration: engines/unity.md
-    - Helper Functions: engines/unity.md
-    - Global Variables: engines/unity.md
-    - Uniforms and C#: engines/unity.md
+    - Global Variables: engines/unity/globalVariables.md
+    - Helper Functions: engines/unity/helperFunctions.md
+    - Uniforms and C#: engines/unity/uniformsAndCs.md
     - Custom HLSL:
       - Camera:
         - Camera Matrix: engines/unity/camera/cameraMatrix.md
         - Camera Rotation: engines/unity/camera/cameraRotation.md
         - Camera Translation: engines/unity/camera/cameraBackAndForth.md
         - Camera Mouse-Based Movement: engines/unity/camera/mouseBasedMovement.md
-      - Animation: engines/unity.md
+      - Animation: 
+        - Orbit Object Around Point: engines/unity/animations/orbitObject.md
+        - Shake Object: engines/unity/animations/shakeObject.md
       - Basics: engines/unity.md
       - Water Environment: engines/unity.md
       - Lighting: engines/unity.md

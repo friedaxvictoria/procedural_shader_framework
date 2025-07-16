@@ -23,13 +23,13 @@ void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 
 
 ### Inputs:
 - ```float3 mat1```: The first matrix to be combined for the computation
-    - *ShaderGraph default value*: 3x3 identity matrix
+> *ShaderGraph default value*: 3x3 identity matrix
 - ```float3 mat2```: The second matrix to be combined for the computation
-    - *ShaderGraph default value*: 3x3 identity matrix
+> *ShaderGraph default value*: 3x3 identity matrix
 - ```float distance```: The distance of the camera to the world origin along the z-axis
-    - *ShaderGraph default value*: CHANGE
+> *ShaderGraph default value*: 10
 - ```float3 lookAtPosition```: The focal point of the camera
-    - *ShaderGraph default value*: world origin
+> *ShaderGraph default value*: world origin
 
 Examplary matrices that can be used as input to this function are [Camera Rotation](cameraRotation.md) or [Camera Translation](cameraBackAndForth.md). It is possible to only add one custom matrix as the multiplication with the default identity matrix yields correct results. If more than two matrices are to be combined, manually multiply them together via script or a Multiply Node before plugging the result into this function.
 

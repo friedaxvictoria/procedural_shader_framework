@@ -1,8 +1,15 @@
-#ifndef GLOBAL_VARIABLES
-#define GLOBAL_VARIABLES
+# Global Variables
 
+The global variables are an essential part of the integration in Unity. They are defined in a separate file and included in all hlsl-files that require them. They can easily distinguished by their signature underscore **_variableName**.
+
+---
+
+## The Code
+
+``` 
 #define MAX_OBJECTS 20
 //water index is the first value possible after the object indices
+#define WATER_INDEX 20
 
 //uniforms
 extern float2 _mousePoint;
@@ -26,4 +33,4 @@ float _objectShininess[MAX_OBJECTS+1];
 //dolphin specific arrays
 float _timeOffsetDolphin[MAX_OBJECTS];
 float _speedDolphin[MAX_OBJECTS];
-#endif
+```

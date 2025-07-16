@@ -7,7 +7,10 @@
 void computeUV_float(float2 fragCoord, float scaleUp, float scaleRight, out float2 uv)
 {
     uv = fragCoord.xy * 2 - 1;
-    uv.x *= scaleRight / scaleUp;
+    if (scaleRight>scaleUp)
+        uv.x *= scaleRight / scaleUp;
+    else
+        uv.y *= scaleUp / scaleRight;
 }
 
 //use after lighting function

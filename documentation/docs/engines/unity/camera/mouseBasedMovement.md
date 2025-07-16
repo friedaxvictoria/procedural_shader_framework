@@ -1,6 +1,6 @@
 # Mouse-Based Camera Movement
 
-This function imitates a camera movements. With a left mouse-click the world can be rotated in the x- and y-direction. By enabling the exposed boolean *allow movement* in the inspector, the camera position can further be modified using WASDQE. This is enabled by modifying the camera position via the *set_shader_uniforms.cs* file.
+This function imitates a camera movements. With a left mouse-click the world can be rotated in the x- and y-direction. 
 
 ---
 
@@ -27,7 +27,7 @@ void moveViaMouse_float(out float3x3 mat)
 }
 ```
 
-[See Helper Functions](unity/cameraRotation.md) to find out more about ```computeRotationMatrix(float3 axis, float angle)```
+[See Helper Functions](unity/helperFunctions.md) to find out more about ```computeRotationMatrix(float3 axis, float angle)```
 
 ---
 
@@ -38,7 +38,7 @@ void moveViaMouse_float(out float3x3 mat)
 
 ### Outputs:
 - ```float3x3 mat```: The final camera matrix that can be plugged into the [Water Shader](unity/cameraMatrix.md) or the [SDF Raymarching](unity/cameraMatrix.md). 
-    - Contrary to other animation functions, this function does not need to be finished off with a computation of the [Camera Matrix](cameraMatrix.md). 
+> Contrary to other animation functions, this function does not need to be finished off with a computation of the [Camera Matrix](cameraMatrix.md). 
 
 ---
 
@@ -47,14 +47,6 @@ void moveViaMouse_float(out float3x3 mat)
 - Rotations via clicking the left mouse-button
     - Drag left and right for a rotation around the y-axis.
     - Drag up and down for a rotation around the x-axis.
-- Translations via WASDQE
-    - W: Forward Movement
-    - A: Left Movement
-    - S: Backward Movement
-    - D: Right Movement
-    - Q: Upward Movement
-    - E: Downward Movement
-    - Press *Shift* for an increased speed. The speed can further be adjusted in the inspector.
 
 ---
 
