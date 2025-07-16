@@ -4,9 +4,10 @@
 #include "global_variables.hlsl"
 
 //CUSTOM NODE FUNCTIONS
-void computeUV_float(float2 fragCoord, out float2 uv)
+void computeUV_float(float2 fragCoord, float scaleUp, float scaleRight, out float2 uv)
 {
     uv = fragCoord.xy * 2 - 1;
+    uv.x *= scaleRight / scaleUp;
 }
 
 //use after lighting function

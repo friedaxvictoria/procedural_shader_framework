@@ -1,4 +1,4 @@
-# 🎮 Unity Shader Integrations
+# Overview
 
 Unity is a versatile real-time engine known for its **Shader Graph system**, **cross-platform support**, and ease of integration for custom shaders.
 Unity implementations use **Shader Graph** or custom HLSL in the **Universal Render Pipeline (URP)**.

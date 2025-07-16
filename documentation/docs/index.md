@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # 🎨 Procedural Shader Development Documentation
 
 Welcome to the **Shader Snippets Documentation Site** — a collaborative knowledge base for procedural shaders used in multiple engines including **Unreal**, **Unity**, and **Godot**.
