@@ -2,7 +2,7 @@
 
 - **Category:** Lighting
 - **Author:** Xuetong Fu
-- **Shader Type:** Lighting functions
+- **Shader Type:** Lighting function library
 - **Input Requirements:** LightingContext, MaterialParams
 ---
 
@@ -10,19 +10,17 @@
 
 ### 🔷 Core Concept
 
-Explain the logic used in this shader.
-
-- Movement logic (e.g., `cos(t)`, `sin(t * speed)`)
-- Procedural math (e.g., FBM, noise)
-- Camera path, lighting, deformation, etc.
+This module defines multiple lighting models for shading surfaces based on their physical or stylized properties. Each model computes the final color by combining diffuse, specular, and ambient contributions using information in the LightingContext and MaterialParams.
 
 ---
 ## 🎛️ Parameters
 
-| Name | Description | Range | Default |
-|------|-------------|-------|---------|
-| `T`  | Looping time | 0–40  | —       |
-| ...  | ...          | ...   | ...     |
+| Name       | Description            | Type             | Range | Default | Role     |
+|------------|------------------------|------------------|-------|---------|----------|
+| `ctx`      | Lighting context input | LightingContext  | —     | —       | Input    |
+| `mat`      | Material parameters    | MaterialParams   | —     | —       | Input    |
+| `(return)` | Final RGB color        | vec3             | 0.0–1.0 | —       | Output   |
+
 
 ---
 
@@ -33,24 +31,9 @@ Explain the logic used in this shader.
 #include "lighting/surface_lighting/material_params.glsl"
 ```
 
-### 1. Blinn Phong
-<!--
-if you want to put small code snippet
--->
-```glsl
-vec3 applyBlinnPhongLighting(LightingContext ctx, MaterialParams mat) {
-    float diff = max(dot(ctx.normal, ctx.lightDir), 0.0); 
-    vec3 H = normalize(ctx.lightDir + ctx.viewDir); 
-    float spec = pow(max(dot(ctx.normal, H), 0.0), mat.shininess); 
-    vec3 diffuse = diff * mat.baseColor * ctx.lightColor;
-    vec3 specular = spec * mat.specularColor * mat.specularStrength;
+### 1. Phong
+The Phong lighting model computes specular highlights using the reflected light vector, resulting in sharper and more localized reflections. It offers a classic and intuitive approach to lighting, useful for surfaces where accurate highlight direction is important.
 
-    return ctx.ambient + diffuse + specular;
-}
-```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lightingblinn_phong.glsl)
-
-### 2. Phong
 <!--
 if you want to put small code snippet
 -->
@@ -61,13 +44,32 @@ if you want to put small code snippet
     float spec = pow(max(dot(R, ctx.viewDir), 0.0), mat.shininess); 
     vec3 diffuse = diff * mat.baseColor * ctx.lightColor;
     vec3 specular = spec * mat.specularColor * mat.specularStrength;
-
     return ctx.ambient + diffuse + specular;
 }
 ```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/phong.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/phong.glsl)
+
+### 2. Blinn-phong
+The Blinn-Phong lighting model calculates diffuse and specular highlights using the halfway vector between the light and view directions. It provides a smoother and more efficient alternative to the classic Phong model, making it suitable for real-time rendering with stylized or semi-realistic surfaces.
+
+<!--
+if you want to put small code snippet
+-->
+```glsl
+vec3 applyBlinnPhongLighting(LightingContext ctx, MaterialParams mat) {
+    float diff = max(dot(ctx.normal, ctx.lightDir), 0.0); 
+    vec3 H = normalize(ctx.lightDir + ctx.viewDir); 
+    float spec = pow(max(dot(ctx.normal, H), 0.0), mat.shininess); 
+    vec3 diffuse = diff * mat.baseColor * ctx.lightColor;
+    vec3 specular = spec * mat.specularColor * mat.specularStrength;
+    return ctx.ambient + diffuse + specular;
+}
+```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/blinn_phong.glsl)
 
 ### 3. Lambert
+Implements a classic Lambertian diffuse model. It computes the intensity of reflected light based on the angle between surface normal and light direction, producing soft, angle-dependent shading.
+
 <!--
 if you want to put small code snippet
 -->
@@ -77,9 +79,11 @@ vec3 lambertDiffuse(LightingContext ctx, MaterialParams mat) {
     return mat.baseColor * ctx.lightColor * diff;
 }
 ```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/lambert.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/lambert.glsl)
 
-### 4. PRB
+### 4. Physically Based Rendering
+Simulates realistic lighting by blending diffuse and specular reflections based on surface roughness and metallic properties. Produces soft highlights on rough surfaces and sharp reflections on polished materials, enabling physically plausible rendering across diverse material types.
+
 <!--
 if you want to put small code snippet
 -->
@@ -117,9 +121,11 @@ vec3 applyPBRLighting(LightingContext ctx, MaterialParams mat) {
     return lighting;
 }
 ```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/prb.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/pbr.glsl)
 
 ### 5. Rim Lighting
+Adds a soft glow around the edges of objects by highlighting areas where the surface normal is nearly perpendicular to the view direction.
+
 <!--
 if you want to put small code snippet
 -->
@@ -129,9 +135,11 @@ vec3 computeRimLighting(LightingContext ctx, MaterialParams mat, vec3 rimColor) 
     return rim * rimColor;
 }
 ```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/rim_lighting.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/rim_lighting.glsl)
 
 ### 6. Fake Specular
+Simulates stylized highlights without relying on physical material properties. 
+
 <!--
 if you want to put small code snippet
 -->
@@ -142,4 +150,6 @@ vec3 computeFakeSpecular(LightingContext ctx, MaterialParams mat) {
     return highlight * mat.fakeSpecularColor * ctx.lightColor;
 }
 ```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/fack_specular.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/fake_specular.glsl)
+
+---
