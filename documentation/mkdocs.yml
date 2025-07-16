@@ -2,6 +2,7 @@ site_name: Shader Documentation
 
 theme:
   name: material
+  #custom_dir: overrides
   features:
     - navigation.tabs
     - navigation.sections
@@ -12,7 +13,8 @@ theme:
     - content.code.copy
     - search.suggest
     - search.highlight
-
+    - navigation.footer
+    
   palette:
     - scheme: default
       toggle:
