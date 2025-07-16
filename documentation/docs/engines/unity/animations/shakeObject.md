@@ -35,15 +35,15 @@ void shakeObject_float(float3 seedPosition, float intensity, float speed, out fl
 
 
 ### Outputs:
-- ```float3 position```: The animated position of the object 
+- ```float3 position```: The animated position of the object which can directly be plugged into the inputs of an SDF function (e.g. [Sphere](unity/cameraMatrix.md)) or lighting functions (e.g. [Point Light](unity/cameraMatrix.md)).
 
-The outputed direction can directly be plugged into the inputs of an SDF function (e.g. [Sphere](unity/cameraMatrix.md)) or  or lighting functions (e.g. [Point Light](unity/cameraMatrix.md)).
+
 
 ---
 
 ## Implementation
 
-=== "Shader Graph"
+=== "Visual Scripting"
     Find the node at PSF/Animation/Shake Object
 
     ![Unity Translate Camera](images/translateCamera.png){ width="500" }

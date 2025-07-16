@@ -186,6 +186,27 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "053a20b16d24491fa7e69a80fe521777",
+    "m_Id": 2,
+    "m_DisplayName": "fragmentCoordinates",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "fragmentCoordinates",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BranchOnInputConnectionNode",
     "m_ObjectId": "09499e9108504fbbb0c628759d581212",
     "m_Group": {
@@ -684,9 +705,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -642.0,
-            "y": 103.99999237060547,
-            "width": 89.5,
+            "x": -685.0,
+            "y": 93.5000228881836,
+            "width": 187.5,
             "height": 34.00000762939453
         }
     },
@@ -715,10 +736,10 @@
     "m_Guid": {
         "m_GuidSerialized": "d2f235cf-f0e7-4a65-a66f-6eb04424531b"
     },
-    "m_Name": "uv",
+    "m_Name": "fragmentCoordinates",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "uv",
-    "m_DefaultReferenceName": "_uv",
+    "m_RefNameGeneratedByDisplayName": "fragmentCoordinates",
+    "m_DefaultReferenceName": "_fragmentCoordinates",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -787,7 +808,7 @@
             "m_Id": "2b7457db508a44b791309064cfa8d10f"
         },
         {
-            "m_Id": "dbc1bbb9640a4a3ea1a02bd872e3b54c"
+            "m_Id": "053a20b16d24491fa7e69a80fe521777"
         },
         {
             "m_Id": "ac17684eae384231a36effc16557ff6c"
@@ -817,27 +838,6 @@
     "m_FunctionName": "computeWater",
     "m_FunctionSource": "fa43ac4379392f242b813d3bfff8037f",
     "m_FunctionBody": "Enter function body here..."
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
-    "m_ObjectId": "dbc1bbb9640a4a3ea1a02bd872e3b54c",
-    "m_Id": 2,
-    "m_DisplayName": "uv",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "uv",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_Labels": []
 }
 
 {
@@ -903,7 +903,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "fbacb83146774a51b0f5a675b268060d",
     "m_Id": 0,
-    "m_DisplayName": "uv",
+    "m_DisplayName": "fragmentCoordinates",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

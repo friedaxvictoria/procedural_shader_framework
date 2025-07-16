@@ -27,7 +27,7 @@ void moveViaMouse_float(out float3x3 mat)
 }
 ```
 
-[See Helper Functions](unity/helperFunctions.md) to find out more about ```computeRotationMatrix(float3 axis, float angle)```
+See [Helper Functions](unity/helperFunctions.md) to find out more about ```computeRotationMatrix(float3 axis, float angle)```
 
 ---
 
@@ -52,7 +52,7 @@ void moveViaMouse_float(out float3x3 mat)
 
 ## Implementation
 
-=== "Shader Graph"
+=== "Visual Scripting"
     Find the node at PSF/Camera/Mouse-Based Movement
 
     ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }

@@ -26,7 +26,7 @@ void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axi
 ## The Parameters
 
 ### Inputs:
-- ```float3 seedPosition```: The initial position of the object.
+- ```float3 seedPosition```: The initial position of the object
 - ```float3 centre```: The central position around which the object obits
 > *ShaderGraph default value*: world origin
 - ```float3 axis```: The axis around which the object rotates
@@ -48,7 +48,7 @@ The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphe
 
 ## Implementation
 
-=== "Shader Graph"
+=== "Visual Scripting"
     Find the node at PSF/Animation/Orbit Object Around Point
 
     ![Unity Translate Camera](images/translateCamera.png){ width="500" }
@@ -58,4 +58,4 @@ The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphe
 
 ---
 
-Find the original shader code [here](unity/cameraMatrix.md).
+Find the original shader code [here](../../../shaders/animation/sdf_animation_shader.md). Changes and simplifications where made to combine the *Orbit Animation* and *Self-Rotate Animation*. The option of different time modes was removed for simplicity reasons.

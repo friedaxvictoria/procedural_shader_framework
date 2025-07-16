@@ -82,14 +82,14 @@ float4 traceWater(float3 rayDirection)
 }
 
 //CUSTOM NODE FUNCTIONS
-void computeWater_float(float condition, float3x3 cameraMatrix, float2 uv, out float4 hitPosition, out float3 normal, out float hitIndex, out float3 rayDirection)
+void computeWater_float(float condition, float3x3 cameraMatrix, float2 fragmentCoordinates, out float4 hitPosition, out float3 normal, out float hitIndex, out float3 rayDirection)
 {
     if (condition == 0)
     {
         cameraMatrix = computeCameraMatrix(float3(0, 0, 0), _rayOrigin, float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1));
     }
     
-    rayDirection = normalize(mul(float3(uv, -1), cameraMatrix));
+    rayDirection = normalize(mul(float3(fragmentCoordinates, -1), cameraMatrix));
 
     //default background color
     float3 baseColor = float3(0.05, 0.07, 0.1);

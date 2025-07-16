@@ -4,13 +4,13 @@
 #include "global_variables.hlsl"
 
 //CUSTOM NODE FUNCTIONS
-void computeUV_float(float2 fragCoord, float scaleUp, float scaleRight, out float2 uv)
+void computeFragmentCoordinates_float(float2 inputCoordinates, float scaleUp, float scaleRight, out float2 fragmentCoordinates)
 {
-    uv = fragCoord.xy * 2 - 1;
+    fragmentCoordinates = inputCoordinates.xy * 2 - 1;
     if (scaleRight>scaleUp)
-        uv.x *= scaleRight / scaleUp;
+        fragmentCoordinates.x *= scaleRight / scaleUp;
     else
-        uv.y *= scaleUp / scaleRight;
+        fragmentCoordinates.y *= scaleUp / scaleRight;
 }
 
 //use after lighting function

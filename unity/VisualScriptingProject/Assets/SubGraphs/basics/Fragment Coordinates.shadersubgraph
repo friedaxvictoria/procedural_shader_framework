@@ -339,10 +339,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 26.999990463256837,
-            "y": -38.500003814697269,
-            "width": 85.4999771118164,
-            "height": 76.99998474121094
+            "x": 121.9999771118164,
+            "y": -43.000003814697269,
+            "width": 85.49999237060547,
+            "height": 76.99996948242188
         }
     },
     "m_Slots": [
@@ -473,6 +473,27 @@
     "m_Property": {
         "m_Id": "854a72262008453bbf9b29d65603d682"
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "74d864c5ff164ae19dc7b64079ad0c94",
+    "m_Id": 1,
+    "m_DisplayName": "fragmentCoordinates",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "fragmentCoordinates",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -686,27 +707,6 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
-    "m_ObjectId": "c33da717b3ff4324a84130d9cff52926",
-    "m_Id": 1,
-    "m_DisplayName": "uv",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "uv",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "c4a54cf9cab64fc7b1208aa669e7f624",
     "m_Id": 0,
     "m_DisplayName": "inputCoordinates",
@@ -732,7 +732,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "computeUV (Custom Function)",
+    "m_Name": "computeFragmentCoordinates (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -754,7 +754,7 @@
             "m_Id": "68b0a0678e9a40999387a14a8d23acb9"
         },
         {
-            "m_Id": "c33da717b3ff4324a84130d9cff52926"
+            "m_Id": "74d864c5ff164ae19dc7b64079ad0c94"
         }
     ],
     "synonyms": [
@@ -769,7 +769,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "computeUV",
+    "m_FunctionName": "computeFragmentCoordinates",
     "m_FunctionSource": "fd25178b13d891c43a51f63eed872ea4",
     "m_FunctionBody": "Enter function body here..."
 }

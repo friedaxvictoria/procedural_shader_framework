@@ -15,7 +15,7 @@ void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 
 }
 ```
 
-[See Helper Functions](unity/cameraRotation.md) to find out more about ```computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)```
+See [Helper Functions](unity/cameraRotation.md) to find out more about ```computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)```
 
 ---
 
@@ -40,7 +40,7 @@ Examplary matrices that can be used as input to this function are [Camera Rotati
 
 ## Implementation
 
-=== "Shader Graph"
+=== "Visual Scripting"
     Find the node at PSF/Camera/Camera Matrix
 
     ![Unity Camera Matrix](images/cameraMatrixVisual.png){ width="500" }

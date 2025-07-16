@@ -23,14 +23,13 @@ void backAndForth_float(float speed, out float3x3 mat)
 > *ShaderGraph default value*: 1
 
 ### Outputs:
-- ```float3x3 mat```: The rotation matrix 
-> This output __needs to be__ plugged into the [Camera Matrix](unity/cameraMatrix.md) before it can be used within the rest of the pipeline. This is necessary to apply the rotation matrix to the ray origin and to compute the correct camera matrix.
+- ```float3x3 mat```: The rotation matrix which __needs to be__ plugged into the [Camera Matrix](unity/cameraMatrix.md) before it can be used within the rest of the pipeline. This is necessary to apply the rotation matrix to the ray origin and to compute the correct camera matrix.
 
 ---
 
 ## Implementation
 
-=== "Shader Graph"
+=== "Visual Scripting"
     Find the node at PSF/Camera/Back and Forth
 
     ![Unity Translate Camera](images/translateCamera.png){ width="500" }
