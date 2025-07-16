@@ -4,16 +4,6 @@
 #include "helper_functions.hlsl"
 #include "global_variables.hlsl"
 
-//LOCAL HELPERS
-float applyTimeMode(float time, int mode)
-{
-    if (mode == 1)
-        return sin(time);
-    else if (mode == 2)
-        return abs(sin(time));
-    return time;
-}
-
 //CUSTOM NODE FUNCTIONS
 //CAMERA ANIMATIONS
 void rotateCamera_float(float3 axis, float speed, out float3x3 mat)
@@ -25,17 +15,25 @@ void rotateCamera_float(float3 axis, float speed, out float3x3 mat)
 void backAndForth_float(float speed, out float3x3 mat)
 {
     float t = _Time.y * speed;
-    mat = half3x3(1, 0, 0, 0, 1, 0, 0, 0, abs(sin(t)));
+    mat = float3x3(1, 0, 0, 0, 1, 0, 0, 0, abs(sin(t)));
 }
 
-/*
-//inspired by https://www.shadertoy.com/view/NsS3Ww
 void moveViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
-    mat = mul(computeRotationMatrix(float3(0, 1, 0), lerp(-PI, PI, mouse.x)), computeRotationMatrix(float3(1, 0, 0), mouse.y * -PI));
 
-}*/
+    // Center mouse to [-0.5, +0.5]
+    mouse = mouse - 0.5;
+
+    // Convert to yaw and pitch
+    float yaw = lerp(-PI, PI, mouse.x + 0.5); // == PI * mouse.x when centered
+    float pitch = lerp(-PI / 2, PI / 2, -mouse.y + 0.5); // invert Y axis
+
+    float3x3 rotY = computeRotationMatrix(float3(0, 1, 0), yaw);
+    float3x3 rotX = computeRotationMatrix(float3(1, 0, 0), pitch);
+
+    mat = mul(rotY, rotX); // yaw first, then pitch
+}
 
 //a camera animation ALWAYS has to end with this node!!
 void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPosition, out float3x3 cameraMatrix)
@@ -45,13 +43,7 @@ void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 
     cameraMatrix = computeCameraMatrix(lookAtPosition, _rayOrigin, combinedMatrix);
 }
 
-//OBJECT ANIMATIONS --> applicable to sdfs and lights
-void translateObject_float(float3 seedPosition, float3 direction, float speed, int mode, out float3 position)
-{
-    float time = applyTimeMode(_Time.y, mode);
-    position = seedPosition + direction * sin(time * speed);
-}
-
+//OBJECT ANIMATIONS
 void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axis, float radius, float speed, float angleOffset, out float3 position, out float angle)
 {
     axis = normalize(axis);
@@ -63,15 +55,6 @@ void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axi
     position = center + cos(angle) * positionTemp + sin(angle) * cross(axis, positionTemp) + (1 - cos(angle)) * dot(axis, positionTemp) * axis;
     //convert to degrees as input to the sdfs is in degrees
     angle = angle * 180 / PI;
-}
-
-void pulseObject_float(float3 seedSize, float seedRadius, float frequency, float amplitude, int mode, out float3 size, out float radius)
-{
-    float time = applyTimeMode(_Time.y, mode);
-    float scale = 1.0 + sin(time * frequency) * amplitude;
-    
-    size = seedSize * scale;
-    radius = seedRadius * scale;
 }
 
 void shakeObject_float(float3 seedPosition, float intensity, float speed, out float3 position)
@@ -102,22 +85,5 @@ void changingColorSin_float(float3 seedColor, float speed, out float3 color)
 {
     float3 rootColor = asin(2 * seedColor - 1);
     color = 0.5 + 0.5 * sin(_Time.y * speed * rootColor);
-}
-
-void moveViaMouse_float(out float3x3 mat)
-{
-    float2 mouse = _mousePoint.xy / _ScreenParams.xy;
-
-    // Center mouse to [-0.5, +0.5]
-    mouse = mouse - 0.5;
-
-    // Convert to yaw and pitch
-    float yaw = lerp(-PI, PI, mouse.x + 0.5); // == PI * mouse.x when centered
-    float pitch = lerp(-PI / 2, PI / 2, -mouse.y + 0.5); // invert Y axis
-
-    float3x3 rotY = computeRotationMatrix(float3(0, 1, 0), yaw);
-    float3x3 rotX = computeRotationMatrix(float3(1, 0, 0), pitch);
-
-    mat = mul(rotY, rotX); // yaw first, then pitch
 }
 #endif

@@ -8,7 +8,7 @@
 //LOCAL HELPERS
 void addSDF(float index, float type, float3 position, float3 size, float radius, float3 axis, float angle, float noise, float3 baseColor, float3 specularColor, float specularStrength,
 float shininess, float timeOffset, float speed){
-    for (int i = 0; i <= 10; i++)
+    for (int i = 0; i <= MAX_OBJECTS; i++)
     {
         if (i == index)
         {
