@@ -1,12 +1,12 @@
-# Mouse-Based Camera Movement
+# Mouse-Based Camera Rotation
 
-This function imitates a camera movements. With a left mouse-click the world can be rotated in the x- and y-direction. 
+This function imitates a camera rotation based on the mouse position. With a left mouse-click the world can be rotated in the x- and y-direction. 
 
 ---
 
 ## The Code
 
-``` 
+``` hlsl
 void moveViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;

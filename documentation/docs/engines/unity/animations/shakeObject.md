@@ -6,7 +6,7 @@ This function creates a linear shaking animation on objects by changing its posi
 
 ## The Code
 
-``` 
+``` hlsl
 void shakeObject_float(float3 seedPosition, float intensity, float speed, out float3 position)
 {
     float time = _Time.y * speed;

@@ -6,7 +6,7 @@ This function imitates a camera rotation by changing the ray origin and the came
 
 ## The Code
 
-``` 
+``` hlsl
 void rotateCamera_float(float3 axis, float speed, out float3x3 mat)
 {
     float angle = _Time.y * speed;

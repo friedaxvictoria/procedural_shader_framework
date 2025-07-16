@@ -6,7 +6,7 @@ This function rotates an objects around a point. It can be applied to SDFs and l
 
 ## The Code
 
-``` 
+``` hlsl
 void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axis, float radius, float speed, float angleOffset, out float3 position, out float angle)
 {
     axis = normalize(axis);

@@ -61,6 +61,8 @@ nav:
       # You can add more categories like this:
       # - Noise:
       #     - Cloud FBM: shaders/noise/cloud_fbm.md -->
+      
+  - Shaders: shaders/shaderPage.md
   - Godot: engines/godot.md
   - Unity:
     - Integration: engines/unity.md

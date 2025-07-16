@@ -6,7 +6,7 @@ The global variables are an essential part of the integration in Unity. They are
 
 ## The Code
 
-``` 
+``` hlsl
 #define MAX_OBJECTS 20
 //water index is the first value possible after the object indices
 #define WATER_INDEX 20

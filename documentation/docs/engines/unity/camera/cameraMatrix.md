@@ -6,7 +6,7 @@ This function computes the camera matrix based on two input matrices. It is requ
 
 ## The Code
 
-``` 
+``` hlsl
 void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPosition, out float3x3 cameraMatrix)
 {
     float3x3 combinedMatrix = mul(mat1, mat2);

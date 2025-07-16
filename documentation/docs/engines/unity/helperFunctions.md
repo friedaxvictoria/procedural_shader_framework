@@ -6,7 +6,7 @@ This sections gives an overview of the universal helper functions used across Un
 
 ## The Code - Camera Matrix
 
-``` 
+``` hlsl
 float3x3 computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)
 {
     float3 forward = normalize(lookAtPosition - eye);
@@ -34,7 +34,7 @@ float3x3 computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)
 
 ## The Code - Rotation Matrix
 
-``` 
+``` hlsl
 float3x3 computeRotationMatrix(float3 axis, float angle)
 {
     float c = cos(angle);

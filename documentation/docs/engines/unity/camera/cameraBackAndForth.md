@@ -6,7 +6,7 @@ This function imitates a camera translation by changing the ray origin and the c
 
 ## The Code
 
-``` 
+``` hlsl
 void backAndForth_float(float speed, out float3x3 mat)
 {
     float t = _Time.y * speed;

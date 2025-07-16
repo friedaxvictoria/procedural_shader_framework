@@ -10,7 +10,7 @@ Uniforms in Unity are set via a custom C# file. It is essential to add them to t
 
 ## The Code
 
-``` 
+``` cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
