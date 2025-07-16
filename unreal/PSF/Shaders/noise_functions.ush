@@ -82,4 +82,40 @@ float snoise(float3 v)
 }
 
 
+float4 hash44(float4 p)
+{
+    p = frac(p * float4(0.1031, 0.1030, 0.0973, 0.1099));
+    p += dot(p, p.wzxy + 33.33);
+    return frac((p.xxyz + p.yzzw) * p.zywx);
+}
+
+
+float n31(float3 p)
+{
+    const float3 S = float3(7.0, 157.0, 113.0); // step vector: pairwise-prime
+    float3 ip = floor(p);
+    p = frac(p);
+    p = p * p * (3.0 - 2.0 * p); // Hermite smoother
+
+    float4 h = float4(0.0, S.yz, S.y + S.z) + dot(ip, S);
+    h = lerp(hash44(h), hash44(h + S.x), p.x);
+    h.xy = lerp(h.xz, h.yw, p.y);
+    return lerp(h.x, h.y, p.z);
+}
+
+float fbm_n31(float3 p, int octaves)
+{
+    float value = 0.0;
+    float amplitude = 0.5;
+    for (int i = 0; i < octaves; ++i)
+    {
+        value += amplitude * n31(p);
+        p *= 2.0;
+        amplitude *= 0.5;
+    }
+    return value;
+}
+
+
+
 #endif

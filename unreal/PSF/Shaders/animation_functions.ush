@@ -32,19 +32,9 @@ void getCameraMatrix(float3x3 mat1, float3x3 mat2, float distance, float3 lookAt
     camMatrix = computeCameraMatrix(lookAtPos, _rayOrigin, combinedMat);
 }
 
-float applyTimeMode(float t, int mode)
+void translateObject(float time, float3 seedPosition, float3 dir, float speed, out float3 position)
 {
-    if (mode == 1)
-        return sin(t);
-    else if (mode == 2)
-        return abs(sin(t));
-    return t;
-}
-
-void translateObject(float3 seedPosition, float3 dir, float speed, int mode, float time, out float3 position)
-{
-    float t = applyTimeMode(time, mode);
-    position = seedPosition + dir * sin(t * speed);
+    position = seedPosition + dir * sin(time * speed);
 }
 
 void orbitObjectAroundPoint(float3 seedPosition, float3 center, float3 axis, float radius, float speed, float angleOffset, float time, out float3 position, out float angle)
@@ -60,10 +50,9 @@ void orbitObjectAroundPoint(float3 seedPosition, float3 center, float3 axis, flo
     angle = angle * 180 / PI;
 }
 
-void pulseObject(float3 seedSize, float seedRadius, float freq, float amp, int mode, float time, out float3 size, out float radius)
+void pulseObject(float time, float3 seedSize, float seedRadius, float freq, float amp, out float3 size, out float radius)
 {
-    float t = applyTimeMode(time, mode);
-    float scale = 1.0 + sin(t * freq) * amp;
+    float scale = 1.0 + sin(time * freq) * amp;
     
     size = seedSize * scale;
     radius = seedRadius * scale;
@@ -103,4 +92,25 @@ void changingColorSin(float3 seedColor, float speed, float time, out float3 colo
     float3 rootColor = asin(2 * seedColor - 1);
     color = 0.5 + 0.5 * sin(time * speed * rootColor);
 }
+
+float3 animateUpDown(float3 pos, float time, float amplitude = 0.5, float frequency = 2.0)
+{
+    pos.y += sin(time * frequency) * amplitude;
+    return pos;
+}
+
+float3 animateCircularXZ(float3 pos, float time, float radius = 0.5, float speed = 1.0)
+{
+    float angle = time * speed;
+    pos.x += sin(angle) * radius;
+    pos.z += cos(angle) * radius;
+    return pos;
+}
+
+float3 animateSwayX(float3 pos, float time, float amplitude = 0.3, float frequency = 1.5)
+{
+    pos.x += sin(time * frequency) * amplitude;
+    return pos;
+}
+
 #endif

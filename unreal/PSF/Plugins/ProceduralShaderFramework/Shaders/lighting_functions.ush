@@ -111,29 +111,15 @@ void addSunriseLight(float time, float4 hitPosition, float3 normal, MaterialPara
 
 
 
-struct LightingContext
-{
-    float3 position; // World-space fragment position
-    float3 normal; // Normal at the surface point (normalized)
-    float3 viewDir; // Direction from surface to camera (normalized)
-    float3 lightDir; // Direction from surface to light (normalized)
-    float3 lightColor; // RGB intensity of the light source
-    float3 ambient; // Ambient light contribution
-};
-
-void lightingContext(float3 hitPos, float3 rayOrigin, out float3 viewDir, out float3 lightDir, out float3 lightColor, out float3 ambientColor)
-{
-    viewDir = normalize(rayOrigin - hitPos); // Direction from hit point to camera
-    float3 baseLightDir = float3(10.0, 5.0, 5.0); // Light position in world space
-    lightDir = normalize(baseLightDir - hitPos);
-    lightColor = float3(1.0, 1.0, 1.0); // Light color (white)
-    ambientColor = float3(0.1, 0.1, 0.1); // Ambient light color<
-}
-
-void applyPhongLighting(float3 hitPos, MaterialParams material, float3 normal, out float3 lightingColor)
+void applyPhongLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
     float3 viewDir, lightDir, lightColor, ambientColor;
-    lightingContext(hitPos, _rayOrigin, viewDir, lightDir, lightColor, ambientColor);
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
     float diff = max(dot(normal, lightDir), 0.0); // Lambertian diffuse
 
     float3 R = reflect(-lightDir, normal); // Reflected light direction
@@ -145,163 +131,125 @@ void applyPhongLighting(float3 hitPos, MaterialParams material, float3 normal, o
     lightingColor = ambientColor + diffuse + specular;
 }
 
-void applyLambertLighting(float3 hitPos, float3 lightPosition, float3 normal, out float3 lightingColor)
+void applyLambertLighting(float4 hitPosition, float3 lightPosition, float3 normal, out float3 lightingColor)
 {
-    float3 viewDir = normalize(_rayOrigin - hitPos);
-    float3 lightDir = normalize(lightPosition - hitPos);
+    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
+    float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
     float3 lightColor = float3(1.0, 1.0, 1.0);
     float3 ambientColor = float3(0.05, 0.05, 0.05);
 
-    float diff = max(dot(normal, lightDir), 0.0);
-    float3 diffuse = diff * lightColor;
+    float diffuseValue = max(dot(normal, lightDirection), 0.0);
+    float3 diffuseColor = diffuseValue * lightColor;
 
-    lightingColor = ambientColor + diffuse;
+    lightingColor = ambientColor + diffuseColor;
 }
 
-void applyBlinnPhongLighting(float3 hitPos, float3 lightPosition, float3 normal, MaterialParams material, out
-float3 lightingColor)
+void applyBlinnPhongLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
-    float3 viewDir = normalize(_rayOrigin - hitPos);
-    float3 lightDir = normalize(lightPosition - hitPos);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
-    float3 ambientColor = float3(0.05, 0.05, 0.05);
 
-    float3 halfVec = normalize(viewDir + lightDir);
-    float diff = max(dot(normal, lightDir), 0.0);
-    // material.shininess
-    float spec = pow(max(dot(normal, halfVec), 0.0), material.shininess);
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float diff = max(dot(normal, lightDir), 0.0); // Lambertian diffuse
 
-    float3 colour = material.baseColor;
-    float3 diffuse = diff * colour * lightColor;
+    float3 H = normalize(lightDir + viewDir); // Halfway vector
+    float spec = pow(max(dot(normal, H), 0.0), material.shininess); // Specular term
+
+    float3 diffuse = diff * material.baseColor * lightColor;
     float3 specular = spec * material.specularColor * material.specularStrength;
 
     lightingColor = ambientColor + diffuse + specular;
 }
 
-void applyToonLighting(float3 hitPos, float3 lightPosition, float3 normal, MaterialParams material, out
-float3 lightingColor)
+void applyFakeSpecular(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
-    if (hitPos.z == 0)
-    {
-        lightingColor = float3(0, 0, 0);
-        return;
-    }
+    float3 viewDir, lightDir, lightColor, ambientColor;
     
-    float3 viewDir = normalize(_rayOrigin - hitPos);
-    float3 lightDir = normalize(lightPosition - hitPos);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
-    float3 ambientColor = float3(0.05, 0.05, 0.05);
-
-    float diff = max(dot(normal, lightDir), 0.0);
-
-    float step1 = 0.3;
-    float step2 = 0.6;
-    float step3 = 0.9;
-
-    float toonDiff =
-        diff > step3 ? 1.0 :
-        diff > step2 ? 0.7 :
-        diff > step1 ? 0.4 : 0.1;
-
-    float3 baseColor = material.baseColor;
-    lightingColor = ambientColor + toonDiff * baseColor * lightColor;
-}
-
-void applyRimLighting(float3 hitPos, float3 lightPosition, float3 normal, MaterialParams material, out
-float3 lightingColor)
-{
-    if (hitPos.z == 0)
-    {
-        lightingColor = float3(0, 0, 0);
-        return;
-    }
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
     
-    float3 viewDir = normalize(_rayOrigin - hitPos);
-    float3 lightDir = normalize(lightPosition - hitPos);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
-    float3 ambientColor = float3(0.05, 0.05, 0.05);
-
-    float rim = 1.0 - saturate(dot(viewDir, normal));
-    rim = pow(rim, 4.0);
-
-    float3 baseColor = material.baseColor;
-    lightingColor = ambientColor + baseColor * lightColor + rim * material.specularColor;
+    float3 H = normalize(lightDir + viewDir); // Halfway vector
+    float highlight = pow(max(dot(normal, H), 0.0), material.fakeSpecularPower);
+    lightingColor = highlight * material.fakeSpecularColor * lightColor;
 }
 
-void applySoftSSLighting(float3 hitPos, float3 lightPosition, float3 normal, MaterialParams material, out
-float3 lightingColor)
+void lambertDiffuse(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
-    float3 viewDir = normalize(_rayOrigin - hitPos);
-    float3 lightDir = normalize(lightPosition - hitPos);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
-    float3 ambientColor = float3(0.05, 0.05, 0.05);
-
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
     float diff = max(dot(normal, lightDir), 0.0);
-    float backLight = max(dot(-normal, lightDir), 0.0);
-
-    float3 baseColor = material.baseColor;
-    float3 sssColor = float3(1.0, 0.5, 0.5);
-
-    float3 diffuse = diff * baseColor * lightColor;
-    float3 sss = backLight * sssColor * 0.25;
-
-    lightingColor = ambientColor + diffuse + sss;
+    lightingColor = material.baseColor * lightColor * diff;
 }
 
-void applyFresnelLighting(float3 hitPos, float3 lightPosition, float3 normal, MaterialParams material, out
-float3 lightingColor)
+void applyPBRLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
-    if (hitPos.z == 0)
-    {
-        lightingColor = float3(0, 0, 0);
-        return;
-    }
-    float3 viewDir = normalize(_rayOrigin - hitPos);
-    float3 lightDir = normalize(lightPosition - hitPos);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
-    float3 ambientColor = float3(0.05, 0.05, 0.05);
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float3 N = normalize(normal);
+    float3 V = normalize(viewDir);
+    float3 L = normalize(lightDir);
+    float3 H = normalize(L + V);
+    float3 F0 = lerp(float3(0.04, 0.04, 0.04), material.baseColor, material.metallic);
 
-    float fresnel = pow(1.0 - saturate(dot(viewDir, normal)), 3.0);
-    float rimStrength = 1.2;
+    float NDF = pow(material.roughness + 1.0, 2.0);
+    float a = NDF * NDF;
+    float a2 = a * a;
 
-    float3 baseColor = material.baseColor;
-    lightingColor = ambientColor + baseColor * lightColor + rimStrength * fresnel * material.specularColor;
+    // GGX Normal Distribution Function (D)
+    float NdotH = max(dot(N, H), 0.0);
+    float D = a2 / (PI * pow((NdotH * NdotH) * (a2 - 1.0) + 1.0, 2.0));
+
+    // Fresnel Schlick approximation (F)
+    float HdotV = max(dot(H, V), 0.0);
+    float3 F = F0 + (1.0 - F0) * pow(1.0 - HdotV, 5.0);
+
+    // Smith's Geometry Function (G)
+    float NdotV = max(dot(N, V), 0.0);
+    float NdotL = max(dot(N, L), 0.0);
+    float k = pow(material.roughness + 1.0, 2.0) / 8.0;
+    float G_V = NdotV / (NdotV * (1.0 - k) + k);
+    float G_L = NdotL / (NdotL * (1.0 - k) + k);
+    float G = G_V * G_L;
+
+    // Cook-Torrance BRDF
+    float3 specular = (D * F * G) / (4.0 * NdotL * NdotV + 0.001);
+
+    // Diffuse (non-metallic only)
+    float3 kd = (1.0 - F) * (1.0 - material.metallic);
+    float3 diffuse = kd * material.baseColor / PI;
+
+    // Final
+    float3 lighting = (diffuse + specular) * lightColor * NdotL;
+    lightingColor = lighting;
 }
 
-void applyUVGradientLighting(float3 hitPos, float3 lightPosition, float3 normal, float2 _uv, out float3 lightingColor)
+void applyRimLighting(float3 rimColor, float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
-    float3 viewDir = normalize(_rayOrigin - hitPos);
-    float3 lightDir = normalize(lightPosition - hitPos);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
-    float3 ambientColor = float3(0.1, 0.1, 0.1);
-
-    float diff = max(dot(normal, lightDir), 0.0);
-    float3 gradientColor = lerp(float3(0.2, 0.4, 0.9), float3(1.0, 0.6, 0.0), _uv.y);
-
-    lightingColor = ambientColor + diff * gradientColor * lightColor;
-}
-
-void applyUVAnisotropicLighting(float3 hitPos, float3 lightPosition, float3 normal, float2 _uv, MaterialParams material, out
-float3 lightingColor)
-{
-    float3 viewDir = normalize(_rayOrigin - hitPos);
-    float3 lightDir = normalize(lightPosition - hitPos);
-    float3 halfVec = normalize(viewDir + lightDir);
-
-    float angle = _uv.x * 6.2831853; // 2π
-    float3 localTangent = float3(cos(angle), sin(angle), 0.0);
-    float3 tangent = normalize(localTangent - normal * dot(localTangent, normal));
-    float3 bitangent = cross(normal, tangent);
-
-    float TdotH = dot(tangent, halfVec);
-    float BdotH = dot(bitangent, halfVec);
-    float specAniso = pow(TdotH * TdotH + BdotH * BdotH, 8.0);
-
-    float diff = max(dot(normal, lightDir), 0.0);
-    float3 baseColor = material.baseColor;
-    float3 ambientColor = float3(0.1, 0.1, 0.1);
-
-    lightingColor = ambientColor + diff * baseColor + specAniso * material.specularColor;
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float rim = pow(1.0 - max(dot(normal, viewDir), 0.0), material.rimPower);
+    lightingColor = rim * rimColor;
 }
 
 #endif
