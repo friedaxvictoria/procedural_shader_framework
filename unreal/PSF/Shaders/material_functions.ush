@@ -1,0 +1,52 @@
+#ifndef PROCEDURAL_SHADER_MATERIALS_NOISE_H
+#define PROCEDURAL_SHADER_MATERIALS_NOISE_H
+
+struct MaterialParams
+{
+    float3 baseColor;
+    float3 specularColor;
+    float specularStrength;
+    float shininess;
+
+    float roughness;
+    float metallic;
+    float rimPower;
+    float fakeSpecularPower;
+    float3 fakeSpecularColor;
+
+    float ior;
+    float refractionStrength;
+    float3 refractionTint;
+};
+
+MaterialParams createDefaultMaterialParams()
+{
+    MaterialParams mat;
+    mat.baseColor = float3(1.0, 1.0, 1.0);
+    mat.specularColor = float3(1.0, 1.0, 1.0);
+    mat.specularStrength = 1.0;
+    mat.shininess = 32.0;
+
+    mat.roughness = 0.5;
+    mat.metallic = 0.0;
+    mat.rimPower = 2.0;
+    mat.fakeSpecularPower = 32.0;
+    mat.fakeSpecularColor = float3(1.0, 1.0, 1.0);
+
+    mat.ior = 1.45;
+    mat.refractionStrength = 0.0;
+    mat.refractionTint = float3(1.0, 1.0, 1.0);
+    return mat;
+}
+
+MaterialParams makePlastic(float3 color)
+{
+    MaterialParams mat = createDefaultMaterialParams();
+    mat.baseColor = color;
+    mat.metallic = 0.0;
+    mat.roughness = 0.4;
+    mat.specularStrength = 0.5;
+    return mat;
+}
+
+#endif

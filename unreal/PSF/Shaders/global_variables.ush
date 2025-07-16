@@ -1,0 +1,13 @@
+#ifndef PROCEDURAL_SHADER_FRAMEWORK_GLOBALS_H
+#define PROCEDURAL_SHADER_FRAMEWORK_GLOBALS_H
+
+#define MAX_SDFS 16
+
+// uniforms
+static float2 _mousePoint = float2(0.0, 0.0);
+static float3 _rayOrigin = float3(0.0, 0, 7.0);
+static float _GammaCorrect;
+
+static float _raymarchStoppingCriterium = 100;
+
+#endif
