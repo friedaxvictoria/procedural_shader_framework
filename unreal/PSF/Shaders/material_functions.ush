@@ -1,0 +1,249 @@
+#ifndef PROCEDURAL_SHADER_MATERIALS_NOISE_H
+#define PROCEDURAL_SHADER_MATERIALS_NOISE_H
+
+#include "noise_functions.ush"
+
+
+//////////////////////////////
+// ------------------------------------------
+// Common Physically-Based Material Templates
+// ------------------------------------------
+#define MAT_PLASTIC_WHITE      1
+#define MAT_PLASTIC_COLOR      2
+#define MAT_METAL_BRUSHED      3
+#define MAT_METAL_POLISHED     4
+#define MAT_GLASS_CLEAR        5
+#define MAT_GLASS_TINTED       6
+#define MAT_RUBBER_BLACK       7
+#define MAT_CERAMIC_WHITE      8
+#define MAT_EMISSIVE_WHITE     9
+
+// ------------------------------------------
+// Scene-Specific Materials (Start from 100)
+// ------------------------------------------
+#define MAT_METAL_WING         100
+#define MAT_SOLAR_PANEL        101
+#define MAT_COCKPIT_GLASS      102
+#define MAT_WINDOW_FRAME       103
+#define MAT_COCKPIT_BODY       104
+#define MAT_GUN_BARREL         105
+#define MAT_LASER_EMISSIVE     106
+//////////////////////////////
+
+
+struct MaterialParams
+{
+    float3 baseColor;
+    float3 specularColor;
+    float specularStrength;
+    float shininess;
+
+    float roughness;
+    float metallic;
+    float rimPower;
+    float fakeSpecularPower;
+    float3 fakeSpecularColor;
+
+    float ior;
+    float refractionStrength;
+    float3 refractionTint;
+};
+
+MaterialParams createDefaultMaterialParams()
+{
+    MaterialParams mat;
+    mat.baseColor = float3(1.0, 1.0, 1.0);
+    mat.specularColor = float3(1.0, 1.0, 1.0);
+    mat.specularStrength = 1.0;
+    mat.shininess = 32.0;
+
+    mat.roughness = 0.5;
+    mat.metallic = 0.0;
+    mat.rimPower = 2.0;
+    mat.fakeSpecularPower = 32.0;
+    mat.fakeSpecularColor = float3(1.0, 1.0, 1.0);
+
+    mat.ior = 1.45;
+    mat.refractionStrength = 0.0;
+    mat.refractionTint = float3(1.0, 1.0, 1.0);
+    return mat;
+}
+
+// ------------------------------------------
+// Plastic material preset
+// ------------------------------------------
+MaterialParams makePlastic(float3 color)
+{
+    MaterialParams mat = createDefaultMaterialParams();
+    mat.baseColor = color;
+    mat.metallic = 0.0;
+    mat.roughness = 0.4;
+    mat.specularStrength = 0.5;
+    return mat;
+}
+
+// ------------------------------------------
+// Glass material preset
+// ------------------------------------------
+MaterialParams makeGlass(float3 tint, float ior)
+{
+    MaterialParams mat = createDefaultMaterialParams();
+    mat.baseColor = tint;
+    mat.metallic = 0.0;
+    mat.roughness = 0.1;
+    mat.ior = ior;
+    mat.refractionStrength = 0.9;
+    mat.refractionTint = tint;
+    mat.specularStrength = 1.0;
+    return mat;
+}
+
+// ------------------------------------------
+// Brushed metal with procedural noise
+// ------------------------------------------
+MaterialParams makeMetalBrushed(float3 base, float3 uv, float scale)
+{
+    MaterialParams mat = createDefaultMaterialParams();
+    mat.baseColor = base - n31(uv * scale) * 0.1; // Requires external noise n31()
+    mat.metallic = 1.0;
+    mat.roughness = 0.2;
+    mat.specularStrength = 0.5;
+    return mat;
+}
+
+// ------------------------------------------
+// Toon material preset (flat surface with strong rim)
+// ------------------------------------------
+MaterialParams makeToon(float3 color, float edgeSharpness)
+{
+    MaterialParams mat = createDefaultMaterialParams();
+    mat.baseColor = color;
+    mat.metallic = 0.0;
+    mat.roughness = 1.0;
+    mat.rimPower = edgeSharpness;
+    mat.fakeSpecularColor = float3(1.0, 1.0, 1.0);
+    mat.fakeSpecularPower = 128.0;
+    return mat;
+}
+
+// ------------------------------------------
+// Water material preset
+// ------------------------------------------
+MaterialParams makeWater(float3 color)
+{
+    MaterialParams mat = createDefaultMaterialParams();
+    mat.baseColor = color;
+    mat.fakeSpecularColor = float3(1.0, 1.0, 1.0);
+    mat.fakeSpecularPower = 64.0;
+    mat.specularColor = float3(1.5, 1.5, 1.5);
+    mat.specularStrength = 1.5;
+    mat.shininess = 64.0;
+    mat.ior = 1.333;
+    mat.refractionStrength = 0.0;
+    return mat;
+}
+
+
+MaterialParams getMaterialByID(int id, float3 uv = float3(0.0, 0.0, 0.0))
+{
+    MaterialParams mat = createDefaultMaterialParams();
+
+    // ---------- Common Material Templates ----------
+    if (id == MAT_PLASTIC_WHITE)
+    {
+        mat = makePlastic(float3(1.0, 1.0, 1.0));
+    }
+    else if (id == MAT_PLASTIC_COLOR)
+    {
+        mat = makePlastic(float3(0.4, 0.6, 1.0));
+    }
+    else if (id == MAT_METAL_BRUSHED)
+    {
+        mat = makeMetalBrushed(float3(0.6, 0.6, 0.6), uv, 12.0);
+    }
+    else if (id == MAT_METAL_POLISHED)
+    {
+        mat = makeMetalBrushed(float3(0.9, 0.9, 0.9), uv, 0.0);
+        mat.roughness = 0.05;
+        mat.specularStrength = 1.0;
+    }
+    else if (id == MAT_GLASS_CLEAR)
+    {
+        mat = makeGlass(float3(1.0, 1.0, 1.0), 1.5);
+    }
+    else if (id == MAT_GLASS_TINTED)
+    {
+        mat = makeGlass(float3(0.6, 0.8, 1.0), 1.45);
+    }
+    else if (id == MAT_RUBBER_BLACK)
+    {
+        mat = makePlastic(float3(0.05, 0.05, 0.05));
+        mat.roughness = 0.9;
+        mat.specularStrength = 0.2;
+    }
+    else if (id == MAT_CERAMIC_WHITE)
+    {
+        mat = makePlastic(float3(0.95, 0.95, 0.95));
+        mat.roughness = 0.2;
+        mat.specularStrength = 0.8;
+    }
+    else if (id == MAT_EMISSIVE_WHITE)
+    {
+        mat.baseColor = float3(1.0, 1.0, 1.0);
+        mat.fakeSpecularColor = float3(1.0, 1.0, 1.0);
+        mat.fakeSpecularPower = 1.0;
+        mat.rimPower = 0.0;
+        mat.specularStrength = 0.0;
+    }
+
+    // ---------- Scene-Specific Materials ----------
+    else if (id == MAT_METAL_WING)
+    {
+        mat = makeMetalBrushed(float3(0.30, 0.30, 0.30), uv, 18.7);
+        mat.specularStrength = 0.5;
+    }
+    else if (id == MAT_COCKPIT_BODY)
+    {
+        mat = makeMetalBrushed(float3(0.30, 0.30, 0.30), uv, 18.7);
+        mat.specularStrength = 0.5;
+        float cutout = step(abs(atan2(uv.y, uv.z) - 0.8), 0.01);
+        mat.baseColor *= 1.0 - 0.8 * cutout;
+    }
+    else if (id == MAT_SOLAR_PANEL)
+    {
+        float3 modifiedUV = uv;
+        if (uv.x < uv.y * 0.7)
+            modifiedUV.y = 0.0;
+        float intensity = 0.005 + 0.045 * pow(abs(sin((modifiedUV.x - modifiedUV.y) * 12.0)), 20.0);
+        mat.baseColor = float3(intensity, intensity, intensity);
+        mat.specularStrength = 0.2;
+        mat.metallic = 0.0;
+    }
+    else if (id == MAT_GUN_BARREL)
+    {
+        mat.baseColor = float3(0.02, 0.02, 0.02);
+        mat.metallic = 1.0;
+        mat.specularStrength = 0.2;
+    }
+    else if (id == MAT_COCKPIT_GLASS)
+    {
+        mat = makeGlass(float3(0.6, 0.7, 1.0), 1.45);
+    }
+    else if (id == MAT_WINDOW_FRAME)
+    {
+        mat.baseColor = float3(0.10, 0.10, 0.10);
+        mat.metallic = 1.0;
+    }
+    else if (id == MAT_LASER_EMISSIVE)
+    {
+        mat.baseColor = float3(0.30, 1.00, 0.30);
+        mat.specularStrength = 0.0;
+        mat.fakeSpecularColor = float3(0.3, 1.0, 0.3);
+        mat.fakeSpecularPower = 1.0;
+        mat.rimPower = 0.5;
+    }
+
+    return mat;
+}
+
+#endif

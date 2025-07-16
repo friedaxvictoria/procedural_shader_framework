@@ -1,0 +1,255 @@
+﻿#ifndef PROCEDURAL_SHADER_FRAMEWORK_LIGHTING_H
+#define PROCEDURAL_SHADER_FRAMEWORK_LIGHTING_H
+
+#include "sdf_functions.ush"
+
+//LOCAL HELPERS
+struct SunriseLight
+{
+    float3 sundir;
+    float3 earthCenter;
+    float earthRadius;
+    float atmosphereRadius;
+    float sunIntensity;
+};
+
+float2 densitiesRM(float3 position, SunriseLight light)
+{
+    float h = max(0., length(position - light.earthCenter) - light.earthRadius);
+    return float2(exp(-h / 8e3), exp(-h / 12e2));
+}
+
+float escape(float3 position, float3 direction, float atmosphereRadius, float3 earthCenter)
+{
+    float3 v = position - earthCenter;
+    float b = dot(v, direction);
+    float det = b * b - dot(v, v) + atmosphereRadius * atmosphereRadius;
+    if (det < 0.)
+        return -1.;
+    det = sqrt(det);
+    float t1 = -b - det;
+    float t2 = -b + det;
+    return (t1 >= 0.) ? t1 : t2;
+}
+
+float2 scatterDepthInt(float3 position, float3 direction, float atmosphericDistance, float steps, SunriseLight light)
+{
+    float2 depthRMs = float2(0., 0);
+    atmosphericDistance /= steps;
+    direction *= atmosphericDistance;
+
+    for (float i = 0.; i < steps; ++i)
+        depthRMs += densitiesRM(position + direction * i, light);
+
+    return depthRMs * atmosphericDistance;
+}
+
+float3 applySunriseLighting(float3 position, float3 direction, float atmosphericDistance, float3 Lo, SunriseLight light)
+{
+    float3 bR = float3(58e-7, 135e-7, 331e-7); // Rayleigh scattering coefficient
+    float3 bMs = float3(2e-5, 2e-5, 2e-5); // Mie scattering coefficients
+    float3 bMe = float3(2e-5, 2e-5, 2e-5) * 1.1;
+    float2 totalDepthRM = float2(0., 0);
+    float3 I_R = float3(0., 0, 0);
+    float3 I_M = float3(0., 0, 0);
+    float3 oldDirection = direction;
+    atmosphericDistance /= 16.0;
+    direction *= atmosphericDistance;
+
+    for (float i = 0.; i < 16.0; ++i)
+    {
+        float3 currentPosition = position + direction * i;
+        float2 dRM = densitiesRM(currentPosition, light) * atmosphericDistance;
+        totalDepthRM += dRM;
+        float2 depthRMsum = totalDepthRM + scatterDepthInt(currentPosition, light.sundir, escape(currentPosition, light.sundir, light.atmosphereRadius, light.earthCenter), 4., light);
+        float3 A = exp(-bR * depthRMsum.x - bMe * depthRMsum.y);
+        I_R += A * dRM.x;
+        I_M += A * dRM.y;
+    }
+
+    float mu = dot(oldDirection, light.sundir);
+    return Lo + Lo * exp(-bR * totalDepthRM.x - bMe * totalDepthRM.y)
+        + light.sunIntensity * (1. + mu * mu) * (
+            I_R * bR * .0597 +
+            I_M * bMs * .0196 / pow(1.58 - 1.52 * mu, 1.5));
+}
+
+
+//CUSTOM NODE FUNCTIONS
+void addSunriseLight(float time, float4 hitPosition, float3 normal, MaterialParams material, float3 rayDirection, out float3 lightingColor)
+{
+    SunriseLight sunrise;
+    sunrise.sundir = normalize(float3(0.5, 0.4 * (1. + sin(0.5 * time)), -1.));
+    sunrise.earthCenter = float3(0., -6360e3, 0.);
+    sunrise.earthRadius = 6360e3;
+    sunrise.atmosphereRadius = 6380e3;
+    sunrise.sunIntensity = 10.0;
+    
+    float atmosphereDist = escape(hitPosition.xyz, rayDirection, sunrise.atmosphereRadius, sunrise.earthCenter);
+    float3 lightColor = applySunriseLighting(hitPosition.xyz, rayDirection, atmosphereDist, float3(0, 0, 0), sunrise);
+        
+    if (hitPosition.w > _raymarchStoppingCriterium)
+    {
+        lightingColor = lightColor;
+        return;
+    }
+        
+    float3 lightDirection = sunrise.sundir;
+    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
+    float3 reflectedDirection = reflect(-lightDirection, normal);
+    
+    float3 ambientColor = float3(0, 0, 0);
+
+    float diffuseValue = max(dot(normal, lightDirection), 0.0);
+    float specularValue = pow(max(dot(reflectedDirection, viewDirection), 0.0), material.shininess);
+    
+    float3 diffuseColor = diffuseValue * (0.5 * material.baseColor + 0.5 * lightColor);
+    float3 specularColor = specularValue * material.specularColor * material.specularStrength;
+        
+    lightingColor = ambientColor + diffuseColor + specularColor;
+}
+
+
+
+void applyPhongLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float diff = max(dot(normal, lightDir), 0.0); // Lambertian diffuse
+
+    float3 R = reflect(-lightDir, normal); // Reflected light direction
+    float spec = pow(max(dot(R, viewDir), 0.0), material.shininess); // Phong specular
+
+    float3 diffuse = diff * material.baseColor * lightColor;
+    float3 specular = spec * material.specularColor * material.specularStrength;
+
+    lightingColor = ambientColor + diffuse + specular;
+}
+
+void applyLambertLighting(float4 hitPosition, float3 lightPosition, float3 normal, out float3 lightingColor)
+{
+    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
+    float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
+    float3 lightColor = float3(1.0, 1.0, 1.0);
+    float3 ambientColor = float3(0.05, 0.05, 0.05);
+
+    float diffuseValue = max(dot(normal, lightDirection), 0.0);
+    float3 diffuseColor = diffuseValue * lightColor;
+
+    lightingColor = ambientColor + diffuseColor;
+}
+
+void applyBlinnPhongLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float diff = max(dot(normal, lightDir), 0.0); // Lambertian diffuse
+
+    float3 H = normalize(lightDir + viewDir); // Halfway vector
+    float spec = pow(max(dot(normal, H), 0.0), material.shininess); // Specular term
+
+    float3 diffuse = diff * material.baseColor * lightColor;
+    float3 specular = spec * material.specularColor * material.specularStrength;
+
+    lightingColor = ambientColor + diffuse + specular;
+}
+
+void applyFakeSpecular(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float3 H = normalize(lightDir + viewDir); // Halfway vector
+    float highlight = pow(max(dot(normal, H), 0.0), material.fakeSpecularPower);
+    lightingColor = highlight * material.fakeSpecularColor * lightColor;
+}
+
+void lambertDiffuse(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float diff = max(dot(normal, lightDir), 0.0);
+    lightingColor = material.baseColor * lightColor * diff;
+}
+
+void applyPBRLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float3 N = normalize(normal);
+    float3 V = normalize(viewDir);
+    float3 L = normalize(lightDir);
+    float3 H = normalize(L + V);
+    float3 F0 = lerp(float3(0.04, 0.04, 0.04), material.baseColor, material.metallic);
+
+    float NDF = pow(material.roughness + 1.0, 2.0);
+    float a = NDF * NDF;
+    float a2 = a * a;
+
+    // GGX Normal Distribution Function (D)
+    float NdotH = max(dot(N, H), 0.0);
+    float D = a2 / (PI * pow((NdotH * NdotH) * (a2 - 1.0) + 1.0, 2.0));
+
+    // Fresnel Schlick approximation (F)
+    float HdotV = max(dot(H, V), 0.0);
+    float3 F = F0 + (1.0 - F0) * pow(1.0 - HdotV, 5.0);
+
+    // Smith's Geometry Function (G)
+    float NdotV = max(dot(N, V), 0.0);
+    float NdotL = max(dot(N, L), 0.0);
+    float k = pow(material.roughness + 1.0, 2.0) / 8.0;
+    float G_V = NdotV / (NdotV * (1.0 - k) + k);
+    float G_L = NdotL / (NdotL * (1.0 - k) + k);
+    float G = G_V * G_L;
+
+    // Cook-Torrance BRDF
+    float3 specular = (D * F * G) / (4.0 * NdotL * NdotV + 0.001);
+
+    // Diffuse (non-metallic only)
+    float3 kd = (1.0 - F) * (1.0 - material.metallic);
+    float3 diffuse = kd * material.baseColor / PI;
+
+    // Final
+    float3 lighting = (diffuse + specular) * lightColor * NdotL;
+    lightingColor = lighting;
+}
+
+void applyRimLighting(float3 rimColor, float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPos.xyz);
+    lightDir = normalize(lightPosition - hitPos.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float rim = pow(1.0 - max(dot(normal, viewDir), 0.0), material.rimPower);
+    lightingColor = rim * rimColor;
+}
+
+#endif
