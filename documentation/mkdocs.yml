@@ -89,6 +89,7 @@ nav:
         - Orbit Object Around Point: engines/unity/animations/orbitObject.md
         - Shake Object: engines/unity/animations/shakeObject.md
         - Cycle Color: engines/unity/animations/colorAnimation.md
+        - Tweening: engines/unity/animations/tweening.md
     - Tutorials:
       - Christmas Tree: engines/unity.md
       - Safety Buoy: engines/unity.md
