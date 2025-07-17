@@ -1,0 +1,50 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://5fe0xkwp00ed"]
+
+[ext_resource type="Shader" uid="uid://xd3x47r1kfbs" path="res://sdf_updated.gdshader" id="1_n6sea"]
+
+[resource]
+shader = ExtResource("1_n6sea")
+shader_parameter/lightPosition = Vector3(0, 0, 0)
+shader_parameter/specularColorFloat = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specularStrengthFloat = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/shininessFloat = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/screen_resolution = Vector2(0, 0)
+shader_parameter/inputCount = 0
+shader_parameter/obj_noise = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/is_animated = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/camera_mode1 = 0
+shader_parameter/camera_mode2 = 0
+shader_parameter/terrain_mode = 0
+shader_parameter/color_mode = 0
+shader_parameter/animation_mode = 0
+shader_parameter/obj_type = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_position = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_size = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_radius = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_color = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_speed = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_direction = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/obj_time_offset = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/Tme = 0.0
+shader_parameter/camera_position = Vector3(0, 0, 0)
+shader_parameter/look_at_position = Vector3(0, 0, 0)
+shader_parameter/_mousePoint = Vector4(0, 0, 0, 0)
+shader_parameter/_ScreenParams = Vector4(0, 0, 0, 0)
+shader_parameter/_Resolution = Vector2(0, 0)
+shader_parameter/iResolution = Vector2(0, 0)
+shader_parameter/_Mouse = Vector2(0, 0)
+shader_parameter/movement_speed = 0.0
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 0.0
+shader_parameter/orbit_axis = Vector3(0, 0, 0)
+shader_parameter/orbit_speed = 0.0
+shader_parameter/cycle_speed = 0.0
+shader_parameter/wave_speed = 0.0
+shader_parameter/layer1Amp = 2.0
+shader_parameter/later2Amp = 1.0
+shader_parameter/layer3Amp = 1.0
+shader_parameter/layer1Freq = 0.2
+shader_parameter/later2Freq = 0.275
+shader_parameter/layer3Freq = 1.5
+shader_parameter/desertColor1 = Vector3(1, 0.95, 0.7)
+shader_parameter/desertColor2 = Vector3(0.9, 0.6, 0.4)
