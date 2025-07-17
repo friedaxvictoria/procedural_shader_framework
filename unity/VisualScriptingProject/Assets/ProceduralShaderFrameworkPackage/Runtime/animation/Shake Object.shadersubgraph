@@ -485,10 +485,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -356.0,
-            "y": -70.5,
-            "width": 208.0,
-            "height": 246.0
+            "x": -370.0,
+            "y": -71.5,
+            "width": 226.0,
+            "height": 326.0000305175781
         }
     },
     "m_Slots": [
@@ -518,7 +518,7 @@
     },
     "m_SourceType": 0,
     "m_FunctionName": "shakeObject",
-    "m_FunctionSource": "f019ed0d0f0c45b469d451f9858a089b",
+    "m_FunctionSource": "a20e88266f691c5419d6eb39bed7e6fa",
     "m_FunctionBody": "Enter function body here..."
 }
 

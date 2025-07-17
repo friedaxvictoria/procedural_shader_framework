@@ -7,7 +7,7 @@ This function imitates a camera rotation based on the mouse position. With a lef
 ## The Code
 
 ``` hlsl
-void moveViaMouse_float(out float3x3 mat)
+void rotateViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
 
@@ -53,8 +53,8 @@ See [Helper Functions](unity/helperFunctions.md) to find out more about ```compu
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Camera/Mouse-Based Movement
-
+    Find the node at PSF/Camera/Rotate Via Mouse
+    
     ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
 
 === "Standard Scripting"

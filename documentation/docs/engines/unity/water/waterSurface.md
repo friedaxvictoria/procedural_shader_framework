@@ -148,7 +148,7 @@ See [Helper Functions](unity/helperFunctions.md) to find out more about ```compu
 > Can be aquired using [Fragment Coordinates](unity/cameraMatrix.md)
 
 ### Outputs:
-- ```float4 hitPosition```: The first three dimensions contain the position at which the water has been hit. The w-value contains the raymarching parameter at which the hit occured. This is required in order to be able to combine the water with other visual elements.
+- ```float4 hitPosition```: The first three dimensions contain the position at which the water has been hit. The w-component contains the raymarching parameter at which the hit occured. This is required in order to be able to combine the water with other visual elements.
 - ```float3 normal```: The normal at the hit position
 - ```float hitIndex```: A value determining what surface has been hit. The water gets a hard-coded hitIndex.
 - ```float3 rayDirection```: The ray direction from the camera to the hit position

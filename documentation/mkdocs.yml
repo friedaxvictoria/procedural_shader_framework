@@ -65,13 +65,15 @@ nav:
   - Shaders: shaders/shaderPage.md
   - Godot: engines/godot.md
   - Unity:
-    - Integration: engines/unity.md
+    - Overview: engines/unity.md
     - Global Variables: engines/unity/globalVariables.md
     - Helper Functions: engines/unity/helperFunctions.md
     - Uniforms and C#: engines/unity/uniformsAndCs.md
     - Custom HLSL:
       - Basics: 
         - Fragment Coordinates: engines/unity/basics/fragCoords.md
+        - Combine Color: engines/unity/basics/combineColor.md
+        - Minimum: engines/unity/basics/minimum.md
       - Camera:
         - Camera Matrix: engines/unity/camera/cameraMatrix.md
         - Camera Rotation: engines/unity/camera/cameraRotation.md

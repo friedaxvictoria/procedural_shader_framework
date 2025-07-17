@@ -223,7 +223,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "17f9f2039f814cb5b4981f5dd5f9b5c0",
     "m_Id": 0,
-    "m_DisplayName": "uv",
+    "m_DisplayName": "fragmentCoordinates",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -405,27 +405,6 @@
 }
 
 {
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
-    "m_ObjectId": "618adb60fdf6487fb9b0950b8bdc580d",
-    "m_Id": 4,
-    "m_DisplayName": "uv",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "uv",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_Labels": []
-}
-
-{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Vector3ShaderProperty",
     "m_ObjectId": "6396d57645934220baf17a0c49c8699c",
@@ -537,6 +516,27 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "b9d161b7c2314697a995838014a13983",
+    "m_Id": 4,
+    "m_DisplayName": "fragmentCoordinates",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "fragmentCoordinates",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "c6787f74e0e045f6a3bf83a44c996d1e",
     "m_Id": 1,
@@ -588,10 +588,10 @@
     "m_Guid": {
         "m_GuidSerialized": "b5709eaf-2352-4844-8ffb-1190fd639122"
     },
-    "m_Name": "uv",
+    "m_Name": "fragmentCoordinates",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "uv",
-    "m_DefaultReferenceName": "_uv",
+    "m_RefNameGeneratedByDisplayName": "fragmentCoordinates",
+    "m_DefaultReferenceName": "_fragmentCoordinates",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -652,19 +652,19 @@
     },
     "m_Slots": [
         {
-            "m_Id": "e8da540daf8544059c73a0b71648ae6a"
-        },
-        {
             "m_Id": "56ac8bb77e334ca19987457869659fd7"
         },
         {
             "m_Id": "d140fb31acde4ea0bb4643130c697854"
         },
         {
-            "m_Id": "618adb60fdf6487fb9b0950b8bdc580d"
+            "m_Id": "b9d161b7c2314697a995838014a13983"
         },
         {
             "m_Id": "843602c9fcc14a03b937c9691c474c0a"
+        },
+        {
+            "m_Id": "e8da540daf8544059c73a0b71648ae6a"
         }
     ],
     "synonyms": [
@@ -680,7 +680,7 @@
     },
     "m_SourceType": 0,
     "m_FunctionName": "applyUVGradientLighting",
-    "m_FunctionSource": "9a1785534f52fd34b88ffdcf1c57f61b",
+    "m_FunctionSource": "24cda223aa6b9d84f9c9b6ed3dcafc9a",
     "m_FunctionBody": "Enter function body here..."
 }
 

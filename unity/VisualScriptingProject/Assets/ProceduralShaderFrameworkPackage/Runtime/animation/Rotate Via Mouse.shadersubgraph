@@ -212,7 +212,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "moveViaMouse (Custom Function)",
+    "m_Name": "rotateViaMouse (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -240,8 +240,8 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "moveViaMouse",
-    "m_FunctionSource": "f019ed0d0f0c45b469d451f9858a089b",
+    "m_FunctionName": "rotateViaMouse",
+    "m_FunctionSource": "a20e88266f691c5419d6eb39bed7e6fa",
     "m_FunctionBody": "Enter function body here..."
 }
 

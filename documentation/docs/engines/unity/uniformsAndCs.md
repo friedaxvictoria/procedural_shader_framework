@@ -6,6 +6,9 @@ Uniforms in Unity are set via a custom C# file. It is essential to add them to t
 - Setting the global variable **_raymarchStoppingCriterium** for the reason mentioned above. This variable defines the stopping criterium after which the raymarching of the [Water Shader](unity/cameraMatrix.md) or the [SDF Raymarching](unity/cameraMatrix.md) is terminated. 
 - Providing the mouse position to the [Mouse-Based Movement](camera/mouseBasedMovement.md). This is necessary since Unity's hlsl support has no built-in mouse variable.
 - Enabling translations through the scene using WASDQE.  
+
+The C# file is connected to the prefab *ShaderUniformControl*. Read about how to include the prefab in a scene in [Overview](../unity.md).
+
 ---
 
 ## The Code
@@ -92,7 +95,7 @@ public class set_shader_uniforms : MonoBehaviour
 
 ## Experience
 
-Within the inspector of the ShaderUniformControl:
+Within the inspector of the *ShaderUniformControl*:
 
 - Enable *Allow Movement*
     - Translations via WASDQE

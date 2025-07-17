@@ -543,7 +543,7 @@
             "m_Id": "0802d79e33114cd58a2cbe6686370e7c"
         },
         {
-            "m_Id": "5be13ee38d2447f39076dbcd4e4d54e8"
+            "m_Id": "68e56dd68355487291da53a6148918f0"
         },
         {
             "m_Id": "4ec4dd3e4bc341e3b29cad3108ad690d"
@@ -571,7 +571,7 @@
     },
     "m_SourceType": 0,
     "m_FunctionName": "raymarch",
-    "m_FunctionSource": "6bea9ff5bc0a7854ca82f3a868a4af1d",
+    "m_FunctionSource": "73efd5bf3eeda904c9c32c2f343ef199",
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -605,31 +605,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "5913d85037f64884bb0726743a9c45e0",
     "m_Id": 0,
-    "m_DisplayName": "uv",
+    "m_DisplayName": "fragmentCoordinates",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
-    "m_ObjectId": "5be13ee38d2447f39076dbcd4e4d54e8",
-    "m_Id": 11,
-    "m_DisplayName": "uv",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "uv",
     "m_StageCapability": 3,
     "m_Value": {
         "x": 0.0,
@@ -679,6 +658,27 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "68e56dd68355487291da53a6148918f0",
+    "m_Id": 11,
+    "m_DisplayName": "fragmentCoordinates",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "fragmentCoordinates",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -903,10 +903,10 @@
     "m_Guid": {
         "m_GuidSerialized": "39a4543c-5023-467d-ba15-d3b5f6805324"
     },
-    "m_Name": "uv",
+    "m_Name": "fragmentCoordinates",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "uv",
-    "m_DefaultReferenceName": "_uv",
+    "m_RefNameGeneratedByDisplayName": "fragmentCoordinates",
+    "m_DefaultReferenceName": "_fragmentCoordinates",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,

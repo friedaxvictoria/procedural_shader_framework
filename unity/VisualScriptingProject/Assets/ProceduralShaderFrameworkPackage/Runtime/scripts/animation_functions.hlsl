@@ -18,7 +18,7 @@ void backAndForth_float(float speed, out float3x3 mat)
     mat = float3x3(1, 0, 0, 0, 1, 0, 0, 0, abs(sin(t)));
 }
 
-void moveViaMouse_float(out float3x3 mat)
+void rotateViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
 
