@@ -39,7 +39,7 @@ The computation of the root color is required to ensure that the seed color with
 === "Visual Scripting"
     Find the node at PSF/Animation/Cycle Color Sin
 
-    ![Unity Translate Camera](images/translateCamera.png){ width="500" }
+    ![Unity Translate Camera](../images/cycleColor.png){ width="500" }
 
 === "Standard Scripting"
     Include ...

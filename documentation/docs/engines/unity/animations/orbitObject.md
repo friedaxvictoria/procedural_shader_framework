@@ -51,7 +51,7 @@ The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphe
 === "Visual Scripting"
     Find the node at PSF/Animation/Orbit Object Around Point
 
-    ![Unity Translate Camera](images/translateCamera.png){ width="500" }
+    ![Unity Translate Camera](../images/orbitObject.png){ width="500" }
 
 === "Standard Scripting"
     Include ...

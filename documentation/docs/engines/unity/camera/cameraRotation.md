@@ -36,7 +36,7 @@ See [Helper Functions](unity/cameraRotation.md) to find out more about ```comput
 === "Visual Scripting"
     Find the node at PSF/Camera/Rotate Camera
 
-    ![Unity Rotate Camera](images/rotateCameraVisual.png){ width="500" }
+    ![Unity Rotate Camera](../images/rotateCamera.png){ width="500" }
 
 === "Standard Scripting"
     Include ...

@@ -43,7 +43,7 @@ Examplary matrices that can be used as input to this function are [Camera Rotati
 === "Visual Scripting"
     Find the node at PSF/Camera/Camera Matrix
 
-    ![Unity Camera Matrix](images/cameraMatrixVisual.png){ width="500" }
+    ![Unity Camera Matrix](../images/cameraMatrix.png){ width="500" }
 
 === "Standard Scripting"
     Include ...

@@ -46,7 +46,7 @@ void shakeObject_float(float3 seedPosition, float intensity, float speed, out fl
 === "Visual Scripting"
     Find the node at PSF/Animation/Shake Object
 
-    ![Unity Translate Camera](images/translateCamera.png){ width="500" }
+    ![Unity Translate Camera](../images/shakeObject.png){ width="500" }
 
 === "Standard Scripting"
     Include ...

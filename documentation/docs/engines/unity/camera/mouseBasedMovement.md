@@ -54,8 +54,8 @@ See [Helper Functions](unity/helperFunctions.md) to find out more about ```compu
 
 === "Visual Scripting"
     Find the node at PSF/Camera/Rotate Via Mouse
-    
-    ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
+
+    ![Unity Mouse-Based Camera Rotation](../images/rotateViaMouse.png){ width="300" }
 
 === "Standard Scripting"
     Include ...

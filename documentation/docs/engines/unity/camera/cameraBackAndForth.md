@@ -32,7 +32,7 @@ void backAndForth_float(float speed, out float3x3 mat)
 === "Visual Scripting"
     Find the node at PSF/Camera/Back and Forth
 
-    ![Unity Translate Camera](images/translateCamera.png){ width="500" }
+    ![Unity Back And Forth Camera](../images/backAndForth.png){ width="400" }
 
 === "Standard Scripting"
     Include ...
