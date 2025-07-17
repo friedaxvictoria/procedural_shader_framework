@@ -86,7 +86,16 @@ Compute surface lighting effects including diffuse, specular, rim, and reflectio
 - [Rim Reflection Lighting](lighting/Rim_lighting_and_reflection.md)
 - [Lighting Functions](lighting/lighting_functions.md)
 - [Lighting Context](lighting/lighting_context.md)
-  
+### Rendering Shaders
+
+- [Ray_Marching](rendering/Ray_Marching.md)
+- [Sphere Intersection](rendering/Sphere_Intersection_Function.md)
+- [Volumetric Ray Marching](rendering/VolumetricRayMarch.md)
+- [Heightfield Ray Intersection](rendering/Heightfield Ray Intersection.md)
+- [Oriented Box Intersection](rendering/Oriented Box Intersection.md)
+- [Surface Normal Estimation](rendering/Surface_Normal_Estimation.md)
+- [Advanced Normal Estimation](rendering/Tetrahedral adaptive SDF normal estimation.md)
+
 ### 🔷 Scenes Shaders
 
 Shaders that render complete background or environmental elements such as sky, sun, clouds, or horizon effects. These shaders are not limited to lighting or material computation but instead define the overall visual atmosphere of a scene.
