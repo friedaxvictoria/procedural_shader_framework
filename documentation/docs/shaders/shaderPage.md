@@ -94,7 +94,7 @@ Compute surface lighting effects including diffuse, specular, rim, and reflectio
 - [Heightfield Ray Intersection](rendering/Heightfield_Ray_Intersection.md)
 - [Oriented Box Intersection](rendering/Oriented_Box_Intersection.md)
 - [Surface Normal Estimation](rendering/Surface_Normal_Estimation.md)
-- [Advanced Normal Estimation](rendering/Tetrahedral_adaptive SDF_normal_estimation.md)
+- [Advanced Normal Estimation](rendering/Tetrahedral_adaptive_SDF_normal_estimation.md)
 
 ### 🔷 Scenes Shaders
 
