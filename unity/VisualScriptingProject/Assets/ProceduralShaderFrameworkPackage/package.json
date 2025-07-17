@@ -1,0 +1,14 @@
+{
+    "name": "com.tudresden.proceduralshaderframeworkpackage",
+    "version": "1.0.0",
+    "displayName": "Procedural Shader Framework Package",
+    "description": "This is the Procedural Shader Framework Package for Unity",
+    "unity": "2022.3",
+    "samples": [
+    {
+        "displayName": "Christmas Tree",
+        "description": "Demonstrates a simple sample shader",
+        "path": "Samples~/ChristmasTree"
+    }
+    ]
+}
