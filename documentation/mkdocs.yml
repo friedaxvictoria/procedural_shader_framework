@@ -90,6 +90,8 @@ nav:
         - Shake Object: engines/unity/animations/shakeObject.md
         - Cycle Color: engines/unity/animations/colorAnimation.md
         - Tweening: engines/unity/animations/tweening.md
+      - Lighting:
+        - Sunrise Light: engines/unity/lighting/sunriseLight.md 
     - Tutorials:
       - Christmas Tree: engines/unity.md
       - Safety Buoy: engines/unity.md

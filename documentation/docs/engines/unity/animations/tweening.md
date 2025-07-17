@@ -83,24 +83,20 @@ Use one of the following constants as `tweenType` in the functions above:
 
 === "Visual Scripting"
     Find the node at PSF/Animation/Tweening
+    Note: For visual scripting, tween type can be provided by the tween value as an integer.
 
 
 === "Standard Scripting"
     Include - #include "Assets/Shaders/Includes/tween_functions.hlsl"
     
+    Example Usage
+
+    This function call eases 3D position from (0, 0, 3) to (5, 5, 3) over 5 seconds using a bounce in-out easing, with ping-pong enabled to reverse the motion back and forth, starting at time 0. The position is stored in float3 position.
+
+    ```hlsl
+    float3 position;
+    tween3D_float(float3(0,0,3), float3(5,5,3), 5.0, TWEEN_BOUNCE_INOUT, 0.0, true, position);
+    ```
 ---
 
 This is an engine-specific implementation without a shader-basis.
-
-## Example Usage
-
-This function call eases 3D position from (0, 0, 3) to (5, 5, 3) over 5 seconds using a bounce in-out easing, with ping-pong enabled to reverse the motion back and forth, starting at time 0. The position is stored in float3 position.
-
-Note: For visual scripting, tween type can be provided by the tween value as an integer.
-
-```hlsl
-float3 position;
-tween3D_float(float3(0,0,3), float3(5,5,3), 5.0, TWEEN_BOUNCE_INOUT, 0.0, true, position);
-```
-
----
