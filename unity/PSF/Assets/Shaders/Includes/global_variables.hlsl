@@ -1,9 +1,8 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
 
-#define MAX_OBJECTS 10
+#define MAX_OBJECTS 20
 //water index is the first value possible after the object indices
-#define WATER_INDEX 10
 
 //uniforms
 extern float2 _mousePoint;

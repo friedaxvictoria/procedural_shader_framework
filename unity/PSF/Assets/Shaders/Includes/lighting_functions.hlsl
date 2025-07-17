@@ -149,7 +149,7 @@ void pointLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 
     lightingColor = ambientColor + diffuseColor + specularColor;
 }
 
-void applyLambertLighting_float(float4 hitPosition, float3 lightPosition, float3 normal, out float3 lightingColor)
+void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightPosition, out float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
@@ -249,23 +249,31 @@ float3 lightingColor)
     lightingColor = ambientColor + diffuseColor + sss;
 }
 
-void applyFresnelLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
-float3 lightingColor)
+void applyFresnelLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
     {
         lightingColor = float3(0, 0, 0);
         return;
     }
+
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
+    
+    float3 baseColor = _objectBaseColor[hitIndex];
+    float3 specularColor = _objectSpecularColor[hitIndex];
+
     float3 ambientColor = float3(0.05, 0.05, 0.05);
+    float3 lightColor = float3(1.0, 1.0, 1.0);
+    float NdotL = saturate(dot(normal, lightDirection));
+    float3 diffuse = baseColor * lightColor * NdotL;
 
-    float fresnel = pow(1.0 - saturate(dot(viewDirection, normal)), 3.0);
-    float rimStrength = 1.2;
+    // Schlick's approximation
+    float3 F0 = specularColor;
+    float cosTheta = saturate(dot(viewDirection, normal));
+    float3 fresnel = F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
 
-    lightingColor = ambientColor + _objectBaseColor[hitIndex] * lightColor + rimStrength * fresnel * _objectSpecularColor[hitIndex];
+    lightingColor = ambientColor + diffuse + fresnel;
 }
 
 void applyUVGradientLighting_float(float4 hitPosition, float3 normal, float2 uv, float3 lightPosition, out float3 lightingColor)
