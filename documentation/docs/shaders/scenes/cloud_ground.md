@@ -4,7 +4,7 @@
 or, external link like of a github can be added -->
 
 <!-- this is for locally stored images -->
-<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/CloudAnd Ground.png" alt="Cloud Ground" width="400" height="225">
+<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/CloudAndGround.png" alt="Cloud Ground" width="400" height="225">
 
 - **Category:** Scene
 - **Author:** Xuetong Fu
