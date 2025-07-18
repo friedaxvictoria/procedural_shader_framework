@@ -123,18 +123,16 @@ Shader "Custom/UserShader5"
                 moveViaMouse_float(camMat);
 
 
-                computeUV_float(IN.uv, uv);
-
+                computeFragmentCoordinates_float(IN.uv, 12, 20, uv);
+                
 
                 addSphere_float(0, float3(-2,0,-5), float3(2,2,2), float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, 0, index);
 
-                translateObject_float(float3(5,0,-5), float3(-4,-8,0), 5, 1, position_temp);
-                orbitObjectAroundPoint_float(position_temp, float3(3,3,-2), float3(1,2,0), 0.2, 0.8, 0.1, position_temp, temp);
                 //shakeObject_float(position_temp, 0.4, 1, position_temp);
-                pulseObject_float(float3(2,2,2), 0, 2, 1, 0, size_temp, radius_temp);
+                // pulseObject_float(float3(2,2,2), 0, 2, 1, 0, size_temp, radius_temp);
                 cycleColor_float(float3(0.8,0.1,0.1), 0.5, color_temp);
 
-                addCube_float(index, position_temp, size_temp, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), color_temp, 2, 1, 0, index);
+                addCube_float(index, float3(5,0,-5), float3(2,2,2), float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), color_temp, 2, 1, 0, index);
 
                 tween1D_float(2, 5, 5.0, TWEEN_ELASTIC_INOUT, 5.0, true, temp);
 
@@ -153,7 +151,6 @@ Shader "Custom/UserShader5"
 
 
                 raymarch_float(1, camMat, index, uv, hitPos1, normal1, hitID1, rayDir1);
-
                 computeWater_float(1, camMat, uv, hitPos2, normal2, hitID2, rayDir2);
 
                 getMinimum_float(hitPos1, normal1, hitID1, hitPos2, normal2, hitID2, hitPos, normal, hitID);
@@ -164,12 +161,12 @@ Shader "Custom/UserShader5"
                 applyToonLighting_float(hitPos, normal, hitID, _LightPosition, colorOut2);
 
 
+
                 
 
 
                 colorOut = colorOut1 + colorOut2 + colorOut3;
 
-                // computeWater_float(uv, camMat, colorOut2, hitPos2);
 
 
 

@@ -1,0 +1,247 @@
+#ifndef PROCEDURAL_SHADER_FRAMEWORK_SDFs_H
+#define PROCEDURAL_SHADER_FRAMEWORK_SDFs_H
+
+#include "helper_functions.ush"
+#include "global_variables.ush"
+#include "material_functions.ush"
+
+struct SDF
+{
+    int type;
+    float3 position;
+    float3 size;
+    float radius;
+    float3x3 rotation;
+    MaterialParams material;
+    float noiseAmount;
+};
+
+static SDF sdfArray[MAX_SDFS];
+static int gHitId = -1;
+
+void addSDF(inout int index, SDF newSDF)
+{
+    sdfArray[index] = newSDF;
+    index += 1;
+}
+
+void addSphere(inout int index, float3 position, float radius, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    
+    newSDF.type = 0;
+    newSDF.position = position;
+    newSDF.size = float3(0, 0, 0);
+    newSDF.radius = radius;
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
+
+}
+
+void addRoundBox(inout int index, float3 position, float radius, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    
+    newSDF.type = 0;
+    newSDF.position = position;
+    newSDF.size = float3(0, 0, 0);
+    newSDF.radius = radius;
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
+
+}
+
+void addTorus(inout int index, float3 position, float radius, float thickness, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    newSDF.type = 2;
+    newSDF.position = position;
+    newSDF.radius = 0;
+    newSDF.size = float3(0, radius, thickness);
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
+}
+
+void addHexPrism(inout int index, float3 position, float height, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    newSDF.type = 3;
+    newSDF.position = position;
+    newSDF.radius = height;
+    newSDF.size = float3(0.0, 0.0, 0.0);
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
+}
+
+void addOctahedron(inout int index, float3 position, float size, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    newSDF.type = 4;
+    newSDF.position = position;
+    newSDF.radius = size;
+    newSDF.size = float3(0.0, 0.0, 0.0);
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
+}
+
+void addEllipsoid(inout int index, float3 position, float3 radius, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    newSDF.type = 5;
+    newSDF.position = position;
+    newSDF.radius = 0.0;
+    newSDF.size = radius;
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
+}
+
+void addDolphin(inout int index, float3 position, float timeOffset, float speed, float3 direction)
+{
+    
+}
+
+void addRock(inout int index, float3 position, float3 size, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    newSDF.type = 7;
+    newSDF.position = position;
+    newSDF.radius = 0.0;
+    newSDF.size = size;
+    
+    float3 u = normalize(axis);
+    float rad = radians(angle);
+    float c = cos(rad);
+    float s = sin(rad);
+    
+    newSDF.rotation = float3x3(
+        c + (1.0 - c) * u.x * u.x,
+        (1.0 - c) * u.x * u.y - s * u.z,
+        (1.0 - c) * u.x * u.z + s * u.y,
+
+        (1.0 - c) * u.y * u.x + s * u.z,
+        c + (1.0 - c) * u.y * u.y,
+        (1.0 - c) * u.y * u.z - s * u.x,
+
+        (1.0 - c) * u.z * u.x - s * u.y,
+        (1.0 - c) * u.z * u.y + s * u.x,
+        c + (1.0 - c) * u.z * u.z
+    );
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
+}
+
+
+float evalSDF(int index, float3 p)
+{
+    SDF s = sdfArray[index];
+    float3 probePoint = mul((p - s.position), s.rotation);
+    if (s.type == 0)
+    {
+        return sdSphere((p - s.position), s.radius);
+    }
+    else if (s.type == 1)
+    {
+        return sdRoundBox(p - s.position, s.size, s.radius);
+    }
+    else if (s.type == 2)
+    {
+        return sdTorus(p - s.position, s.size.yz);
+    }
+    else if (s.type == 3)
+    {
+        return sdHexPrism(p - s.position, s.radius);
+    }
+    else if (s.type == 4)
+    {
+        return sdOctahedron(p - s.position, s.radius);
+    }
+    else if (s.type == 5)
+    {
+        return sdEllipsoid(p - s.position, s.size);
+    }
+    else if (s.type == 7)
+    {
+        float base = sdBox(probePoint, s.size);
+        float noise = snoise(probePoint * 5.0) * 0.1;
+        return base - noise * 0.3;
+    }
+
+    return 1e5;
+}
+
+float3 get_normal(int i, float3 p)
+{
+    float h = 0.0001;
+    float2 k = float2(1, -1);
+    
+    float normal1 = evalSDF(i, p + k.xyy * h);
+    float normal2 = evalSDF(i, p + k.yyx * h);
+    float normal3 = evalSDF(i, p + k.yxy * h);
+    float normal4 = evalSDF(i, p + k.xxx * h);
+    return normalize(k.xyy * normal1 + k.yyx * normal2 + k.yxy * normal3 + k.xxx * normal4);
+}
+
+void raymarchAll(float condition, float3x3 cameraMatrix, float numberSDFs, float2 uv, out float4 hitPosition, out float3 normal, out MaterialParams material, out float3 rayDirection)
+{
+    if (condition == 0)
+    {
+        cameraMatrix = computeCameraMatrix(float3(0, 0, 0), _rayOrigin, float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1));
+    }
+    
+    rayDirection = normalize(mul(float3(uv, -1), cameraMatrix));
+    float t = 0.0;
+    hitPosition = float4(0, 0, 0, 0);
+    int hitIndex;
+    for (int i = 0; i < 100; i++)
+    {
+        float3 currentPosition = _rayOrigin + rayDirection * t;
+        float d = 1e5;
+        int bestIndex = -1;
+        for (int j = 0; j < numberSDFs; ++j)
+        {
+            float dj = evalSDF(j, currentPosition);
+            if (dj < d)
+            {
+                d = dj;
+                bestIndex = j;
+            }
+        }
+        hitIndex = bestIndex;
+        if (d < 0.001)
+        {
+            hitPosition.xyz = currentPosition;
+            normal = get_normal(hitIndex, currentPosition);
+            material = sdfArray[hitIndex].material;
+            hitPosition.w = t;
+            break;
+        }
+        if (t > _raymarchStoppingCriterium)
+        {
+            hitPosition.xyz = currentPosition;
+            hitPosition.w = _raymarchStoppingCriterium + 1;
+            break;
+        }
+        t += d;
+    }
+}
+
+float3 renderScene(float3 color, float t)
+{
+    if (t != _raymarchStoppingCriterium + 1)
+        return color;
+    return float3(0.0, 0.0, 0.0);
+}
+#endif

@@ -3,9 +3,12 @@ site_name: Shader Documentation
 theme:
   name: material
   features:
+    - navigation.tracking
+    - navigation.instant
+    - navigation.instant.prefetch
     - navigation.tabs
-    - navigation.sections
-    - toc.integrate
+    - navigation.expansion
+    - navigation.path
     - navigation.top
     - content.code.link
     - content.code.annotation
@@ -32,6 +35,8 @@ plugins:
   - search
 
 markdown_extensions:
+  - toc:
+      toc_depth : "1-1"
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.superfences
@@ -43,7 +48,6 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - attr_list
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
 
@@ -57,8 +61,39 @@ nav:
       # You can add more categories like this:
       # - Noise:
       #     - Cloud FBM: shaders/noise/cloud_fbm.md -->
-  - Engines:
-    - Godot: engines/godot.md
-    - Unity: engines/unity.md
-    - Unreal Engine: engines/unreal.md
+      
+  - Shaders: shaders/shaderPage.md
+  - Godot: engines/godot.md
+  - Unity:
+    - Overview: engines/unity.md
+    - Global Variables: engines/unity/globalVariables.md
+    - Helper Functions: engines/unity/helperFunctions.md
+    - Uniforms and C#: engines/unity/uniformsAndCs.md
+    - Custom HLSL:
+      - Basics: 
+        - Fragment Coordinates: engines/unity/basics/fragCoords.md
+        - Combine Color: engines/unity/basics/combineColor.md
+        - Minimum: engines/unity/basics/minimum.md
+      - Camera:
+        - Camera Matrix: engines/unity/camera/cameraMatrix.md
+        - Rotation: engines/unity/camera/cameraRotation.md
+        - Back And Forth: engines/unity/camera/cameraBackAndForth.md
+        - Mouse-Based Rotation: engines/unity/camera/mouseBasedMovement.md
+      - SDFs: engines/unity.md
+      - Environments: 
+        - Water Surface: engines/unity/water/waterSurface.md
+        - Water Height: engines/unity/water/waterHeight.md
+        - Water Normal: engines/unity/water/waterNormal.md
+      - Lighting: engines/unity.md
+      - Animation: 
+        - Orbit Object Around Point: engines/unity/animations/orbitObject.md
+        - Shake Object: engines/unity/animations/shakeObject.md
+        - Cycle Color: engines/unity/animations/colorAnimation.md
+        - Tweening: engines/unity/animations/tweening.md
+      - Lighting:
+        - Sunrise Light: engines/unity/lighting/sunriseLight.md 
+    - Tutorials:
+      - Christmas Tree: engines/unity.md
+      - Safety Buoy: engines/unity.md
+  - Unreal Engine: engines/unreal.md
     

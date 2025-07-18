@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwsyi01lnca5n"]
+
+[ext_resource type="Script" uid="uid://40n4eqpg1rxc" path="res://addons/scripts/sdf_updated.gd" id="1_51pa3"]
+[ext_resource type="Material" uid="uid://5fe0xkwp00ed" path="res://sdf_updated.tres" id="2_pikb6"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("shader_material_target")]
+script = ExtResource("1_51pa3")
+shader_material_target = NodePath("ColorRect")
+lightPosition = Vector3(20, 0, 7)
+cameraPosition = Vector3(0, -10, 13)
+shake_speed = 2.0
+shake_intensity = 0.3
+orbit_speed = 0.1
+movement_speed = 0.1
+terrain_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("2_pikb6")
+offset_right = 1158.0
+offset_bottom = 650.0

@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="Visual_Shader_Plugins_Trial1"
-run/main_scene="uid://d1hsphbwtyhqo"
+run/main_scene="uid://coak16xbdrt1"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/visualshadernodes/plugin.cfg")
+enabled=PackedStringArray()
