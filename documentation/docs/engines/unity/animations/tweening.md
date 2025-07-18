@@ -23,20 +23,24 @@ void tween1D_float(float start, float end, float duration, int tweenType, float 
 }
 ```
 
-#### **Parameters**
+## Parameters
+
+### Inputs
+
 | Name         | Type   | Description |
 |--------------|--------|-------------|
 | `start`  | float3/float  | Starting value |
 | `end`   | float3/float  | Target value |
 | `duration` | float  | Duration of the tween in seconds |
 | `tweenType`   | enum/int  | Easing type (see Tween Types below) |
-| `startTime`  | float    | Time the tween should start (in seconds) |
+| `startTime`  | float    | Time at which the tween should start (in seconds) |
 | `pingpong`   | bool   | If true, animates back and forth (0→1→0...), else loops from 0→1 repeatedly |
 
-#### **Output**
+### Output
+
 - ```float3 position / float scale``` — The interpolated value at current time.
 
-
+The output can be used for an arbitrary input parameter. It is the most suitable for animating an SDF's parameters such as *Position*, *Color*, *Scale*, ...
 
 
 ## Tween Types
@@ -82,9 +86,11 @@ Use one of the following constants as `tweenType` in the functions above:
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Animation/Tweening
-    Note: For visual scripting, tween type can be provided by the tween value as an integer.
+    Find the node for 1D Tweening at ```PSF/Animation/ 1D Tweening```
 
+    Find the node for 3D Tweening at ```PSF/Animation/ 3D Tweening```
+
+    > The tween type can be provided by the tween value as an integer.
 
 === "Standard Scripting"
     Include - #include "Assets/Shaders/Includes/tween_functions.hlsl"

@@ -14,7 +14,7 @@ void rotateCamera_float(float3 axis, float speed, out float3x3 mat)
 }
 ```
 
-See [Helper Functions](unity/cameraRotation.md) to find out more about ```computeRotationMatrix(float3 axis, float angle)```
+See [Helper Functions](../helperFunctions.md) to find out more about ```computeRotationMatrix(float3 axis, float angle)```
 
 ---
 
@@ -34,7 +34,7 @@ See [Helper Functions](unity/cameraRotation.md) to find out more about ```comput
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Camera/Rotate Camera
+    Find the node at `PSF/Camera/Rotate Camera`
 
     ![Unity Rotate Camera](../images/rotateCamera.png){ width="500" }
 

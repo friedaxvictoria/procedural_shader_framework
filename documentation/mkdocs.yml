@@ -51,6 +51,9 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
 
+extra_css:
+  - style.css
+
 nav:
   - Home: index.md
 
@@ -88,8 +91,8 @@ nav:
       - Animation: 
         - Orbit Object Around Point: engines/unity/animations/orbitObject.md
         - Shake Object: engines/unity/animations/shakeObject.md
-        - Cycle Color: engines/unity/animations/colorAnimation.md
         - Tweening: engines/unity/animations/tweening.md
+        - Cycle Color: engines/unity/animations/colorAnimation.md
       - Lighting:
         - Sunrise Light: engines/unity/lighting/sunriseLight.md 
     - Tutorials:

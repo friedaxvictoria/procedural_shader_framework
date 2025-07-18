@@ -355,3 +355,11 @@ if we want to link the github repo
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/WaterSurface.glsl)
 
 ---
+
+## Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../../engines/godot">Godot</a>
+  <a class="md-button" href="../../../engines/unity/water/waterSurface">Unity</a>
+  <a class="md-button" href="../../../engines/unreal">Unreal Engine</a>
+<div>

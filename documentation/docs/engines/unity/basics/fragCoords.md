@@ -49,7 +49,7 @@ The values used depend on the object's extent as well as Unity's camera:
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Basics/Fragment Coordinates
+    Find the node at `PSF/Basics/Fragment Coordinates`
 
     To easily get access to the scale, add Unity's *Object Node*, connect the scale-parameter to Unity's *Splitter Node*, and choose the required dimensions to connect to the custom node's inputs. 
 

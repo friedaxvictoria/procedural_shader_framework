@@ -1,4 +1,4 @@
-# Sunrise Lighting Shader Function
+# Sunrise Lighting
 
 This function computes realistic atmospheric lighting based on a simplified earth-sun model. It simulates sunlight scattering through the atmosphere and includes diffuse and specular reflections using a Phong lighting model. If the ray hits the sky (escapes before hitting geometry), it returns the atmospheric color.
 
@@ -42,13 +42,18 @@ void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float
 
 ---
 
-#### **Parameters**
+## Parameters
+
+### Inputs
+
 | Name           | Type     | Description |
 |----------------|----------|-------------|
-| `hitPosition`  | float4   | World position of the surface hit; `.w` holds the raymarch step or distance |
+| `hitPosition`  | float4   | World position of the surface hit; the w-component holds the raymarch step or distance |
 | `normal`       | float3   | Surface normal at the hit point |
 | `hitIndex`     | float    | Object/material index used to fetch shading parameters |
 | `rayDirection` | float3   | Direction of the incoming ray |
+
+The inputs are typically provided by the functions [SDF Raymarching](...) or [Water Surface](...).
 
 #### **Output**
 - `float3 lightingColor` — Final RGB lighting result, including sunrise sky or surface lighting.

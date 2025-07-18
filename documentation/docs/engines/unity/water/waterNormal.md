@@ -130,7 +130,7 @@ Due to the normal of the water surface changing very rapidly, an approach was im
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Environments/Water Normal
+    Find the node at `PSF/Environments/Water Normal`
     
     ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
 
@@ -139,4 +139,4 @@ Due to the normal of the water surface changing very rapidly, an approach was im
 
 ---
 
-This is an engine-specific implementation without a shader-basis.
+This is an engine-specific implementation without a shader-basis. The original helper functions can be found [here](../../../shaders/scenes/water_surface.md).
