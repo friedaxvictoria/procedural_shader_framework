@@ -27,7 +27,7 @@ void rotateViaMouse_float(out float3x3 mat)
 }
 ```
 
-See [Helper Functions](unity/helperFunctions.md) to find out more about ```computeRotationMatrix(float3 axis, float angle)```
+See [Helper Functions](../helperFunctions.md) to find out more about ```computeRotationMatrix(float3 axis, float angle)```
 
 ---
 
@@ -53,7 +53,7 @@ See [Helper Functions](unity/helperFunctions.md) to find out more about ```compu
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Camera/Rotate Via Mouse
+    Find the node at `PSF/Camera/Rotate Via Mouse`
 
     ![Unity Mouse-Based Camera Rotation](../images/rotateViaMouse.png){ width="300" }
 

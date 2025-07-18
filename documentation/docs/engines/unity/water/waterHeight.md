@@ -87,7 +87,7 @@ void sampleHeightField_float(float3 position, out float3 heightPosition)
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Environments/Water Height Field
+    Find the node at `PSF/Environments/Water Height Field`
     
     ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
 
@@ -96,4 +96,4 @@ void sampleHeightField_float(float3 position, out float3 heightPosition)
 
 ---
 
-This is an engine-specific implementation without a shader-basis.
+This is an engine-specific implementation without a shader-basis. The original helper functions can be found [here](../../../shaders/scenes/water_surface.md).

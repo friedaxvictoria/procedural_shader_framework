@@ -132,7 +132,7 @@ void computeWater_float(float condition, float3x3 cameraMatrix, float2 fragmentC
 }
 ````
 
-See [Helper Functions](unity/helperFunctions.md) to find out more about ```computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)```.
+See [Helper Functions](../helperFunctions.md) to find out more about ```computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)```.
 
 ---
 
@@ -153,14 +153,14 @@ See [Helper Functions](unity/helperFunctions.md) to find out more about ```compu
 - ```float hitIndex```: A value determining what surface has been hit. The water gets a hard-coded hitIndex.
 - ```float3 rayDirection```: The ray direction from the camera to the hit position
 
-All outputs are to be plugged into a [Combine Results](unity/cameraMatrix.md) or an arbitrary lighting function.
+All outputs are to be plugged into a [Combine Color](../basics/combineColor.md.md) or an arbitrary lighting function.
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Environments/Water
+    Find the node at `PSF/Environments/Water`
     
     ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
 
@@ -173,4 +173,4 @@ All outputs are to be plugged into a [Combine Results](unity/cameraMatrix.md) or
 
 ---
 
-Find the original shader code [here](unity/cameraMatrix.md).
+Find the original shader code [here](../../../shaders/scenes/water_surface.md). This basis was adapted to be compatible with Unity's workflow and to allow it to be modifyable within the framework.

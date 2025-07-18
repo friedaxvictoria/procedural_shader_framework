@@ -1,6 +1,6 @@
 # Helper Functions
 
-This sections gives an overview of the universal helper functions used across Unity's integration. Within the ShaderGraph implementation they are not accessible and solely used to implement the custom nodes. However, if the standard scripting is used, they can be accessed and used for custom computations.
+This sections gives an overview of the universal helper functions used across Unity's integration. Within the ShaderGraph implementation they are not exposed and solely used to implement the custom nodes. However, if the standard scripting is used, they can be accessed and used for custom computations.
 
 ---
 

@@ -40,7 +40,7 @@ The edgecase that for a fragment both inputs did not yield a hit, is checked for
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Basics/Combine Color
+    Find the node at `PSF/Basics/Combine Color`
 
     ![Unity Translate Camera](images/translateCamera.png){ width="500" }
 

@@ -3,7 +3,7 @@
 Uniforms in Unity are set via a custom C# file. It is essential to add them to the shader as they are responsible for:
 
 - Setting the ray origin/camera position: As the ray origin is defined as a [Global Variable](globalVariables.md), it has to be initialised. Unity does not take initialisations outside of hlsl-functions into account. Therefore, to enable the most univeral initialisation, the ray origin is defined via a uniform. **This potentially leads to shaders that do not show the desired output. See [Bug: Empty Shader](#bug-empty-shader) to learn more about this.**
-- Setting the global variable **_raymarchStoppingCriterium** for the reason mentioned above. This variable defines the stopping criterium after which the raymarching of the [Water Shader](unity/cameraMatrix.md) or the [SDF Raymarching](unity/cameraMatrix.md) is terminated. 
+- Setting the global variable **_raymarchStoppingCriterium** for the reason mentioned above. This variable defines the stopping criterium after which the raymarching of the [Water Shader](camera/cameraMatrix.md) or the [SDF Raymarching](SDFs/raymarching.md) is terminated. 
 - Providing the mouse position to the [Mouse-Based Movement](camera/mouseBasedMovement.md). This is necessary since Unity's hlsl support has no built-in mouse variable.
 - Enabling translations through the scene using WASDQE.  
 
@@ -114,6 +114,6 @@ Within the inspector of the *ShaderUniformControl*:
 
 ## Bug: Empty Shader
 
-If the shader has been composed and compiled for the first time but the only a blank material is visible in Scene mode, it could be due to the initialisation of essential parameters using uniform variables. All nodes using **_rayOrigin** and **_raymarchStoppingCriterium** are affected. Thus, lighting such as the [Sunrise](camera/mouseBasedMovement.md.md) might correctly be rendered. 
+If the shader has been composed and compiled for the first time but the only a blank material is visible in Scene mode, it could be due to the initialisation of essential parameters using uniform variables. All nodes using **_rayOrigin** and **_raymarchStoppingCriterium** are affected. Thus, lighting such as the [Sunrise Lighting](lighting/sunriseLight.md) might correctly be rendered. 
 
 To resolve this issue, simply run the scene once. By running the scene, the C# file will be executed and the uniform variables will be set. The uniforms will remain even after the Game mode has been exited.

@@ -43,14 +43,14 @@ void getMinimum_float(float4 hitPosition1, float3 normal1, float hitIndex1, floa
 - ```float3 normal```: The normal corresponding to the closest hit position
 - ```float hitIndex```: The index corresponding to the closest hit position
 
-The outputs can be used for further computations using lighting functions (e.g. [Sunrise](...)).
+The outputs can be used for further computations using lighting functions (e.g. [Sunrise Lighting](../lighting/sunriseLight.md)).
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at PSF/Basics/Minimum
+    Find the node at `PSF/Basics/Minimum`
 
     ![Unity Translate Camera](images/translateCamera.png){ width="500" }
 
