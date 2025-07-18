@@ -15,6 +15,11 @@ Welcome to the **Shader Library**, a central hub for exploring all procedural sh
 
 ## 📂 Shader Categories
 
+### 🔭 General Structure
+General structure of the shaders logic
+
+- [General Structure](general_structure.md)
+
 ### 🌀 Animation Shaders
 Shaders that control movement over time, often using sine/cosine functions or time-based interpolation.
 
