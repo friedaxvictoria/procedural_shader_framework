@@ -6,11 +6,11 @@
 //   for different types of volumetric media, including cloud, fog,
 //   flame, smoke, magic effects, and customizable default presets.
 //
-//   These are intended to be used in the vol_matl_library.glsl
+//   These are intended to be used in the vol_mat_library.glsl
 //   registration function or directly in volume evaluation code.
 //
 // Dependencies:
-//   - VolMaterialParams structure (vol_matl_params.glsl)
+//   - VolMaterialParams structure (vol_mat_params.glsl)
 // ==========================================
 
 #ifndef VOL_MAT_PRESETS_GLSL
@@ -19,7 +19,7 @@
 // ------------------------------------------
 // Default Volume Material (neutral white fog)
 // ------------------------------------------
-VolMaterialParams makeDefault() {
+VolMaterialParams makeDefaultVolumeMaterial() {
     VolMaterialParams mat;
     mat.baseColor = vec3(1.0);
     mat.densityScale = 1.0;

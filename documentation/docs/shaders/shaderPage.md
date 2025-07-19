@@ -15,6 +15,11 @@ Welcome to the **Shader Library**, a central hub for exploring all procedural sh
 
 ## 📂 Shader Categories
 
+### 🔭 General Structure
+General structure of the shaders logic
+
+- [General Structure](general_structure.md)
+
 ### 🌀 Animation Shaders
 Shaders that control movement over time, often using sine/cosine functions or time-based interpolation.
 
@@ -78,6 +83,7 @@ Shaders that generate or modify geometry procedurally.
 Define the visual appearance of surfaces by specifying physical or stylized material properties such as color, roughness, metallicity, and transparency. Used alongside lighting models to produce realistic or artistic effect.
 
 - [Material System](material/material_system.md)
+- [Volume Material System](material/volume_material_system.md)
 
 ### 💡 Lighting Shaders
 
@@ -86,6 +92,9 @@ Compute surface lighting effects including diffuse, specular, rim, and reflectio
 - [Rim Reflection Lighting](lighting/Rim_lighting_and_reflection.md)
 - [Lighting Functions](lighting/lighting_functions.md)
 - [Lighting Context](lighting/lighting_context.md)
+- [Volume Lighting Functions](lighting/volume_lighting_functions.md)
+- [Volume Lighting Context](lighting/volume_lighting_context.md)
+
 ### Rendering Shaders
 
 - [Ray_Marching](rendering/Ray_Marching.md)
@@ -103,7 +112,11 @@ Shaders that render complete background or environmental elements such as sky, s
 - [Sun And Halo](scenes/SunAndHalo.md)
 - [Volumetric FBM Cloud](scenes/Cloud_fbm.md)
 - [Water Surface](scenes/water_surface.md)
+- [Boat And Flag](scenes/boat_flag.md)
 - [Cloud Volume](scenes/cloud_volume.md)
+- [Cloud And Ground](scenes/cloud_ground.md)
+- [Cloud And Water](scenes/cloud_water.md)
+- [Terrain And Castle](scenes/terrain_castle.md)
   
 ---
 

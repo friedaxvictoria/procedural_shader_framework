@@ -34,7 +34,7 @@
 
 // Get volume material from ID
 VolMaterialParams getVolMaterialByID(int id) {
-    VolMaterialParams mat = makeDefault();
+    VolMaterialParams mat = makeDefaultVolumeMaterial();
 
     // ---------- Common Volume Types ----------
     if (id == VOL_CLOUD_WHITE) {
@@ -73,7 +73,7 @@ VolMaterialParams getVolMaterialByID(int id) {
         mat.noiseStrength = 0.5;
     }
     else if (id == VOL_HAZE_GREEN) {
-        mat = makeFogMaterial(vec3(0.2, 0.6, 0.3));
+        mat = makeFog(vec3(0.2, 0.6, 0.3));
         mat.densityScale = 0.7;
     }
 

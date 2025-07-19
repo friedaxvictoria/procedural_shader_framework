@@ -3,7 +3,7 @@
 - **Category:** Material
 - **Author:** Xuetong Fu
 - **Shader Type:** Utility header
-- **Input Requirements:** material ID / uv
+- **Input Requirements:** Material ID; uv; material property parameters (see the table below for details)
 
 ---
 
@@ -59,7 +59,7 @@ struct MaterialParams {
 
 #endif
 ```
-Usage: `#include "lighting/surface_lighting/material_params.glsl"`
+Usage: `#include "materials/material/material_params.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/material_params.glsl)
 
@@ -188,7 +188,7 @@ if you want to put small code snippet and make it appereable and dissapear
 if we want to link the github repo
 -->
 
-Usage: `#include "lighting/surface_lighting/material_presets.glsl"`
+Usage: `#include "materials/material/material_presets.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/material_presets.glsl)
 
@@ -335,7 +335,7 @@ if you want to put small code snippet and make it appereable and dissapear
 if we want to link the github repo
 -->
 
-Usage: `#include "lighting/surface_lighting/material_library.glsl"`
+Usage: `#include "materials/material//material_library.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/material_library.glsl)
 
