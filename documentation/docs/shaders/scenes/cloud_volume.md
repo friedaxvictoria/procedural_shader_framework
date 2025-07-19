@@ -1,15 +1,11 @@
 #  🧩 Grayscale Volumetric Cloud Shader
 
-<!-- this one is to display the shader output either by locally storing in the directory under static/images/...
-or, external link like of a github can be added -->
-
-<!-- this is for locally stored images -->
-<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/VolumetricCloud.png" alt="Volumetric Cloud" width="400" height="225">
+<img src="../../../../shaders/screenshots/VolumetricCloud.png" alt="Volumetric Cloud" width="400" height="225">
 
 - **Category:** Scene
 - **Author:** Xuetong Fu
 - **Shader Type:** Full‑screen volumetric raymarch (simplex‑FBM density)
-- **Input Requirements:** `fragCoord`, `iTime`, `iMouse`, `iResolution`, `iChannel1 (blue‑noise)`
+- **Input Requirements:** `fragCoord`, `iTime`, `iMouse`, `iResolution`, `iChannel1` (blue‑noise)
 - **Output:**  `fragColor` RGBA color (grayscale cloud density in RGB, alpha = integrated opacity)
 
 ---
@@ -28,7 +24,7 @@ No lighting is applied and output is pure grayscale density (RGB = α).
 | **Camera Rays** | inline in `mainImage()` | Creates an orbit camera from mouse yaw/pitch; produces origin `ro` & dir `rd` |
 | **Blue‑Noise Jitter** | `texelFetch(iChannel1, px & 1023, 0).x` | Uses a 1024^2 blue‑noise texture to random‑offset the first march step, breaking regular sampling patterns |
 | **Integrator** | `integrateDensity()` | Marches up to 190 steps, accumulates front‑to‑back α until exit or opacity ≥ 1 |
-| **Output** | `fragColor = sum` | Final grayscale clouds—ready for external lighting |
+
 
 Result: smoothly drifting clouds with soft edges.
 
@@ -56,9 +52,7 @@ Make sure to adjust the entry point from `mainImage(out vec4 fragColor, in vec2 
 ---
 
 ## 💻 Shader Code & Includes
-<!--
-if you want to put small code snippet
--->
+
 ### 1. Simplex Noise Generator 
 The `snoise()` function provides a 3D simplex noise implementation based on Ashima Arts’ classic GLSL version. It uses skewed coordinate space and lattice permutations to evaluate smooth noise with low directional artifacts, ideal for volumetric fields. Internally, it computes contributions from the four nearest simplex corners using gradient vectors, attenuation masks, and normalization factors. This function serves as the foundational noise source for the FBM density field in the cloud shader.
 
@@ -206,52 +200,14 @@ vec4 integrateDensity(vec3 ro, vec3 rd, ivec2 px) {
 }
 ```
 
-<!--
-if you want to put small code snippet and make it appereable and dissapear
--->
-??? note "📄 WaterSurface.glsl"
-    ```glsl
-    // ==========================================
-    // Shader: Grayscale Volumetric Cloud Shader
-    // Category: Volume Rendering & Procedural Noise
-    // Description: Generates density-based cloud structures using simplex noise and volumetric raymarching
-    // Screenshot: screenshots/VolumetricCloud.png
-    // ==========================================
+### **Full Code**
 
-    /*
-    * This shader renders a 3D volume of procedural clouds using simplex noise and FBM,
-    * combined with height-based shaping and volumetric integration.
-    * Designed for lighting-independent density visualization.
-    *
-    * Main Components:
-    * - snoise(): 3D simplex noise generator (Ashima Arts)
-    * - map(): Density field evaluation using FBM and vertical falloff
-    * - integrateDensity(): Raymarch through the volume and accumulate cloud density
-    * - setCamera(): Constructs view matrix based on camera position, target, and roll
-    * - mainImage(): Entry point setting up camera and performing raymarching
-    *
-    * Inputs:
-    *   iMouse       - vec2 : controls yaw and pitch (camera orbit)
-    *   iTime        - float: time used for animating noise flow
-    *   iResolution  - vec2 : viewport resolution
-    *   iChannel0    - (optional) noise texture fallback (unused in this version)
-    *   iChannel1    - blue-noise texture for dithering ray step
-    *
-    * Output:
-    *   vec4 : grayscale cloud color + alpha (accumulated density)
-    *
-    * Notes:
-    * - No lighting or shading is applied �� this is purely structural density output
-    * - Designed as a reusable cloud volume core for lighting modules to be added externally
-    */
-
-
+??? note "📄 CloudVolume.glsl"
     // ---------- Configuration Constants ----------
     #define CAM_POS vec3(0.0, -1.0, -6.0)
     #define CLOUD_BASE -3.0
     #define CLOUD_TOP  0.6
     const float PI = 3.14159265;
-
 
     // ---------- Simplex Noise Implementation ----------
     vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -326,7 +282,6 @@ if you want to put small code snippet and make it appereable and dissapear
         return snoise(x);
     }
 
-
     // ---------- Density Function ----------
     float map(vec3 p, int oct) {
         vec3 q = p - vec3(0.0, 0.1, 1.0) * iTime;
@@ -344,7 +299,6 @@ if you want to put small code snippet and make it appereable and dissapear
         return (1.6 * f - 0.6 - p.y) * heightFalloff;
     }
 
-
     // ---------- Camera Construction ----------
     mat3 setCamera(vec3 ro, vec3 ta, float cr) {
         vec3 cw = normalize(ta - ro);
@@ -353,7 +307,6 @@ if you want to put small code snippet and make it appereable and dissapear
         vec3 cv = normalize(cross(cu, cw));
         return mat3(cu, cv, cw);
     }
-
 
     // ---------- Volumetric Raymarch ----------
     vec4 integrateDensity(vec3 ro, vec3 rd, ivec2 px) {
@@ -398,7 +351,6 @@ if you want to put small code snippet and make it appereable and dissapear
         return clamp(sum, 0.0, 1.0);
     }
 
-
     // ---------- Main Shader Entry ----------
     void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         vec2 uv = (2.0 * fragCoord - iResolution.xy) / iResolution.y;
@@ -418,9 +370,7 @@ if you want to put small code snippet and make it appereable and dissapear
         fragColor = integrateDensity(ro, rd, ivec2(fragCoord - 0.5));
     }
     ```
-<!--
-if we want to link the github repo
--->
+
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/CloudVolume.glsl)
 
 ---
