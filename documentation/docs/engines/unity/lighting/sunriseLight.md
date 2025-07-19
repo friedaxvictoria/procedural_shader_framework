@@ -63,10 +63,10 @@ The inputs are typically provided by the functions [SDF Raymarching](...) or [Wa
 ## Implementation
 
 === "Visual Scripting"  
-    Find the node at `PSF/Lighting/SunriseLight`
+    Find the node at ```PSF/Lighting/SunriseLight```
 
 === "Standard Scripting"  
-    Include - `#include "Assets/Shaders/Includes/lighting_functions.hlsl"`
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/lighting_functions.hlsl"```
 
     Example Usage
 
