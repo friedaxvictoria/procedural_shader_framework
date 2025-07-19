@@ -36,10 +36,10 @@ float sdSphere(float3 position, float radius)
     return length(position) - radius;
 }
 
-float sdRoundBox(float3 position, float3 b, float r)
+float sdRoundBox(float3 position, float3 size, float radius)
 {
-    float3 q = abs(position) - b + r;
-    return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - r;
+    float3 q = abs(position) - size + radius;
+    return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - radius;
 }
 
 // radius.x is the major radius, radius.y is the thickness
@@ -115,10 +115,10 @@ float shininess, float noise, out float indexOut)
     indexOut = index + 1;
 }
 
-void addCube_float(float index, float3 position, float3 size, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
+void addRoundBox_float(float index, float3 position, float3 size, float radius, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
 float shininess, float noise, out float indexOut)
 {
-    addSDF(index, 1, position, size, 0, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
+    addSDF(index, 1, position, size, radius, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
     indexOut = index + 1;
 }
 

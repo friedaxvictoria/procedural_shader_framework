@@ -82,7 +82,15 @@ nav:
         - Rotation: engines/unity/camera/cameraRotation.md
         - Back And Forth: engines/unity/camera/cameraBackAndForth.md
         - Mouse-Based Rotation: engines/unity/camera/mouseBasedMovement.md
-      - SDFs: engines/unity.md
+      - SDFs: 
+        - General Information: engines/unity/sdfs/generalInformation.md
+        - Sphere: engines/unity/sdfs/sphere.md
+        - RoundBox: engines/unity/sdfs/cube.md
+        - Torus: engines/unity/sdfs/torus.md
+        - Ellipsoid: engines/unity/sdfs/ellipsoid.md
+        - Hexagonal Prism: engines/unity/sdfs/hexPrism.md
+        - Octahedron: engines/unity/sdfs/octahedron.md
+        - Dolphin: engines/unity/sdfs/dolphin.md
       - Environments: 
         - Water Surface: engines/unity/water/waterSurface.md
         - Water Height: engines/unity/water/waterHeight.md

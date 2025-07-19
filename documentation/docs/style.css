@@ -1,7 +1,7 @@
 .button-row {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   gap: 1rem;
   width: 100%;
 }

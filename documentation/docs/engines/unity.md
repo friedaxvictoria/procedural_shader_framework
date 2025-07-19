@@ -44,7 +44,9 @@ To easily include the integration of the framework into any Unity project, it is
 
 ## Visual Scripting
 
-The functions have been integrated as Sub Graphs that are callable as nodes in a ShaderGraph. All nodes are located under **PSF** short for **Procedural Shader Framework** once the UPM has been included. Detailed paths for the individual nodes are noted after the description of each of the functions.
+The functions have been integrated as Sub Graphs that are callable as nodes in a ShaderGraph. All nodes are located under **PSF** short for **Procedural Shader Framework** once the UPM has been included. Detailed paths for the individual nodes are noted after the description of each of the functions. 
+
+To simplify some initial setups, nodes come with default parameters. For each description of an input parameter, the node's default value for said parameter is noted. If no default value is explicitly mentioned, it can be assumed to be zero for the respective amount of dimensions. 
 
 Be aware that the visual previews of the nodes might not be expressive. E.g. if correctly used, the visual preview for an SDF node will always be uniformly black or white.
 
