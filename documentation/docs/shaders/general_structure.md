@@ -22,6 +22,10 @@ or, external link like of a github can be added -->
   title="TIE Fighter Shader Demo"
   frameborder="0" allowfullscreen></iframe> -->
 
+- **Category:** General Structure
+- **Author:** Saeed Shamseldin
+
+---
 
 ## Overview
 

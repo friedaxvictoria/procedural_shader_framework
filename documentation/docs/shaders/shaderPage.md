@@ -20,6 +20,10 @@ General structure of the shaders logic
 
 - [General Structure](general_structure.md)
 
+### Signed Distance Field (SDF) Shader
+This documentation covers the Signed Distance Field (SDF) module used in the GLSL shader.
+- [SDF Shader](geometry/SDF_Shader.md)
+
 ### 🌀 Animation Shaders
 Shaders that control movement over time, often using sine/cosine functions or time-based interpolation.
 
