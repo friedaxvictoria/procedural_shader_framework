@@ -1,4 +1,4 @@
-#  🧩 General Structure Shader
+# General Structure Shader
 
 <!-- this one is to display the shader output either by locally storing in the directory under static/images/...
 or, external link like of a github can be added -->
