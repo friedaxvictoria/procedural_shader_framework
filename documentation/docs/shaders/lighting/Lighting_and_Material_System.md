@@ -1,4 +1,4 @@
-#  🧩 Lighting and Material System Shader
+# Lighting and Material System Shader
 
 <!-- this one is to display the shader output either by locally storing in the directory under static/images/...
 or, external link like of a github can be added -->
@@ -134,8 +134,7 @@ void MakePlasticMaterial(
 ```
 **Integration with Raymarching**
 
-1. **After [raymarching](../geometry/SDF_Shader.md#raymarching-integration)**, call [`SDFsNormal(hitPos)`](../geometry/SDF_Shader.md#normal-estimation)
- to get normals.
+1. **After [raymarching](../geometry/SDF_Shader.md#raymarching-integration)**, call [`SDFsNormal(hitPos)`](../geometry/SDF_Shader.md#normal-estimation) to get normals.
 
 2. **Configure materials** using MakePlasticMaterial().
 

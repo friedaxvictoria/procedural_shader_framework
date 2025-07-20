@@ -20,15 +20,20 @@ General structure of the shaders logic
 
 - [General Structure](general_structure.md)
 
-### Signed Distance Field (SDF) Shader
+### Signed Distance Field (SDF) System Shader
 This documentation covers the Signed Distance Field (SDF) module used in the GLSL shader.
 
-- [SDF Shader](geometry/SDF_Shader.md)
+- [SDF System](geometry/SDF_Shader.md)
 
-### Lighting and Material Shader
+### Lighting and Material System Shader 
 This documentation covers the Phong-based lighting model and material system used in the GLSL.
 
-- [Lighting & Material Shader](lighting/Lighting_and_Material_System.md)
+- [Lighting & Material System](lighting/Lighting_and_Material_System.md)
+
+### Noise System Shader
+The noise system in this shader provides procedural pattern generation for textures, terrain, and effects.
+
+- [Noise System](noise/Noise_System.md)
 
 ### 🌀 Animation Shaders
 Shaders that control movement over time, often using sine/cosine functions or time-based interpolation.
@@ -127,6 +132,7 @@ Shaders that render complete background or environmental elements such as sky, s
 - [Cloud And Ground](scenes/cloud_ground.md)
 - [Cloud And Water](scenes/cloud_water.md)
 - [Terrain And Castle](scenes/terrain_castle.md)
+- [Dolphin](scenes/dolphin.md)
   
 ---
 
