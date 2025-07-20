@@ -81,6 +81,9 @@ Use one of the following constants as `tweenType` in the functions above:
 | `TWEEN_BOUNCE_OUT`        | 29    |
 | `TWEEN_BOUNCE_INOUT`      | 30    |
 
+
+To check the easings of the tween types: https://easings.net/
+
 ---
 
 ## Implementation
@@ -93,7 +96,7 @@ Use one of the following constants as `tweenType` in the functions above:
     > The tween type can be provided by the tween value as an integer.
 
 === "Standard Scripting"
-    Include - #include "Assets/Shaders/Includes/tween_functions.hlsl"
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/tween_functions.hlsl"```
     
     Example Usage
 

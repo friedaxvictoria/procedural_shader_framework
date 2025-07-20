@@ -103,6 +103,15 @@ nav:
         - Cycle Color: engines/unity/animations/colorAnimation.md
       - Lighting:
         - Sunrise Light: engines/unity/lighting/sunriseLight.md 
+        - Point Light: engines/unity/lighting/pointLight.md
+        - Lambertian Light: engines/unity/lighting/lambLight.md
+        - Blinn Phong Light: engines/unity/lighting/blinnPhongLight.md
+        - Toon Light: engines/unity/lighting/toonLight.md
+        - Rim Light: engines/unity/lighting/rimLight.md
+        - Soft Subsurface Scattering: engines/unity/lighting/softSubsurfaceScattering.md
+        - Fresnel Light: engines/unity/lighting/fresnelLight.md
+        - UV Gradient Light: engines/unity/lighting/uvGradientLight.md
+        - UV Anisotropic Light: engines/unity/lighting/uvAnisotropicLight.md
     - Tutorials:
       - Christmas Tree: engines/unity.md
       - Safety Buoy: engines/unity.md
