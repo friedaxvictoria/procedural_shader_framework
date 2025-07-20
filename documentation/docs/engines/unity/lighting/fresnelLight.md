@@ -45,22 +45,28 @@ void applyFresnelLighting_float(float4 hitPosition, float3 normal, float hitInde
 
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `hitPosition`   | float4   | World position of the surface hit; the w-component holds the raymarch distance |
+| `hitPosition` <img width=50/>   | float4   | World position of the surface hit; the w-component holds the raymarch distance |
 | `normal`        | float3   | Surface normal at the hit point |
 | `hitIndex`      | float    | Object/material index used to fetch shading parameters |
 | `lightPosition` | float3   | World-space position of the light source |
 
-The inputs are typically provided by the functions [SDF Raymarching](...) or [Water Surface](...).
+The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).
 
-#### **Output**
-- `float3 lightingColor` — Final RGB lighting result using diffuse and Fresnel specular reflection.
+### Output
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `lightingColor`   | float3   | Final RGB lighting result using diffuse and Fresnel specular reflection |
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"  
-    Find the node at ```PSF/Lighting/FresnelLight```
+    Find the node at ```PSF/Lighting/Fresnel Lighting```
+
+    <figure markdown="span">
+        ![Unity Fresnel Lighting](../images/lighting/fresnel.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"  
     Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/lighting_functions.hlsl"```
@@ -71,3 +77,7 @@ The inputs are typically provided by the functions [SDF Raymarching](...) or [Wa
     float3 lightColor;
     applyFresnelLighting_float(hitPos, surfaceNormal, objectIndex, float3(1, 4, -1), lightColor);
     ```
+
+---
+
+This is an engine-specific implementation without a shader-basis.

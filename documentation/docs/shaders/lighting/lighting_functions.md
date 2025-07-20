@@ -67,6 +67,12 @@ vec3 applyBlinnPhongLighting(LightingContext ctx, MaterialParams mat) {
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/blinn_phong.glsl)
 
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../../engines/unity/lighting/blinnPhongLight">Unity</a>
+</div>
+
 ### 3. Lambert
 Implements a classic Lambertian diffuse model. It computes the intensity of reflected light based on the angle between surface normal and light direction, producing soft, angle-dependent shading.
 
@@ -80,6 +86,12 @@ vec3 lambertDiffuse(LightingContext ctx, MaterialParams mat) {
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/lambert.glsl)
+
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../../engines/unity/lighting/lambLight">Unity</a>
+</div>
 
 ### 4. Physically Based Rendering
 Simulates realistic lighting by blending diffuse and specular reflections based on surface roughness and metallic properties. Produces soft highlights on rough surfaces and sharp reflections on polished materials, enabling physically plausible rendering across diverse material types.
@@ -136,6 +148,12 @@ vec3 computeRimLighting(LightingContext ctx, MaterialParams mat, vec3 rimColor) 
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/rim_lighting.glsl)
+
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../../engines/unity/lighting/rimLight">Unity</a>
+</div>
 
 ### 6. Fake Specular
 Simulates stylized highlights without relying on physical material properties. 

@@ -143,6 +143,12 @@ mat4 getTranslateMatrix(float t, int mode) {
 }
 ```
 
+##### Engine Integrations
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/animations/tweening">Unity</a>
+</div>
+
 #### 5.3 Orbit Animation
 
 ```glsl
@@ -177,6 +183,12 @@ mat4 getOrbitMatrix(float t, int mode) {
 }
 ```
 
+##### Engine Integrations
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/animations/orbitObject">Unity</a>
+</div>
+
 #### 5.3 Self-Rotate Animation
 
 ```glsl
@@ -196,6 +208,12 @@ mat4 getSelfRotateMatrix(float t, int mode) {
 }
 ```
 
+##### Engine Integrations
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/animations/orbitObject">Unity</a>
+</div>
+
 #### 5.4 Pulse Scale Animation
 
 ```glsl
@@ -211,6 +229,12 @@ mat4 getPulseScaleMatrix(float t, int mode) {
     );
 }
 ```
+
+##### Engine Integrations
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/animations/tweening">Unity</a>
+</div>
 
 #### 5.5 TIE Path Animation
 
@@ -311,13 +335,3 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         fragColor = vec4(0.0); // Background color
     }
 ```
-
----
-
-## Engine Integrations
-
-<div class="button-row">
-  <a class="custom-button md-button" href="../../../engines/godot">Godot</a>
-  <a class="custom-button md-button" href="../../../../engines/unity/animations/orbitObject">Unity</a>
-  <a class="custom-button md-button" href="../../../engines/unreal">Unreal Engine</a>
-<div>

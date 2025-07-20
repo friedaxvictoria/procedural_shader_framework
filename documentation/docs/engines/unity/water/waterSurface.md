@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function computes a water surface through raymarching. 
+This function computes a water surface through raymarching a height field. 
 
 ---
 
@@ -130,48 +130,55 @@ void computeWater_float(float condition, float3x3 cameraMatrix, float2 fragmentC
     _objectSpecularColor[MAX_OBJECTS] = pow(color, float3(0.55, 0.55, 0.55));
     _objectSpecularStrength[MAX_OBJECTS] = 1;
     _objectShininess[MAX_OBJECTS] = 32;
-    //hard-coded hit index for the water
+    //hard-coded hit-index for the water
     hitIndex = MAX_OBJECTS;
 }
 ````
 
 See [Helper Functions](../helperFunctions.md) to find out more about ```computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)```.
 
+Read about setting the water's material-values and hit-index at [Lighting General Information](../lighting/generalInformation.md).
+
 ---
 
 ## The Parameters
 
 ### Inputs:
-- ```float condition```: A value that is used to check whether the default camera matrix should be computed or a custom camera matrix has been put in.
-    - condition = 0: The default camera matrix should be computed
-    - condition = 1: A custom camera matrix has been added
-- ```float3x3 cameraMatrix```: The camera matrix
-> Can be aquired using [Camera Matrix](../camera/cameraMatrix.md)
-- ```float2 fragCoordinates```: The fragment's coordinates
-> Can be aquired using [Fragment Coordinates](unity/cameraMatrix.md)
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `condition`  <img width=100/>  | float   |  A value that is used to check whether the default camera matrix should be computed or a custom camera matrix has been put in <br> <blockquote> condition = 0: The default camera matrix should be computed </blockquote> <blockquote> condition = 1: A custom camera matrix has been added </blockquote>|
+| `cameraMatrix`  | float3x3   |  Camera matrix <br> <blockquote>Can be aquired using [Camera Matrix](../camera/cameraMatrix.md)</blockquote> |
+| `fragmentCoordinates` | float2   |  The fragment's coordinates <br> <blockquote>Can be aquired using [Fragment Coordinates](../basics/fragCoords.md)</blockquote> |
 
 ### Outputs:
-- ```float4 hitPosition```: The first three dimensions contain the position at which the water has been hit. The w-component contains the raymarching parameter at which the hit occured. This is required in order to be able to combine the water with other visual elements.
-- ```float3 normal```: The normal at the hit position
-- ```float hitIndex```: A value determining what surface has been hit. The water gets a hard-coded hitIndex.
-- ```float3 rayDirection```: The ray direction from the camera to the hit position
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `hitPosition`  <img width=50/>  | float4   |  The first three dimensions contain the position at which the water has been hit. The w-component contains the raymarching parameter at which the hit occured. This is required in order to be able to combine the water with other visual elements. |
+| `normal`  | float3   |  Normal at the hit position |
+| `hitIndex` | float  |  A value determining what surface has been hit. The water gets a hard-coded hitIndex.|
+| `rayDirection` | float3   |  Ray direction from the camera to the hit position |
 
-All outputs are to be plugged into a [Combine Color](../basics/combineColor.md.md) or an arbitrary lighting function.
+All outputs are to be plugged into a [Combine Color](../basics/combineColor.md) or an arbitrary [Lighting Function](../lighting/generalInformation.md).
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at `PSF/Environments/Water`
+    Find the node at `PSF/Environments/Water Surface`
     
-    ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Water Surface](../images/water/water.png){ width="500" }
+    </figure>
 
-    >Due to internal workings of the node, the condition-input is not required. Within the SubGraph a "Branch On Input Connection" node is used to determine whether a camera matrix was connected to its respective input. This in turn determines the condition-value.
+    >Due to internal workings of the node, the condition-input is not required. Within the SubGraph a *Branch On Input Connection* node is used to determine whether a camera matrix was connected to its respective input. This in turn determines the condition-value.
 
-    ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Water Sub Graph](../images/water/innerWater.png){ width="700" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

@@ -5,7 +5,9 @@
 
 The global variables are an essential part of the integration in Unity. They are defined in a separate file and included in all hlsl-files that require them. They can easily distinguished by their signature underscore **_variableName**.
 
-The global variables define the maximum amount of SDFs that can be added to a single shader to be **20**. Read more about this setup in the [SDF Overview](sdfs/generalInformation.md). Additionally, the hit-index for the water surface is defined to be the first available index after the SDF indices. More environments can be added by incrementing the water's index for each added environment and increasing the material array's size by the amount of added environments. 
+The global variables define the maximum amount of SDFs that can be added to a single shader to be **20**. Read more about this setup in the [SDF General Information](sdfs/generalInformation.md). 
+
+Additionally, the hit-index for the water surface is defined to be the first available index after the SDF indices. More environments can be added by incrementing the water's index for each added environment and increasing the material array's size by the amount of added environments. Read more about the importance of the hit-indices in [Lighting General Information](lighting/generalInformation.md).
 
 ---
 

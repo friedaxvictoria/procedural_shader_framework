@@ -22,11 +22,14 @@ void backAndForth_float(float speed, out float3x3 mat)
 ## The Parameters
 
 ### Inputs:
-- ```float speed```: The speed with which the translation is applied
-> *ShaderGraph default value*: 1
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `speed`        | float   | Speed with which the translation is applied <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
 
 ### Outputs:
-- ```float3x3 mat```: The rotation matrix which __needs to be__ plugged into the [Camera Matrix](cameraMatrix.md) before it can be used within the rest of the pipeline. This is necessary to apply the rotation matrix to the ray origin and to compute the correct camera matrix.
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `mat`        | float3x3   | Transformation matrix which __needs to be__ plugged into the [Camera Matrix](cameraMatrix.md) before it can be used within the rest of the pipeline. This is necessary to apply the transformation matrix to the ray origin and to compute the correct camera matrix |
 
 ---
 
@@ -35,11 +38,15 @@ void backAndForth_float(float speed, out float3x3 mat)
 === "Visual Scripting"
     Find the node at `PSF/Camera/Back and Forth`
 
-    ![Unity Back And Forth Camera](../images/backAndForth.png){ width="400" }
+    <figure markdown="span">
+        ![Unity Back And Forth Camera](../images/camera/backAndForth.png){ width="400" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---
 
+ADD LINK
 Find the original shader code [here](unity/cameraMatrix.md).

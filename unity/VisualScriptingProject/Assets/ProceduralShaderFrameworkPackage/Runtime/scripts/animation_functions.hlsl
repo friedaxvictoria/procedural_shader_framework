@@ -36,10 +36,10 @@ void rotateViaMouse_float(out float3x3 mat)
 }
 
 //a camera animation ALWAYS has to end with this node!!
-void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPosition, out float3x3 cameraMatrix)
+void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float3 lookAtPosition, out float3x3 cameraMatrix)
 {
     float3x3 combinedMatrix = mul(mat1, mat2);
-    _rayOrigin = mul(float3(0, 0, distance), combinedMatrix);
+    _rayOrigin = mul(_rayOrigin, combinedMatrix);
     cameraMatrix = computeCameraMatrix(lookAtPosition, _rayOrigin, combinedMatrix);
 }
 

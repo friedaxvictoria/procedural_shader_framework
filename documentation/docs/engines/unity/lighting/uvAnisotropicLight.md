@@ -40,21 +40,29 @@ float3 lightingColor)
 
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `hitPosition`   | float4   | World-space surface hit position; `w` holds the raymarch step or distance |
+| `hitPosition` <img width=50/>   | float4   | World-space surface hit position; `w` holds the raymarch step or distance |
 | `normal`        | float3   | Surface normal at the hit location |
 | `hitIndex`      | float    | Index used to fetch object material properties |
-| `uv`            | float2   | UV coordinates used to define local tangent direction |
+| `uv`            | float2   | UV coordinates used to define local tangent direction; for this framework the *fragment coordinates* from [Fragment Coordinates](../basics/fragCoords.md) can be used |
 | `lightPosition` | float3   | World-space position of the light source |
 
-#### **Output**
-- `float3 lightingColor` — RGB lighting result including anisotropic specular highlights and standard diffuse.
+The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).
+
+### Output
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `lightingColor` <img width=50/>   | float3   | RGB lighting result including anisotropic specular highlights and standard diffuse |
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"  
-    Find the node at ```PSF/Lighting/UVAnisotropicLight```
+    Find the node at ```PSF/Lighting/UV Anisotropic Lighting```
+
+    <figure markdown="span">
+        ![Unity UV Anisotropic Lighting](../images/lighting/UVAnisotropic.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"  
     Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/lighting_functions.hlsl"```
@@ -65,3 +73,7 @@ float3 lightingColor)
     float3 lightColor;
     applyUVAnisotropicLighting_float(hitPos, surfaceNormal, objectIndex, uvCoords, lightPos, lightColor);
     ```
+
+---
+
+This is an engine-specific implementation without a shader-basis.

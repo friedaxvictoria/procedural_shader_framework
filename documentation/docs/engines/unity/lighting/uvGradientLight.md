@@ -31,20 +31,28 @@ void applyUVGradientLighting_float(float4 hitPosition, float3 normal, float2 uv,
 
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `hitPosition`   | float4   | World position of the surface hit; the w-component is typically the raymarch distance |
+| `hitPosition`  <img width=50/>  | float4   | World position of the surface hit; the w-component is typically the raymarch distance |
 | `normal`        | float3   | Surface normal at the hit point |
-| `uv`            | float2   | UV coordinates used for gradient calculation |
+| `uv`            | float2   | UV coordinates used for gradient calculation; for this framework the *fragment coordinates* from [Fragment Coordinates](../basics/fragCoords.md) can be used |
 | `lightPosition` | float3   | World-space position of the light source |
 
-#### **Output**
-- `float3 lightingColor` — Final RGB lighting result using UV-based color gradients and diffuse shading.
+The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).
+
+### Output
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `lightingColor`  <img width=50/>  | float3   | Final RGB lighting result using UV-based color gradients and diffuse shading |
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"  
-    Find the node at ```PSF/Lighting/UVGradientLight```
+    Find the node at ```PSF/Lighting/UV Gradient Lighting```
+
+    <figure markdown="span">
+        ![Unity UV Gradient Lighting](../images/lighting/UVGradient.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"  
     Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/lighting_functions.hlsl"```
@@ -55,3 +63,6 @@ void applyUVGradientLighting_float(float4 hitPosition, float3 normal, float2 uv,
     float3 lightColor;
     applyUVGradientLighting_float(hitPos, surfaceNormal, uvCoords, float3(1, 4, -1), lightColor);
     ```
+---
+
+This is an engine-specific implementation without a shader-basis.

@@ -5,6 +5,8 @@
 
 This function computes the normal of the water surface at a given position. It can be used to adjust an objects orientation to match up with the water. 
 
+> Due to the normal of the water surface changing very rapidly, an approach was implemented that samples four normals with a distance of **sampleRadius** to the position in the x-z-plane. Their average is taken. To additionally smooth out the rapid change, the normal's influence can be adjusted.
+
 ---
 
 ## The Code
@@ -110,21 +112,22 @@ void adaptableNormal_float(float3 position, float3 offset, float influence, floa
 }
 ````
 
-Due to the normal of the water surface changing very rapidly, an approach was implemented that samples four normals with a distance of **sampleRadius** to the position. Their average is taken. To additionally smooth out the rapid change, the normal's influence can be adjusted.
-
 ---
 
 ## The Parameters
 
 ### Inputs:
-- ```float3 position```: The position at which the normal is to be sampled
-- ```float3 offset```: An offset axis that is added to the computed normal to allow for object rotation's to be applied on top of this normal
-- ```float influence```: The amount with which the water's normal contributes to the output. Typically a value between 0 and 1.
-> *ShaderGraph default value*: 1
-- ```float sampleRadius```: The distance at which four normals are sampled in x- and z-direction
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `position`  <img width=50/>  | float3   |  Position at which the normal is to be sampled |
+| `offset`  | float3   |  Offset axis that is added to the computed normal to allow for object rotation's to be applied on top of this normal |
+| `influence` | float   |  Amount with which the water's normal contributes to the output. Typically a value between 0 and 1 <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
+| `sampleRadius`  | float   |  Distance at which four normals are sampled in x- and z-direction |
 
 ### Outputs:
-- ```float3 normal```: The adjusted normal at the inputted position. The vector can be used as an axis for an SDF function (e.g. [Sphere](unity/cameraMatrix.md)). The normal is not normalised due to the normalisation occuring in later computations.
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `normal` | float3   |  Adjusted normal at the inputted position. The vector can be used as an axis for an SDF function (e.g. [Sphere](../sdfs/sphere.md)). The normal is not normalised due to the normalisation occuring in later computations
 
 > To get the true normal at a given position, set ```influence=1``` and ```sampleRadius=0```.
 
@@ -135,11 +138,14 @@ Due to the normal of the water surface changing very rapidly, an approach was im
 === "Visual Scripting"
     Find the node at `PSF/Environments/Water Normal`
     
-    ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Water Normal](../images/water/waterNormal.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---
 
-This is an engine-specific implementation without a shader-basis. The original helper functions can be found [here](../../../shaders/scenes/water_surface.md).
+This is an engine-specific extension to the shader code's water shader which can be found [here](../../../shaders/scenes/water_surface.md).

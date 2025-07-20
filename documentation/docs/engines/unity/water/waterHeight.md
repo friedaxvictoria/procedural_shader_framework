@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function computes the height of the water environment using raymarching. This is useful to place objects on the water's surface.
+This function computes the height of the water environment using raymarching. It takes an arbitrary input position and returns that very position moved to the correct height. This is useful to place objects on the [Water Surface](waterSurface.md).
 
 ---
 
@@ -56,22 +56,20 @@ This function computes the height of the water environment using raymarching. Th
     ````
 
 ```` hlsl
-void sampleHeightField_float(float3 position, out float3 heightPosition)
+void sampleHeightField_float(float3 seedPosition, out float3 heightPosition)
 {
-    float y = position.y;
-    
-    //binary search or Newton-Raphson style iteration
+    float y = 0;
     float stepSize = 0.05; 
 
     for (int i = 0; i < 100; i++)
     {
-        position.y = y;
-        float height = computeWave(position);
+        seedPosition.y = y;
+        float height = computeWave(seedPosition);
         if (height < 0.01)
             break;
         y -= stepSize;
     }
-    heightPosition = float3(position.x, y, position.z);
+    heightPosition = float3(seedPosition.x, y, seedPosition.z);
 }
 ````
 
@@ -80,10 +78,14 @@ void sampleHeightField_float(float3 position, out float3 heightPosition)
 ## The Parameters
 
 ### Inputs:
-- ```float3 position```: A seed position for which the height of the water surface is computed.
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `seedPosition`  <img width=50/>  | float3   |  Seed position for which the height of the water surface is computed |
 
 ### Outputs:
-- ```float3 heightPosition```: The original position moved to the correct height of the water. This position can be plugged into the position-input of an SDF function (e.g. [Sphere](unity/cameraMatrix.md)) or lighting functions (e.g. [Point Light](unity/cameraMatrix.md)).
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `heightPosition`  <img width=100/>  | float3   |  Original position moved to the correct height of the water. This position can be plugged into the position-input of an SDF function (e.g. [Sphere](../sdfs/sphere.md)) or lighting functions (e.g. [Point Light](../lighting/pointLight.md)) in order to place then on top of the water's surface. |
 
 ---
 
@@ -92,11 +94,14 @@ void sampleHeightField_float(float3 position, out float3 heightPosition)
 === "Visual Scripting"
     Find the node at `PSF/Environments/Water Height Field`
     
-    ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Water Height Field](../images/water/waterHeight.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---
 
-This is an engine-specific implementation without a shader-basis. The original helper functions can be found [here](../../../shaders/scenes/water_surface.md).
+This is an engine-specific extension to the shader code's water shader which can be found [here](../../../shaders/scenes/water_surface.md).
