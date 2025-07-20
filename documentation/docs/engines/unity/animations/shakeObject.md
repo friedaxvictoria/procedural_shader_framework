@@ -1,4 +1,7 @@
-# Shake Object
+<div class="container">
+    <h1 class="main-heading">Shake Object</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function creates a linear shaking animation on objects by changing its position. It can be applied to SDFs and lights.
 
@@ -26,18 +29,18 @@ void shakeObject_float(float3 seedPosition, float intensity, float speed, out fl
 ## The Parameters
 
 ### Inputs:
-- ```float3 seedPosition```: The initial position of the object
-- ```float intensity```: The intensity of the shaking
-- ```float speed```: The speed with which the position change is applied
-> *ShaderGraph default value*: 1
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `seedPosition`   | float3   | Initial position of the object |
+| `intensity`        | float   | Intensity of the shaking <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
+| `speed`        | float   | Speed with which the position change is applied <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
 
-> Play around by adding [tweening](unity/cameraMatrix.md) to intensity and speed to create a more intricate animation.
-
+> Play around by adding [Tweening](tweening.md) to intensity and speed to create a more intricate animation.
 
 ### Outputs:
-- ```float3 position```: The animated position of the object which can directly be plugged into the inputs of an SDF function (e.g. [Sphere](unity/cameraMatrix.md)) or lighting functions (e.g. [Point Light](unity/cameraMatrix.md)).
-
-
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `position`   | float3   |  Current position of the object which can directly be plugged into the inputs of an SDF function (e.g. [Sphere](../sdfs/sphere.md)) or lighting functions (e.g. [Point Light](../lighting/pointLight.md)). |
 
 ---
 
@@ -46,9 +49,12 @@ void shakeObject_float(float3 seedPosition, float intensity, float speed, out fl
 === "Visual Scripting"
     Find the node at `PSF/Animation/Shake Object`
 
-    ![Unity Translate Camera](../images/shakeObject.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Shake Object](../images/animations/shakeObject.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

@@ -1,4 +1,7 @@
-# Blinn-Phong Lighting
+<div class="container">
+    <h1 class="main-heading">Blinn-Phong Lighting</h1>
+    <blockquote class="author">by Utku Alkan</blockquote>
+</div>
 
 This function implements the Blinn-Phong lighting model using per-pixel calculations. It computes diffuse and specular reflections based on the surface normal, view direction, and light direction. A small ambient component is added for minimal base illumination.
 

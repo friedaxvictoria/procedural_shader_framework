@@ -1,4 +1,7 @@
-# Camera Matrix
+<div class="container">
+    <h1 class="main-heading">Camera Matrix</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function computes the camera matrix based on two input matrices. It is required after a camera animation is applied. 
 

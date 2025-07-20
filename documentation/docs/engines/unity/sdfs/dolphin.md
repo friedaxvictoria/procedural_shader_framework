@@ -1,4 +1,7 @@
-# SDF Dolphin
+<div class="container">
+    <h1 class="main-heading">SDF Dolphin</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function creates an internal instance of an SDF-based dolphin. In order for the cube to be visible in the final output, [SDF Raymarching](...) and an arbitrary lighting function has to be included. 
 
@@ -172,31 +175,6 @@ For further information of the implementations of SDFs in Unity refer to [Genera
     ```
 
 ``` hlsl
-void addSDF(float index, float type, float3 position, float3 size, float radius, float3 axis, float angle, float noise, float3 baseColor, float3 specularColor, float specularStrength,
-float shininess, float timeOffset, float speed){
-    for (int i = 0; i <= MAX_OBJECTS; i++)
-    {
-        if (i == index)
-        {
-            _sdfType[i] = type;
-            _sdfPosition[i] = position;
-            _sdfSize[i] = size;
-            _sdfRadius[i] = radius;
-            _sdfRotation[i] = computeRotationMatrix(normalize(axis), angle * PI / 180);
-            _sdfNoise[i] = noise;
-            
-            _objectBaseColor[i] = baseColor;
-            _objectSpecularColor[i] = specularColor;
-            _objectSpecularStrength[i] = specularStrength;
-            _objectShininess[i] = shininess;
-
-            _timeOffsetDolphin[i] = timeOffset;
-            _speedDolphin[i] = speed;
-            break;
-        }
-    }
-}
-
 void addDolphin_float(float index, float3 position, float timeOffset, float speed, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
 float shininess, out float indexOut)
 {

@@ -1,4 +1,7 @@
-# Minimum
+<div class="container">
+    <h1 class="main-heading">Minimum</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function outputs the hit position, normal, and hit index out of two sets of inputs based on which hit position is closer to the camera. It is used **before** all the lighting functions are applied. 
 

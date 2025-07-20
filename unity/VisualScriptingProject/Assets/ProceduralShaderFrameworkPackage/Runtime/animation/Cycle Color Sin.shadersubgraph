@@ -98,7 +98,7 @@
         },
         "preventRotation": false
     },
-    "m_Path": "PSF/Animation/Color",
+    "m_Path": "PSF/Animation",
     "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
@@ -174,7 +174,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "changingColorSin (Custom Function)",
+    "m_Name": "cycleColorSin (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -208,7 +208,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "changingColorSin",
+    "m_FunctionName": "cycleColorSin",
     "m_FunctionSource": "a20e88266f691c5419d6eb39bed7e6fa",
     "m_FunctionBody": "Enter function body here..."
 }

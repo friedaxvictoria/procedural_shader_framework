@@ -1,4 +1,7 @@
-# Sample Water Normal
+<div class="container">
+    <h1 class="main-heading">Sample Water Normal</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function computes the normal of the water surface at a given position. It can be used to adjust an objects orientation to match up with the water. 
 

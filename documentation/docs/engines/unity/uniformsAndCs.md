@@ -1,10 +1,13 @@
-# Uniforms and C\#
+<div class="container">
+    <h1 class="main-heading">Uniforms and C#</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 Uniforms in Unity are set via a custom C# file. It is essential to add them to the shader as they are responsible for:
 
-- Setting the ray origin/camera position: As the ray origin is defined as a [Global Variable](globalVariables.md), it has to be initialised. Unity does not take initialisations outside of hlsl-functions into account. Therefore, to enable the most univeral initialisation, the ray origin is defined via a uniform. **This potentially leads to shaders that do not show the desired output. See [Bug: Empty Shader](#bug-empty-shader) to learn more about this.**
-- Setting the global variable **_raymarchStoppingCriterium** for the reason mentioned above. This variable defines the stopping criterium after which the raymarching of the [Water Shader](camera/cameraMatrix.md) or the [SDF Raymarching](SDFs/raymarching.md) is terminated. 
-- Providing the mouse position to the [Mouse-Based Movement](camera/mouseBasedMovement.md). This is necessary since Unity's hlsl support has no built-in mouse variable.
+- Setting the ray origin/camera position: As the ray origin is defined as a [Global Variable](globalVariables.md), it has to be initialised. Unity ShaderGraph does not take initialisations outside of hlsl-functions into account. Therefore, to initialise it, the ray origin is defined via a uniform. **This potentially leads to shaders which do not show the desired output. See [Bug: Empty Shader](#bug-empty-shader) to learn more about this.**
+- Setting the global variable **_raymarchStoppingCriterium** for the reason mentioned above. This variable defines the stopping criterium after which the raymarching of the [Water Shader](water/waterSurface.md) or the [SDF Raymarching](sdfs/raymarching.md) is terminated. 
+- Providing the mouse position to the [Mouse-Based Camera Rotation](camera/mouseBasedMovement.md). This is necessary since Unity's hlsl support has no built-in mouse variable.
 - Enabling translations through the scene using WASDQE.  
 
 The C# file is connected to the prefab *ShaderUniformControl*. Read about how to include the prefab in a scene in [Overview](../unity.md).
@@ -109,11 +112,12 @@ Within the inspector of the *ShaderUniformControl*:
 - Alter *Movement Speed* to adjusted the general speed of the movement. 
 - Adjust *Ray Origin* to change the camera position. Be aware that this only leads to lasting changes if neither the *Allow Movement* is used, nor is there a camera animation integrated within the shader.
 
-## Integration
-
+    <figure markdown="span">
+        ![Inspector Of The Prefab](images/prefab.png){ width="300" }
+    </figure>
 
 ## Bug: Empty Shader
 
-If the shader has been composed and compiled for the first time but the only a blank material is visible in Scene mode, it could be due to the initialisation of essential parameters using uniform variables. All nodes using **_rayOrigin** and **_raymarchStoppingCriterium** are affected. Thus, lighting such as the [Sunrise Lighting](lighting/sunriseLight.md) might correctly be rendered. 
+If a custom shader has been composed and compiled for the first time but the only a blank material is visible in Scene-mode, it could be due to the lack of initialisation of essential parameters using uniform variables. All nodes using **_rayOrigin** and **_raymarchStoppingCriterium** are affected. On the other hand, functions that use neither, such as the [Sunrise](lighting/sunriseLight.md), are typically correctly rendered. 
 
-To resolve this issue, simply run the scene once. By running the scene, the C# file will be executed and the uniform variables will be set. The uniforms will remain even after the Game mode has been exited.
+To resolve this issue, simply run the scene once. By running the scene, the C# file connected to the prefab in the scene will be executed and the uniform variables will be set. The uniforms will remain even after the Game-mode has been exited.

@@ -1,4 +1,7 @@
-# Toon Lighting
+<div class="container">
+    <h1 class="main-heading">Toon Lighting</h1>
+    <blockquote class="author">by Utku Alkan</blockquote>
+</div>
 
 This function implements a stylized toon shading model using stepped diffuse bands instead of smooth gradients. It divides diffuse reflection into discrete levels and combines it with a minimal ambient term. This creates a cartoon-like appearance with clear lighting bands and no specular highlights.
 

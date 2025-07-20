@@ -1,4 +1,7 @@
-# Sample Water Height
+<div class="container">
+    <h1 class="main-heading">Sample Water Height</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function computes the height of the water environment using raymarching. This is useful to place objects on the water's surface.
 

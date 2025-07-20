@@ -1,4 +1,7 @@
-# Fresnel Lighting
+<div class="container">
+    <h1 class="main-heading">Fresnel Lighting</h1>
+    <blockquote class="author">by Utku Alkan</blockquote>
+</div>
 
 This function applies Fresnel-based lighting using Schlick’s approximation to simulate view-dependent reflectivity. It combines Lambertian diffuse shading with a specular fresnel effect that intensifies as the viewing angle approaches grazing.
 

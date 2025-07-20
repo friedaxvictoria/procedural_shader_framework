@@ -1,6 +1,9 @@
-# Cycle Color
+<div class="container">
+    <h1 class="main-heading">Cycle Color</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
-This function applies a colour animation to an arbitrary input colour. It cycles through colours based on a sinus computation.
+This function applies a color animation to an arbitrary input color. It cycles through colors based on a sinus computation.
 
 ---
 
@@ -14,7 +17,7 @@ void changingColorSin_float(float3 seedColor, float speed, out float3 color)
 }
 ```
 
-The computation of the root color is required to ensure that the seed color within the cycle of colors. It is computed by solving for x when _Time.y = 0:
+The computation of the root color is required to ensure that the seed color is within the cycle of colors. It is computed by solving for x when _Time.y = 0:
 
 ```seedColor = 0.5 + 0.5 * sin(_Time.y * speed * x)```
 
@@ -23,14 +26,17 @@ The computation of the root color is required to ensure that the seed color with
 ## The Parameters
 
 ### Inputs:
-- ```float3 seedColor```: The initial color of the object
-- ```float3 speed```: The speed with which the color is changed
-> *ShaderGraph default value*: 1
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `seedColor`   | float3   | Initial color of the object|
+| `speed`        | float   | Speed with which the color is changed <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
 
 ### Outputs:
-- ```float3 color```: The current color of the object which can directly be plugged into the inputs of SDF functions (e.g. [Sphere](unity/cameraMatrix.md)) or lighting functions (e.g. [Point Light](unity/cameraMatrix.md)).
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `color`   | float3   | Current color of the object which can directly be plugged into the inputs of SDF functions (e.g. [Sphere](unity/cameraMatrix.md)) or lighting functions (e.g. [Point Light](unity/cameraMatrix.md)).|
 
-> To create organic and interesting effects, the function can also be applied to position parameters. See the tutorial on the [Safety Buoy](unity/cameraMatrix.md) for this.
+> To create organic and interesting effects, the function can also be applied to position parameters. See the tutorial on the [Safety Buoy](../tutorials/safetyBuoy.md) for this.
 
 ---
 
@@ -39,9 +45,12 @@ The computation of the root color is required to ensure that the seed color with
 === "Visual Scripting"
     Find the node at `PSF/Animation/Cycle Color Sin`
 
-    ![Unity Translate Camera](../images/cycleColor.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Cycle Color](../images/animations/cycleColor.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

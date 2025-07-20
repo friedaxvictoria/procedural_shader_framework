@@ -1,4 +1,7 @@
-# Fragment Coordinates
+<div class="container">
+    <h1 class="main-heading">Fragment Coordinates</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function computes fragment coordinates ranging from 0 to 1 based on input coordinates. This function is the basis for all others and should always be included in a shader.
 

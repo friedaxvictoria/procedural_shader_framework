@@ -1,4 +1,7 @@
-# Sunrise Lighting
+<div class="container">
+    <h1 class="main-heading">Sunrise</h1>
+    <blockquote class="author">by Utku Alkan</blockquote>
+</div>
 
 This function computes realistic atmospheric lighting based on a simplified earth-sun model. It simulates sunlight scattering through the atmosphere and includes diffuse and specular reflections using a Phong lighting model. If the ray hits the sky (escapes before hitting geometry), it returns the atmospheric color.
 

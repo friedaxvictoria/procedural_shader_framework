@@ -1,6 +1,9 @@
-# Helper Functions
+<div class="container">
+    <h1 class="main-heading">Helper Functions</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
-This sections gives an overview of the universal helper functions used across Unity's integration. Within the ShaderGraph implementation they are not exposed and solely used to implement the custom nodes. However, if the standard scripting is used, they can be accessed and used for custom computations.
+This sections gives an overview of the universal helper functions used across Unity's integration. Within the ShaderGraph implementation they are not exposed and solely used to implement the custom nodes. However, if the standard scripting with ShaderLab is used, they can be accessed and used for custom computations.
 
 ---
 
@@ -21,14 +24,16 @@ float3x3 computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)
 ## The Parameters - Camera Matrix
 
 ### Inputs:
-- ```float3 lookAtPosition```: The focal point of the camera
-> *ShaderGraph value*: world origin
-- ```float3 eye```: The position of the camera - It is generally recommended to use the global variable **_rayOrigin** for this computations. 
-> *ShaderGraph value*: _rayOrigin
-- ```float3x3 mat```: A transformation matrix
+| Name | Type     | Description |
+|-----------------------|----------|-------------|
+| `lookAtPosition` <img width=50/>| float3   | Focal point of the camera |
+| `eye`        | float3   | Position of the camera - It is generally recommended to use the global variable **_rayOrigin** for this computations |
+| `mat`            | float3x3   | Transformation matrix |
 
 ### Outputs:
-- ```float3x3```: The camera matrix 
+| Type     | Description |
+|----------|-------------|
+| float3x3   | Camera matrix |
 
 ---
 
@@ -52,14 +57,21 @@ float3x3 computeRotationMatrix(float3 axis, float angle)
 ## The Parameters - Rotation Matrix
 
 ### Inputs:
-- ```float3 axis```: The axis around which to rotate
-- ```float3 angle```: The angle at which to rotate
+| Name | Type     | Description |
+|-----------------------|----------|-------------|
+| `axis`  | float3   | Axis around which to rotate |
+| `angle`        | float3   | Angle at which to rotate |
+
 ### Outputs:
-- ```float3x3```: The rotation matrix 
+| Type     | Description |
+|----------|-------------|
+| float3x3   | Rotation matrix |
 
 ---
 
 ## Access
+
+!Utku Input
 
 If standard scripting is used, the helper functions can be included and used with: 
 ```

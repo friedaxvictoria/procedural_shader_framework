@@ -70,18 +70,8 @@ void shakeObject_float(float3 seedPosition, float intensity, float speed, out fl
     position = seedPosition + jitter;
 }
 
-void cycleColor_float(float3 seedColor, float speed, out float3 color)
-{
-    float time = _Time.y * speed;
-    float hue = frac(time);
-    float3 hsv = float3(hue, 1.0, 1.0);
-    float3 rgb = saturate(abs(frac(hsv.x + float3(0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0);
-    
-    color = rgb * seedColor;
-}
-
 //inspired by inspo: https://www.shadertoy.com/view/fl3fRf 
-void changingColorSin_float(float3 seedColor, float speed, out float3 color)
+void cycleColorSin_float(float3 seedColor, float speed, out float3 color)
 {
     float3 rootColor = asin(2 * seedColor - 1);
     color = 0.5 + 0.5 * sin(_Time.y * speed * rootColor);

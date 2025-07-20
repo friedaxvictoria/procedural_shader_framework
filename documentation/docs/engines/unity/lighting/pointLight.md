@@ -1,4 +1,7 @@
-# Point Lighting
+<div class="container">
+    <h1 class="main-heading">Point Light</h1>
+    <blockquote class="author">by Utku Alkan</blockquote>
+</div>
 
 This function simulates a point light source with distance-based attenuation and optional atmospheric decay. It casts a ray through the scene and accumulates light color based on distance from the point light, then applies Phong-based shading at the surface hit point.
 

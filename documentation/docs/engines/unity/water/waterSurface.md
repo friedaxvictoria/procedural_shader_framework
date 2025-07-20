@@ -1,4 +1,7 @@
-# Water Surface
+<div class="container">
+    <h1 class="main-heading">Water Surface</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function computes a water surface through raymarching. 
 

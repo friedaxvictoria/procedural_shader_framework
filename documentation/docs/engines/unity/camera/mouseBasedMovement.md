@@ -1,4 +1,7 @@
-# Mouse-Based Camera Rotation
+<div class="container">
+    <h1 class="main-heading">Mouse-Based Camera Rotation</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function imitates a camera rotation based on the mouse position. With a left mouse-click the world can be rotated in the x- and y-direction. 
 

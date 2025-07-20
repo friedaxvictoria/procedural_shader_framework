@@ -1,4 +1,7 @@
-# Camera Rotation
+<div class="container">
+    <h1 class="main-heading">Camera Rotation</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
 This function imitates a camera rotation by changing the ray origin and the camera matrix. The rotation will always be __centred at the world origin__. The distance at which the rotation is applied is defined by the __distance between the world origin and the current ray origin__.
 

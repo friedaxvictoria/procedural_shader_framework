@@ -1,4 +1,7 @@
-# Lambert Lighting
+<div class="container">
+    <h1 class="main-heading">Lambert Lighting</h1>
+    <blockquote class="author">by Utku Alkan</blockquote>
+</div>
 
 This function applies simple Lambertian diffuse lighting with a fixed white light source. It computes the diffuse reflection based on the angle between the light direction and surface normal, and adds a small constant ambient term. This is a lightweight lighting model ideal for unlit or stylized shading.
 

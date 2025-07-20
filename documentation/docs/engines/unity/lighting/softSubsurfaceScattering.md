@@ -1,4 +1,7 @@
-# Soft Subsurface Scattering (SSS) Lighting
+<div class="container">
+    <h1 class="main-heading">Soft Subsurface Scattering (SSS) Lighting</h1>
+    <blockquote class="author">by Utku Alkan</blockquote>
+</div>
 
 This function simulates a simple soft subsurface scattering (SSS) effect by adding light transmitted through the object’s surface. It enhances realism by combining standard Lambertian diffuse shading with a soft backlighting term.
 

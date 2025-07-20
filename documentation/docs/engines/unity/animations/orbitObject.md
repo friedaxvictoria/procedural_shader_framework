@@ -1,6 +1,9 @@
-# Orbit Object Around Point
+<div class="container">
+    <h1 class="main-heading">Orbit Object Around Point</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
-This function rotates an objects around a point. It can be applied to SDFs and lights.
+This function rotates an object around a point. It can be applied to SDFs and lights.
 
 ---
 
@@ -26,23 +29,24 @@ void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axi
 ## The Parameters
 
 ### Inputs:
-- ```float3 seedPosition```: The initial position of the object
-- ```float3 centre```: The central position around which the object obits
-> *ShaderGraph default value*: world origin
-- ```float3 axis```: The axis around which the object rotates
-> *ShaderGraph default value*: ```float3(0,1,0)```
-- ```float radius```: The distance at which the object rotates around the centre point
-- ```float3 speed```: The speed with which the rotation is applied
-> *ShaderGraph default value*: 1
-- ```float angleOffset```: An optional offset to the rotation defined in degrees. This allows objects to use the same rotation at different starting positions.
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `seedPosition`  <img width=50/>  | float3   | Initial position of the object|
+| `centre`        | float3   | Central position around which the object obits |
+| `axis`   | float3   | Axis around which the object rotates <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|
+| `radius`   | float   | Distance at which the object rotates around the centre point|
+| `speed`   | float   | Speed with which the rotation is applied <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
+| `angleOffset`   | float   | =ptional offset to the rotation defined in degrees. This allows objects to use the same rotation at different starting positions.|
 
 > By setting the radius to 0, a self-rotation of the object can be achieved.
 
 ### Outputs:
-- ```float3 position```: The current position of the object 
-- ```float angle```: The angle defining the self-rotation of the object
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `position`   | float3   | Current position of the object |
+| `angle`        | float   | Angle defining the self-rotation of the object |
 
-The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphere](unity/cameraMatrix.md)) or lighting functions (e.g. [Point Light](unity/cameraMatrix.md)). As lighting functions are not susceptible to changes of the angle, it only requires the **position** as input.
+The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphere](../sdfs/sphere.md)) or lighting functions (e.g. [Point Light](../lighting/pointLight.md)). As lighting functions are not susceptible to changes of the angle, it only requires the **position** as input.
 
 ---
 
@@ -51,9 +55,12 @@ The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphe
 === "Visual Scripting"
     Find the node at `PSF/Animation/Orbit Object Around Point`
 
-    ![Unity Translate Camera](../images/orbitObject.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Orbit Object](../images/animations/orbitObject.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

@@ -72,7 +72,7 @@ nav:
     - Global Variables: engines/unity/globalVariables.md
     - Helper Functions: engines/unity/helperFunctions.md
     - Uniforms and C#: engines/unity/uniformsAndCs.md
-    - Custom HLSL:
+    - The Integration:
       - Basics: 
         - Fragment Coordinates: engines/unity/basics/fragCoords.md
         - Combine Color: engines/unity/basics/combineColor.md
@@ -91,29 +91,29 @@ nav:
         - Hexagonal Prism: engines/unity/sdfs/hexPrism.md
         - Octahedron: engines/unity/sdfs/octahedron.md
         - Dolphin: engines/unity/sdfs/dolphin.md
+        - SDF Raymarching: engines/unity/sdfs/raymarching.md
       - Environments: 
         - Water Surface: engines/unity/water/waterSurface.md
         - Water Height: engines/unity/water/waterHeight.md
         - Water Normal: engines/unity/water/waterNormal.md
-      - Lighting: engines/unity.md
       - Animation: 
         - Orbit Object Around Point: engines/unity/animations/orbitObject.md
         - Shake Object: engines/unity/animations/shakeObject.md
         - Tweening: engines/unity/animations/tweening.md
         - Cycle Color: engines/unity/animations/colorAnimation.md
       - Lighting:
-        - Sunrise Light: engines/unity/lighting/sunriseLight.md 
+        - Sunrise: engines/unity/lighting/sunriseLight.md 
         - Point Light: engines/unity/lighting/pointLight.md
-        - Lambertian Light: engines/unity/lighting/lambLight.md
-        - Blinn Phong Light: engines/unity/lighting/blinnPhongLight.md
-        - Toon Light: engines/unity/lighting/toonLight.md
-        - Rim Light: engines/unity/lighting/rimLight.md
+        - Lambertian Lighting: engines/unity/lighting/lambLight.md
+        - Blinn Phong Lighting: engines/unity/lighting/blinnPhongLight.md
+        - Toon Lighting: engines/unity/lighting/toonLight.md
+        - Rim Lighting: engines/unity/lighting/rimLight.md
         - Soft Subsurface Scattering: engines/unity/lighting/softSubsurfaceScattering.md
-        - Fresnel Light: engines/unity/lighting/fresnelLight.md
-        - UV Gradient Light: engines/unity/lighting/uvGradientLight.md
-        - UV Anisotropic Light: engines/unity/lighting/uvAnisotropicLight.md
+        - Fresnel Lighting: engines/unity/lighting/fresnelLight.md
+        - UV Gradient Lighting: engines/unity/lighting/uvGradientLight.md
+        - UV Anisotropic Lighting: engines/unity/lighting/uvAnisotropicLight.md
     - Tutorials:
-      - Christmas Tree: engines/unity.md
-      - Safety Buoy: engines/unity.md
+      - Christmas Tree: engines/unity/tutorials/christmasTree.md
+      - Safety Buoy: engines/unity/tutorials/safetyBuoy.md
   - Unreal Engine: engines/unreal.md
     
