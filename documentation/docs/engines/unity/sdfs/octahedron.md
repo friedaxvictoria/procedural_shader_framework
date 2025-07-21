@@ -61,9 +61,12 @@ float shininess, float noise, out int indexOut)
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
 
----
+    Example Usage
+
+    ```hlsl
+    addOctahedron_float(index, float3(-2, 1, -6), 1.2, float3(1, 0, 0), 45.0, float3(0.7, 0.2, 0.5), float3(1, 1, 1), 0.5, 32.0, 0.05, index);
+    ```
 
 This is an engine-specific implementation without a shader-basis.

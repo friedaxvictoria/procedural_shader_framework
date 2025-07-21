@@ -61,5 +61,22 @@ float shininess, float timeOffset, float speed){
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Some code
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
+
+
+    Example Usage
+
+    ```hlsl
+    float index;
+
+    addSphere_float(0, float3(-2,0,-5), float3(2,2,2), float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, 0, index);
+
+    addRoundBox_float(index, float3(5,0,-5), float3(2,2,2), 1, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), float3(0.2,0.8,0.8), 2, 1, 0, index);
+
+    addTorus_float(index, float3(0,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+    addTorus_float(index, float3(-4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+    addTorus_float(index, float3(-1.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+    addTorus_float(index, float3(4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+
+    addDolphin_float(index, float3(3,-0.5,8), 1, 2, float3(0, 1, 0), 45, float3(0.2,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
+    ```

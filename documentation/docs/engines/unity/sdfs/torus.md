@@ -65,8 +65,15 @@ float shininess, float noise, out int indexOut)
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    addTorus_float(index, float3(0,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+    ```
+
 
 ---
 

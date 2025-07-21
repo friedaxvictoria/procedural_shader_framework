@@ -62,8 +62,13 @@ float shininess, float noise, out int indexOut)
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    addEllipsoid_float(index, float3(0, 1, -3), float3(1.5, 1.0, 0.5), float3(0, 1, 0), 0, float3(0.3, 0.6, 0.9), float3(1, 1, 1), 1.0, 32.0, 0.0, index);
+    ```
 
 ---
 

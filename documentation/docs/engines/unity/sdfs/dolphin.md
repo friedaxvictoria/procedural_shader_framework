@@ -216,8 +216,14 @@ float shininess, out int indexOut)
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    addDolphin_float(index, float3(3,-0.5,8), 1, 2, float3(0, 1, 0), 45, float3(0.2,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
+    ```
 
 ---
 

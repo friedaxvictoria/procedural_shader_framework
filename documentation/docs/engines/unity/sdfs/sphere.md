@@ -61,8 +61,15 @@ float shininess, float noise, out int indexOut)
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    addSphere_float(index, float3(-2,0,-5), float3(2,2,2), float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, 0, index);
+    ```
+
 
 ---
 

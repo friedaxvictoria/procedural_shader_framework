@@ -116,8 +116,14 @@ float condition, float3x3 cameraMatrix, float numberSDFs, float2 fragmentCoordin
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    raymarch_float(1, camMat, index, uv, hitPos1, normal1, hitID1, rayDir1);
+    ```
 
 ---
 

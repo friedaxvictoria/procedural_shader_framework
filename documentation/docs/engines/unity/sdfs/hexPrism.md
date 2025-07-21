@@ -67,9 +67,13 @@ float shininess, float noise, out int indexOut)
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
 
+    Example Usage
+
+    ```hlsl
+    addHexPrism_float(index, float3(2, 0, -4), 3.0, float3(0, 1, 0), 30.0, float3(0.6, 0.3, 0.1), float3(1, 1, 1), 0.8, 16.0, 0.1, index);
+    ```
 ---
 
 This is an engine-specific implementation without a shader-basis.
