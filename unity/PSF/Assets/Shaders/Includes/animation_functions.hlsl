@@ -18,7 +18,7 @@ void backAndForth_float(float speed, out float3x3 mat)
     mat = float3x3(1, 0, 0, 0, 1, 0, 0, 0, abs(sin(t)));
 }
 
-void moveViaMouse_float(out float3x3 mat)
+void rotateViaMouse_float(out float3x3 mat)
 {
     float2 mouse = _mousePoint.xy / _ScreenParams.xy;
 
@@ -36,10 +36,10 @@ void moveViaMouse_float(out float3x3 mat)
 }
 
 //a camera animation ALWAYS has to end with this node!!
-void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPosition, out float3x3 cameraMatrix)
+void getCameraMatrix_float(float3x3 mat1, float3x3 mat2, float3 lookAtPosition, out float3x3 cameraMatrix)
 {
     float3x3 combinedMatrix = mul(mat1, mat2);
-    _rayOrigin = mul(float3(0, 0, distance), combinedMatrix);
+    _rayOrigin = mul(_rayOrigin, combinedMatrix);
     cameraMatrix = computeCameraMatrix(lookAtPosition, _rayOrigin, combinedMatrix);
 }
 
@@ -70,18 +70,8 @@ void shakeObject_float(float3 seedPosition, float intensity, float speed, out fl
     position = seedPosition + jitter;
 }
 
-void cycleColor_float(float3 seedColor, float speed, out float3 color)
-{
-    float time = _Time.y * speed;
-    float hue = frac(time);
-    float3 hsv = float3(hue, 1.0, 1.0);
-    float3 rgb = saturate(abs(frac(hsv.x + float3(0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0);
-    
-    color = rgb * seedColor;
-}
-
 //inspired by inspo: https://www.shadertoy.com/view/fl3fRf 
-void changingColorSin_float(float3 seedColor, float speed, out float3 color)
+void cycleColorSin_float(float3 seedColor, float speed, out float3 color)
 {
     float3 rootColor = asin(2 * seedColor - 1);
     color = 0.5 + 0.5 * sin(_Time.y * speed * rootColor);

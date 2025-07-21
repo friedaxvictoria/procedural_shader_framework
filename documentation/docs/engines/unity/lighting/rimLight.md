@@ -4,7 +4,9 @@
 </div>
 
 This function implements rim lighting, a non-photorealistic effect that highlights the edges of an object based on the view angle. It enhances silhouettes by boosting brightness where the view direction is nearly perpendicular to the surface normal. The effect is combined with ambient and base lighting, and uses the specular color to tint the rim.
-
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/examples/rimLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code

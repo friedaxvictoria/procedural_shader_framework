@@ -4,7 +4,9 @@
 </div>
 
 This function applies Lambertian diffuse lighting with a color gradient based on the surface's UV coordinates. The gradient interpolates from blue to orange depending on the `uv.y` value, creating visually interesting color variation across a surface. Ambient light is added for minimal base illumination.
-
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/examples/UVLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code
