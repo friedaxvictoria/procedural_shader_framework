@@ -41,6 +41,7 @@ Shaders that control movement over time, often using sine/cosine functions or ti
 - [TIE Fighter](animation/tie_fighter.md)
 - [Camera Orientation Setup Shader](animation/calcLookAtMatrix.md)
 - [SDF Animation](animation/sdf_animation_shader.md)
+- [Camera Animation](animation/Camera_Anim.md)
 
 
 ### ☁️ Noise Shaders  

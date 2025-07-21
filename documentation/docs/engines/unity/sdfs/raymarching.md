@@ -109,7 +109,7 @@ float condition, float3x3 cameraMatrix, float numberSDFs, float2 fragmentCoordin
 
     ![Unity Mouse-Based Camera Rotation](){ width="300" }
 
-    >Due to internal workings of the node, the condition-input is not required. Within the SubGraph a "Branch On Input Connection" node is used to determine whether a camera matrix was connected to its respective input. This in turn determines the condition-value.
+    >Due to internal workings of the node, the condition-input is not required. Within the SubGraph a *Branch On Input Connection* node is used to determine whether a camera matrix was connected to its respective input. This in turn determines the condition-value.
 
     ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
 

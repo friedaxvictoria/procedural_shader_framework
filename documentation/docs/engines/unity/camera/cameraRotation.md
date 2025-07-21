@@ -24,13 +24,15 @@ See [Helper Functions](../helperFunctions.md) to find out more about ```computeR
 ## The Parameters
 
 ### Inputs:
-- ```float3 axis```: The axis around which the camera rotates 
-> *ShaderGraph default value*: ```float3(0,1,0)```
-- ```float speed```: The speed with which the rotation is applied
-> *ShaderGraph default value*: 1
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `axis`        | float3  | Axis around which the camera rotates  <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|
+| `speed`        | float   | Speed with which the rotation is applied <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
 
 ### Outputs:
-- ```float3x3 mat```: The rotation matrix which __needs to be__ plugged into the [Camera Matrix](cameraMatrix.md) before it can be used within the rest of the pipeline. This is necessary to apply the rotation matrix to the ray origin and to compute the correct camera matrix.
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `mat`        | float3x3   | Transformation matrix which __needs to be__ plugged into the [Camera Matrix](cameraMatrix.md) before it can be used within the rest of the pipeline. This is necessary to apply the transformation matrix to the ray origin and to compute the correct camera matrix |
 
 ---
 
@@ -39,11 +41,15 @@ See [Helper Functions](../helperFunctions.md) to find out more about ```computeR
 === "Visual Scripting"
     Find the node at `PSF/Camera/Rotate Camera`
 
-    ![Unity Rotate Camera](../images/rotateCamera.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Rotate Camera](../images/camera/rotateCamera.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---
 
+ADD LINK
 Find the original shader code [here](unity/cameraMatrix.md).

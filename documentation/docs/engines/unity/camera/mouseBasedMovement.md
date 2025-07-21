@@ -37,10 +37,14 @@ See [Helper Functions](../helperFunctions.md) to find out more about ```computeR
 ## The Parameters
 
 ### Inputs:
-- None
+None
 
 ### Outputs:
-- ```float3x3 mat```: The final camera matrix that can be plugged into the [Water Shader](unity/cameraMatrix.md) or the [SDF Raymarching](unity/cameraMatrix.md). 
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `mat`        | float3x3   | Final camera matrix that can be plugged into the [Water Shader](../water/waterSurface.md) or the [SDF Raymarching](../sdfs/raymarching.md) |
+
+CHECK THIS
 > Contrary to other animation functions, this function does not need to be finished off with a computation of the [Camera Matrix](cameraMatrix.md). 
 
 ---
@@ -58,7 +62,9 @@ See [Helper Functions](../helperFunctions.md) to find out more about ```computeR
 === "Visual Scripting"
     Find the node at `PSF/Camera/Rotate Via Mouse`
 
-    ![Unity Mouse-Based Camera Rotation](../images/rotateViaMouse.png){ width="300" }
+    <figure markdown="span">
+        ![Unity Mouse-Based Camera Rotation](../images/camera/rotateViaMouse.png){ width="300" }
+    </figure>
 
 === "Standard Scripting"
     Include ...

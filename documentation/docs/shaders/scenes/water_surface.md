@@ -286,7 +286,5 @@ float highlight = clamp(fresnel * 1.5, 0.0, 1.0);
 ## Engine Integrations
 
 <div class="button-row">
-  <a class="md-button" href="../../../engines/godot">Godot</a>
   <a class="md-button" href="../../../engines/unity/water/waterSurface">Unity</a>
-  <a class="md-button" href="../../../engines/unreal">Unreal Engine</a>
-<div>
+</div>

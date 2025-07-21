@@ -102,6 +102,7 @@ nav:
         - Tweening: engines/unity/animations/tweening.md
         - Cycle Color: engines/unity/animations/colorAnimation.md
       - Lighting:
+        - General Information: engines/unity/lighting/generalInformation.md
         - Sunrise: engines/unity/lighting/sunriseLight.md 
         - Point Light: engines/unity/lighting/pointLight.md
         - Lambertian Lighting: engines/unity/lighting/lambLight.md

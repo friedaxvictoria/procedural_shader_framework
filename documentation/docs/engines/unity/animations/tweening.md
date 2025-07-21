@@ -270,10 +270,10 @@ To check the easings of the tween types [here](https://easings.net/).
     Find the node for 3D Tweening at ```PSF/Animation/3D Tweening```
 
     <figure markdown="span">
-        ![Unity 3D Tweening](../images/animations/3DTweening.png){ width="300" }
+        ![Unity 3D Tweening](../images/animations/3DTweening.png){ width="400" }
     </figure>
 
-    > The tween type can be provided by the tween value as an integer.
+    > The tween type can be provided by the tween value as a ``float``.
 
 === "Standard Scripting"
     Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/tween_functions.hlsl"```
@@ -288,4 +288,4 @@ To check the easings of the tween types [here](https://easings.net/).
     ```
 ---
 
-This is an engine-specific implementation without a shader-basis.
+This is an engine-specific implementation without a shader-basis. It combines an expands the shader library's [Translate and Pulse-Scale Animations](../../../shaders/animation/sdf_animation_shader.md).

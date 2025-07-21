@@ -41,17 +41,23 @@ float3 lightingColor)
 | `hitIndex`      | float    | Object/material index used to fetch shading parameters |
 | `lightPosition` | float3   | World-space position of the light source |
 
-The inputs are typically provided by the functions [SDF Raymarching](...) or [Water Surface](...).
+The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).
 
-#### **Output**
-- `float3 lightingColor` — Final RGB lighting result using Blinn-Phong shading.
+### Output
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `lightingColor`   | float3   | Final RGB lighting result using Blinn-Phong shading |
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"  
-    Find the node at ```PSF/Lighting/BlinnPhongLight```
+    Find the node at ```PSF/Lighting/Blinn Phong Lighting```
+
+    <figure markdown="span">
+        ![Unity Blinn Phong Lighting](../images/lighting/blinnPhong.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"  
     Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/lighting_functions.hlsl"```
@@ -62,3 +68,7 @@ The inputs are typically provided by the functions [SDF Raymarching](...) or [Wa
     float3 lightColor;
     applyBlinnPhongLighting_float(hitPos, surfaceNormal, objectIndex, float3(3, 6, -2), lightColor);
     ```
+
+---
+
+Find the original shader code [here](../../../shaders/lighting/lighting_functions.md). This basis was adapted to be compatible with Unity's workflow and to allow it to be modifyable within the framework.

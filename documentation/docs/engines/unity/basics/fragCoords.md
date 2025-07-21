@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function computes fragment coordinates ranging from 0 to 1 based on input coordinates. This function is the basis for all others and should always be included in a shader.
+This function computes fragment coordinates ranging from 0 to 1 based on input coordinates. As this function is responsible for computing the coordinates at which a fragement is computed, it is the basis for all others. **It should always be included in a shader.**
 
 ---
 
@@ -25,27 +25,31 @@ void computeFragmentCoordinates_float(float2 inputCoordinates, float scaleUp, fl
 ## The Parameters
 
 ### Inputs:
-- ```float2 inputCoordinates```: The input coordinates - usually uv-input of the object the shader is applied to
-- ```float scaleUp```: The vertical scale of the object 
-> *ShaderGraph default value*: 1
-- ```float scaleRight```: The horizontal scale of the object
-> *ShaderGraph default value*: 1
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `inputCoordinates`  <img width=50/>  | float2   | Input coordinates - usually uv-input of the object the shader is applied to|
+| `scaleUp`        | float   | Vertical scale of the object <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
+| `scaleRight`   | float  | Horizontal scale of the object <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
 
 ### Outputs:
-- ```float2 fragmentCoordinates```: The coordinates mapped to 0 to 1 which are a required input to [SDF Raymarching](...), [Water Surface](...), and certain lighting functions.
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `fragmentCoordinates`  <img width=70/>  | float2   | Coordinates mapped to 0 to 1 which are a required input to [SDF Raymarching](../sdfs/raymarching.md), [Water Surface](../water/waterSurface.md), and certain lighting functions|
 
 ---
 
 ## Notes on Non-Uniformly Shaped Objects
 
-If a square-shaped object is used within the scene, both the **scaleUp** and the **scaleRight** can be disregarded in the ShaderGraph oder simply set to one for the Standard Scripting. However, if rectangles (e.g. fullscreen shaders) or cuboids are utilised, the scaling parameters are necessary to ensure that no distortion occurs by applying the ratio of the scales to the outputted parameters.
+If a square-shaped object is used to apply the shader to, both the **scaleUp** and the **scaleRight** can be disregarded in the ShaderGraph oder simply be set to *1* for the Standard Scripting. However, if rectangles (e.g. fullscreen shaders) or cuboids are utilised, the scaling parameters are necessary to ensure that no distortion occurs. This is done by applying the ratio of the scales to the coordinates.
 
-The values used depend on the object's extent as well as Unity's camera:
+The required scaling-values depend on the object's extent as well as Unity's camera:
 
-- For a rectangle choose the vertical scale as **scaleUp** and the horizontal scale as **scaleRight**
-- For a cuboid choose the scales as above taking Unity's camera into account. If the camera looks along the z-axis and the y-axis defines the upwards vector, choose the y-scale as **scaleUp** and the x-scale as **scaleRight**.
+- For a rectangle choose the vertical scale as **scaleUp** and the horizontal scale as **scaleRight**.
+- For a cuboid choose the scaling-values as above taking Unity's camera into account. If the camera looks along the z-axis and the y-axis defines the upwards vector, choose the y-scale as **scaleUp** and the x-scale as **scaleRight**.
 
 > If a cuboid is used that is differently scaled in each dimension, the procedural results can only be non-distorted for a combination of two axis.
+
+!ADD IMAGE
 
 ---
 
@@ -54,15 +58,30 @@ The values used depend on the object's extent as well as Unity's camera:
 === "Visual Scripting"
     Find the node at `PSF/Basics/Fragment Coordinates`
 
-    To easily get access to the scale, add Unity's *Object Node*, connect the scale-parameter to Unity's *Splitter Node*, and choose the required dimensions to connect to the custom node's inputs. 
+    To easily get access to the scale:
 
-    ![Unity Translate Camera](images/translateCamera.png){ width="500" }
+    - For objects: Add Unity's *Object Node*, connect the scale-parameter to Unity's *Splitter Node*, and choose the required dimensions to connect to the custom node's inputs. 
 
-    >Due to internal workings of the node, the inputCoordinates-input is not required. Within the SubGraph a "Branch On Input Connection" node is used to determine whether any input coordinates were connected to their respective input. If this is not the case, the uv-coordinates are used as a default input.
+        <figure markdown="span">
+            ![Unity Object's Fragment Coordinates](../images/basics/objectFragCoords.png){ width="500" }
+        </figure>
+    
+    - For fullscreen shaders: Add Unity's *Screen Node* to access the width and height of the screen 
 
-    ![Unity Translate Camera](images/translateCamera.png){ width="500" }
+        <figure markdown="span">
+            ![Unity Full Screen Fragment Coordinates](../images/basics/fullScreenFragCoords.png){ width="400" }
+        </figure>
+
+    > Due to internal workings of the node, the input-coordinates-input is not required. Within the SubGraph a *Branch On Input Connection* node is used to determine whether any input coordinates were connected to their respective input. If this is not the case, the uv-coordinates are used as a default input. 
+
+    <figure markdown="span">
+        ![Unity SubGraph Fragment Coordinates](../images/basics/innerFragCoords.png){ width="700" }
+    </figure>
+    
+    > For an alternative effect, the input-coordinates can also be customised. The *Screen Position Node* can be used if zooming in should not effect the scale of the material.
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

@@ -5,6 +5,8 @@
 
 This function simulates a point light source with distance-based attenuation and optional atmospheric decay. It casts a ray through the scene and accumulates light color based on distance from the point light, then applies Phong-based shading at the surface hit point.
 
+> The function does not check for objects between a point in space and the light. Therefore, it does not reproduce shadows. 
+
 ---
 
 ## The Code
@@ -57,26 +59,32 @@ void pointLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 
 
 | Name               | Type     | Description |
 |--------------------|----------|-------------|
-| `hitPosition`      | float4   | World position of the surface hit; the w-component holds the raymarch step or distance |
+| `hitPosition`    <img width=50/>   | float4   | World position of the surface hit; the w-component holds the raymarch step or distance |
 | `normal`           | float3   | Surface normal at the hit point |
 | `hitIndex`         | float    | Object/material index used to fetch shading parameters |
 | `rayDirection`     | float3   | Direction of the incoming ray |
 | `lightPosition`    | float3   | World-space position of the point light |
-| `lightColor`       | float3   | Base color of the point light |
-| `dropPower`        | float    | Exponent for light attenuation falloff |
-| `atmosphericDecay` | float    | Exponential decay factor for atmospheric light absorption |
+| `lightColor`       | float3   | Base color of the point light <br> <blockquote>*ShaderGraph default value*:float3(1,1,1)</blockquote> |
+| `dropPower`        | float    | Exponent for light attenuation falloff <br> <blockquote>*ShaderGraph default value*: 5</blockquote>|
+| `atmosphericDecay` | float    | Exponential decay factor for atmospheric light absorption <br> <blockquote>*ShaderGraph default value*: 0.05</blockquote>|
 
-The inputs are typically provided by the functions [SDF Raymarching](...) or [Water Surface](...).
+The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).
 
-#### **Output**
-- `float3 lightingColor` — Final RGB lighting result from the point light and material shading.
+### Output
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `lightingColor`   | float3   | Final RGB lighting result from the point light and material shading |
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"  
-    Find the node at ```PSF/Lighting/PointLight```
+    Find the node at ```PSF/Lighting/Point Light```
+
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/pointLight.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"  
     Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/lighting_functions.hlsl"```
@@ -87,3 +95,7 @@ The inputs are typically provided by the functions [SDF Raymarching](...) or [Wa
     float3 lightColor;
     pointLight_float(hitPos, normal, hitID, rayDir, float3(2, 5, -2), float3(1,1,1), 5, 0.05, lightColor);
     ```
+
+---
+
+This is an engine-specific implementation without a shader-basis.
