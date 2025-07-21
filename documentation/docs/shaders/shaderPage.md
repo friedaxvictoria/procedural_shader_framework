@@ -30,6 +30,11 @@ This documentation covers the Phong-based lighting model and material system use
 
 - [Lighting & Material System](lighting/Lighting_and_Material_System.md)
 
+### Animation System Shader
+This documentation covers the Animation module used in the GLSL shader.
+
+- [Animation System](animation/Animation_System.md)
+
 ### Noise System Shader
 The noise system in this shader provides procedural pattern generation for textures, terrain, and effects.
 
