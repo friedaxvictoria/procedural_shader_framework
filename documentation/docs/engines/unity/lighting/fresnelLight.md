@@ -4,6 +4,9 @@
 </div>
 
 This function applies Fresnel-based lighting using Schlick’s approximation to simulate view-dependent reflectivity. It combines Lambertian diffuse shading with a specular fresnel effect that intensifies as the viewing angle approaches grazing.
+    <figure markdown="span">
+    ![Unity Fresnel Lighting](../images/lighting/examples/fresnelLight.png){ width="500" }
+    </figure>
 
 ---
 

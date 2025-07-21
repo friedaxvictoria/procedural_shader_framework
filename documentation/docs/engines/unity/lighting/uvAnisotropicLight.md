@@ -4,7 +4,9 @@
 </div>
 
 This function simulates anisotropic lighting effects using per-pixel tangent vectors derived from UV coordinates. The result mimics materials like brushed metal or hair by modulating specular highlights along UV-based tangent directions. It combines Lambertian diffuse lighting with a directional specular term.
-
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/examples/UVAnisotropicLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code

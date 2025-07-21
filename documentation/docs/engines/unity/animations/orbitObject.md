@@ -60,9 +60,15 @@ The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphe
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/animation_functions.hlsl"```
 
+    Example Usage
+
+    ```hlsl
+    float3 newPosition;
+    float orbitAngle;
+    orbitObjectAroundPoint_float(float3(0, 0, 0), float3(1, 1, 1), float3(0, 1, 0), 2.0, 1.5, 45.0, newPosition, orbitAngle);
+    ```
 ---
 
 Find the original shader code [here](../../../shaders/animation/sdf_animation_shader.md). Changes and simplifications where made to combine the *Orbit Animation* and *Self-Rotate Animation*. The option of different time modes was removed for simplicity reasons.

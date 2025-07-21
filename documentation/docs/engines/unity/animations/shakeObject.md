@@ -54,8 +54,14 @@ void shakeObject_float(float3 seedPosition, float intensity, float speed, out fl
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/animation_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3 position_temp;
+    shakeObject_float(float3(0, 0, 0), 0.4, 1, position_temp);
+    ```
 
 ---
 

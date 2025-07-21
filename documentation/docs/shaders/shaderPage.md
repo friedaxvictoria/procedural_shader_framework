@@ -30,6 +30,11 @@ This documentation covers the Phong-based lighting model and material system use
 
 - [Lighting & Material System](lighting/Lighting_and_Material_System.md)
 
+### Animation System Shader
+This documentation covers the Animation module used in the GLSL shader.
+
+- [Animation System](animation/Animation_System.md)
+
 ### Noise System Shader
 The noise system in this shader provides procedural pattern generation for textures, terrain, and effects.
 
@@ -41,6 +46,7 @@ Shaders that control movement over time, often using sine/cosine functions or ti
 - [TIE Fighter](animation/tie_fighter.md)
 - [Camera Orientation Setup Shader](animation/calcLookAtMatrix.md)
 - [SDF Animation](animation/sdf_animation_shader.md)
+- [Camera Animation](animation/Camera_Anim.md)
 
 
 ### ☁️ Noise Shaders  
@@ -109,6 +115,7 @@ Compute surface lighting effects including diffuse, specular, rim, and reflectio
 - [Lighting Context](lighting/lighting_context.md)
 - [Volume Lighting Functions](lighting/volume_lighting_functions.md)
 - [Volume Lighting Context](lighting/volume_lighting_context.md)
+- [Sunrise](lighting/Sunrise.md)
 
 ### Rendering Shaders
 

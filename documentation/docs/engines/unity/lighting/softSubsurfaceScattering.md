@@ -4,7 +4,9 @@
 </div>
 
 This function simulates a simple soft subsurface scattering (SSS) effect by adding light transmitted through the object’s surface. It enhances realism by combining standard Lambertian diffuse shading with a soft backlighting term.
-
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/examples/SSSLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code

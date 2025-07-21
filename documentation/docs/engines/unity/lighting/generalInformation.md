@@ -43,3 +43,15 @@ To combine lighting functions simply add the resulting colors together. For Shad
     ![Unity Add Lighting](../images/lighting/addLight.png){ width="400" }
     </figure>
 
+For the standart scripting users can combine the lights by simply adding the outputs.
+```hlsl
+pointLight_float(hitPos, normal, hitID, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05,  colorOut1);
+applyToonLighting_float(hitPos, normal, hitID, _LightPosition, colorOut2);
+sunriseLight_float(hitPos, normal, hitID, rayDir1, colorOut3);
+
+colorOut = colorOut1 + colorOut2 + colorOut3;
+```
+Example output
+    <figure markdown="span">
+    ![Unity Add Lighting](../images/lighting/examples/PointToonSunrise.png){ width="400" }
+    </figure>

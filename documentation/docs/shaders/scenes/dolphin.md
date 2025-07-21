@@ -76,7 +76,7 @@ Calculates the shortest distance from a point to a line segment.
 
 ### Returns:
 
-- **vec2**: x = squared distance, y = projection parameter along segment
+- **`vec2`**: x = squared distance, y = projection parameter along segment
 
 ### `distanceToBox(vec3 point, vec3 halfExtent, float radius)`
 Calculates distance to a rounded box.

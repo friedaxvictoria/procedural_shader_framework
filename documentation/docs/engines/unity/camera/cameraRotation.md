@@ -46,8 +46,14 @@ See [Helper Functions](../helperFunctions.md) to find out more about ```computeR
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/animation_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3x3 rotationMatrix;
+    rotateCamera_float(rotationAxis, rotationSpeed, rotationMatrix);
+    ```
 
 ---
 
