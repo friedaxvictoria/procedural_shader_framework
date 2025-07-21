@@ -5,8 +5,6 @@
 
 This function performs raymarching considering all previously instantiated SDFs.
 
-For further information of the implementations of SDFs in Unity refer to [General Information](generalInformation.md).
-
 ---
 
 ## The Code
@@ -34,7 +32,7 @@ float evalSDF(int index, float3 position)
     return 1e5;
 }
 
-void raymarch_float(float condition, float3x3 cameraMatrix, float numberSDFs, float2 fragmentCoordinates, out float4 hitPosition, out float3 normal, out int hitIndex, out float3 rayDirection)
+void raymarch_float(int condition, float3x3 cameraMatrix, int numberSDFs, float2 fragmentCoordinates, out float4 hitPosition, out float3 normal, out int hitIndex, out float3 rayDirection)
 {
     if (condition == 0)
     {
@@ -107,13 +105,18 @@ float condition, float3x3 cameraMatrix, float numberSDFs, float2 fragmentCoordin
 === "Visual Scripting"
     Find the node at `PSF/SDFs/Raymarching`
 
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+    <figure markdown="span">
+        ![Unity Raymarching](../images/sdfs/raymarching.png){ width="500" }
+    </figure>
 
     >Due to internal workings of the node, the condition-input is not required. Within the SubGraph a *Branch On Input Connection* node is used to determine whether a camera matrix was connected to its respective input. This in turn determines the condition-value.
 
-    ![Unity Move Camera With Mouse](images/mouseMovementCamera.png){ width="500" }
+    <figure markdown="span">
+        ![Unity Inner Raymarching](../images/sdfs/innerRaymarching.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

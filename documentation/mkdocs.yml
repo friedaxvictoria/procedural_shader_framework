@@ -96,7 +96,8 @@ nav:
         - Water Surface: engines/unity/water/waterSurface.md
         - Water Height: engines/unity/water/waterHeight.md
         - Water Normal: engines/unity/water/waterNormal.md
-      - Animation: 
+      - Animations: 
+        - General Information: engines/unity/animations/generalInformation.md
         - Orbit Object Around Point: engines/unity/animations/orbitObject.md
         - Shake Object: engines/unity/animations/shakeObject.md
         - Tweening: engines/unity/animations/tweening.md

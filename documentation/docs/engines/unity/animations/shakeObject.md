@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function creates a linear shaking animation on objects by changing its position. It can be applied to SDFs and lights.
+This function creates a linear shaking animation on objects by changing its position.
 
 ---
 

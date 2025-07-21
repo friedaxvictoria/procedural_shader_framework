@@ -3,9 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based dolphin. In order for the cube to be visible in the final output, [SDF Raymarching](...) and an arbitrary lighting function has to be included. 
-
-For further information of the implementations of SDFs in Unity refer to [General Information](generalInformation.md).
+This function creates an internal instance of an SDF-based dolphin. In order for the cube to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
 
 ---
 
@@ -38,8 +36,6 @@ For further information of the implementations of SDFs in Unity refer to [Genera
 
     float3 dolphinMovement(float timeOffset, float3 basePosition, float speed)
     {
-        if (speed == 0)
-            return basePosition;
         float adjustedTime = _Time.y + timeOffset;
         float jumping = 0.5 + 0.5 * cos(-0.4 + 0.5 * adjustedTime);
         
@@ -76,7 +72,7 @@ For further information of the implementations of SDFs in Unity refer to [Genera
         for (int i = 0; i < segmentNumber; i++)
         {
             float segmentPosition = float(i) / segmentNumberFloat;
-            float2 segmentAnimation = speed == 0 ? float2(0, 0): dolphinAnimation(segmentPosition, timeOffset);
+            float2 segmentAnimation = dolphinAnimation(segmentPosition, timeOffset);
             float segmentLength = 0.48;
             if (i == 0)
                 segmentLength = 0.655;
@@ -175,8 +171,8 @@ For further information of the implementations of SDFs in Unity refer to [Genera
     ```
 
 ``` hlsl
-void addDolphin_float(float index, float3 position, float timeOffset, float speed, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
-float shininess, out float indexOut)
+void addDolphin_float(int index, float3 position, float timeOffset, float speed, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
+float shininess, out int indexOut)
 {
     addSDF(index, 6, position, float3(0.0, 0.0, 0.0), 9, axis, angle, 0, baseColor, specularColor, specularStrength, shininess, timeOffset, speed);
     indexOut = index + 1;
@@ -188,25 +184,25 @@ float shininess, out float indexOut)
 ## The Parameters
 
 ### Inputs:
-- ```float index```: The index at which the dolphin is stored 
-- ```float3 position```: The central position of the dolphin
-- ```float timeOffset```: The time at which the dolphin is first seen in the sceen
-- ```float speed```: The speed at which the dolphin moves
-> *ShaderGraph default value*: ```1```
-- ```float3 axis```: The axis determining the orientation of the dolphin
-> *ShaderGraph default value*: ```float3(0,1,0)```
-- ```float angle```: The angle around the axis 
-- Material parameters
-    - ```float3 baseColor```: The underlying color of the dolphin
-    > *ShaderGraph default value*: ```float3(0,1,0)```
-    - ```float3 specularColor```: The color of the highlights
-    - ```float3 specularStrength```: The intensity with which highlights are created
-    > *ShaderGraph default value*: ```1```
-    - ```float3 shininess```: The shape and sharpness of the highlights; the larger the value, the more focussed the highlight
-    > *ShaderGraph default value*: ```32```
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `index`  <img width=50/>  | int   | Index at which the dolphin is stored  |
+| `position`        | float3   | Central position |
+| `timeOffset`        | float   | Time at which the dolphin is first seen in the sceen |
+| `speed`        | float   | Speed at which the dolphin moves <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
+| `axis`            | float3   | Axis determining the orientation <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|
+| `angle` | float   | World-space position of the light source |
+| `baseColor`  | float3   | Underlying color <br> <blockquote>*ShaderGraph default value*: float3()</blockquote>|
+| `specularColor`        | float3   | Color of the highlights |
+| `specularStrength`            | float   | Intensity with which highlights are created <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
+| `shininess` | float   | Shape and sharpness of the highlights; the larger the value, the more focussed the highlight  <br> <blockquote>*ShaderGraph default value*: 32</blockquote>|
+
+> Even when the **speed** is set to zero, the dolphin will make an up-down movement. It will simply not move forwards.
 
 ### Outputs:
-- ```float indexOut```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [SDF Raymarching](...).  
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `indexOut`  | int   | Incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [SDF Raymarching](raymarching.md) |
 
 ---
 
@@ -215,9 +211,12 @@ float shininess, out float indexOut)
 === "Visual Scripting"
     Find the node at `PSF/SDFs/Dolphin`
 
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+    <figure markdown="span">
+        ![Unity Dolphin](../images/sdfs/dolphin.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

@@ -44,9 +44,6 @@ None
 |-----------------|----------|-------------|
 | `mat`        | float3x3   | Final camera matrix that can be plugged into the [Water Shader](../water/waterSurface.md) or the [SDF Raymarching](../sdfs/raymarching.md) |
 
-CHECK THIS
-> Contrary to other animation functions, this function does not need to be finished off with a computation of the [Camera Matrix](cameraMatrix.md). 
-
 ---
 
 ## Experience

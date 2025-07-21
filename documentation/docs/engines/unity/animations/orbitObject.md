@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function rotates an object around a point. It can be applied to SDFs and lights.
+This function rotates an object around a point. During the rotation, the object orients itself to face the central point of its orbit.
 
 ---
 

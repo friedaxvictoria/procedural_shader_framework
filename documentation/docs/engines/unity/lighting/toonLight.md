@@ -9,7 +9,7 @@ This function implements a stylized toon shading model using stepped diffuse ban
 
 ## The Code
 ```hlsl
-void applyToonLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
+void applyToonLighting_float(float4 hitPosition, float3 normal, int hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
@@ -48,7 +48,7 @@ float3 lightingColor)
 |-----------------|----------|-------------|
 | `hitPosition` <img width=50/>   | float4   | World position of the surface hit; the w-component holds the raymarch distance |
 | `normal`        | float3   | Surface normal at the hit point |
-| `hitIndex`      | float    | Object/material index used to fetch shading parameters |
+| `hitIndex`      | int    | Object/material index used to fetch shading parameters |
 | `lightPosition` | float3   | World-space position of the light source |
 
 The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).

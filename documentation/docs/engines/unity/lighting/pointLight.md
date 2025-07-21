@@ -11,7 +11,7 @@ This function simulates a point light source with distance-based attenuation and
 
 ## The Code
 ```hlsl
-void pointLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 rayDirection, float3 lightPosition, float3 lightColor, float dropPower, float atmosphericDecay, out float3 lightingColor)
+void pointLight_float(float4 hitPosition, float3 normal, int hitIndex, float3 rayDirection, float3 lightPosition, float3 lightColor, float dropPower, float atmosphericDecay, out float3 lightingColor)
 {
     //raymarch the environment    
     float t = 0;
@@ -61,7 +61,7 @@ void pointLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 
 |--------------------|----------|-------------|
 | `hitPosition`    <img width=50/>   | float4   | World position of the surface hit; the w-component holds the raymarch step or distance |
 | `normal`           | float3   | Surface normal at the hit point |
-| `hitIndex`         | float    | Object/material index used to fetch shading parameters |
+| `hitIndex`         | int    | Object/material index used to fetch shading parameters |
 | `rayDirection`     | float3   | Direction of the incoming ray |
 | `lightPosition`    | float3   | World-space position of the point light |
 | `lightColor`       | float3   | Base color of the point light <br> <blockquote>*ShaderGraph default value*:float3(1,1,1)</blockquote> |

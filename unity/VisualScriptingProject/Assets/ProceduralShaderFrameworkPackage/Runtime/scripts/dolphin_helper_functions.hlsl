@@ -27,8 +27,6 @@ float2 dolphinAnimation(float position, float timeOffset)
 
 float3 dolphinMovement(float timeOffset, float3 basePosition, float speed)
 {
-    if (speed == 0)
-        return basePosition;
     float adjustedTime = _Time.y + timeOffset;
     float jumping = 0.5 + 0.5 * cos(-0.4 + 0.5 * adjustedTime);
     
@@ -38,7 +36,7 @@ float3 dolphinMovement(float timeOffset, float3 basePosition, float speed)
     finalMovement.y *= 0.5;
     finalMovement.x += 0.1 * sin(0.1 - 1.0 * adjustedTime) * (1.0 - jumping);
     
-    float3 worldOffset = float3(0.0, 0.0, fmod(-speed * _Time.y, 20.0) - 5.0);
+    float3 worldOffset = float3(0.0, 0.0, fmod(-speed * _Time.y, 50.0) - 5.0);
     
     return basePosition + finalMovement + worldOffset;
 }
@@ -65,7 +63,7 @@ float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed)
     for (int i = 0; i < segmentNumber; i++)
     {
         float segmentPosition = float(i) / segmentNumberFloat;
-        float2 segmentAnimation = speed == 0 ? float2(0, 0): dolphinAnimation(segmentPosition, timeOffset);
+        float2 segmentAnimation = dolphinAnimation(segmentPosition, timeOffset);
         float segmentLength = 0.48;
         if (i == 0)
             segmentLength = 0.655;

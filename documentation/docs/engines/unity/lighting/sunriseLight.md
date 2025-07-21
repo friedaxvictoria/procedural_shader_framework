@@ -83,7 +83,7 @@ This function computes realistic atmospheric lighting based on a simplified eart
     ````
 
 ```hlsl
-void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 rayDirection, out float3 lightingColor)
+void sunriseLight_float(float4 hitPosition, float3 normal, int hitIndex, float3 rayDirection, out float3 lightingColor)
 { 
     SunriseLight sunrise;
     sunrise.sundir = normalize(float3(0.5, 0.4 * (1. + sin(0.5 * _Time.y)), -1.));
@@ -127,7 +127,7 @@ void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float
 |----------------|----------|-------------|
 | `hitPosition`  <img width=50/> | float4   | World position of the surface hit; the w-component holds the raymarch step or distance |
 | `normal`       | float3   | Surface normal at the hit point |
-| `hitIndex`     | float    | Object/material index used to fetch shading parameters |
+| `hitIndex`     | int    | Object/material index used to fetch shading parameters |
 | `rayDirection` | float3   | Direction of the incoming ray |
 
 The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).

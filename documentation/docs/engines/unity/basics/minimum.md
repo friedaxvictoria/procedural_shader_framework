@@ -12,7 +12,7 @@ Therefore, it can be used to combine outputs of raymarching functions. The subse
 ## The Code
 
 ``` hlsl
-void getMinimum_float(float4 hitPosition1, float3 normal1, float hitIndex1, float4 hitPosition2, float3 normal2, float hitIndex2, out float4 hitPosition, out float3 normal, out float hitIndex)
+void getMinimum_float(float4 hitPosition1, float3 normal1, int hitIndex1, float4 hitPosition2, float3 normal2, int hitIndex2, out float4 hitPosition, out float3 normal, out int hitIndex)
 {
     if (hitPosition1.w < hitPosition2.w && hitPosition1.w < _raymarchStoppingCriterium)
     {
@@ -38,17 +38,17 @@ void getMinimum_float(float4 hitPosition1, float3 normal1, float hitIndex1, floa
 |-----------------|----------|-------------|
 | `hitPosition1`  <img width=50/>  | float4   | Hit-position of the first input where the first three dimensions define the point in space and the w-component contains the raymarching parameter at which the hit occured|
 | `normal1`        | float3   | Normal of the first input|
-| `hitIndex1`        | float   | Hit-index of the first input|
+| `hitIndex1`        | int   | Hit-index of the first input|
 | `hitPosition2`   | float4   | Hit-position of the second input where the first three dimensions define the point in space and the w-component contains the raymarching parameter at which the hit occured|
 | `normal3`        | float3   | Normal of the second input|
-| `hitIndex2`        | float   | Hit-index of the second input|
+| `hitIndex2`        | int   | Hit-index of the second input|
 
 ### Outputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
 | `hitPosition`  <img width=50/>  | float4   | Hit-position that is the closest to the camera out of the two sets of inputs|
 | `normal`        | float3   | Normal corresponding to the closest hit-position|
-| `hitIndex`        | float3   | Hit-index corresponding to the closest hit-position|
+| `hitIndex`        | int   | Hit-index corresponding to the closest hit-position|
 
 The outputs can be used for further computations using lighting functions (e.g. [Sunrise](../lighting/sunriseLight.md)).
 

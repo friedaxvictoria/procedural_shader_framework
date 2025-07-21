@@ -3,9 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based octahedron. In order for the cube to be visible in the final output, [SDF Raymarching](...) and an arbitrary lighting function has to be included. 
-
-For further information of the implementations of SDFs in Unity refer to [General Information](generalInformation.md).
+This function creates an internal instance of an SDF-based octahedron. In order for the cube to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
 
 ---
 
@@ -58,9 +56,12 @@ float shininess, float noise, out int indexOut)
 === "Visual Scripting"
     Find the node at `PSF/SDFs/Octahedron`
 
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+    <figure markdown="span">
+        ![Unity Octahedron](../images/sdfs/octahedron.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

@@ -3,9 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based sphere. In order for the cube to be visible in the final output, [SDF Raymarching](...) and an arbitrary lighting function has to be included. 
-
-For further information of the implementations of SDFs in Unity refer to [General Information](generalInformation.md).
+This function creates an internal instance of an SDF-based sphere. In order for the cube to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
 
 ---
 
@@ -17,8 +15,8 @@ float sdSphere(float3 position, float radius)
     return length(position) - radius;
 }
 
-void addSphere_float(float index, float3 position, float radius, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
-float shininess, float noise, out float indexOut)
+void addSphere_float(int index, float3 position, float radius, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
+float shininess, float noise, out int indexOut)
 {
     addSDF(index, 0, position, float3(0,0,0), radius, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
     indexOut = index + 1;
@@ -58,9 +56,12 @@ float shininess, float noise, out float indexOut)
 === "Visual Scripting"
     Find the node at `PSF/SDFs/Sphere`
 
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+    <figure markdown="span">
+        ![Unity Sphere](../images/sdfs/sphere.png){ width="500" }
+    </figure>
 
 === "Standard Scripting"
+    !Utku Input
     Include ...
 
 ---

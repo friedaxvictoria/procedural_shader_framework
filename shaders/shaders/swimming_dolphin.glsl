@@ -1,4 +1,4 @@
-﻿#define NO_OF_SEGMENTS 11
+﻿s#define NO_OF_SEGMENTS 11
 #define F_NO_OF_SEGMENTS 11.0
 
 float jumping;
