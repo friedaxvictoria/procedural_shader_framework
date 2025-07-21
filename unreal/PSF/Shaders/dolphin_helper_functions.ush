@@ -1,0 +1,6 @@
+#ifndef PROCEDURAL_SHADER_FRAMEWORK_DOLPHIN_H
+#define PROCEDURAL_SHADER_FRAMEWORK_DOLPHIN_H
+
+#include "global_variables.ush"
+
+#endif

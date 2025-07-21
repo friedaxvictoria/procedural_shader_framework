@@ -4,47 +4,20 @@
 #include "global_variables.ush"
 #include "noise_functions.ush"
 
-#define NO_OF_SEGMENTS 11
-#define F_NO_OF_SEGMENTS 11.0
-
-static float jumping;
-static float time;
-static float segmentIdx = 0.0;
-static float3 ccd, ccp;
-
-// This function gives you the shortest distance from a 2D point p to a finite line segment between a and b.
-float2 lineSegmentDistance(float3 p, float3 start, float3 end)
-{
-	// Calculate the vector from the start of the line segment to the point
-    float3 startToPoint = p - start;
-	// Calculate the vector from the start of the line segment to the end
-    float3 startToEnd = end - start;
-	// Calculate the projection of the point onto the line segment
-    float projection = clamp(dot(startToPoint, startToEnd) / dot(startToEnd, startToEnd), 0.0, 1.0);
-	// Calculate the closest point on the line segment to the point
-    float3 vecToClosestPoint = startToPoint - projection * startToEnd;
-	// Calculate the length of the vector to the closest point
-    return float2(dot(vecToClosestPoint, vecToClosestPoint), projection);
-}
-
+//SPECIAL HELPERS FOR DOLPHIN
 float distanceToBox(float3 p, float3 halfExtent, float radius)
 {
-	// Calculate the distance from the point to the box
     float3 distanceToBox = abs(p) - halfExtent;
-	// Returns: Negative inside the rounded box, Zero on the surface, Positive outside.
     return length(max(distanceToBox, 0.0)) - radius;
 }
 
-// Blends two distances smoothly, instead of taking the harsh minimum (min()), which gives a hard union in SDFs.
 float smoothUnion(float distance1, float distance2, float smoothFactor)
 {
-	// h decides how much to interpolate between distance2 and distance1
     float h = clamp(0.5 + 0.5 * (distance2 - distance1) / smoothFactor, 0.0, 1.0);
     return lerp(distance2, distance1, h) - smoothFactor * h * (1.0 - h);
 }
 
-// Modified animation function with instance parameters
-float2 dolphinAnimation(float position, float time, float timeOffset)
+float2 dolphinAnimation(float position, float timeOffset, float time)
 {
     float adjustedTime = time + timeOffset;
     float angle1 = 0.9 * (0.5 + 0.2 * position) * cos(5.0 * position - 3.0 * adjustedTime + 6.2831 / 4.0);
@@ -55,10 +28,7 @@ float2 dolphinAnimation(float position, float time, float timeOffset)
     return float2(finalAngle, thickness);
 }
 
-// generates a 3D animation offset vector used to animate some aspect of the dolphin
-
-// Modified movement function with instance parameters
-float3 dolphinMovement(float time, float timeOffset, float3 basePosition, float speed)
+float3 dolphinMovement(float timeOffset, float3 basePosition, float speed, float time)
 {
     if (speed == 0)
         return basePosition;
@@ -71,21 +41,22 @@ float3 dolphinMovement(float time, float timeOffset, float3 basePosition, float 
     finalMovement.y *= 0.5;
     finalMovement.x += 0.1 * sin(0.1 - 1.0 * adjustedTime) * (1.0 - jumping);
     
-    // Apply linear movement
     float3 worldOffset = float3(0.0, 0.0, fmod(-speed * time, 20.0) - 5.0);
     
     return basePosition + finalMovement + worldOffset;
 }
 
+
 //returning: res.x: The signed distance from point p to the dolphin. res.y: A parameter h that stores a normalized position along the dolphin's body (used for further shaping/decorating).
 float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed, float time)
 {
 
-	// Initialize the result to a very large distance and an auxiliary value of 0. We'll minimize this value over the dolphin's body parts.
+	//initialize the result to a very large distance and an auxiliary value of 0. We'll minimize this value over the dolphin's body parts.
     float2 result = float2(1000.0, 0.0);
-	// Transform Point into Dolphin Local Space
-	// Initialize the start point for the dolphin's body
-    float3 startPoint = dolphinMovement(time, timeOffset, position, speed);
+    float3 startPoint = dolphinMovement(timeOffset, position, speed, time);
+
+    float segmentNumberFloat = 11.0;
+    int segmentNumber = int(segmentNumberFloat);
 
     float3 position1 = startPoint;
     float3 position2 = startPoint;
@@ -94,29 +65,30 @@ float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed,
     float3 direction2 = float3(0.0, 0.0, 0.0);
     float3 direction3 = float3(0.0, 0.0, 0.0);
     float3 closestPoint = startPoint;
-	// Iterates through all the dolphin’s spine segments (same concept as in dolphinSignedDistance)
-    for (int i = 0; i < NO_OF_SEGMENTS; i++)
+
+    for (int i = 0; i < segmentNumber; i++)
     {
-		// Compute Normalized Segment Index and Animation
-        float segmentPosition = float(i) / F_NO_OF_SEGMENTS;
-        float2 segmentAnimation = speed == 0 ? float2(0, 0) : dolphinAnimation(segmentPosition, time, timeOffset);
-		// The length of segments
+        float segmentPosition = float(i) / segmentNumberFloat;
+        float2 segmentAnimation = speed == 0 ? float2(0, 0) : dolphinAnimation(segmentPosition, timeOffset, time);
         float segmentLength = 0.48;
         if (i == 0)
             segmentLength = 0.655;
-		// endPoint is the end point of the current segment. The orientation of the segment is controlled by angles (segmentAnimation.x, segmentAnimation.y). This creates a wavy, sinuous body as the dolphin swims.
         float3 endPoint = startPoint + segmentLength * normalize(float3(sin(segmentAnimation.y), sin(segmentAnimation.x), cos(segmentAnimation.x)));
-		// Calculate the distance from the point to the line segment defined by startPoint and endPoint
-        float2 dist = lineSegmentDistance(p, startPoint, endPoint);
 
-        if (dist.x < result.x)
+        float3 startToPoint = p - startPoint;
+        float3 startToEnd = endPoint - startPoint;
+        float projection = clamp(dot(startToPoint, startToEnd) / dot(startToEnd, startToEnd), 0.0, 1.0);
+        float3 vectorToClosestPoint = startToPoint - projection * startToEnd;
+
+        float2 distance = float2(dot(vectorToClosestPoint, vectorToClosestPoint), projection);
+
+        if (distance.x < result.x)
         {
-            result = float2(dist.x, segmentPosition + dist.y / F_NO_OF_SEGMENTS);
-            closestPoint = startPoint + dist.y * (endPoint - startPoint);
-            ccd = endPoint - startPoint; // This is the direction vector of the segment
+            result = float2(distance.x, segmentPosition + distance.y / segmentNumberFloat);
+            closestPoint = startPoint + distance.y * (endPoint - startPoint);
 
         }
-		// Store Specific Segment Info for Fins and Tail
+		//store Specific Segment Info for Fins and Tail
         if (i == 3)
         {
             position1 = startPoint;
@@ -127,53 +99,38 @@ float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed,
             position3 = startPoint;
             direction3 = endPoint - startPoint;
         }
-        if (i == (NO_OF_SEGMENTS - 1))
+        if (i == (segmentNumber - 1))
         {
             position2 = endPoint;
             direction2 = endPoint - startPoint;
         }
-		// Move Forward to Next Segment
+		//move Forward to Next Segment
         startPoint = endPoint;
     }
-	   // Save Closest Point (This is the Target Line)
-    ccp = closestPoint;
-		// It lies in the range [0.0,1.0][0.0,1.0], where 0 is near the head and 1 is at the tail.
     float bodyRadius = result.y;
-		// The radius of the dolphin's body at that point. This shapes the body to be thickest near the middle and tapering toward head and tail.
     float radius = 0.05 + bodyRadius * (1.0 - bodyRadius) * (1.0 - bodyRadius) * 2.7;
-		//This adds a bump in the radius near the front of the dolphin (around bodyRadius ≈ 0.04), which decays rapidly afterward.
-    radius += 7.0 * max(0.0, bodyRadius - 0.04) * exp(-30.0 * max(0.0, bodyRadius - 0.04)) * smoothstep(-0.1, 0.1, p.
-    y - closestPoint.y);
-		// Reduces radius near the center line (point.y ≈ closestPoint.y) and only in the front part (h < 0.1).
-    radius -= 0.03 * (smoothstep(0.0, 0.1, abs(p.
-    y - closestPoint.y))) * (1.0 - smoothstep(0.0, 0.1, bodyRadius));
-		// Add Thickness Near the Head
+    radius += 7.0 * max(0.0, bodyRadius - 0.04) * exp(-30.0 * max(0.0, bodyRadius - 0.04)) * smoothstep(-0.1, 0.1, p.y - closestPoint.y);
+    radius -= 0.03 * (smoothstep(0.0, 0.1, abs(p.y - closestPoint.y))) * (1.0 - smoothstep(0.0, 0.1, bodyRadius));
     radius += 0.05 * clamp(1.0 - 3.0 * bodyRadius, 0.0, 1.0);
-    radius += 0.035 * (1.0 - smoothstep(0.0, 0.025, abs(bodyRadius - 0.1))) * (1.0 - smoothstep(0.0, 0.1, abs(p.
-    y - closestPoint.y)));
-		// The true signed distance is the distance from point p to the spine (closestPoint) minus the radius at that location. Scaled by 0.75 to compress or adjust the final SDF
-    result.x = 0.75 * (distance(p,
-    closestPoint)
-    - radius);
+    radius += 0.035 * (1.0 - smoothstep(0.0, 0.025, abs(bodyRadius - 0.1))) * (1.0 - smoothstep(0.0, 0.1, abs(p.y - closestPoint.y)));
+    result.x = 0.75 * (distance(p, closestPoint) - radius);
 
-		// fin part
+	//fin part
     direction3 = normalize(direction3);
     float k = sqrt(1.0 - direction3.y * direction3.y);
-		// Create a transformation matrix to align the local coordinate system with the dolphin's fin direction
     float3x3 ms = float3x3(
 			direction3.z / k, -direction3.x * direction3.y / k, direction3.x,
 			0.0, k, direction3.y,
 			-direction3.x / k, -direction3.y * direction3.z / k, direction3.z);
-		// Transform the point into the local coordinate system of the fin
-    float3 ps = mul((p
-    - position3), ms);
+    float3 ps = mul((p - position3), ms);
     ps.z -= 0.1; // This is the offset for the fin
+
     float distance5 = length(ps.yz) - 0.9;
     distance5 = max(distance5, -(length(ps.yz - float2(0.6, 0.0)) - 0.35));
     distance5 = max(distance5, distanceToBox(ps + float3(0.0, -0.5, 0.5), float3(0.0, 0.5, 0.5), 0.02));
     result.x = smoothUnion(result.x, distance5, 0.1);
 
-		// fin 
+	//fin 
     direction1 = normalize(direction1);
     k = sqrt(1.0 - direction1.y * direction1.y);
     ms = float3x3(
@@ -181,8 +138,7 @@ float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed,
 			0.0, k, direction1.y,
 			-direction1.x / k, -direction1.y * direction1.z / k, direction1.z);
 
-    ps = p
-    - position1;
+    ps = p - position1;
     ps = mul(ps, ms);
     ps.x = abs(ps.x);
     float l = ps.x;
@@ -195,43 +151,20 @@ float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed,
     distance5 = max(distance5, distanceToBox(ps + float3(0.0, 0.0, 0.0), float3(1.0, 0.0, 1.0), 0.015 + 0.05 * l));
     result.x = smoothUnion(result.x, distance5, 0.12);
 
-		// tail part
+	//tail part
     direction2 = normalize(direction2);
     float2x2 mf = float2x2(
 			direction2.z, direction2.y,
 			-direction2.y, direction2.z);
-    float3 pf = p
-    - position2 - direction2 * 0.25;
+    float3 pf = p - position2 - direction2 * 0.25;
     pf.yz = mul(pf.yz, mf);
     float distance4 = length(pf.xz) - 0.6;
     distance4 = max(distance4, -(length(pf.xz - float2(0.0, 0.8)) - 0.9));
     distance4 = max(distance4, distanceToBox(pf, float3(1.0, 0.005, 1.0), 0.005));
     result.x = smoothUnion(result.x, distance4, 0.1);
-		// Return the signed distance and the auxiliary value
+
     return result;
 }
-
-float3 getDolphinColor(float3 hitPos, float3 normal)
-{
-    float3 tangentV = normalize(float3(-ccd.z, 0.0, ccd.x));
-    float3 bitangentV = normalize(cross(ccd, tangentV));
-    float3 position = float3(
-            dot(hitPos - ccp, tangentV),
-            dot(hitPos - ccp, bitangentV),
-            segmentIdx
-        );
-        
-    float3 material;
-    material.xyz = lerp(float3(0.3, 0.38, 0.46) * 0.6, float3(0.8, 0.9, 1.0), smoothstep(-0.05, 0.05, position.y - segmentIdx * 0.5 + 0.1)); // Base color of the dolphin
-    material.xyz *= smoothstep(0.0, 0.06, distance(float3(abs(position.x), position.yz) * float3(1.0, 1.0, 4.0), float3(0.35, 0.0, 0.4)));
-    material.xyz *= 1.0 - 0.75 * (1.0 - smoothstep(0.0, 0.02, abs(position.y))) * (1.0 - smoothstep(0.07, 0.11, segmentIdx));
-    material.xyz *= 0.1 * 0.23 * 0.6;
-    
-    float3 BRDF = 20.0 * 1 * float3(4.00, 2.20, 1.40);
-    material *= BRDF;
-    return material;
-}
-
 
 // new function for rock sdf
 // Signed distance to an axis-aligned box centered at origin
