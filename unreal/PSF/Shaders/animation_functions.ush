@@ -17,11 +17,21 @@ void backAndForth(float speed, float time, out float3x3 mat)
 }
 
 // from https://www.shadertoy.com/view/NsS3Ww
-void moveViaMouse(float2 _ScreenParams, out float3x3 mat)
+void moveViaMouse(float2 mousePosition, float2 screenSize, out float3x3 mat)
 {
-    float2 mouse = _mousePoint.xy / _ScreenParams.xy;
+    
+    float2 mouse = mousePosition.xy / screenSize.xy;
 
-    mat = mul(computeRotationMatrix(float3(0, 1, 0), lerp(-PI, PI, mouse.x)), computeRotationMatrix(float3(1, 0, 0), mouse.y * -PI));
+    mouse = mouse - 0.25;
+
+    // Convert to yaw and pitch
+    float yaw = lerp(-PI, PI, -mouse.x + 0.5); // == PI * mouse.x when centered
+    float pitch = lerp(-PI / 2, PI / 2, mouse.y + 0.5); // invert Y axis
+
+    float3x3 rotY = computeRotationMatrix(float3(1, 0, 0), yaw);
+    float3x3 rotX = computeRotationMatrix(float3(0, 1, 0), pitch);
+
+    mat = mul(-rotY, rotX); // yaw first, then pitch
 }
 
 // a camera animation ALWAYS has to end with this node!!
