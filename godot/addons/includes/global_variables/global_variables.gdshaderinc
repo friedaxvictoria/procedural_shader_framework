@@ -1,7 +1,7 @@
 // res://addons/includes/global_variables.gdshaderinc
 
 // Max object count constant
-const int MAX_OBJECTS = 15;
+const int MAX_OBJECTS = 25;
 
 // light position
 uniform vec3 lightPosition;
