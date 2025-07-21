@@ -143,8 +143,15 @@ void adaptableNormal_float(float3 position, float3 offset, float influence, floa
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/water_surface.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3 adjustedNormal;
+    adaptableNormal_float(float3(0,0,0), float3(0,0,0), 1, 0, adjustedNormal);
+    ```
+
 
 ---
 

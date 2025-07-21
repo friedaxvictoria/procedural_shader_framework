@@ -178,8 +178,13 @@ All outputs are to be plugged into a [Combine Color](../basics/combineColor.md) 
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/water_surface.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    computeWater_float(1, camMat, uv, hitPos, normal, hitID, rayDir);
+    ```
 
 ---
 
