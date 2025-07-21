@@ -64,9 +64,13 @@ The outputs can be used for further computations using lighting functions (e.g. 
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/basics_functions.hlsl"```
 
+    Example Usage
+
+    ```hlsl
+    getMinimum_float(hitPos1, normal1, hitID1, hitPos2, normal2, hitID2, hitPos, normal, hitID);
+    ```
 ---
 
 This is an engine-specific implementation without a shader-basis.

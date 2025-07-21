@@ -67,7 +67,14 @@ CHECK THIS
     </figure>
 
 === "Standard Scripting"
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/animation_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3x3 camMat;
+    rotateViaMouse_float(camMat);
+    ```
 
 ---
 

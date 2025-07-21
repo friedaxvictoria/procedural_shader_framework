@@ -50,8 +50,15 @@ The computation of the root color is required to ensure that the seed color is w
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/animation_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3 color_temp;
+    changingColorSin_float(float3(0.8, 0.1, 0.1), 0.5, color_temp);
+    ```
+
 
 ---
 

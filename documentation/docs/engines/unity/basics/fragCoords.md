@@ -81,8 +81,14 @@ The required scaling-values depend on the object's extent as well as Unity's cam
     > For an alternative effect, the input-coordinates can also be customised. The *Screen Position Node* can be used if zooming in should not effect the scale of the material.
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/basics_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float2 uv;
+    computeFragmentCoordinates_float(IN.uv, 10, 12, uv);
+    ```
 
 ---
 
