@@ -109,6 +109,7 @@ Compute surface lighting effects including diffuse, specular, rim, and reflectio
 - [Lighting Context](lighting/lighting_context.md)
 - [Volume Lighting Functions](lighting/volume_lighting_functions.md)
 - [Volume Lighting Context](lighting/volume_lighting_context.md)
+- [Sunrise](lighting/Sunrise.md)
 
 ### Rendering Shaders
 
