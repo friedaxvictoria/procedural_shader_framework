@@ -5,7 +5,7 @@
 
 This tutorial is designed to illustrate the workflow of Unity's integration of the framework. It showcases relevant connections between functions and gives examplary usecases for them. 
 
-The tutorial goes step-by-step through the creation of a scene containing a bouncing christmas tree using animated SDFs and some lights.
+The tutorial goes step-by-step through the creation of a scene containing a **bouncing christmas tree** using animated SDFs and **some lights**.
 
 > To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
 
@@ -27,41 +27,45 @@ The tutorial goes step-by-step through the creation of a scene containing a boun
             ![Unity Christmas Tree: First Ellipsoid](../images/christmasTree/ctEllipsoid.png){ width="400" }
         </figure>
 
-4. Connect the instantiations of the SDFs in series:
+    4. Connect the instantiations of the SDFs in series. The order is irrelevant, this is an examplary order:
 
-    Hexagonal Prism: *index 0*
+        Hexagonal Prism: *index 0*
 
-    Ellipsoid 1: *hexagonal prism index* 
+        Ellipsoid 1: *hexagonal prism index* 
 
-    Ellipsoid 2: *ellipsoid 1 index*
+        Ellipsoid 2: *ellipsoid 1 index*
 
-    Ellipsoid 3: *ellipsoid 2 index*
+        Ellipsoid 3: *ellipsoid 2 index*
 
-    Ellipsoid 4: *ellipsoid 3 index*
+        Ellipsoid 4: *ellipsoid 3 index*
     
-    Ellipsoid 5: *ellipsoid 4 index*
+        Ellipsoid 5: *ellipsoid 4 index*
 
-    <figure markdown="span">
+        <figure markdown="span">
         ![Unity Christmas Tree: Connectivity](../images/christmasTree/ctConnectivity.png){ width="700" }
-    </figure>
+        </figure>
 
-5. Add fitting colors to the SDFs, e.g.
-    Hexagonal Prism: *#453535*
-    Ellipsoids: *#18631B*
+    5. Add fitting colors to the SDFs, e.g.
 
-    <figure markdown="span">
+        Hexagonal Prism: *#453535*
+
+        Ellipsoids: *#18631B*
+
+        <figure markdown="span">
         ![Unity Christmas Tree: Color](../images/christmasTree/ctColor.png){ width="700" }
-    </figure>
+        </figure>
 
-6. Add noise to the SDFs for a more organic look, e.g.
-    Hexagonal Prism: Unity's build in *Gradient Noise* with *scale 30*
-    Ellipsoids: Unity's build in *Voronoi Noise* with *angleOffset 2* and *cellDensity 100*
+    6.  Add noise to the SDFs for a more organic look, e.g.
 
-    > Be aware that these noises use UV-coordinates of the underlying object and are deterministic with regard to them. Therefore, once animation is added, the noise will move.
+        Hexagonal Prism: Unity's build-in *Gradient Noise Node* with *scale 30*
+        
+        Ellipsoids: Unity's build-in *Voronoi Noise Node* with *angleOffset 2* and *cellDensity 100*
 
-    <figure markdown="span">
+        > Be aware that these noises use UV-coordinates of the underlying object and are deterministic with regard to them. Therefore, once animation is added, the noise will move.
+
+        <figure markdown="span">
         ![Unity Christmas Tree: Noise](../images/christmasTree/ctNoise.png){ width="500" }
-    </figure>
+        </figure>
 
 7. Plug the final SDF's index *ellipsoid 5 index* into the [SDF Raymarching](../sdfs/raymarching.md). 
 

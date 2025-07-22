@@ -57,7 +57,7 @@ float shininess, float timeOffset, float speed){
 === "Visual Scripting"
 
     <figure markdown="span">
-        ![Unity Connectivity](../images/sdfs/connectivity.png){ width="500" }
+        ![Unity Connectivity](../images/sdfs/exampleConnectivity.png){ width="700" }
     </figure>
 
 === "Standard Scripting"

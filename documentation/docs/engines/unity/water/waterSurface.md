@@ -156,7 +156,7 @@ Read about setting the water's material-values and hit-index at [Lighting Genera
 | `hitPosition`  <img width=50/>  | float4   |  The first three dimensions contain the position at which the water has been hit. The w-component contains the raymarching parameter at which the hit occured. This is required in order to be able to combine the water with other visual elements. |
 | `normal`  | float3   |  Normal at the hit position |
 | `hitIndex` | int  |  A value determining what surface has been hit. The water gets a hard-coded hitIndex.|
-| `rayDirection` | float3   |  Ray direction from the camera to the hit position |
+| `rayDirection` | float3   |  Ray direction dependant on the current fragment coordinates |
 
 All outputs are to be plugged into a [Combine Color](../basics/combineColor.md) or an arbitrary [Lighting Function](../lighting/generalInformation.md).
 

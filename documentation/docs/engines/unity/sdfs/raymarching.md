@@ -93,7 +93,7 @@ void raymarch_float(int condition, float3x3 cameraMatrix, int numberSDFs, float2
 | `hitPosition`  <img width=100/>  | float4   |  The first three dimensions contain the position at which the water has been hit. The w-component contains the raymarching parameter at which the hit occured. This is required in order to be able to combine the raymarching output with other visual elements. |
 | `normal`  | float3   |  Normal at the hit position |
 | `hitIndex` | int  |  A value determining which SDF surface is the first to be hit|
-| `rayDirection` | float3   |  Ray direction from the camera to the hit position |
+| `rayDirection` | float3   |  Ray direction dependant on the current fragment coordinates |
 
 ---
 

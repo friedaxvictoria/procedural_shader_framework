@@ -129,7 +129,7 @@ Material:
     - _angle: 3.66
     - _angle_offset: 2
     - _cell_density: 100
-    - _duration: 0
+    - _duration: 2
     - _rotationSpeed: 1
     - _scale: 0.3
     - _shininess: 40

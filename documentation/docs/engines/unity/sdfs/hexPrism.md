@@ -43,7 +43,7 @@ float shininess, float noise, out int indexOut)
 | `angle` | float   | World-space position of the light source |
 | `baseColor`  | float3   | Underlying color <br> <blockquote>*ShaderGraph default value*: float3(1,0,1)</blockquote>|
 | `specularColor`        | float3   | Color of the highlights |
-| `specularStrength`            | float   | Intensity with which highlights are created <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
+| `specularStrength`            | float   | Intensity with which highlights are created between 0 and 1 <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
 | `shininess` | float   | Shape and sharpness of the highlights; the larger the value, the more focussed the highlight  <br> <blockquote>*ShaderGraph default value*: 32</blockquote>|
 | `noise` | float   | Noise that is added to the shape of the hexagonal prism |
 

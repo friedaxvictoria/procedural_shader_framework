@@ -5,6 +5,8 @@
 
 This function creates an internal instance of an SDF-based dolphin. In order for the cube to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
 
+The animation of the dolphin utilises modulo to avoid the dolphin swimming further and further away. Therefore, after a set amount of time, the dolphin disappears and reappears at its starting position.
+
 ---
 
 ## The Code
@@ -45,7 +47,7 @@ This function creates an internal instance of an SDF-based dolphin. In order for
         finalMovement.y *= 0.5;
         finalMovement.x += 0.1 * sin(0.1 - 1.0 * adjustedTime) * (1.0 - jumping);
         
-        float3 worldOffset = float3(0.0, 0.0, fmod(-speed * _Time.y, 20.0) - 5.0);
+        float3 worldOffset = float3(0.0, 0.0, fmod(-speed * _Time.y, 50.0) - 5.0);
         
         return basePosition + finalMovement + worldOffset;
     }
@@ -194,7 +196,7 @@ float shininess, out int indexOut)
 | `angle` | float   | World-space position of the light source |
 | `baseColor`  | float3   | Underlying color <br> <blockquote>*ShaderGraph default value*: float3(0.5,0.5,0.5)</blockquote>|
 | `specularColor`        | float3   | Color of the highlights |
-| `specularStrength`            | float   | Intensity with which highlights are created <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
+| `specularStrength`            | float   | Intensity with which highlights are created between 0 and 1 <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
 | `shininess` | float   | Shape and sharpness of the highlights; the larger the value, the more focussed the highlight  <br> <blockquote>*ShaderGraph default value*: 32</blockquote>|
 
 > Even when the **speed** is set to zero, the dolphin will make an up-down movement. It will simply not move forwards.
