@@ -84,14 +84,9 @@ Shader "Custom/UserShader9"
                 float index;
                 float3x3 camMat = float3x3( 1,0,0, 0,1,0, 0,0,1 );
 
-
                 float4 hitPos1;
-
                 float hitID1;
-
-
                 float3 normal1;
-
                 float3 rayDir1;
 
 
@@ -102,8 +97,6 @@ Shader "Custom/UserShader9"
                 float3 colorOut;
                 
                 
-
-
                 // all temps
                 float temp;
                 float3 size_temp;
@@ -111,14 +104,9 @@ Shader "Custom/UserShader9"
                 float3 position_temp;
                 float3 color_temp;
 
-
                 rotateViaMouse_float(camMat);
 
-
                 computeFragmentCoordinates_float(IN.uv, 10, 10, uv);
-                
-
-
                
                 float3 carRoot;
                 float3 offset;
@@ -161,27 +149,13 @@ Shader "Custom/UserShader9"
                 addTorus_float(index, position_temp + float3(1.2, wheelY, -0.95), wheelRadius, wheelThickness, float3(0,0,1), 90, float3(0.1,0.1,0.1), float3(0.3,0.3,0.3), 0.1, 32, 0, index);
                 addTorus_float(index, position_temp + float3(-1, wheelY, -0.95), wheelRadius, wheelThickness, float3(0,0,1), 90, float3(0.1,0.1,0.1), float3(0.3,0.3,0.3), 0.1, 32, 0, index);
 
-
-
-
-
                 raymarch_float(1, camMat, index, uv, hitPos1, normal1, hitID1, rayDir1);
-
-
 
                 pointLight_float(hitPos1, normal1, hitID1, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05,  colorOut1);
                 sunriseLight_float(hitPos1, normal1, hitID1, rayDir1, colorOut3);
                 applyToonLighting_float(hitPos1, normal1, hitID1, _LightPosition, colorOut2);
 
-
-
-                
-
-
                 colorOut = colorOut1 + colorOut2 + colorOut3;
-
-
-
 
                 return float4(colorOut,1);
             }

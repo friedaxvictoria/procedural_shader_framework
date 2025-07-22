@@ -139,4 +139,5 @@ nav:
           - Safety Buoy: engines/unity/tutorials/safetyBuoy.md
           - Elevator: engines/unity/tutorials/elevator.md
           - Car: engines/unity/tutorials/car.md
+          - Shrine: engines/unity/tutorials/shrine.md
   - Unreal Engine: engines/unreal.md
