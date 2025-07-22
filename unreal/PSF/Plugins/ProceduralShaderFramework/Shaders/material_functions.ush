@@ -69,6 +69,26 @@ MaterialParams createDefaultMaterialParams()
     return mat;
 }
 
+MaterialParams makeMaterial(float3 baseColor, float3 specularColor, float specularStrength, float shininess, float roughness, float metallic, float rimPower, float fakeSpecularPower, float3 fakeSpecularColor, float ior, float refractionStrength, float3 refractionTint)
+{
+    MaterialParams mat;
+    mat.baseColor = baseColor;
+    mat.specularColor = specularColor;
+    mat.specularStrength = specularStrength;
+    mat.shininess = shininess;
+
+    mat.roughness = roughness;
+    mat.metallic = metallic;
+    mat.rimPower = rimPower;
+    mat.fakeSpecularPower = fakeSpecularPower;
+    mat.fakeSpecularColor = fakeSpecularColor;
+
+    mat.ior = ior;
+    mat.refractionStrength = refractionStrength;
+    mat.refractionTint = refractionTint;
+    return mat;
+}
+
 // ------------------------------------------
 // Plastic material preset
 // ------------------------------------------

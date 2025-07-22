@@ -111,12 +111,18 @@ void addSunriseLight(float time, float4 hitPosition, float3 normal, MaterialPara
 
 
 
-void applyPhongLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+void applyPhongLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
+    if (hitPosition.w > _raymarchStoppingCriterium)
+    {
+        lightingColor = float3(0, 0, 0);
+        return;
+    }
+    
     float3 viewDir, lightDir, lightColor, ambientColor;
     
-    viewDir = normalize(_rayOrigin - hitPos.xyz);
-    lightDir = normalize(lightPosition - hitPos.xyz);
+    viewDir = normalize(_rayOrigin - hitPosition.xyz);
+    lightDir = normalize(lightPosition - hitPosition.xyz);
     lightColor = float3(1.0, 1.0, 1.0);
     ambientColor = float3(0.05, 0.05, 0.05);
     
@@ -133,6 +139,12 @@ void applyPhongLighting(float3 hitPos, float3 lightPosition, MaterialParams mate
 
 void applyLambertLighting(float4 hitPosition, float3 lightPosition, float3 normal, out float3 lightingColor)
 {
+    if (hitPosition.w > _raymarchStoppingCriterium)
+    {
+        lightingColor = float3(0, 0, 0);
+        return;
+    }
+    
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
     float3 lightColor = float3(1.0, 1.0, 1.0);
@@ -144,13 +156,18 @@ void applyLambertLighting(float4 hitPosition, float3 lightPosition, float3 norma
     lightingColor = ambientColor + diffuseColor;
 }
 
-void applyBlinnPhongLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+void applyBlinnPhongLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
+    if (hitPosition.w > _raymarchStoppingCriterium)
+    {
+        lightingColor = float3(0, 0, 0);
+        return;
+    }
 
     float3 viewDir, lightDir, lightColor, ambientColor;
     
-    viewDir = normalize(_rayOrigin - hitPos.xyz);
-    lightDir = normalize(lightPosition - hitPos.xyz);
+    viewDir = normalize(_rayOrigin - hitPosition.xyz);
+    lightDir = normalize(lightPosition - hitPosition.xyz);
     lightColor = float3(1.0, 1.0, 1.0);
     ambientColor = float3(0.05, 0.05, 0.05);
     
@@ -165,12 +182,18 @@ void applyBlinnPhongLighting(float3 hitPos, float3 lightPosition, MaterialParams
     lightingColor = ambientColor + diffuse + specular;
 }
 
-void applyFakeSpecular(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+void applyFakeSpecular(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
+    if (hitPosition.w > _raymarchStoppingCriterium)
+    {
+        lightingColor = float3(0, 0, 0);
+        return;
+    }
+    
     float3 viewDir, lightDir, lightColor, ambientColor;
     
-    viewDir = normalize(_rayOrigin - hitPos.xyz);
-    lightDir = normalize(lightPosition - hitPos.xyz);
+    viewDir = normalize(_rayOrigin - hitPosition.xyz);
+    lightDir = normalize(lightPosition - hitPosition.xyz);
     lightColor = float3(1.0, 1.0, 1.0);
     ambientColor = float3(0.05, 0.05, 0.05);
     
@@ -179,12 +202,59 @@ void applyFakeSpecular(float3 hitPos, float3 lightPosition, MaterialParams mater
     lightingColor = highlight * material.fakeSpecularColor * lightColor;
 }
 
-void applyPBRLighting(float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+void lambertDiffuse(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+    if (hitPosition.w > _raymarchStoppingCriterium)
+    {
+        lightingColor = float3(0, 0, 0);
+        return;
+    }
+    
+    float3 viewDir, lightDir, lightColor, ambientColor;
+    
+    viewDir = normalize(_rayOrigin - hitPosition.xyz);
+    lightDir = normalize(lightPosition - hitPosition.xyz);
+    lightColor = float3(1.0, 1.0, 1.0);
+    ambientColor = float3(0.05, 0.05, 0.05);
+    
+    float diff = max(dot(normal, lightDir), 0.0);
+    lightingColor = material.baseColor * lightColor * diff;
+}
+
+void applyToonLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out
+float3 lightingColor)
+{
+    if (hitPosition.w > _raymarchStoppingCriterium)
+    {
+        lightingColor = float3(0, 0, 0);
+        return;
+    }
+    
+    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
+    float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
+    float3 lightColor = float3(1.0, 1.0, 1.0);
+    float3 ambientColor = float3(0.05, 0.05, 0.05);
+
+    float diffuseValue = max(dot(normal, lightDirection), 0.0);
+
+    float step1 = 0.3;
+    float step2 = 0.6;
+    float step3 = 0.9;
+
+    float toonDiff =
+        diffuseValue > step3 ? 1.0 :
+        diffuseValue > step2 ? 0.7 :
+        diffuseValue > step1 ? 0.4 : 0.1;
+
+    lightingColor = ambientColor + toonDiff * material.baseColor * lightColor;
+}
+
+void applyPBRLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
     float3 viewDir, lightDir, lightColor, ambientColor;
     
-    viewDir = normalize(_rayOrigin - hitPos.xyz);
-    lightDir = normalize(lightPosition - hitPos.xyz);
+    viewDir = normalize(_rayOrigin - hitPosition.xyz);
+    lightDir = normalize(lightPosition - hitPosition.xyz);
     lightColor = float3(1.0, 1.0, 1.0);
     ambientColor = float3(0.05, 0.05, 0.05);
     
@@ -226,12 +296,12 @@ void applyPBRLighting(float3 hitPos, float3 lightPosition, MaterialParams materi
     lightingColor = lighting;
 }
 
-void applyRimLighting(float3 rimColor, float3 hitPos, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+void applyRimLighting(float3 rimColor, float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
     float3 viewDir, lightDir, lightColor, ambientColor;
     
-    viewDir = normalize(_rayOrigin - hitPos.xyz);
-    lightDir = normalize(lightPosition - hitPos.xyz);
+    viewDir = normalize(_rayOrigin - hitPosition.xyz);
+    lightDir = normalize(lightPosition - hitPosition.xyz);
     lightColor = float3(1.0, 1.0, 1.0);
     ambientColor = float3(0.05, 0.05, 0.05);
     
@@ -239,34 +309,7 @@ void applyRimLighting(float3 rimColor, float3 hitPos, float3 lightPosition, Mate
     lightingColor = rim * rimColor;
 }
 
-void applyToonLighting_float(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
-{
-    if (hitPosition.w > _raymarchStoppingCriterium)
-    {
-        lightingColor = float3(0, 0, 0);
-        return;
-    }
-    
-    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
-    float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
-    float3 ambientColor = float3(0.05, 0.05, 0.05);
-
-    float diffuseValue = max(dot(normal, lightDirection), 0.0);
-
-    float step1 = 0.3;
-    float step2 = 0.6;
-    float step3 = 0.9;
-
-    float toonDiff =
-        diffuseValue > step3 ? 1.0 :
-        diffuseValue > step2 ? 0.7 :
-        diffuseValue > step1 ? 0.4 : 0.1;
-
-    lightingColor = ambientColor + toonDiff * material.baseColor * lightColor;
-}
-
-void applySoftSSLighting_float(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+void applySoftSSLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
@@ -285,7 +328,7 @@ void applySoftSSLighting_float(float4 hitPosition, float3 lightPosition, Materia
     lightingColor = ambientColor + diffuseColor + sss;
 }
 
-void applyFresnelLighting_float(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+void applyFresnelLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
     {
@@ -303,7 +346,7 @@ void applyFresnelLighting_float(float4 hitPosition, float3 lightPosition, Materi
     lightingColor = ambientColor + material.baseColor * lightColor + rimStrength * fresnel * material.specularColor;
 }
 
-void applyUVGradientLighting_float(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, float2 uv, out float3 lightingColor)
+void applyUVGradientLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, float2 uv, out float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
@@ -316,7 +359,7 @@ void applyUVGradientLighting_float(float4 hitPosition, float3 lightPosition, Mat
     lightingColor = ambientColor + diffuseValue * gradientColor * lightColor;
 }
 
-void applyUVAnisotropicLighting_float(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, float2 uv, out float3 lightingColor)
+void applyUVAnisotropicLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, float2 uv, out float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
@@ -336,5 +379,4 @@ void applyUVAnisotropicLighting_float(float4 hitPosition, float3 lightPosition, 
 
     lightingColor = ambientColor + diffuseValue * material.baseColor + spectralAnisotropic * material.specularColor;
 }
-
 #endif
