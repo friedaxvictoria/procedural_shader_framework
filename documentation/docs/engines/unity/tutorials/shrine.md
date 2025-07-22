@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="main-heading">Tutorial: Car</h1>
+    <h1 class="main-heading">Tutorial: Shrine</h1>
     <blockquote class="author">by Utku Alkan</blockquote>
 </div>
 

@@ -108,8 +108,6 @@ Shader "Custom/UserShader8"
                 float3 colorOut3;
 
                 float3 colorOut;
-                
-                
 
 
                 // all temps
@@ -122,10 +120,8 @@ Shader "Custom/UserShader8"
 
                 rotateViaMouse_float(camMat);
 
-
                 computeFragmentCoordinates_float(IN.uv, 10, 10, uv);
                 
-
                
                 // Base platform
                 addRoundBox_float(0, float3(0, -2, 0), float3(6, 0.5, 6), 0.3, float3(0, 1, 0), 0, float3(0.1, 0.1, 0.1), float3(0.5, 0.5, 0.5), 0.1, 64, 0, index);
@@ -180,14 +176,7 @@ Shader "Custom/UserShader8"
                 sunriseLight_float(hitPos, normal, hitID, rayDir1, colorOut3);
                 applyToonLighting_float(hitPos, normal, hitID, _LightPosition, colorOut2);
 
-
-
-                
-
-
                 colorOut = colorOut1 + colorOut2 + colorOut3;
-
-
 
 
                 return float4(colorOut,1);
