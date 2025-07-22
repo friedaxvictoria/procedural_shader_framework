@@ -5,7 +5,7 @@
 ---
 
 - **Category:** Noise  
-- **Shader Type:** Pseudo 3D Gradient Noise (Perlin-style)  
+- **Author:** Wanzhang He
 - **Input Requirements:** `vec3 pos (xy + time)`, `fragCoord`, `iTime`, `iResolution`  
 - **Output:** Animated grayscale gradient noise
 
