@@ -2,8 +2,6 @@
 
 <img src="https://github.com/saeedelsayed/Procedural-Shaders/blob/main/screenshots/noise/3d%20perlin%20noise.png?raw=true" alt="3D Perlin Noise Output" width="400" height="225">
 
----
-
 - **Category:** Noise  
 - **Author:** Wanzhang He
 - **Input Requirements:** `vec3 pos (xy + time)`, `fragCoord`, `iTime`, `iResolution`  
@@ -43,16 +41,11 @@ The result is a time-varying field of smooth noise between `[-1.0, 1.0]`, visual
 
 ---
 
-## 💻 Full Shader Code
+## 💻 Shader Code
 
 ```glsl
-// ==========================================
-// Shader: Perlin-3D Gradient Noise Shader
-// Category: Noise
 // Description: Generates time-varying 2D noise with pseudo-3D gradient noise using dynamic gradients.
 // Uses Perlin-style gradient noise with time-animated gradients.
-// Screenshot: screenshots/noise/3d perlin noise.png
-// ==========================================
 
 vec2 GetGradient(vec2 intPos, float t) {
     float rand = fract(sin(dot(intPos, vec2(12.9898, 78.233))) * 43758.5453);
