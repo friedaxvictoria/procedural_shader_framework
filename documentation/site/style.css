@@ -1,0 +1,27 @@
+.button-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1rem;
+  width: 100%;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.author{
+  align-content: center;
+  border-left:0 !important;
+  font-style: italic;
+}
+
+.main-heading{
+  margin:0 !important;
+}
+
+table {
+    width:100% !important;
+}

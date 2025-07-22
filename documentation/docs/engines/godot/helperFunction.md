@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="main-heading">Helper Functions Analysis for Ray Marching and Scene Integration</h1>
+    <h1 class="main-heading">Helper Functions</h1>
     <blockquote class="author">by Jeewan</blockquote>
 </div>
 This document provides a detailed analysis of the helper functions defined in the `helper_function.gdshaderinc` 

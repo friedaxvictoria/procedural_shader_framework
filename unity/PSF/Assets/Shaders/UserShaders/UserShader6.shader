@@ -123,7 +123,7 @@ Shader "Custom/UserShader6"
                 rotateViaMouse_float(camMat);
 
 
-                computeFragmentCoordinates_float(IN.uv, 11, 20, uv);
+                computeFragmentCoordinates_float(IN.uv, 11, 11, uv);
                 
 
                
@@ -135,7 +135,7 @@ Shader "Custom/UserShader6"
 
                
 
-                addDolphin_float(index, float3(3,-0.5,8), 2, 1.56, float3(0, 1, 0), 45, float3(0.2,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
+                addDolphin_float(index, float3(3,-0.5,8), 2, 1.52, float3(0, 1, 0), 45, float3(0.2,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
                 //addDolphin_float(index, float3(3.5,-0.5,8), 1, 2, float3(0, 1, 0), 60, float3(0.5,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
                 //addDolphin_float(index, float3(4,-0.5,8), 1, 2, float3(0, 1, 0), 30, float3(0.2,0.5,0.5), float3(0.2,0.5,0.2), 1, 1, index);
 

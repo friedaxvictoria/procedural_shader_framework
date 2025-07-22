@@ -121,7 +121,7 @@ The **Dolphin** primitive supports additional animation parameters:
 
 ### 💾 Script Integration Example
 
-Within the `_ready()` function of `sdf_updated.gd`, populate the scene by instantiating and configuring `ShaderObject` instances:
+Within the `_ready()` function of `sdf_updated.gd`, populate the scene by instantiating and configuring `ShaderObject` instances. **[[Explore more on Godot Script]](godot/gdScript.md)**
 
 ```gd
 func _ready():

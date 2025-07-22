@@ -151,8 +151,8 @@ Shader "Custom/UserShader7"
                 tween3D_float(float3(0,0,0), float3(4.5,4.5,4.5), 2.0, TWEEN_ELASTIC_INOUT, 0.0, true, position_temp);
                 addSphere_float(index, float3(0,0,0), position_temp, float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, 0, index);
 
-                tween3D_float(float3(0,0,0), float3(20,2,1), 2.0, TWEEN_ELASTIC_INOUT, 0.0, true, position_temp);
-                addRoundBox_float(index, float3(0,10,-10), position_temp, 1, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), float3(0.2,0.8,0.8), 2, 1, 0, index);
+                //tween3D_float(float3(0,0,0), float3(20,2,1), 2.0, TWEEN_ELASTIC_INOUT, 0.0, true, position_temp);
+                //addRoundBox_float(index, float3(0,10,-10), position_temp, 1, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), float3(0.2,0.8,0.8), 2, 1, 0, index);
 
 
                 addDolphin_float(index, float3(3,-0.5,8), 2, 1.56, float3(0, 1, 0), 45, float3(0.2,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
