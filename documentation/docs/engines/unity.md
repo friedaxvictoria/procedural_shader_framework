@@ -113,7 +113,7 @@ Due to the requirement of noting the precision in ShaderGraph, all functions tha
 
 > Note that all other helper functions (e.g. [Helper Functions](unity/helperFunctions.md)) can still be called in ShaderLab and do not have the appendix.
 
-!Utku Input
+In standard scripting, after including the appropriate libraries, users can directly call the functions within their ShaderLab shader files, typically in the fragment shader. This approach is better suited for those who prefer coding over using Shader Graph, and it becomes especially advantageous as the scene complexity increases, offering more control and clarity compared to a node-based setup.
 
 ---
 

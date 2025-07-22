@@ -135,7 +135,7 @@ Shader "Custom/UserShader9"
                 addRoundBox_float(0, float3(0, -1.8, 0), float3(20, 0.5, 4), 0.3, float3(0,1,0), 0, float3(0.15, 0.15, 0.15), float3(0.3, 0.3, 0.3), 0.1, 32, 0, index);
 
                 // Car motion tween
-                tween3D_float(float3(-10, 0, 0), float3(10, 0, 0), 3.0, TWEEN_QUARTIC_INOUT, 0.0, true, carRoot);
+                tween3D_float(float3(-10, 0, 0), float3(10, 0, 0), 6.0, TWEEN_QUARTIC_INOUT, 0.0, true, carRoot);
 
                 // Car Body
                 addRoundBox_float(index, carRoot + float3(0, -0.5, 0), float3(2.0, 0.4, 1.0), 0.2, float3(0,1,0), 0, float3(0.8, 0.1, 0.1), float3(1,1,1), 0.4, 64, 0, index);
