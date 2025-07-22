@@ -51,6 +51,16 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
 
+copyright: Copyright &copy; 2025 TU DRESDEN FAKULTÄT INFORMATIK
+extra:
+  #generator: false
+  social:
+    - icon: fontawesome/brands/mastodon 
+      link: https://tu-dresden.de/ing/informatik
+
+    - icon: fontawesome/brands/github 
+      link: https://github.com/friedaxvictoria/procedural_shader_framework.git
+
 extra_css:
   - style.css
 
@@ -66,7 +76,15 @@ nav:
       #     - Cloud FBM: shaders/noise/cloud_fbm.md -->
       
   - Shaders: shaders/shaderPage.md
-  - Godot: engines/godot.md
+  - Godot: 
+    - Overal Structure: engines/godot.md
+    - Global Variables: engines/godot/globalVariables.md
+    - Helper Functions: engines/godot/helperFunction.md
+    - GD Script: engines/godot/gdScript.md
+    - GD Shader Include: engines/godot/gdShaderInclude.md
+    - Main Fragment Shader: engines/godot/mainFragmentShader.md
+    - Shader Flow Pipeline: engines/godot/shaderFlow.md
+
   - Unity:
     - Overview: engines/unity.md
     - Global Variables: engines/unity/globalVariables.md
