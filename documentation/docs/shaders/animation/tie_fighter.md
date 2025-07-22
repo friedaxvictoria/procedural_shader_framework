@@ -1,7 +1,7 @@
 # 🧩 TIE Fighter Animation Shader
 
 - **Category:** Animation 
-- **Author:** Ruimin Ma
+- **Author:** Wanzhang He
 
 ---
 
@@ -54,7 +54,7 @@ These are **not part of the general animation system**, but instead define a **s
 
 ---
 
-## 💻 Code Snippet
+## 💻 Shader Code
 
 ```glsl
 /** Fighter body motion */
@@ -82,3 +82,4 @@ void getCamera(float T, out vec3 ro, out vec3 lookAt)
              t);
 }
 ```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/animation/TIE%20Fighter_animation.glsl)
