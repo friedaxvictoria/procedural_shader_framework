@@ -526,7 +526,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     // === Scene SDF objects ===
     SDF terrain = SDF(0, vec3(0.0), vec3(0.0), 0.0);
     SDF castle1 = SDF(1, vec3(0.0), vec3(0.0), 0.0);
-    SDF castle2 = SDF(1, vec3(3.0, 0.0, 5.0), vec3(0.0), 15.0);
+    SDF castle2 = SDF(1, vec3(3.0, 0.0, 5.0), vec3(0.0), radians(15.0));
     sdfArray[0] = terrain;
     sdfArray[1] = castle1;
     sdfArray[2] = castle2;
