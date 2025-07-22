@@ -2,7 +2,7 @@
 
 
 - **Category:** Noise  
-- **Author:** Ruimin Ma  
+- **Author:** Wanzhang He
 - **Shader Type:** utility / hash / value noise  
 - **Input Requirements:** `vec3`, `vec4`
 
@@ -64,3 +64,4 @@ float n31(vec3 p)
 
 #endif // TF_NOISE_UTILS_GLSL
 ```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/noise/TIE%20Fighter_noise.glsl)
