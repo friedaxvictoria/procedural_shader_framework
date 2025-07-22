@@ -4,7 +4,7 @@
 
 
 - **Category:** Noise  
-- **Author:** Xunyu Zhang  
+- **Author:** Wanzhang He
 - **Shader Type:** 2D Voronoi / cell noise  
 - **Input Requirements:** `vec2`, `float`, `iResolution`
 
@@ -98,3 +98,4 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     fragColor = vec4(noise.y, noise.y, noise.x, 1.0);
 }
 ```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/noise/cell_noise.glsl)
