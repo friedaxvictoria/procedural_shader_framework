@@ -1,8 +1,7 @@
 # 🧩 Voronoi Cell Noise Visualizer
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/voronoi%20cell.png" alt="Voronoi Cell Noise Example" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/voronoi%20cell.png?raw=true" alt="Voronoi Cell Noise Example" width="400" height="225">
 
----
 
 - **Category:** Noise  
 - **Author:** Xunyu Zhang  
