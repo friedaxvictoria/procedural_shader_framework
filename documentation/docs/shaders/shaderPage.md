@@ -141,6 +141,7 @@ Shaders that render complete background or environmental elements such as sky, s
 - [Cloud And Water](scenes/cloud_water.md)
 - [Terrain And Castle](scenes/terrain_castle.md)
 - [Dolphin](scenes/dolphin.md)
+- [Desert](scenes/desert.md)
   
 ---
 
