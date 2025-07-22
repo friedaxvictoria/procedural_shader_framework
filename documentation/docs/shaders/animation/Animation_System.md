@@ -3,6 +3,9 @@
     <blockquote class="author">by Wanzhang He</blockquote>
 </div>
 
+<img src="../../../static/images/images4Shaders/animation_SDFs.gif" alt="general scene" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+
+---
 
 ## Overview
 

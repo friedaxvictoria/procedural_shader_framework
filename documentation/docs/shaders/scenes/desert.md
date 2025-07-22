@@ -3,6 +3,8 @@
     <blockquote class="author">by Saeed Shamseldin</blockquote>
 </div>
 
+<img src="../../../static/images/images4Shaders/desert.png" alt="general scene" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+
 This document explains the desert generation and rendering system implemented in the GLSL shader code.
 
 ---

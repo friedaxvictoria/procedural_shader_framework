@@ -144,15 +144,3 @@ Shaders that render complete background or environmental elements such as sky, s
 - [Desert](scenes/desert.md)
   
 ---
-
-**📘 How to Read a Shader Page**
-
-Every shader entry follows the same layout:
-
-- **Overview** — What it is, what it does  
-- **Algorithm** — Description of logic and flow  
-- **Code** — Full GLSL/HLSL implementation  
-- **Results** — Previews, GIFs, or videos  
-<!-- - **Parameters** — Inputs you can change  -->
-
----
