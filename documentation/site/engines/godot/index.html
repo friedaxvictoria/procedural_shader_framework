@@ -20,7 +20,7 @@
     
     
       
-        <title>Overal Structure - Shader Documentation</title>
+        <title>Shader Flow Pipeline - Shader Documentation</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overal Structure
+              Shader Flow Pipeline
             
           </span>
         </div>
@@ -439,7 +439,7 @@
   
   
   <span class="md-ellipsis">
-    Overal Structure
+    Shader Flow Pipeline
     
   </span>
   
@@ -578,7 +578,7 @@
   
   
   <span class="md-ellipsis">
-    Shader Flow Pipeline
+    User Manual
     
   </span>
   
@@ -2054,11 +2054,12 @@
 </ul>
 </li>
 </ul>
+<hr />
 <h2 id="file-structure">File Structure</h2>
 <p>This framework structure showcases a Godot Engine setup for a rendering-focused application using GDScript 
 and GLSL shaders. Below is an overview of how the project is structured, including scripts, shaders, 
 and their interactions.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>godot/
+<h2 id="godot-vscode-addons-includes-global_variables-global_variablesgdshaderinc-helper_functions-helper_functionsgdshaderinc-sdf_updatedgdshaderinc-scripts-sdf_updatedgd-editorconfig-gitattributes-gitignore-iconsvg-iconsvgimport-projectgodot-readmemd-sdf_updatedgdshader-sdf_updatedtres-sdf_updatedtscn"><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>godot/
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── 📁 .vscode/
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── 📁 addons/
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── 📁 includes/
@@ -2079,7 +2080,7 @@ and their interactions.</p>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>├── 🎨 sdf_updated.gdshader
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>├── 🌳 sdf_updated.tres
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>└── 🎬 sdf_updated.tscn
-</code></pre></div>
+</code></pre></div></h2>
 <h2 id="getting-started">Getting Started</h2>
 <ol>
 <li>Clone or download the project files <strong><a href="https://github.com/friedaxvictoria/procedural_shader_framework.git">Click Here for Link</a></strong></li>
@@ -2088,20 +2089,26 @@ and their interactions.</p>
 <li>Modify the SDF Manager script (<code>sdf_updated.gd</code>) to add custom shapes and effects</li>
 <li>Experiment with shader parameters, through inspector, to achieve desired visual results</li>
 </ol>
+<hr />
 <h2 id="framework-workflow">Framework Workflow</h2>
 <ol>
 <li><strong>User Interaction</strong>: The user modifies the scene by adding or removing SDFs via scripts in the directory <code>scripts/sdf_updated.gd</code>, attached to nodes in <code>sdf_updated.tscn</code>.</li>
 <li><strong>Data Passing</strong>: The GDScript updates shader uniforms (e.g., SDF positions, sizes) through the global variables system.</li>
-<li><strong>Shader Processing</strong>:<ul>
+<li>
+<p><strong>Shader Processing</strong>:</p>
+<ul>
 <li>The main fragment shader (<code>sdf_updated.gdshader</code>) includes the main rendering file (<code>sdf_updated.gdshaderinc</code>).</li>
 <li>Helper functions from <code>includes/helper_functions/</code> support the main rendering logic.</li>
 <li>Global variables from <code>includes/global_variables/</code> provide shared data access.</li>
 <li>The IntegrationFlexible method combines raymarching, lighting, and noise to produce the final image.</li>
 </ul>
 </li>
-<li><strong>Rendering</strong>: The shader outputs the final pixel colors, rendering the dynamic SDF scene in the <code>sdf_updated.tscn</code> scene.</li>
+<li>
+<p><strong>Rendering</strong>: The shader outputs the final pixel colors, rendering the dynamic SDF scene in the <code>sdf_updated.tscn</code> scene.</p>
+</li>
 </ol>
 <p>👉 <strong><a href="shaderFlow/">View how it works→</a></strong></p>
+<hr />
 <h2 id="overal-structure-in-detail">Overal Structure in Detail</h2>
 <h3 id="1-global-variables"><strong>1. Global Variables</strong></h3>
 <p>Global variables are managed in the <code>includes/global_variables/</code> folder to store all shared variables used across the shaders, ensuring consistency and ease of access.</p>
@@ -2109,12 +2116,14 @@ and their interactions.</p>
 <li><strong>Location</strong>: <code>includes/global_variables/</code> folder</li>
 <li><strong>Purpose</strong>: Defines global constants and uniforms used throughout the shader pipeline.</li>
 </ul>
-<p><strong>Examples</strong>:
-- uniform vec2 resolution: Screen resolution for rendering.
-- uniform float time: Animation time for dynamic effects.
-- uniform vec3 camera_pos: Camera position for raymarching.
-- SDF-specific parameters (e.g., positions, sizes, or types of SDFs).</p>
-<p><strong>Usage</strong>: Included in the main fragment shader and other shader files to access shared variables.</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li>uniform vec2 resolution: Screen resolution for rendering.</li>
+<li>uniform float time: Animation time for dynamic effects.</li>
+<li>uniform vec3 camera_pos: Camera position for raymarching.</li>
+<li>SDF-specific parameters (e.g., positions, sizes, or types of SDFs).</li>
+</ul>
+<p><strong>Usage</strong>: Included in the shader inclusive and helper function files to access shared variables.</p>
 <p>👉 <strong><a href="globalVariables/">View how it works→</a></strong></p>
 <h3 id="2-helper-functions-for-rendering"><strong>2. Helper Functions for Rendering</strong></h3>
 <p>Helper functions are stored in the <code>includes/helper_functions/</code> folder to support the main rendering logic. These are called within the main shader include files to perform specific tasks.</p>
@@ -2122,10 +2131,12 @@ and their interactions.</p>
 <li><strong>Location</strong>: <code>includes/helper_functions/</code> folder</li>
 <li><strong>Purpose</strong>: Contains utility functions for rendering, such as vector transformations, color manipulations, or mathematical utilities.</li>
 </ul>
-<p><strong>Examples</strong>:
-- Normalizing vectors for lighting calculations.
-- Converting coordinates for raymarching.
-- Utility functions for blending or interpolating values.</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li>Normalizing vectors for lighting calculations.</li>
+<li>Converting coordinates for raymarching.</li>
+<li>Utility functions for blending or interpolating values.</li>
+</ul>
 <p>👉 <strong><a href="helperFunction/">View how it works→</a></strong></p>
 <h3 id="3-gdscript-file-for-dynamic-sdf-management"><strong>3. GDScript File for Dynamic SDF Management</strong></h3>
 <p>A GDScript file is attached to a Node2D to allow users to dynamically add or remove Signed Distance Fields (SDFs) on the screen. This script provides an interface for manipulating SDFs, which are then passed to the shader for rendering.</p>
@@ -2133,10 +2144,12 @@ and their interactions.</p>
 <li><strong>Location</strong>: <code>scripts/</code> folder</li>
 <li><strong>Purpose</strong>: Manages the creation, modification, and removal of SDFs. Users can interact with this script to customize the scene dynamically.</li>
 </ul>
-<p><strong>Key Functionality</strong>:
-- Add SDFs (e.g., torus, dolphin) to the scene.
-- Remove SDFs based on user input.
-- Update shader parameters with SDF data for rendering.</p>
+<p><strong>Key Functionality</strong>:</p>
+<ul>
+<li>Add SDFs (e.g., torus, dolphin) to the scene.</li>
+<li>Remove SDFs based on user input.</li>
+<li>Update shader parameters with SDF data for rendering.</li>
+</ul>
 <p>👉 <strong><a href="gdScript/">View how it works→</a></strong></p>
 <h3 id="4-main-gdshader-include-files"><strong>4. Main GDShader Include Files</strong></h3>
 <p>The project uses the main shader include file <code>sdf_updated.gdshaderinc</code> that contains core rendering logic, such as lighting, raymarching, and noise functions. This file is included in the main fragment shader to provide the complete rendering pipeline.</p>
@@ -2153,10 +2166,12 @@ and their interactions.</p>
 <li><strong>Resource</strong>: <code>sdf_updated.tres</code></li>
 <li><strong>Purpose</strong>: Combines all shader logic to produce the final pixel colors.</li>
 </ul>
-<p><strong>Key Functionality</strong>:
-- Includes global variables for shared data.
-- Includes the main <code>sdf_updated.gdshaderinc</code> file.
-- Calls the IntegrationFlexible method, which integrates raymarching, lighting, and noise effects to render the scene.</p>
+<p><strong>Key Functionality</strong>:</p>
+<ul>
+<li>Includes global variables for shared data.</li>
+<li>Includes the main <code>sdf_updated.gdshaderinc</code> file.</li>
+<li>Calls the IntegrationFlexible method, which integrates raymarching, lighting, and noise effects to render the scene.</li>
+</ul>
 <p><strong>Structure</strong>:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -2168,6 +2183,7 @@ and their interactions.</p>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
 </code></pre></div>
 👉 <strong><a href="mainFragmentShader/">View how it works→</a></strong></p>
+<hr />
 <h2 id="key-features">Key Features</h2>
 <ul>
 <li><strong>Dynamic SDF Manipulation</strong>: Real-time addition and removal of geometric primitives</li>
@@ -2176,6 +2192,7 @@ and their interactions.</p>
 <li><strong>Performance Optimized</strong>: Efficient raymarching implementation for real-time rendering</li>
 <li><strong>User-Friendly Interface</strong>: GDScript integration for easy scene modification</li>
 </ul>
+<hr />
 <h2 id="requirements">Requirements</h2>
 <ul>
 <li>Godot Engine 4.x</li>

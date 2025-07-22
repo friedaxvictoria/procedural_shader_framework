@@ -25,3 +25,17 @@
 table {
     width:100% !important;
 }
+
+.md-typeset {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.md-typeset p {
+  margin-bottom: 1.2rem;
+  text-align: justify;
+}
+
+.md-typeset strong {
+  font-weight: 600;
+  color: #2c3e50;
+}
