@@ -1,8 +1,7 @@
 # 🧩 Noise Shader Collection
 
-
 - **Category:** Noise
-- **Author:** Xunyu Zhang
+- **Author:** Wanzhang He
 - **Shader Type:** noise functions
 - **Input Requirements:** `float`, `vec2`, `vec3`, `time`
 
@@ -48,6 +47,3 @@ vec2 v  = voronoi(uv, 0.5);              // Voronoi result: (colorID, borderDist
 ```
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/noise/noise.glsl)
-
----
-
