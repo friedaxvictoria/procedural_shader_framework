@@ -27,31 +27,27 @@ float shininess, float noise, out int indexOut)
 
 ---
 
-## The Parameters
+## The Parameters  
 
 ### Inputs:
-- ```float index```: The index at which the torus is stored 
-- ```float3 position```: The central position of the torus
-- ```float radius```: The radius of the torus from center to the very outside of the tube
-> *ShaderGraph default value*: ```3```
-- ```float thickness```: The thickness of the torus' tube
-> *ShaderGraph default value*: ```1```
-- ```float3 axis```: The axis determining the orientation of the torus
-> *ShaderGraph default value*: ```float3(0,1,0)```
-- ```float angle```: The angle around the axis 
-- Material parameters
-    - ```float3 baseColor```: The underlying color of the torus
-    > *ShaderGraph default value*: ```float3(0,1,0)```
-    - ```float3 specularColor```: The color of the highlights
-    - ```float3 specularStrength```: The intensity with which highlights are created
-    > *ShaderGraph default value*: ```1```
-    - ```float3 shininess```: The shape and sharpness of the highlights; the larger the value, the more focussed the highlight
-    > *ShaderGraph default value*: ```32```
-- ```float3 noise```: Noise that is added to the shape of the torus
-
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `index`  <img width=50/>  | int   | Index at which the torus is stored  |
+| `position`        | float3   | Central position |
+| `radius`        | float   | Radius of the torus from center to the start of the tube <br> <blockquote>*ShaderGraph default value*: 3</blockquote>|
+| `thickness`        | float   | Thickness of the torus' tube <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
+| `axis`            | float3   | Axis determining the orientation <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|
+| `angle` | float   | World-space position of the light source |
+| `baseColor`  | float3   | Underlying color <br> <blockquote>*ShaderGraph default value*: float3(1,0,0)</blockquote>|
+| `specularColor`        | float3   | Color of the highlights |
+| `specularStrength`            | float   | Intensity with which highlights are created <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
+| `shininess` | float   | Shape and sharpness of the highlights; the larger the value, the more focussed the highlight  <br> <blockquote>*ShaderGraph default value*: 32</blockquote>|
+| `noise` | float   | Noise that is added to the shape of the torus |
 
 ### Outputs:
-- ```float indexOut```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [SDF Raymarching](...).  
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `indexOut`  | int   | Incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [SDF Raymarching](raymarching.md) |
 
 ---
 

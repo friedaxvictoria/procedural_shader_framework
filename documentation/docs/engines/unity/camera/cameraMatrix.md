@@ -63,4 +63,4 @@ Examplary matrices that can be used as input to this function are [Camera Rotati
 
 ---
 
-This is an engine-specific implementation without a shader-basis.
+Find the original shader code [here](../../../shaders/animation/Camera_Anim.md).

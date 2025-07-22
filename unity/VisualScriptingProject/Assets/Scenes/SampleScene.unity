@@ -651,7 +651,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 20945ace514eb4e4da009bedf8c036f5, type: 2}
+  - {fileID: 2100000, guid: 25446e3454f587742b145fa33d5a1945, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -708,6 +708,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShaderUniformControl
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577673553396646536, guid: e759fec0b97238f48857cba3af8b6c99,
+        type: 3}
+      propertyPath: rayOrigin.z
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7164318732148846314, guid: e759fec0b97238f48857cba3af8b6c99,
         type: 3}

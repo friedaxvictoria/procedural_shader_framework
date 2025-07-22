@@ -134,3 +134,17 @@ CameraState animate_camera(float time, CameraAnimParams param) {
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/animation/camera_anim.glsl)
+
+## Engine Integrations
+
+### Orbit
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/camera/cameraRotation">Unity</a>
+</div>
+
+### Ping-Pong
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/camera/cameraBackAndForth">Unity</a>
+</div>

@@ -37,7 +37,7 @@ float shininess, float noise, out int indexOut)
 | `radius`        | float   | Radius with which the corners are rounded |
 | `axis`            | float3   | Axis determining the orientation <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|
 | `angle` | float   | World-space position of the light source |
-| `baseColor`  | float3   | Underlying color <br> <blockquote>*ShaderGraph default value*: float3()</blockquote>|
+| `baseColor`  | float3   | Underlying color <br> <blockquote>*ShaderGraph default value*: float3(0,0,1)</blockquote>|
 | `specularColor`        | float3   | Color of the highlights |
 | `specularStrength`            | float   | Intensity with which highlights are created <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
 | `shininess` | float   | Shape and sharpness of the highlights; the larger the value, the more focussed the highlight  <br> <blockquote>*ShaderGraph default value*: 32</blockquote>|
@@ -53,7 +53,7 @@ float shininess, float noise, out int indexOut)
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at `PSF/SDFs/Cube`
+    Find the node at `PSF/SDFs/Round Box`
 
     <figure markdown="span">
         ![Unity Cube](../images/sdfs/cube.png){ width="500" }

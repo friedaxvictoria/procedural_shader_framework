@@ -54,5 +54,4 @@ void backAndForth_float(float speed, out float3x3 mat)
 
 ---
 
-ADD LINK
-Find the original shader code [here](unity/cameraMatrix.md).
+Find the original shader code [here](../../../shaders/animation/Camera_Anim.md) as **mode 2**.

@@ -96,6 +96,9 @@ To easily include the integration of the framework into any Unity project, it is
 
 ## Visual Scripting
 
+!!! Note
+    The visual scripting was integrated to provide a visual alternative. It's main function is to help understand the structure of Unity's integration. While it works well for small examples, the compilation time for larger scenes can drastically increase. **It is not user friendly to generate large scenes.**
+
 The functions have been integrated as Sub Graphs that are callable as nodes in a ShaderGraph. All nodes are located under **PSF** short for **Procedural Shader Framework** once the UPM has been included. Detailed paths for the individual nodes are noted after the description of each of the functions. 
 
 To simplify some initial setups, nodes come with default parameters. For each description of an input parameter, the node's default value for said parameter is noted. If no default value is explicitly mentioned, it can be assumed to be zero for the respective amount of dimensions. 

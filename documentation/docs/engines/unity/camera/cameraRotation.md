@@ -57,5 +57,4 @@ See [Helper Functions](../helperFunctions.md) to find out more about ```computeR
 
 ---
 
-ADD LINK
-Find the original shader code [here](unity/cameraMatrix.md).
+Find the original shader code [here](../../../shaders/animation/Camera_Anim.md) as **mode 1**. It was expanded to allow  rotations around an arbitrary axis.

@@ -79,31 +79,28 @@ void raymarch_float(int condition, float3x3 cameraMatrix, int numberSDFs, float2
 
 ## The Parameters
 
-float condition, float3x3 cameraMatrix, float numberSDFs, float2 fragmentCoordinates, out float4 hitPosition, out float3 normal, out int hitIndex, out float3 rayDirection
-
 ### Inputs:
-- ```float condition```: A value that is used to check whether the default camera matrix should be computed or a custom camera matrix has been put in.
-    - condition = 0: The default camera matrix should be computed
-    - condition = 1: A custom camera matrix has been added
-- ```float3x3 cameraMatrix```: The camera matrix
-> Can be aquired using [Camera Matrix](../camera/cameraMatrix.md)
-- ```float numberSDFs```: The amount of SDFs that are in the scene
-> Should be aquired as the output of the SDF which is instanciated last.
-- ```float2 fragCoordinates```: The fragment's coordinates
-> Can be aquired using [Fragment Coordinates](unity/cameraMatrix.md)
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `condition`  <img width=150/>  | int   |  A value that is used to check whether the default camera matrix should be computed or a custom camera matrix has been put in <br> <blockquote> condition = 0: The default camera matrix should be computed </blockquote> <blockquote> condition = 1: A custom camera matrix has been added </blockquote>|
+| `cameraMatrix`  | float3x3   |  Camera matrix <br> <blockquote>Can be aquired using [Camera Matrix](../camera/cameraMatrix.md)</blockquote> |
+| `numberSDFs`  | int   |  Camera matrix <br> <blockquote>Should be aquired as the output of the SDF which is instanciated last</blockquote> |
+| `fragmentCoordinates` | float2   |  The fragment's coordinates <br> <blockquote>Can be aquired using [Fragment Coordinates](../basics/fragCoords.md)</blockquote> |
 
 ### Outputs:
-- ```float4 hitPosition```: The first three dimensions contain the position at which the water has been hit. The w-component contains the raymarching parameter at which the hit occured. This is required in order to be able to combine the water with other visual elements.
-- ```float3 normal```: The normal at the hit position
-- ```float hitIndex```: A value determining what surface has been hit. The water gets a hard-coded hitIndex.
-- ```float3 rayDirection```: The ray direction from the camera to the hit position
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `hitPosition`  <img width=100/>  | float4   |  The first three dimensions contain the position at which the water has been hit. The w-component contains the raymarching parameter at which the hit occured. This is required in order to be able to combine the raymarching output with other visual elements. |
+| `normal`  | float3   |  Normal at the hit position |
+| `hitIndex` | int  |  A value determining which SDF surface is the first to be hit|
+| `rayDirection` | float3   |  Ray direction from the camera to the hit position |
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at `PSF/SDFs/Raymarching`
+    Find the node at `PSF/SDFs/SDF Raymarch`
 
     <figure markdown="span">
         ![Unity Raymarching](../images/sdfs/raymarching.png){ width="500" }
@@ -112,7 +109,7 @@ float condition, float3x3 cameraMatrix, float numberSDFs, float2 fragmentCoordin
     >Due to internal workings of the node, the condition-input is not required. Within the SubGraph a *Branch On Input Connection* node is used to determine whether a camera matrix was connected to its respective input. This in turn determines the condition-value.
 
     <figure markdown="span">
-        ![Unity Inner Raymarching](../images/sdfs/innerRaymarching.png){ width="500" }
+        ![Unity Inner Raymarching](../images/sdfs/innerRaymarching.png){ width="700" }
     </figure>
 
 === "Standard Scripting"
@@ -127,4 +124,4 @@ float condition, float3x3 cameraMatrix, float numberSDFs, float2 fragmentCoordin
 
 ---
 
-Find the original shader code [here](..).
+Find the original shader code [here](../../../shaders/geometry/SDF_Shader.md).

@@ -146,7 +146,7 @@ Read about setting the water's material-values and hit-index at [Lighting Genera
 ### Inputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `condition`  <img width=100/>  | int   |  A value that is used to check whether the default camera matrix should be computed or a custom camera matrix has been put in <br> <blockquote> condition = 0: The default camera matrix should be computed </blockquote> <blockquote> condition = 1: A custom camera matrix has been added </blockquote>|
+| `condition`  <img width=150/>  | int   |  A value that is used to check whether the default camera matrix should be computed or a custom camera matrix has been put in <br> <blockquote> condition = 0: The default camera matrix should be computed </blockquote> <blockquote> condition = 1: A custom camera matrix has been added </blockquote>|
 | `cameraMatrix`  | float3x3   |  Camera matrix <br> <blockquote>Can be aquired using [Camera Matrix](../camera/cameraMatrix.md)</blockquote> |
 | `fragmentCoordinates` | float2   |  The fragment's coordinates <br> <blockquote>Can be aquired using [Fragment Coordinates](../basics/fragCoords.md)</blockquote> |
 

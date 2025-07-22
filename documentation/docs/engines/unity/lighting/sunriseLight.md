@@ -161,5 +161,4 @@ The inputs are typically provided by the functions [SDF Raymarching](../sdfs/ray
     ```
 ---
 
-ADD CORRECT LINK
-Find the original shader code [here](../../../shaders/lighting/lighting_functions.md). This basis was adapted to be compatible with Unity's workflow and to allow it to be modifyable within the framework.
+Find the original shader code [here](../../../shaders/lighting/Sunrise.md). This basis was adapted to be compatible with Unity's workflow and to allow it to be modifyable within the framework.

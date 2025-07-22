@@ -192,7 +192,7 @@ float shininess, out int indexOut)
 | `speed`        | float   | Speed at which the dolphin moves <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
 | `axis`            | float3   | Axis determining the orientation <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|
 | `angle` | float   | World-space position of the light source |
-| `baseColor`  | float3   | Underlying color <br> <blockquote>*ShaderGraph default value*: float3()</blockquote>|
+| `baseColor`  | float3   | Underlying color <br> <blockquote>*ShaderGraph default value*: float3(0.5,0.5,0.5)</blockquote>|
 | `specularColor`        | float3   | Color of the highlights |
 | `specularStrength`            | float   | Intensity with which highlights are created <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
 | `shininess` | float   | Shape and sharpness of the highlights; the larger the value, the more focussed the highlight  <br> <blockquote>*ShaderGraph default value*: 32</blockquote>|
@@ -227,4 +227,4 @@ float shininess, out int indexOut)
 
 ---
 
-Find the original shader code [here](..).
+Find the original shader code [here](../../../shaders/scenes/dolphin.md). Simplifications such as removing custom coloring were made to integrate the dolphin better into the SDF-framework.
