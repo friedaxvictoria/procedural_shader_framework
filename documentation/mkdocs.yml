@@ -135,5 +135,6 @@ nav:
     - Tutorials:
       - Christmas Tree: engines/unity/tutorials/christmasTree.md
       - Safety Buoy: engines/unity/tutorials/safetyBuoy.md
+      - Elevator: engines/unity/tutorials/elevator.md
   - Unreal Engine: engines/unreal.md
     

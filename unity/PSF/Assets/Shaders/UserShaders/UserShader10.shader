@@ -2,19 +2,6 @@ Shader "Custom/UserShader10"
 {
     Properties
     {
-        _Color ("Base Color", Color) = (1,1,1,1)
-        _TimeSpeed ("Time Speed", Float) = 1.0
-
-        // Built-in properties
-        _MainTex ("iChannel0", 2D) = "white" {}
-        _SecondTex ("iChannel1", 2D) = "white" {}
-        _ThirdTex ("iChannel2", 2D) = "white" {}
-        _FourthTex ("iChannel3", 2D) = "white" {}
-        _Mouse ("Mouse", Vector) = (0.5, 0.5, 0.5, 0.5)
-        [ToggleUI] _GammaCorrect ("Gamma Correction", Float) = 1
-        _Resolution ("Resolution (Change if AA is bad)", Range(1, 1024)) = 1
-
-
         _LightPosition ("Light Position", Vector) = (5.0, 5.0, 5.0)
     }
 
@@ -82,7 +69,7 @@ Shader "Custom/UserShader10"
             {
                 float2 uv;
                 float index;
-                float3x3 camMat = float3x3( 1,0,0, 0,1,0, 0,0,1 );
+                float3x3 camMat = float3x3( 1,0,0, 0,1,0, 0,0,1);
 
 
                 float4 hitPos;
@@ -119,17 +106,12 @@ Shader "Custom/UserShader10"
                 float3 position_temp;
                 float3 color_temp;
 
+                float3 elevatorPos;
+                float liftHeight;
 
                 rotateViaMouse_float(camMat);
 
-
                 computeFragmentCoordinates_float(IN.uv, 10, 10, uv);
-                
-
-
-               
-                float3 elevatorPos;
-                float liftHeight;
 
                 // Tween elevator position
                 tween1D_float(-2.4, 5.0, 4.0, TWEEN_SINE_INOUT, 0.0, true, liftHeight);
@@ -172,31 +154,14 @@ Shader "Custom/UserShader10"
 
 
 
-
-
-
-
-
-
-
                 raymarch_float(1, camMat, index, uv, hitPos1, normal1, hitID1, rayDir1);
-                computeWater_float(1, camMat, uv, hitPos2, normal2, hitID2, rayDir2);
-
-                getMinimum_float(hitPos1, normal1, hitID1, hitPos2, normal2, hitID2, hitPos, normal, hitID);
-
 
                 pointLight_float(hitPos1, normal1, hitID1, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05,  colorOut1);
                 sunriseLight_float(hitPos1, normal1, hitID1, rayDir1, colorOut3);
-                applyBlinnPhongLighting_float(hitPos1, normal1, hitID1, _LightPosition, colorOut2);
-
-
-
-                
+                applyToonLighting_float(hitPos1, normal1, hitID1, _LightPosition, colorOut2);
 
 
                 colorOut = colorOut1 + colorOut2 + colorOut3;
-
-
 
 
                 return float4(colorOut,1);
