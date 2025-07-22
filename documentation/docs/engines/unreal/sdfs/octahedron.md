@@ -1,9 +1,9 @@
 <div class="container">
     <h1 class="main-heading">SDF Octahedron</h1>
-    <blockquote class="author">by Maximilian Lipski</blockquote>
+    <blockquote class="author">by Runtong Li</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based octahedron. In order for the octahedron to be visible in the final output, [SDF Raymarching](...) and an arbitrary lighting function has to be included. 
+This function creates an internal instance of an SDF-based octahedron. In order for the object to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
 For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
 
@@ -12,17 +12,23 @@ For further information of the implementations of SDFs in Unreal Engine refer to
 ## The Code
 
 ``` hlsl
-float sdOctahedron(float3 position, float s)
+float sdOctahedron(float3 p, float s)
 {
-    position = abs(position);
-    return (position.x + position.y + position.z - s) * 0.57735027;
+    p = abs(p);
+    return (p.x + p.y + p.z - s) * 0.57735027;
 }
 
-void addOctahedron_float(int index, float3 position, float radius, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
-float shininess, float noise, out int indexOut)
+void addOctahedron(inout int index, float3 position, float size, float3 axis, float angle, MaterialParams material)
 {
-    addSDF(index, 5, position, float3(0.0, 0.0, 0.0), radius, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
-    indexOut = index + 1;
+    SDF newSDF;
+    newSDF.type = 4;
+    newSDF.position = position;
+    newSDF.radius = size;
+    newSDF.size = float3(0.0, 0.0, 0.0);
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
 }
 ```
 
@@ -31,38 +37,35 @@ float shininess, float noise, out int indexOut)
 ## The Parameters
 
 ### Inputs:
-- ```float index```: The index at which the octahedron is stored 
-- ```float3 position```: The central position of the octahedron
-- ```float radius```: The radius of the octahedron
-> *ShaderGraph default value*: ```1```
-- ```float3 axis```: The axis determining the orientation of the octahedron
-> *ShaderGraph default value*: ```float3(0,1,0)```
-- ```float angle```: The angle around the axis 
-- Material parameters
-    - ```float3 baseColor```: The underlying color of the octahedron
-    > *ShaderGraph default value*: ```float3(0,1,0)```
-    - ```float3 specularColor```: The color of the highlights
-    - ```float3 specularStrength```: The intensity with which highlights are created
-    > *ShaderGraph default value*: ```1```
-    - ```float3 shininess```: The shape and sharpness of the highlights; the larger the value, the more focussed the highlight
-    > *ShaderGraph default value*: ```32```
-- ```float3 noise```: Noise that is added to the shape of the octahedron
-
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `index`        | int   | The index at which this object is stored <br> <blockquote> *Visual Scripting default value*: 1 </blockquote>|
+| `position`        | float3   | The central position of this object |
+| `size`        | float   | Size of this object | 
+| `axis`        | float3   | The axis determining the orientation of the object <br> <blockquote> *Visual Scripting default value*: float3(0, 0, 1) </blockquote> |
+| `angle`        | float   | The angle around the axis |
+| `material` | MaterialParams | The material which the SDF is rendered with |
+    
 ### Outputs:
-- ```float indexOut```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [SDF Raymarching](...).  
+- ```int index```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [RaymarchAll](raymarchAll.md).  
 
 ---
 
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at `ProceduralShaderFramework/SDFs/AddOctahedron`
-
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+    Find the node at `ProceduralShaderFramework/SDFs/AddOctahedorn`
+<figure markdown="span">
+    ![Unreal octahedron](../images/sdfs/octahedron.png){ width="300" }
+</figure>
 
 === "Standard Scripting"
-    Include ...
+    Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```
 
+    Example Usage
+    ```hlsl
+    addOctahedron(index, Position, Height, axis, angle, mat);
+    ```
 ---
 
 This is an engine-specific implementation without a shader-basis.

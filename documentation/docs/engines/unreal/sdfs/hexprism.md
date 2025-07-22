@@ -1,9 +1,9 @@
 <div class="container">
-    <h1 class="main-heading">SDF Ellipsoid</h1>
+    <h1 class="main-heading">SDF Hexprism</h1>
     <blockquote class="author">by Runtong Li</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based Ellipsoid. In order for the object to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
+This function creates an internal instance of an SDF-based Hexprism. In order for the object to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
 For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
 
@@ -12,25 +12,30 @@ For further information of the implementations of SDFs in Unreal Engine refer to
 ## The Code
 
 ``` hlsl
-float sdEllipsoid(float3 p, float3 r)
+float sdHexPrism(float3 p, float2 height)
 {
-    float k0 = length(p / r);
-    float k1 = length(p / (r * r));
-    return k0 * (k0 - 1.0) / k1;
+    const float3 k = float3(-0.8660254, 0.5, 0.57735);
+    p = abs(p);
+    p.xy -= 2.0 * min(dot(k.xy, p.xy), 0.0) * k.xy;
+    float2 d = float2(
+       length(p.xy - float2(clamp(p.x, -k.z * height.x, k.z * height.x), height.x)) * sign(p.y - height.x),
+       p.z - height.y);
+    return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
 }
 
-void addEllipsoid(inout int index, float3 position, float3 radius, float3 axis, float angle, MaterialParams material)
+void addHexPrism(inout int index, float3 position, float height, float3 axis, float angle, MaterialParams material)
 {
     SDF newSDF;
-    newSDF.type = 5;
+    newSDF.type = 3;
     newSDF.position = position;
-    newSDF.radius = 0.0;
-    newSDF.size = radius;
+    newSDF.radius = height;
+    newSDF.size = float3(0.0, 0.0, 0.0);
     newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
     newSDF.material = material;
     
     addSDF(index, newSDF);
 }
+
 ```
 
 ---
@@ -42,9 +47,9 @@ void addEllipsoid(inout int index, float3 position, float3 radius, float3 axis, 
 |-----------------|----------|-------------|
 | `index`        | int   | The index at which this object is stored <br> <blockquote> *Visual Scripting default value*: 1 </blockquote>|
 | `position`        | float3   | The central position of this object |
-| `radius`        | float   | The radius of this object | 
+| `height`        | float   | Height of this object | 
 | `axis`        | float3   | The axis determining the orientation of the object <br> <blockquote> *Visual Scripting default value*: float3(0, 0, 1) </blockquote> |
-| `angle`        | float   | The angle around the axis <br> <blockquote> *Visual Scripting default value*: 0 </blockquote>|
+| `angle`        | float   | The angle around the axis |
 | `material` | MaterialParams | The material which the SDF is rendered with |
     
 ### Outputs:
@@ -55,10 +60,10 @@ void addEllipsoid(inout int index, float3 position, float3 radius, float3 axis, 
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at `ProceduralShaderFramework/SDFs/AddElipsoid`
+    Find the node at `ProceduralShaderFramework/SDFs/AddHexPrism`
 
 <figure markdown="span">
-    ![Unreal ellipsoid](../images/sdfs/ellipsoid.png){ width="300" }
+    ![Unreal hexprism](../images/sdfs/Hexprism.png){ width="300" }
 </figure>
 
 === "Standard Scripting"
@@ -66,8 +71,9 @@ void addEllipsoid(inout int index, float3 position, float3 radius, float3 axis, 
 
     Example Usage
     ```hlsl
-    addEllipsoid(index, Position, Height, axis, angle, mat);
+    addHexPrism(index, Position, Height, axis, angle, mat);
     ```
+
 ---
 
 This is an engine-specific implementation without a shader-basis.
