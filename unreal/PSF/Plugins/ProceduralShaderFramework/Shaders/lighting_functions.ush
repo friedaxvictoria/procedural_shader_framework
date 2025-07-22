@@ -309,4 +309,74 @@ void applyRimLighting(float3 rimColor, float4 hitPosition, float3 lightPosition,
     lightingColor = rim * rimColor;
 }
 
+void applySoftSSLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
+    float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
+    float3 lightColor = float3(1.0, 1.0, 1.0);
+    float3 ambientColor = float3(0.05, 0.05, 0.05);
+
+    float diffuseValue = max(dot(normal, lightDirection), 0.0);
+    float backLight = max(dot(-normal, lightDirection), 0.0);
+
+    float3 baseColor = material.baseColor;
+    float3 sssColor = float3(1.0, 0.5, 0.5);
+
+    float3 diffuseColor = diffuseValue * baseColor * lightColor;
+    float3 sss = backLight * sssColor * 0.25;
+
+    lightingColor = ambientColor + diffuseColor + sss;
+}
+
+void applyFresnelLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, out float3 lightingColor)
+{
+    if (hitPosition.w > _raymarchStoppingCriterium)
+    {
+        lightingColor = float3(0, 0, 0);
+        return;
+    }
+    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
+    float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
+    float3 lightColor = float3(1.0, 1.0, 1.0);
+    float3 ambientColor = float3(0.05, 0.05, 0.05);
+
+    float fresnel = pow(1.0 - saturate(dot(viewDirection, normal)), 3.0);
+    float rimStrength = 1.2;
+
+    lightingColor = ambientColor + material.baseColor * lightColor + rimStrength * fresnel * material.specularColor;
+}
+
+void applyUVGradientLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, float2 uv, out float3 lightingColor)
+{
+    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
+    float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
+    float3 lightColor = float3(1.0, 1.0, 1.0);
+    float3 ambientColor = float3(0.1, 0.1, 0.1);
+
+    float diffuseValue = max(dot(normal, lightDirection), 0.0);
+    float3 gradientColor = lerp(float3(0.2, 0.4, 0.9), float3(1.0, 0.6, 0.0), uv.y);
+
+    lightingColor = ambientColor + diffuseValue * gradientColor * lightColor;
+}
+
+void applyUVAnisotropicLighting(float4 hitPosition, float3 lightPosition, MaterialParams material, float3 normal, float2 uv, out float3 lightingColor)
+{
+    float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
+    float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
+    float3 halfVec = normalize(viewDirection + lightDirection);
+
+    float angle = uv.x * 6.2831853; // 2π
+    float3 localTangent = float3(cos(angle), sin(angle), 0.0);
+    float3 tangent = normalize(localTangent - normal * dot(localTangent, normal));
+    float3 bitangent = cross(normal, tangent);
+
+    float TdotH = dot(tangent, halfVec);
+    float BdotH = dot(bitangent, halfVec);
+    float spectralAnisotropic = pow(TdotH * TdotH + BdotH * BdotH, 8.0);
+    float diffuseValue = max(dot(normal, lightDirection), 0.0);
+
+    float3 ambientColor = float3(0.1, 0.1, 0.1);
+
+    lightingColor = ambientColor + diffuseValue * material.baseColor + spectralAnisotropic * material.specularColor;
+}
 #endif

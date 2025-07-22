@@ -116,6 +116,33 @@ float fbm_n31(float3 p, int octaves)
     return value;
 }
 
+// the noise for desert
+float2 hash22(float2 p)
+{
+    float n = sin(dot(p, float2(113, 1)));
+    p = frac(float2(2097152, 262144) * n) * 2. - 1.;
+    return p;
+}
+
+float n2D(float2 p)
+{
+    float2 i = floor(p);
+    p -= i;
+    p *= p * (3. - p * 2.);
+    return dot(mul(float2x2(frac(sin(fmod(float4(0, 1, 113, 114) + dot(i, float2(1, 113)), 6.2831853)) * 43758.5453)), float2(1. - p.y, p.y)), float2(1. - p.x, p.x));
+}
+
+float gradN2D(in float2 f)
+{
+    const float2 e = float2(0, 1);
+    float2 p = floor(f);
+    f -= p;
+    float2 w = f * f * (3. - 2. * f);
+    float c = lerp(lerp(dot(hash22(p + e.xx), f - e.xx), dot(hash22(p + e.yx), f - e.yx), w.x),
+                  lerp(dot(hash22(p + e.xy), f - e.xy), dot(hash22(p + e.yy), f - e.yy), w.x), w.y);
+    return c * .5 + .5;
+}
+
 
 
 #endif
