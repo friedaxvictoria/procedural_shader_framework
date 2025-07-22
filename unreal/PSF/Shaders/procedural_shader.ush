@@ -1,8 +1,8 @@
 #ifndef PROCEDURAL_SHADER_FRAMEWORK_H
 #define PROCEDURAL_SHADER_FRAMEWORK_H
 
-#include "global_variables.ush"
 #include "helper_functions.ush"
+#include "global_variables.ush"
 #include "sdf_functions.ush"
 #include "basic_functions.ush"
 #include "animation_functions.ush"
@@ -10,6 +10,5 @@
 #include "material_functions.ush"
 #include "noise_functions.ush"
 #include "water_surface.ush"
-#include "tween_functions.ush"
 
 #endif

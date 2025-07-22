@@ -16,15 +16,7 @@ struct SDF
     float noiseAmount;
 };
 
-struct Dolphin
-{
-    float timeOffset;
-    float speed;
-};
-
 static SDF sdfArray[MAX_SDFS];
-static Dolphin dolphinArray[MAX_SDFS];
-
 static int gHitId = -1;
 
 void addSDF(inout int index, SDF newSDF)
@@ -115,21 +107,8 @@ void addEllipsoid(inout int index, float3 position, float3 radius, float3 axis, 
     addSDF(index, newSDF);
 }
 
-void addDolphin(inout int index, float3 position, float timeOffset, float speed, float3 axis, float angle, MaterialParams material)
+void addDolphin(inout int index, float3 position, float timeOffset, float speed, float3 direction)
 {
-    SDF newSDF;
-    newSDF.type = 6;
-    newSDF.position = position;
-    newSDF.radius = 0.0;
-    newSDF.size = float3(0.0, 0.0, 0.0);
-    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
-    newSDF.material = material;
-    Dolphin newDolphin;
-    newDolphin.speed = speed;
-    newDolphin.timeOffset = timeOffset;
-    
-    dolphinArray[index] = newDolphin;
-    addSDF(index, newSDF);
     
 }
 
@@ -164,44 +143,55 @@ void addRock(inout int index, float3 position, float3 size, float3 axis, float a
     addSDF(index, newSDF);
 }
 
+void addDesert(inout int index, float3 position, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    newSDF.type = 8;
+    newSDF.position = position;
+    newSDF.radius = 0.0;
+    newSDF.size = 0;
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    addSDF(index, newSDF);
+}
 
-float evalSDF(int index, float3 p, float time = 0.0)
+float evalSDF(int index, float3 p)
 {
     SDF s = sdfArray[index];
     float3 probePoint = mul((p - s.position), s.rotation);
     if (s.type == 0)
     {
-        return sdSphere(probePoint, s.radius);
+        return sdSphere((p - s.position), s.radius);
     }
     else if (s.type == 1)
     {
-        return sdRoundBox(probePoint, s.size, s.radius);
+        return sdRoundBox(p - s.position, s.size, s.radius);
     }
     else if (s.type == 2)
     {
-        return sdTorus(probePoint, s.size.yz);
+        return sdTorus(p - s.position, s.size.yz);
     }
     else if (s.type == 3)
     {
-        return sdHexPrism(probePoint, s.radius);
+        return sdHexPrism(p - s.position, s.radius);
     }
     else if (s.type == 4)
     {
-        return sdOctahedron(probePoint, s.radius);
+        return sdOctahedron(p - s.position, s.radius);
     }
     else if (s.type == 5)
     {
-        return sdEllipsoid(probePoint, s.size);
-    }
-    else if (s.type == 6)
-    {
-        return dolphinDistance(probePoint, s.position, dolphinArray[index].timeOffset, dolphinArray[index].speed, time).x;
+        return sdEllipsoid(p - s.position, s.size);
     }
     else if (s.type == 7)
     {
         float base = sdBox(probePoint, s.size);
         float noise = snoise(probePoint * 5.0) * 0.1;
         return base - noise * 0.3;
+    }
+    else if (s.type == 8)
+    {
+        return mapDesert(p - s.position);
     }
 
     return 1e5;
@@ -219,7 +209,7 @@ float3 get_normal(int i, float3 p)
     return normalize(k.xyy * normal1 + k.yyx * normal2 + k.yxy * normal3 + k.xxx * normal4);
 }
 
-void raymarchAll(float condition, float3x3 cameraMatrix, float numberSDFs, float2 uv, out float4 hitPosition, out float3 normal, out MaterialParams material, out float3 rayDirection, float time = 0.0)
+void raymarchAll(float condition, float3x3 cameraMatrix, float numberSDFs, float2 uv, out float4 hitPosition, out float3 normal, out MaterialParams material, out float3 rayDirection)
 {
     if (condition == 0)
     {
@@ -237,7 +227,7 @@ void raymarchAll(float condition, float3x3 cameraMatrix, float numberSDFs, float
         int bestIndex = -1;
         for (int j = 0; j < numberSDFs; ++j)
         {
-            float dj = evalSDF(j, currentPosition, time);
+            float dj = evalSDF(j, currentPosition);
             if (dj < d)
             {
                 d = dj;
@@ -251,6 +241,12 @@ void raymarchAll(float condition, float3x3 cameraMatrix, float numberSDFs, float
             normal = get_normal(hitIndex, currentPosition);
             material = sdfArray[hitIndex].material;
             hitPosition.w = t;
+            
+            if (sdfArray[hitIndex].type == 8)
+            {
+                normal = doBumpMap(hitPosition.xyz, normal, 0.07);
+                getDesertColor(hitPosition.xyz, material.baseColor);
+            }
             break;
         }
         if (t > _raymarchStoppingCriterium)

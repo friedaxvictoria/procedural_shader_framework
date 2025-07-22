@@ -1,11 +1,9 @@
 #ifndef PROCEDURAL_SHADER_FRAMEWORK_BASICS_H
 #define PROCEDURAL_SHADER_FRAMEWORK_BASICS_H
 
-#include "global_variables.ush"
-
-void computeUV(float2 fragCoord, out float2 uv)
+void computeUV(float2 fragCoord, float2 ScreenParams, out float2 uv)
 {
-    uv = (fragCoord.xy * 2.0 - 1.0) / float2(screenSize.y / screenSize.x, 1.);
+    uv = (fragCoord.xy * 2.0 - 1.0) / float2(ScreenParams.y / ScreenParams.x, 1.);
 }
 
 // after lighting function
