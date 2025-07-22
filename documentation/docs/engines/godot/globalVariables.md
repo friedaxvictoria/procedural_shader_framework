@@ -2,8 +2,8 @@
     <h1 class="main-heading">Global Variables in Godot Shaders</h1>
     <blockquote class="author">by Jeewan</blockquote>
 </div>
-## Overview
 
+## Overview
 In Godot, global variables in shader files (`global_variables.gdshaderinc`) are used to define constants and uniforms that are shared across multiple shader functions or files. These variables provide a centralized way to manage configuration data, such as object properties, camera settings, and rendering parameters, ensuring consistency and modularity in shader code.
 
 ### **Constants**
@@ -96,6 +96,7 @@ const int NO_ANIMATION=0;
 const int PULSE_ANIMATION=1;
 ```
 
+---
 ## Explanation of Usage
 
 ### **Object Management**
