@@ -85,22 +85,14 @@ Shader "Custom/UserShader9"
                 float3x3 camMat = float3x3( 1,0,0, 0,1,0, 0,0,1 );
 
 
-                float4 hitPos;
                 float4 hitPos1;
-                float4 hitPos2;
 
-                float hitID;
                 float hitID1;
-                float hitID2;
 
 
-                float3 normal;
                 float3 normal1;
-                float3 normal2;
 
-                float3 rayDir;
                 float3 rayDir1;
-                float3 rayDir2;
 
 
                 float3 colorOut1;
@@ -174,9 +166,7 @@ Shader "Custom/UserShader9"
 
 
                 raymarch_float(1, camMat, index, uv, hitPos1, normal1, hitID1, rayDir1);
-                computeWater_float(1, camMat, uv, hitPos2, normal2, hitID2, rayDir2);
 
-                getMinimum_float(hitPos1, normal1, hitID1, hitPos2, normal2, hitID2, hitPos, normal, hitID);
 
 
                 pointLight_float(hitPos1, normal1, hitID1, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05,  colorOut1);

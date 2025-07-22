@@ -3,9 +3,7 @@
     <blockquote class="author">by Utku Alkan</blockquote>
 </div>
 
-This tutorial walks you through building a detailed elevator scene using the signed distance field (SDF) shader framework. The scene includes a moving elevator, walls, a simple passenger, lighting, and animated motion via `tween1D_float`.
-
-All SDFs are created using helper functions like `addRoundBox_float`, `addSphere_float`, and animation with `tween1D_float`. The elevator opens to the +Z side so we can view the interior.
+This tutorial walks you through building an elevator scene. The scene includes a moving elevator, walls, a simple passenger, lighting, and animated motion via `tween1D_float`.
 
 ---
 
