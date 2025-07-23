@@ -45,7 +45,7 @@ void applyUVAnisotropicLighting(float4 hitPosition, float3 lightPosition, Materi
 | `normal`        | float3   | Surface normal at the hit point |
 | `lightPosition` | float3   | World-space position of the directional light source |
 | `material`      | MaterialParams | The material which the SDF is rendered with|
-| `uv`            | float2   | UV coordinates used to define local tangent direction; for this framework the [fragment coordinates](../basics/fragCoords.md) from Fragment Coordinates can be used|
+| `uv`            | float2   | UV coordinates used to define local tangent direction; for this framework the [fragment coordinates](../utils/fragCoords.md) from Fragment Coordinates can be used|
 
 The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarchAll.md) or [Water Surface](../water/waterSurface.md).
 

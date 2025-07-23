@@ -5,8 +5,6 @@
 
 This function creates an internal instance of an SDF-based Hexprism. In order for the object to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
-For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
-
 ---
 
 ## The Code
@@ -61,10 +59,9 @@ void addHexPrism(inout int index, float3 position, float height, float3 axis, fl
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddHexPrism`
-
-<figure markdown="span">
-    ![Unreal hexprism](../images/sdfs/Hexprism.png){ width="300" }
-</figure>
+    <figure markdown="span">
+        ![Unreal hexprism](../images/sdfs/Hexprism.png){ width="300" }
+    </figure>
 
 === "Standard Scripting"
     Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```
