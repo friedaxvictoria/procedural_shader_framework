@@ -1,0 +1,6 @@
+In the case of you wanting to start from a completely clean project, use the .zip which is found in here and follow the instructions from the documentation. 
+Otherwise regenerate the project by rightclicking the .uproject file picking the corresponding action ("Generate Visual Studio project" on Windows, not tested on Linux, I don't know how Unreal Engine works there).
+This regeneration is absolutely neccessary, otherwise problems will occur.
+You should get a pop-up which asks to rebuild PSF and ProceduralShaderFramework, the first one is the project, the second one the Plugin. After that, you should be able to open to project by double clicking on the .uproject file.
+You will find two Materials for you to experiment with in the content browser. The default material, which should show once the play button is pressed, is the ChristmasTree written in Visual Scripting. 
+I a paper like outline appears, the shaders need to be recompiled (99% sure that should not happen). But in that case ```RecompileShaders Changed``` should be entered into the little console at the bottom of Unreal Engine.
