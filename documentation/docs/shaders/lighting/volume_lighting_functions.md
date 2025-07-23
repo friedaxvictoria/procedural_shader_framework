@@ -1,7 +1,11 @@
-#  🧩 Volume Lighting Functions for Clouds
+<div class="container">
+    <h1 class="main-heading">Volume Lighting Functions</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
+
+---
 
 - **Category:** Lighting
-- **Author:** Xuetong Fu
 - **Shader Type:** Lighting function library
 - **Input Requirements:** `VolCtxLocal`, `VolMaterialParams`, `VolumeSample`
 ---
