@@ -1,8 +1,9 @@
-#  Surface Normal Estimation(advanced)
+<div class="container">
+    <h1 class="main-heading">Surface Normal Estimation(advanced)</h1>
+    <blockquote class="author">by Ruimin Ma</blockquote>
+</div>
 
 - **Category:** Rendering
-
-- **Author:** Ruimin Ma
 
 - **Shader Type:** Tetrahedral adaptive SDF normal estimation
 
