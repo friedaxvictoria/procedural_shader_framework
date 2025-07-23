@@ -252,9 +252,9 @@ This shrine scene brings together symmetrical geometry and elegant animation.
 
                     rotateViaMouse_float(camMat);
 
-                    computeFragmentCoordinates_float(IN.uv, 10, 10, uv);
+                    computeFragmentCoordinates_float(IN.uv, 30, 30, uv);
+                        
                     
-                
                     // Base platform
                     addRoundBox_float(0, float3(0, -2, 0), float3(6, 0.5, 6), 0.3, float3(0, 1, 0), 0, float3(0.1, 0.1, 0.1), float3(0.5, 0.5, 0.5), 0.1, 64, 0, index);
 
@@ -262,9 +262,9 @@ This shrine scene brings together symmetrical geometry and elegant animation.
                     addTorus_float(index, float3(0, 2, 0), 1.0, 0.25, float3(0, 1, 0), 0, float3(0.2, 0.5, 1), float3(1, 1, 1), 0.5, 128, 0, index);
 
                     // Floating spheres orbiting torus
+                    [unroll(6)]
                     for (int i = 0; i < 6; ++i)
                     {
-
                         float angle = i * 3.14159 * 2.0 / 6.0;
                         float3 pos = float3(cos(angle) * 2.0, 2.0, sin(angle) * 2.0);
 
