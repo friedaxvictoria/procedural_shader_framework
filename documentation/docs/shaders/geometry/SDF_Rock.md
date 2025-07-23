@@ -1,9 +1,11 @@
-# 🧩 SDF Rock Shader
+<div class="container">
+    <h1 class="main-heading">SDF Rock Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/geometry/SDF_Rock.png?raw=true" alt="Rock Shader Output" width="400" height="225">
+<img src="../../../static/images/images4Shaders/SDF_Rock.png" alt="Rock Shader Output" width="400" height="225">
 
 - **Category:** Geometry  
-- **Author:** Wanzhang He  
 - **Input Requirements:** `fragCoord`, `iResolution`  
 - **Output:** Noisy procedural rock rendered via SDF and raymarching  
 
@@ -144,4 +146,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     }
 }
 ```
+#### Engine Integrations
+<div class="button-row">
+  <a class="custom-button md-button" href="../../engines/unreal/sdfs/rock.md">Unreal</a>
+</div>
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/geometry/SDF_Rock.glsl)

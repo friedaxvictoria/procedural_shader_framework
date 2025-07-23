@@ -1,9 +1,11 @@
-# 🏔️ Pure Snowy Mountain Shader
+<div class="container">
+    <h1 class="main-heading">Pure Snowy Mountain Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/Snowy_Mountain.png?raw=true" alt="Snowy Mountain Output" width="400" height="225">
+<img src="../../../static/images/images4Shaders/Snowy_Mountain.png" alt="Snowy Mountain Output" width="400" height="225">
 
 - **Category:** Scene  
-- **Author:** Wanzhang He  
 - **Shader Type:** Procedural terrain via raymarching and multifractal FBM  
 - **Input Requirements:** `fragCoord`, `iResolution`  
 - **Output:** Highly detailed snowy mountain scene with choppy ridges and dynamic shading

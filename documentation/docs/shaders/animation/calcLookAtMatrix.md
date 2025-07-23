@@ -1,9 +1,11 @@
-# 🧩 Camera Orientation Setup Shader
+<div class="container">
+    <h1 class="main-heading">Camera Orientation Setup Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/animation/RollingRefraction.gif?raw=true" alt="Rolling Camera Preview" width="400" height="225">
+<img src="../../../static/images/images4Shaders/RollingRefraction.gif" alt="Rolling Camera Preview" width="400" height="225">
 
 - **Category:** Animation / Camera  
-- **Author:** Wanzhang He  
 - **Shader Type:** Dynamic camera matrix computation  
 - **Input Requirements:** `fragCoord`, `iResolution`, `iTime`, `iChannel0`  
 - **Output:** Animated environment sample using orbiting camera

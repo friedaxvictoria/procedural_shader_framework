@@ -1,10 +1,11 @@
-# 🧩 Grayscale Noise Shader
+<div class="container">
+    <h1 class="main-heading">Grayscale Noise Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/grayScale_noise.png?raw=true" alt="Grayscale Noise Example" width="400" height="225">
-
+<img src="../../../static/images/images4Shaders/grayScale_noise.png" alt="Grayscale Noise Example" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 
 - **Category:** Noise  
-- **Author:** Wanzhang He
 - **Shader Type:** 2D static noise  
 - **Input Requirements:** `vec2`, `iTime`, `iResolution`
 

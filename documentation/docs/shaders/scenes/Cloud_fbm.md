@@ -1,9 +1,11 @@
-# 🧩 Volumetric FBM Cloud Shader
+<div class="container">
+    <h1 class="main-heading">Volumetric FBM Cloud Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/cloud_fbm.png?raw=true" alt="Volumetric FBM Cloud Output" width="400" height="225">
+<img src="../../../static/images/images4Shaders/cloud_fbm.png" alt="Volumetric FBM Cloud Output" width="400" height="225">
 
 - **Category:** Scene  
-- **Author:** Wanzhang He  
 - **Shader Type:** Procedural cloud via raymarching and 3D FBM  
 - **Input Requirements:** `fragCoord`, `iResolution`, `iTime`  
 - **Output:** Volumetric soft cloud rendered with 3D hash-based FBM

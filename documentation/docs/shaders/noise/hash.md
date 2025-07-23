@@ -1,10 +1,12 @@
-# 🧩 Hash Utility Functions
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/hash_function_visualization.png?raw=true" alt="Hash Function Visualization" width="400" height="225">
+<div class="container">
+    <h1 class="main-heading">Hash Utility Functions</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
+<img src="../../../static/images/images4Shaders/hash_function_visualization.png" alt="Hash Function Visualization" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 
 - **Category:** Noise 
-- **Author:** Wanzhang He  
 - **Shader Type:** Hash & Random Number Generators  
 - **Used In:** All procedural noise functions (value, gradient, voronoi, FBM, etc.)
 

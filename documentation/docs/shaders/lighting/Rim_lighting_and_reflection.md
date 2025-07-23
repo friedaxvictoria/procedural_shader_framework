@@ -1,10 +1,12 @@
-# 🧩 Rim Reflection Lighting Shader
+<div class="container">
+    <h1 class="main-heading">Rim Reflection Lighting Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/lighting/RimReflectionLighting_black.png?raw=true" alt="Rim Lighting on Black Background" width="400" height="225">
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/lighting/RimReflectionLighting_Bayer.png?raw=true" alt="Reflection Highlight with Bayer Background" width="400" height="225">
+<img src="../../../static/images/images4Shaders/RimReflectionLighting_black.png" alt="Rim Lighting on Black Background" width="400" height="225">
+<img src="../../../static/images/images4Shaders/RimReflectionLighting_Bayer.png" alt="Reflection Highlight with Bayer Background" width="400" height="225">
 
 - **Category:** Lighting  
-- **Author:** Wanzhang He  
 - **Shader Type:** Surface lighting effect (rim + reflection)  
 - **Input Requirements:** `fragCoord`, `iResolution`, `iChannel1`  
 - **Output:** Fragment color with rim light and environment reflection
@@ -76,3 +78,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/Rim_lighting_and_reflection.glsl)
+
+
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../engines/unreal/lighting/rimLight.md">Unreal</a>
+</div>

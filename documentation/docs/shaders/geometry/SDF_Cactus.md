@@ -1,9 +1,11 @@
-# 🧩 SDF Cactus Shader
+<div class="container">
+    <h1 class="main-heading">SDF Cactus Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/geometry/SDF_Cactus.png?raw=true" alt="Cactus Shader Output" width="400" height="225">
+<img src="../../../static/images/images4Shaders/SDF_Cactus.png" alt="Cactus Shader Output" width="400" height="225">
 
 - **Category:** Geometry  
-- **Author:** Wanzhang He   
 - **Input Requirements:** `fragCoord`, `iResolution`  
 - **Output:** Procedural cactus with branches and spines using capsule-based SDF  
 

@@ -1,10 +1,11 @@
-# 🧩 SDF Square Shader
+<div class="container">
+    <h1 class="main-heading">SDF Square Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/geometry/square.png?raw=true" alt="Square Shader Output" width="400" height="225">
-
+<img src="../../../static/images/images4Shaders/square.png" alt="Square Shader Output" width="400" height="225">
 
 - **Category:** Geometry
-- **Author:** Wanzhang He
 - **Shader Type:** 2D Primitive (SDF)  
 - **Input Requirements:** `fragCoord`, `iResolution`  
 - **Output:** Red square in white background using SDF logic

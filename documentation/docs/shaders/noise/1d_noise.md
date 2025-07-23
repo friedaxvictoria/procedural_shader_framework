@@ -1,9 +1,11 @@
-# 🧩 1D Noise Shader (with 1D FBM)
+<div class="container">
+    <h1 class="main-heading">1D Noise Shader (with 1D FBM)</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/1d%20noise.png?raw=true" alt="1D FBM Noise Output" width="400" height="225">
+<img src="../../../static/images/images4Shaders/1d%20noise" alt="1D FBM Noise Output" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 
 - **Category:** Noise  
-- **Author:** Wanzhang He
 - **Shader Type:** 1D Value Noise + Fractal FBM  
 - **Input Requirements:** `fragCoord`, `iTime`, `iResolution`
 

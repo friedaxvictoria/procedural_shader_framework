@@ -145,27 +145,29 @@ nav:
     - Overview: engines/unreal.md
     - Global Variables: engines/unreal/globalVariables.md
     - Helper Functions: engines/unreal/helperFunctions.md
-    - Uniforms and C#: engines/unreal/uniformsAndCs.md
     - The Integration:
-      - Basics: 
-        - Fragment Coordinates: engines/unreal/basics/fragCoords.md
-        - Combine Color: engines/unity/unreal/combineColor.md
-        - Minimum: engines/unreal/basic/minimum.md
+      - Utility: 
+        - Fragment Coordinates: engines/unreal/utils/fragCoords.md
+        - Combine Color: engines/unreal/utils/combineColor.md
+        - Minimum: engines/unreal/utils/minimum.md
       - Camera:
         - Camera Matrix: engines/unreal/camera/cameraMatrix.md
         - Rotation: engines/unreal/camera/cameraRotation.md
         - Back And Forth: engines/unreal/camera/cameraBackAndForth.md
         - Mouse-Based Rotation: engines/unreal/camera/mouseBasedMovement.md
+      - Basic:
+        -Material: engines/unreal/basics/material.md
       - SDFs: 
-        - General Information: engines/unreal/sdfs/generalInformation.md
         - Sphere: engines/unreal/sdfs/sphere.md
-        - RoundBox: engines/unreal/sdfs/cube.md
+        - Rock: engines/unreal/sdfs/rock.md
         - Torus: engines/unreal/sdfs/torus.md
         - Ellipsoid: engines/unreal/sdfs/ellipsoid.md
-        - Hexagonal Prism: engines/unreal/sdfs/hexPrism.md
+        - Hexagonal Prism: engines/unreal/sdfs/hexprism.md
         - Octahedron: engines/unreal/sdfs/octahedron.md
         - Dolphin: engines/unreal/sdfs/dolphin.md
-        - SDF Raymarching: engines/unreal/sdfs/raymarching.md
+        - SDF Raymarching: engines/unreal/sdfs/raymarchAll.md
+        - Desert: engines/unreal/sdfs/desert.md
+        - SDFMin: engines/unreal/sdfs/sdfMin.md
       - Environments: 
         - Water Surface: engines/unreal/water/waterSurface.md
         - Water Height: engines/unreal/water/waterHeight.md
@@ -178,12 +180,14 @@ nav:
       - Lighting:
         - General Information: engines/unreal/lighting/generalInformation.md
         - Sunrise: engines/unreal/lighting/sunriseLight.md 
-        - Point Light: engines/unreal/lighting/pointLight.md
         - Lambertian Lighting: engines/unreal/lighting/lambLight.md
+        - Phong Lighting: engines/unreal/lighting/PhongLighting.md
         - Blinn Phong Lighting: engines/unreal/lighting/blinnPhongLight.md
+        - PBR Lighting: engines/unreal/lighting/PBRLighting.md
         - Toon Lighting: engines/unreal/lighting/toonLight.md
         - Rim Lighting: engines/unreal/lighting/rimLight.md
         - Soft Subsurface Scattering: engines/unreal/lighting/softSubsurfaceScattering.md
+        - Fake Specular: engines/unreal/lighting/fakeSpecular.md
         - Fresnel Lighting: engines/unreal/lighting/fresnelLight.md
         - UV Gradient Lighting: engines/unreal/lighting/uvGradientLight.md
         - UV Anisotropic Lighting: engines/unreal/lighting/uvAnisotropicLight.md
