@@ -1,3 +1,32 @@
+// ===========================================================
+// File: sdf_animation_v2_example.glsl
+// Description:
+//     Example shader demonstrating the use of functions from
+//     sdf_animation_v2.glsl to build an animated SDF scene.
+//
+//     This scene includes:
+//     - A red sphere animated with sinusoidal translation.
+//     - A green round box orbiting around the origin.
+//     - A blue torus that follows a TIE-fighter-like path and pulses.
+//
+//     Each object uses modular animation functions such as:
+//         - animateTranslate()
+//         - animateOrbit()
+//         - animatePulseScale()
+//         - tiePos()
+//
+//     The objects are defined using the SDF struct and animated over time.
+//     Ray marching is used for rendering, with flat color output.
+//
+//     This is an example of how to compose dynamic scenes using
+//     the reusable animation and SDF evaluation logic provided
+//     in sdf_animation_v2.glsl.
+//
+// Screenshot: screenshots/animation/sdf_animation_v2_example.gif
+//
+// Author: Wanzhang He
+// ===========================================================
+
 // ==== Structs ====
 struct SDF {
     int   type;       // 0 = sphere, 1 = round box, 2 = torus
