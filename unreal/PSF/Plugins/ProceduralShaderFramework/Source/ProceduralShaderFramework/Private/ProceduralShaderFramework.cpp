@@ -118,7 +118,7 @@ TSharedRef<class SDockTab> FProceduralShaderFrameworkModule::OnSpawnPluginTab(co
 						.MinDesiredHeight(300.0f)
 						[
 							SAssignNew(MultiLineTextBox, SMultiLineEditableTextBox)
-								.Text(FText::FromString("return length(probePoint) - radius;"))
+								.Text(FText::FromString("return length(probePoint) - time;"))
 						]
 				]
 
@@ -129,7 +129,7 @@ TSharedRef<class SDockTab> FProceduralShaderFrameworkModule::OnSpawnPluginTab(co
 				.Padding(10)
 				[
 					SNew(SButton)
-						.Text(FText::FromString("Run"))
+						.Text(FText::FromString("Generate"))
 						.OnClicked_Lambda([this] () -> FReply {
 							WriteShaderFunctionToFile();
 							GenerateMaterialFunction();
