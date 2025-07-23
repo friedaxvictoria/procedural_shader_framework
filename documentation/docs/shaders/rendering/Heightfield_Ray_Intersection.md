@@ -1,8 +1,9 @@
-#  Heightfield Raycast
+<div class="container">
+    <h1 class="main-heading">Heightfield Raycast</h1>
+    <blockquote class="author">by Ruimin Ma</blockquote>
+</div>
 
 - **Category:** Rendering
-
-- **Author:** Ruimin Ma
 
 - **Shader Type:** Height-based terrain raymarcher
 
