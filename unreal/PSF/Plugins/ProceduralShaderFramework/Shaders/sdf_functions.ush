@@ -4,6 +4,9 @@
 #include "helper_functions.ush"
 #include "global_variables.ush"
 #include "material_functions.ush"
+// PSFCODEINCLUDECUSTOMSDFSTART
+
+// PSFCODEINCLUDECUSTOMSDFEND
 
 struct SDF
 {
@@ -164,6 +167,10 @@ void addRock(inout int index, float3 position, float3 size, float3 axis, float a
     addSDF(index, newSDF);
 }
 
+// PSFCODEADDCUSTOMSDFSTART
+
+// PSFCODEADDCUSTOMSDFEND
+
 void addDesert(inout int index, float3 position, float3 axis, float angle, MaterialParams material)
 {
     SDF newSDF;
@@ -218,6 +225,11 @@ float evalSDF(int index, float3 p, float time = 0.0)
     {
         return mapDesert(p - s.position);
     }
+    // PSFCODEEVALCUSTOMSDFSTART
+
+    // PSFCODEEVALCUSTOMSDFEND
+
+
     return 1e5;
 }
 

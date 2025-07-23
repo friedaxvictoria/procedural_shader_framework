@@ -76,7 +76,7 @@ float hashNoise(float3 p)
  *   float : signed height field
  */
 
-float computeWave(float time, float3 pos)
+float computeWave(float3 pos, float time)
 {
     float3 warped = pos - float3(0, 0, time % 62.83 * 3.0);
 
@@ -101,39 +101,18 @@ float computeWave(float time, float3 pos)
     return height;
 }
 
-void computeWave(float2 time, float3 pos, out float3 heightPos)
-{
-        // Start with a reasonable guess (e.g. sea level or midpoint of wave height range)
-    float y = pos.y;
-    
-    // Binary search or Newton-Raphson style iteration
-    float stepSize = 0.05; // Small steps downwards
-
-    for (int i = 0; i < 100; i++)
-    {
-        pos.y = y;
-        float h = computeWave(time, pos);
-        if (h < 0.01) // We've reached the surface
-            break;
-        y -= stepSize;
-    }
-    heightPos = float3(pos.x, y, pos.z);
-
-}
-
-
 float3 getNormal(float3 pos, float delta, float time)
 {
     return normalize(float3(
-            computeWave(time, pos + float3(delta, 0.0, 0.0)) -
-            computeWave(time, pos - float3(delta, 0.0, 0.0)),
+            computeWave(pos + float3(delta, 0.0, 0.0), time) -
+            computeWave(pos - float3(delta, 0.0, 0.0), time),
             0.02,
-            computeWave(time, pos + float3(0.0, 0.0, delta)) -
-            computeWave(time, pos - float3(0.0, 0.0, delta))
+            computeWave(pos + float3(0.0, 0.0, delta), time) -
+            computeWave(pos - float3(0.0, 0.0, delta), time)
         ));
 }
 
-void adaptableNormal(float3 pos, float3 offset, float influence, float sampleRadius, out float3 normal)
+void adaptableNormal(float3 pos, float3 offset, float influence, float sampleRadius, float time, out float3 normal)
 {
     float3 normal1 = getNormal(pos + float3(sampleRadius, 0.0, 0.0), 1, time);
     float3 normal2 = getNormal(pos - float3(sampleRadius, 0.0, 0.0), 1, time);
@@ -146,26 +125,26 @@ void adaptableNormal(float3 pos, float3 offset, float influence, float sampleRad
 /**
  * Performs raymarching against the wave surface SDF.
  */
-float4 traceWater(float3 rayOrigin, float3 rayDir, float time)
+float4 traceWater(float3 rayDirection, float time)
 {
     float d = 0;
     float t = 0;
-    float3 hitPos = float3(0, 0, 0);
+    float3 hitPosition = float3(0, 0, 0);
     float3 outputPos;
     for (int i = 0; i < 100; i++)
     {
-        float3 p = rayOrigin + rayDir * t;
-        d = computeWave(time, p);
+        float3 p = _rayOrigin + rayDirection * t;
+        d = computeWave(p, time);
         if (d < 0.0001)
         {
-            hitPos = p;
+            hitPosition = p;
             break;
         }
         t += d;
         if (t > _raymarchStoppingCriterium)
             break;
     }
-    return float4(hitPos, t);
+    return float4(hitPosition, t);
 }
 
 // ---------- Main Entry ----------
@@ -184,7 +163,7 @@ void computeWater(float condition, float2 uv, float3x3 camMatrix, float time, ou
     float3 color = baseColor;
 
     // Raymarching
-    hitPos = traceWater(_rayOrigin + float3(0, 0, 0), rayDirection, time);
+    hitPos = traceWater(rayDirection, time);
     if (hitPos.w < _raymarchStoppingCriterium)
     {
         // Gradient-based normal estimation
@@ -210,6 +189,8 @@ void computeWater(float condition, float2 uv, float3x3 camMatrix, float time, ou
     else
     {
         hitPos.w = _raymarchStoppingCriterium + 1;
+
+
     }
 
     // Gamma correction
@@ -219,6 +200,31 @@ void computeWater(float condition, float2 uv, float3x3 camMatrix, float time, ou
     sdfArray[MAX_SDFS].material.shininess = 1;
     // hard-coded hit index for the water
     mat = sdfArray[MAX_SDFS].material;
+}
+
+void adaptableWaterNormal(float3 position, float3 offset, float influence, float sampleRadius, float time, out float3 normal)
+{
+    float3 normal1 = getNormal(position + float3(sampleRadius, 0.0, 0.0), 1, time);
+    float3 normal2 = getNormal(position - float3(sampleRadius, 0.0, 0.0), 1, time);
+    float3 normal3 = getNormal(position + float3(0, 0.0, sampleRadius), 1, time);
+    float3 normal4 = getNormal(position - float3(0, 0.0, sampleRadius), 1, time);
+    normal = influence * (normal1 + normal2 + normal3 + normal4) / 4 + offset;
+}
+
+void sampleHeightField(float3 seedPosition, float time, out float3 heightPosition)
+{
+    float y = 0;
+    float stepSize = 0.05;
+
+    for (int i = 0; i < 100; i++)
+    {
+        seedPosition.y = y;
+        float height = computeWave(seedPosition, time);
+        if (height < 0.01)
+            break;
+        y -= stepSize;
+    }
+    heightPosition = float3(seedPosition.x, y, seedPosition.z);
 }
 
 #endif
