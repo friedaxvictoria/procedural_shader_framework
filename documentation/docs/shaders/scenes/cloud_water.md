@@ -1,6 +1,11 @@
-#  🧩 Cloud and Water Integration Shader
+<div class="container">
+    <h1 class="main-heading">Cloud and Water Integration Shader</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
 
-<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/CloudAndWater.png" alt="Cloud Water" width="400" height="225">
+<img src="../../../static/images/images4Shaders/cloud_water.png" alt="Cloud And Water" width="400" height="225">
+
+---
 
 - **Category:** Scene
 - **Author:** Xuetong Fu
