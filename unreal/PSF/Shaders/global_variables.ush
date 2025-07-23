@@ -1,7 +1,7 @@
 #ifndef PROCEDURAL_SHADER_FRAMEWORK_GLOBALS_H
 #define PROCEDURAL_SHADER_FRAMEWORK_GLOBALS_H
 
-#define MAX_SDFS 16
+#define MAX_SDFS 20
 
 static float3 _rayOrigin = float3(0.0, 0, 7.0);
 static float _GammaCorrect;

@@ -9,6 +9,8 @@ void computeUV(float2 fragCoord, float2 viewportSize, out float2 uv)
     uv = flippedUv * 2 - 1;
 }
 
+
+
 // after lighting function
 void combinedColor(float4 hitPosition0, float3 color0, float4 hitPosition1, float3 color1, out float3 color)
 {

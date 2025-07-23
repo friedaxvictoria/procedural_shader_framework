@@ -25,13 +25,13 @@ void rotateViaMouse(float2 mousePosition, float2 screenSize, out float3x3 mat)
     mouse = mouse - 0.25;
 
     // Convert to yaw and pitch
-    float yaw = lerp(-PI, PI, -mouse.x + 0.5); // == PI * mouse.x when centered
+    float yaw = lerp(-PI, PI, mouse.x + 0.5); // == PI * mouse.x when centered
     float pitch = lerp(-PI / 2, PI / 2, mouse.y + 0.5); // invert Y axis
 
     float3x3 rotY = computeRotationMatrix(float3(1, 0, 0), yaw);
     float3x3 rotX = computeRotationMatrix(float3(0, 1, 0), pitch);
 
-    mat = mul(-rotY, rotX); // yaw first, then pitch
+    mat = mul(-rotY, -rotX); // yaw first, then pitch
 }
 
 // a camera animation ALWAYS has to end with this node!!
