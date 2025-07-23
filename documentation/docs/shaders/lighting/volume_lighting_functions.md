@@ -27,7 +27,7 @@ This module contains volumetric lighting computation functions for rendering clo
 | `ctx`      | Lighting context input | VolCtxLocal      | Input     |
 | `mat`      | Volumetric material parameters    | VolMaterialParams | Input     |
 
-
+---
 
 ## 💻 Shader Code & Includes
 
