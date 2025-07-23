@@ -2236,7 +2236,7 @@
 t_b = \frac{\text{CLOUD\_BASE} - r_o.y}{r_d.y}, \quad
 t_t = \frac{\text{CLOUD\_TOP} - r_o.y}{r_d.y}
 \]</div>
-<p>The resulting integration segment <span class="arithmatex">\($$[t_{\min}, t_{\max}]$$\)</span> is derived depending on whether the ray starts above, inside, or below the cloud layer.</p>
+<p>The resulting integration segment <span class="arithmatex">\([t_{min}, t_{max}]\)</span> is derived depending on whether the ray starts above, inside, or below the cloud layer.</p>
 <hr />
 <ol>
 <li><strong>Apply blue-noise dithering to the initial sampling location:</strong></li>
@@ -2274,7 +2274,7 @@ t_t = \frac{\text{CLOUD\_TOP} - r_o.y}{r_d.y}
 <li>
 <p><strong>Early termination occurs when:</strong></p>
 </li>
-<li><span class="arithmatex">\( $$t &gt; t_{\max}$$ \)</span></li>
+<li><span class="arithmatex">\( t &gt; t_{max} \)</span></li>
 <li>or accumulated alpha exceeds <code>0.99</code></li>
 </ul>
 <hr />
@@ -2284,7 +2284,7 @@ t_t = \frac{\text{CLOUD\_TOP} - r_o.y}{r_d.y}
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">return</span><span class="w"> </span><span class="n">clamp</span><span class="p">(</span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
 </code></pre></div>
 <hr />
-<p>## 🎛️ Parameters</p>
+<h2 id="Parameters">🎛️ Parameters</h2>
 <table>
 <thead>
 <tr>
