@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Integration
+// Author: Xuetong Fu
 // Category: Volumetric Lighting
 // Description:
 //   Computes volumetric scattering from inside a bounded volume

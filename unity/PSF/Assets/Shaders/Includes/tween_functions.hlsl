@@ -200,21 +200,21 @@ float getTweenProgress(float startTime, float duration, bool pingpong)
 
 
 // MOVE TWEEN
-void tween3D_float(float3 start, float3 end, float duration, int tweenType, float startTime, bool pingpong, out float3 position)
+void tween3D_float(float3 start, float3 end, float duration, int tweenType, float startTime, bool pingpong, out float3 value)
 {
     float t = getTweenProgress(startTime, duration, pingpong);
 
     float eased = applyTweenFunction(t, tweenType);
-    position = lerp(start, end, eased);
+    value = lerp(start, end, eased);
 }
 
 // SCALE TWEEN
-void tween1D_float(float start, float end, float duration, int tweenType, float startTime, bool pingpong, out float scale)
+void tween1D_float(float start, float end, float duration, int tweenType, float startTime, bool pingpong, out float value)
 {
     float t = getTweenProgress(startTime, duration, pingpong);
 
     float eased = applyTweenFunction(t, tweenType);
-    scale = lerp(start, end, eased);
+    value = lerp(start, end, eased);
 }
 
 

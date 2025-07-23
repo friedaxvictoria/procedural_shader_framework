@@ -4,12 +4,14 @@
 </div>
 
 This function simulates anisotropic lighting effects using per-pixel tangent vectors derived from UV coordinates. The result mimics materials like brushed metal or hair by modulating specular highlights along UV-based tangent directions. It combines Lambertian diffuse lighting with a directional specular term.
-
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/examples/UVAnisotropicLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code
 ```hlsl
-void applyUVAnisotropicLighting_float(float4 hitPosition, float3 normal, float hitIndex, float2 uv, float3 lightPosition, out
+void applyUVAnisotropicLighting_float(float4 hitPosition, float3 normal, int hitIndex, float2 uv, float3 lightPosition, out
 float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
@@ -42,7 +44,7 @@ float3 lightingColor)
 |-----------------|----------|-------------|
 | `hitPosition` <img width=50/>   | float4   | World-space surface hit position; `w` holds the raymarch step or distance |
 | `normal`        | float3   | Surface normal at the hit location |
-| `hitIndex`      | float    | Index used to fetch object material properties |
+| `hitIndex`      | int    | Index used to fetch object material properties |
 | `uv`            | float2   | UV coordinates used to define local tangent direction; for this framework the *fragment coordinates* from [Fragment Coordinates](../basics/fragCoords.md) can be used |
 | `lightPosition` | float3   | World-space position of the light source |
 

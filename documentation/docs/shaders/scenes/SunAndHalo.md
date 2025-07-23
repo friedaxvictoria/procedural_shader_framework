@@ -1,9 +1,9 @@
 # 🧩 Sun and Halo Shader
 
-<img src="../../../../shaders/screenshots/SunAndHalo.png" alt="Sun and Halo Shader Output" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/SunAndHalo.png?raw=true" alt="Sun and Halo Shader Output" width="400" height="225">
 
 - **Category:** Scene / Atmospheric Effect  
-- **Shader Type:** Full-screen background environment  
+- **Author:** Wanzhang He
 - **Input Requirements:** `fragCoord`, `iMouse`, `iResolution`  
 - **Output:** HDR-tone-mapped sun disk and scattering halo over sky gradient
 
@@ -118,3 +118,4 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     fragColor = vec4(pow(color, vec3(1.0 / 2.2)), 1.0);
 }
 ```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/scenes/SunAndHalo.glsl)

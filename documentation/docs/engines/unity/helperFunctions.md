@@ -71,10 +71,7 @@ float3x3 computeRotationMatrix(float3 axis, float angle)
 
 ## Access
 
-!Utku Input
-
 If standard scripting is used, the helper functions can be included and used with: 
-```
-#include ...
-```
+
+```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/helper_functions.hlsl"```
 

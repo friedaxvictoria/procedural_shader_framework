@@ -3,7 +3,7 @@
     <blockquote class="author">by Maximilian Lipski</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based torus. In order for the torus to be visible in the final output, [SDF Raymarching](...) and an arbitrary lighting function has to be included. 
+This function creates an internal instance of an SDF-based torus. In order for the torus to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary lighting function has to be included. 
 
 For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
 
@@ -40,16 +40,16 @@ void addTorus(inout int index, float3 position, float radius, float thickness, f
 ### Inputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `index`        | float   | The index at which the torus is stored <br> <blockquote> *Visual Scripting default value*: 1 </blockquote>|
+| `index`        | int   | The index at which the torus is stored <br> <blockquote> *Visual Scripting default value*: 1 </blockquote>|
 | `position`        | float3   | The central position of the torus |
-| `radius`        | float   | The radius of the torus from center to the very outside of the tube <br> <blockquote> *Visual Scripting default value: 3 </blockquote>|
+| `radius`        | float   | The radius of the torus from center to the very outside of the tube <br> <blockquote> *Visual Scripting default value*: 3 </blockquote>|
 | `thickness`        | float   | The thickness of the torus' tube <br> <blockquote> *Visual Scripting default value*: 1 </blockquote>|
 | `axis`        | float3   | The axis determining the orientation of the torus <br> <blockquote> *Visual Scripting default value*: float3(0, 1, 0) </blockquote> |
 | `angle`        | float   | The angle around the axis |
 | `material` | MaterialParams | The material which the SDF is rendered with |
     
 ### Outputs:
-- ```float indexOut```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [SDF Raymarching](...).  
+- ```int index```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [RaymarchAll](raymarchAll.md).  
 
 ---
 
@@ -57,12 +57,18 @@ void addTorus(inout int index, float3 position, float radius, float thickness, f
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddTorus`
-
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+<figure markdown="span">
+    ![Unreal torus](../images/sdfs/torus.png){ width="300" }
+</figure>
 
 === "Standard Scripting"
-    Include ...
+    Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```
+
+    Example Usage
+    ```hlsl
+    addTorus(index, Position, Radius, Thickness, axis, angle, mat);
+    ```
 
 ---
 
-Find the original shader code [here](..).
+Find the original shader code [here](../../../shaders/geometry/).

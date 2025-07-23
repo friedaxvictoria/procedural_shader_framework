@@ -3,8 +3,10 @@
     <blockquote class="author">by Utku Alkan</blockquote>
 </div>
 
-This function applies simple Lambertian diffuse lighting with a fixed white light source. It computes the diffuse reflection based on the angle between the light direction and surface normal, and adds a small constant ambient term. This is a lightweight lighting model ideal for unlit or stylized shading.
-
+This function applies simple Lambertian diffuse lighting with a fixed light source. It computes the diffuse reflection based on the angle between the light direction and surface normal, and adds a small constant ambient term. This is a lightweight lighting model ideal for unlit or stylized shading.
+    <figure markdown="span">
+        ![Unity Lambertian Lighting](../images/lighting/examples/lambertLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code

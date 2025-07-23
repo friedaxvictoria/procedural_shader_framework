@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Volumetric Lighting Shader
+// Author: Xuetong Fu
 // Category: Volume Lighting
 // Description: 
 //   Provides lighting evaluation functions for volumetric rendering.

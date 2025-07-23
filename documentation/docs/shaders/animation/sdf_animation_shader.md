@@ -2,6 +2,16 @@
 
 - **Category:** Animation / SDF / Scene
 - **Author:** Wanzhang He
+- **Version:** v3 (final version)
+  
+This is the **final and most modular version** of the SDF animation system.  
+It builds upon earlier versions:
+- [SDF Animation v1](sdf_animation_v1.md) – initial prototype with basic animation
+- [SDF Animation v2](sdf_animation_v2.md) – structured modular version using `SDF` and `Animation` structs
+  - 🔗 Example scene: [SDF Animation v2 example](sdf_animation_v2_example.md) – demonstrates `translate`, `orbit`, and `pulseScale` in action  
+- **`sdf_animation_v3.glsl` (this file)** – introduces array-based object batching and external parameter control via uniform arrays, ready for integration with real-time UI/scene systems
+
+---
 ## 📥 Input Requirements
 
 This shader animation module depends on the following inputs:

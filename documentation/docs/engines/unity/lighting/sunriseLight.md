@@ -4,7 +4,9 @@
 </div>
 
 This function computes realistic atmospheric lighting based on a simplified earth-sun model. It simulates sunlight scattering through the atmosphere and includes diffuse and specular reflections using a Phong lighting model. If the ray hits the sky (escapes before hitting geometry), it returns the atmospheric color.
-
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/examples/sunriseLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code
@@ -83,7 +85,7 @@ This function computes realistic atmospheric lighting based on a simplified eart
     ````
 
 ```hlsl
-void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 rayDirection, out float3 lightingColor)
+void sunriseLight_float(float4 hitPosition, float3 normal, int hitIndex, float3 rayDirection, out float3 lightingColor)
 { 
     SunriseLight sunrise;
     sunrise.sundir = normalize(float3(0.5, 0.4 * (1. + sin(0.5 * _Time.y)), -1.));
@@ -127,7 +129,7 @@ void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float
 |----------------|----------|-------------|
 | `hitPosition`  <img width=50/> | float4   | World position of the surface hit; the w-component holds the raymarch step or distance |
 | `normal`       | float3   | Surface normal at the hit point |
-| `hitIndex`     | float    | Object/material index used to fetch shading parameters |
+| `hitIndex`     | int    | Object/material index used to fetch shading parameters |
 | `rayDirection` | float3   | Direction of the incoming ray |
 
 The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).
@@ -159,5 +161,4 @@ The inputs are typically provided by the functions [SDF Raymarching](../sdfs/ray
     ```
 ---
 
-ADD CORRECT LINK
-Find the original shader code [here](../../../shaders/lighting/lighting_functions.md). This basis was adapted to be compatible with Unity's workflow and to allow it to be modifyable within the framework.
+Find the original shader code [here](../../../shaders/lighting/Sunrise.md). This basis was adapted to be compatible with Unity's workflow and to allow it to be modifyable within the framework.

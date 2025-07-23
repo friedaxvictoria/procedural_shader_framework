@@ -77,7 +77,7 @@ float3 applySunriseLighting(float3 position, float3 direction, float atmospheric
 
 //CUSTOM NODE FUNCTIONS
 void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 rayDirection, out float3 lightingColor)
-{ 
+{
     SunriseLight sunrise;
     sunrise.sundir = normalize(float3(0.5, 0.4 * (1. + sin(0.5 * _Time.y)), -1.));
     sunrise.earthCenter = float3(0., -6360e3, 0.);
@@ -120,7 +120,7 @@ void pointLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 
         float3 pt = _rayOrigin + t * rayDirection;
         float dist = distance(pt, lightPosition);
     
-        float attenuation = clamp(1.0 / (pow(dist, dropPower)), 0.0, 1.0); 
+        float attenuation = clamp(1.0 / (pow(dist, dropPower)), 0.0, 1.0);
         float absorption = exp(-t * atmosphericDecay);
         
         pixelLightColor += attenuation * lerp(lightColor, float3(1.0, 1.0, 1.0), attenuation) * absorption;
@@ -149,11 +149,10 @@ void pointLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 
     lightingColor = ambientColor + diffuseColor + specularColor;
 }
 
-void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightPosition, out float3 lightingColor)
+void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightPosition, float3 lightColor, out float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
     float3 ambientColor = float3(0.05, 0.05, 0.05);
 
     float diffuseValue = max(dot(normal, lightDirection), 0.0);

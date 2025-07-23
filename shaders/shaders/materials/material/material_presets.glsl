@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Material Presets
+// Author：Xuetong Fu
 // Category: Material
 // Description:
 //   Provides factory functions for constructing MaterialParams

@@ -4,7 +4,7 @@
 // =====================================================
 // File: sdf_animation_v2.glsl
 // Description: Modular animation system for SDF objects
-// Author: [Your Name]
+// Author: Wanzhang He
 // Version: v2.0
 // Date: [2025-06-03]
 // 

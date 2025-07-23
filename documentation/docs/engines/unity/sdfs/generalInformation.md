@@ -19,14 +19,14 @@ Arrays in their very nature are not modifyable in their size. Thus, a pre-define
 
 Furthermore, ShaderGraph does not allow the access of arrays using input parameters, non-static, and non-constant variables. Thus, to fill the arrays, a work-around using for-loops was implemented. Each SDF uses an **index** to determine the location that it will be stored in. Subsequently, a loop iterates over all possible indices and writes the inputs once the correct index has been reached.
 
-To allow for proper processing, the output-indices should be used as input-indices for the following SDF. The last SDF's output-index should be connected to the **number of SDFs** in the [SDF Raymarching](raymarching.md). This setup also ensures that, in case ShaderGraph is used, all nodes are connected to the graph.
+To allow for proper processing, the output-indices should be used as input-indices for the following SDF thus connecting the functions in series. The last SDF's output-index should be connected to the **number of SDFs** in the [SDF Raymarching](raymarching.md). This setup also ensures that, in case ShaderGraph is used, all nodes are connected to the graph.
 
-Additionally, each SDF is defined by a type. Due to ShaderGraph's limitations and lack of support for *integers*, it is defined as a *float*. The values for the types can be found in the code for the respective SDFs and the [SDF Raymarching](raymarching.md).
+Additionally, each SDF is defined by a type. The values for the types can be found in the code for the respective SDFs and the [SDF Raymarching](raymarching.md).
 
 The instantiation of an SDF is implemented as follows:
 
 ``` hlsl
-void addSDF(float index, float type, float3 position, float3 size, float radius, float3 axis, float angle, float noise, float3 baseColor, float3 specularColor, float specularStrength,
+void addSDF(int index, int type, float3 position, float3 size, float radius, float3 axis, float angle, float noise, float3 baseColor, float3 specularColor, float specularStrength,
 float shininess, float timeOffset, float speed){
     for (int i = 0; i <= MAX_OBJECTS; i++)
     {
@@ -56,8 +56,27 @@ float shininess, float timeOffset, float speed){
 
 === "Visual Scripting"
 
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+    <figure markdown="span">
+        ![Unity Connectivity](../images/sdfs/exampleConnectivity.png){ width="700" }
+    </figure>
 
 === "Standard Scripting"
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/sdf_functions.hlsl"```
 
-    Some code
+
+    Example Usage
+
+    ```hlsl
+    float index;
+
+    addSphere_float(0, float3(-2,0,-5), float3(2,2,2), float3(0.8,0.1,0.1), 0, float3(0.8,0.1,0.1), float3(0.1,0.1,0.8), 2, 1, 0, index);
+
+    addRoundBox_float(index, float3(5,0,-5), float3(2,2,2), 1, float3(0.8,0.1,0.1), 0, float3(0.2,0.2,0.8), float3(0.2,0.8,0.8), 2, 1, 0, index);
+
+    addTorus_float(index, float3(0,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 45, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+    addTorus_float(index, float3(-4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+    addTorus_float(index, float3(-1.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 90, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+    addTorus_float(index, float3(4.5,4.5,0), 2, 0.2, float3(0.8,0.1,0.1), 0, float3(0.2,0.5,0.2), float3(0.8,0.1,0.1), 2, 1, 0, index);
+
+    addDolphin_float(index, float3(3,-0.5,8), 1, 2, float3(0, 1, 0), 45, float3(0.2,0.5,0.2), float3(0.2,0.5,0.2), 1, 1, index);
+    ```

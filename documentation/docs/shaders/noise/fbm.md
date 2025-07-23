@@ -1,9 +1,9 @@
 # 🧩 Fractal Brownian Motion (FBM) Shader
 
-<img src="../../../../shaders/screenshots/noise/2d_FBM_effect.png" alt="2D FBM Effect" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/2d_FBM_effect.png?raw=true" alt="2D FBM Effect" width="400" height="225">
 
 - **Category:** Noise  
-- **Author:** Xunyu Zhang  
+- **Author:** Wanzhang He 
 - **Shader Type:** Fractal / Multi-octave noise  
 - **Input Requirements:** `float`, `vec2`, `vec3`, `noise()`, `Pseudo3dNoise()`, `n31()`
 

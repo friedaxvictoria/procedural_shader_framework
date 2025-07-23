@@ -10,7 +10,7 @@ extern float3 _rayOrigin;
 extern float _raymarchStoppingCriterium;
 
 //sdf arrays
-float _sdfType[MAX_OBJECTS];
+int _sdfType[MAX_OBJECTS];
 float3 _sdfPosition[MAX_OBJECTS];
 float3 _sdfSize[MAX_OBJECTS];
 float _sdfRadius[MAX_OBJECTS];

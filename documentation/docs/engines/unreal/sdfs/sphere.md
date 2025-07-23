@@ -1,9 +1,9 @@
 <div class="container">
     <h1 class="main-heading">SDF Sphere</h1>
-    <blockquote class="author">by Maximilian Lipski</blockquote>
+    <blockquote class="author">by Runtong Li</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based sphere. In order for the sphere to be visible in the final output, [SDF Raymarching](...) and an arbitrary lighting function has to be included. 
+This function creates an internal instance of an SDF-based sphere. In order for the sphere to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
 For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
 
@@ -17,11 +17,19 @@ float sdSphere(float3 position, float radius)
     return length(position) - radius;
 }
 
-void addSphere_float(float index, float3 position, float radius, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
-float shininess, float noise, out float indexOut)
+void addSphere(inout int index, float3 position, float radius, float3 axis, float angle, MaterialParams material)
 {
-    addSDF(index, 0, position, float3(0,0,0), radius, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
-    indexOut = index + 1;
+    SDF newSDF;
+    
+    newSDF.type = 0;
+    newSDF.position = position;
+    newSDF.size = float3(0, 0, 0);
+    newSDF.radius = radius;
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
+
 }
 ```
 
@@ -30,26 +38,17 @@ float shininess, float noise, out float indexOut)
 ## The Parameters
 
 ### Inputs:
-- ```float index```: The index at which the sphere is stored 
-- ```float3 position```: The central position of the sphere
-- ```float radius```: The radius of the sphere
-> *ShaderGraph default value*: ```1```
-- ```float3 axis```: The axis determining the orientation of the sphere
-> *ShaderGraph default value*: ```float3(0,1,0)```
-- ```float angle```: The angle around the axis 
-- Material parameters
-    - ```float3 baseColor```: The underlying color of the sphere
-    > *ShaderGraph default value*: ```float3(0,1,0)```
-    - ```float3 specularColor```: The color of the highlights
-    - ```float3 specularStrength```: The intensity with which highlights are created
-    > *ShaderGraph default value*: ```1```
-    - ```float3 shininess```: The shape and sharpness of the highlights; the larger the value, the more focussed the highlight
-    > *ShaderGraph default value*: ```32```
-- ```float3 noise```: Noise that is added to the shape of the sphere
-
-
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `index`        | int   | The index at which the sphere is stored <br> <blockquote> *Visual Scripting default value*: 1 </blockquote>|
+| `position`        | float3   | The central position of the sphere |
+| `radius`        | float   | The radius of the sphere from center to the very outside of the tube <br> <blockquote> *Visual Scripting default value*: 1 </blockquote>|
+| `axis`        | float3   | The axis determining the orientation of the sphere <br> <blockquote> *Visual Scripting default value*: float3(0, 1, 0) </blockquote> |
+| `angle`        | float   | The angle around the axis |
+| `material` | MaterialParams | The material which the SDF is rendered with |
+    
 ### Outputs:
-- ```float indexOut```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [SDF Raymarching](...).  
+- ```int index```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [RaymarchAll](raymarchAll.md).  
 
 ---
 
@@ -57,12 +56,18 @@ float shininess, float noise, out float indexOut)
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddSphere`
-
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+<figure markdown="span">
+    ![Unreal sphere](../images/sdfs/sphere.png){ width="300" }
+</figure>
 
 === "Standard Scripting"
-    Include ...
+    Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```
+
+    Example Usage
+    ```hlsl
+    addSphere(index, Position, Radius, axis, angle, mat);
+    ```
 
 ---
 
-Find the original shader code [here](..).
+Find the original shader code [here](../../../shaders/geometry/SDF_Sphere.md).

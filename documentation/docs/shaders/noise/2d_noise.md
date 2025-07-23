@@ -2,11 +2,9 @@
 
 <img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/2d%20noise.png?raw=true" alt="2D FBM Noise Output" width="400" height="225">
 
----
-
-- **Category:** Noise  
+- **Category:** Noise
+- **Author:** Wanzhang He 
 - **Shader Type:** 2D Value Noise + Fractal Brownian Motion  
-- **Author:** Based on Morgan McGuire's noise core (BSD license)  
 - **Input Requirements:** `fragCoord`, `iTime`, `iResolution`
 
 ---

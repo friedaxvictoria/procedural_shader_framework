@@ -278,4 +278,102 @@ float3x3 computeRotationMatrix(float3 axis, float angle)
     axis.z * axis.x * minusC - axis.y * s, axis.z * axis.y * minusC + axis.x * s, c + axis.z * axis.z * minusC);
 }
 
+// new function for Desert sdf
+// Desert
+float surfFunc(in float3 p)
+{
+    float layer1Amp = 2.0;
+    float later2Amp = 1.0;
+    float layer3Amp = 1.0;
+
+    float layer1Freq = 0.2;
+    float later2Freq = 0.275;
+    float layer3Freq = 0.5 * 3.0;
+
+    p /= 2.5;
+    float layer1 = n2D(p.xz * layer1Freq) * layer1Amp - .5;
+    layer1 = smoothstep(0., 1.05, layer1);
+    float layer2 = n2D(p.xz * later2Freq) * later2Amp;
+    layer2 = 1. - abs(layer2 - .5) * 2.;
+    layer2 = smoothstep(.2, 1., layer2 * layer2);
+    float layer3 = n2D(p.xz * layer3Freq) * layer3Amp;
+    float res = layer1 * .7 + layer2 * .25 + layer3 * .05;
+    return res;
+}
+
+float mapDesert(float3 p)
+{
+    float sf = surfFunc(p);
+    return p.y + (.5 - sf) * 2.;
+}
+
+float2x2 rot2(in float a)
+{
+    float c = cos(a), s = sin(a);
+    return float2x2(c, s, -s, c);
+}
+
+float grad(float x, float offs)
+{
+    x = abs(frac(x / 6.283 + offs - .25) - .5) * 2.;
+    float x2 = clamp(x * x * (-1. + 2. * x), 0., 1.);
+    x = smoothstep(0., 1., x);
+    return lerp(x, x2, .15);
+}
+
+float sandL(float2 p)
+{
+    float2 q = mul(rot2(3.14159 / 18.), p);
+    q.y += (gradN2D(q * 18.) - .5) * .05;
+    float grad1 = grad(q.y * 80., 0.);
+
+    q = mul(rot2(-3.14159 / 20.), p);
+    q.y += (gradN2D(q * 12.) - .5) * .05;
+    float grad2 = grad(q.y * 80., .5);
+
+    q = mul(rot2(3.14159 / 4.), p);
+    float a2 = dot(sin(q * 12. - cos(q.yx * 12.)), float2(.25, .25)) + .5;
+    float a1 = 1. - a2;
+    float c = 1. - (1. - grad1 * a1) * (1. - grad2 * a2);
+    return c;
+}
+
+float sand(float2 p)
+{
+    p = float2(p.y - p.x, p.x + p.y) * .7071 / 4.;
+    float c1 = sandL(p);
+    float2 q = mul(rot2(3.14159 / 12.), p);
+    float c2 = sandL(q * 1.25);
+    return lerp(c1, c2, smoothstep(.1, .9, gradN2D(p * float2(4, 4))));
+}
+
+float bumpSurf3D(in float3 p)
+{
+    float n = surfFunc(p);
+    float3 px = p + float3(.001, 0, 0);
+    float nx = surfFunc(px);
+    float3 pz = p + float3(0, 0, .001);
+    float nz = surfFunc(pz);
+    return sand(p.xz + float2(n - nx, n - nz) / .001 * 1.);
+}
+
+float3 doBumpMap(in float3 p, in float3 nor, float bumpfactor)
+{
+    const float2 e = float2(0.001, 0);
+    float ref = bumpSurf3D(p);
+    float3 grad = (float3(bumpSurf3D(p - e.xyy),
+                      bumpSurf3D(p - e.yxy),
+                      bumpSurf3D(p - e.yyx)) - ref) / e.x;
+    grad -= nor * dot(nor, grad);
+    return normalize(nor + grad * bumpfactor);
+}
+
+void getDesertColor(float3 p, out float3 color)
+{
+    float ripple = sand(p.xz);
+    color = lerp(float3(1.0, .95, .7), // light sand
+                float3(.9, .6, .4), // darker trough
+                ripple);
+}
+
 #endif

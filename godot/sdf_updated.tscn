@@ -6,8 +6,10 @@
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("shader_material_target")]
 script = ExtResource("1_51pa3")
 shader_material_target = NodePath("ColorRect")
-lightPosition = Vector3(20, 0, 7)
-cameraPosition = Vector3(0, -10, 13)
+lightPosition = Vector3(10, 0, 13)
+cameraPosition = Vector3(0, 7, 8)
+camera_mode1 = 2
+camera_mode2 = 2
 shake_speed = 2.0
 shake_intensity = 0.3
 orbit_speed = 0.1

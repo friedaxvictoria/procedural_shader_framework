@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Blinn-Phong Lighting Shader
+// Author: Xuetong Fu
 // Category: Lighting
 // Description: 
 //   Implements the Blinn-Phong lighting model, combining ambient,

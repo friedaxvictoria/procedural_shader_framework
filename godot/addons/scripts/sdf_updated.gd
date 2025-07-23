@@ -2,7 +2,7 @@ extends Node2D
 
 @export var shader_material_target: CanvasItem
 @export_custom(PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY) 
-var MAX_OBJECTS: int = 15
+var MAX_OBJECTS: int = 25
 @export var lightPosition: Vector3 = Vector3(0.0, 4.0, 7.0)
 @export var cameraPosition: Vector3 = Vector3(0.0, 13.0 , 13.0)
 @export var camera_mode1: CameraMode1 = CameraMode1.AUTO_ORBIT
@@ -95,27 +95,62 @@ func _ready():
 	#User Step1:Add SDFs
 	#Guide user by poviding numbers 
 	shader_objects = [
-		#Add Sphere 
-		#ShaderObject.new().set_values(0, Vector3(0, 3.0, 0), Vector3.ZERO, 1.0, Vector3(0.2, 0.2, 1.0),0),
-		#Add Cube
-		#ShaderObject.new().set_values(1, Vector3(1.9, 0, 0), Vector3(1, 1, 1), 0.2, Vector3(0.2, 1.0, 0.2),0),
-		#ShaderObject.new().set_values(1, Vector3(-1.9, 0, 0), Vector3(1, 1, 1), 0.2, Vector3(0.2, 1.0, 0.2),0),
-		#Add Torus
-		#ShaderObject.new().set_values(2, Vector3(0.0, -3.0, 0), Vector3(1.0,5.0,1.5), 0.2, Vector3(1.0, 0.2, 0.2),2),
-		ShaderObject.new().set_values(2, Vector3(0.0,0.0, 0.0), Vector3(1.0,5.0,1.5), 0.2, Vector3(1.0, 0.2, 0.2),2),
+	
+	
+	#Cart_1
+	#Back-left wheel
+	ShaderObject.new().set_values(2, Vector3(-7.5, 0.2, -5.0), Vector3(0.3, 1.5, 0.3), 0.1, Vector3(0.5, 0.3, 0.2), 2), # Cactus body	
+	# Rock pillar
+	ShaderObject.new().set_values(1, Vector3(-5.0, 2.0, -4.0), Vector3(3.0, 1.0, 1.0), 0.1, Vector3(0.5, 0.3, 0.2), 1), 		
+	#Back-right wheel
+	ShaderObject.new().set_values(2, Vector3(-7.5, 0.2, -3.0), Vector3(0.3, 1.5, 0.3), 0.1, Vector3(0.5, 0.3, 0.2), 2), 
+	
+	#Front-Left wheel
+	ShaderObject.new().set_values(2, Vector3(-2.5, 0.2, -5.0), Vector3(0.3, 1.5, 0.3), 0.1, Vector3(0.5, 0.3, 0.2), 2), # Cactus body
+	#Front-right wheel
+	ShaderObject.new().set_values(2, Vector3(-2.5, 0.2, -3.0), Vector3(0.3, 1.5, 0.3), 0.1, Vector3(0.5, 0.3, 0.2), 2), # Cactus body
+	
 
-		#Add dolphin 
-		#Pass zero in 6th position but no noise applied for dolphin
-		#ShaderObject.new().set_values(3, Vector3(0, -2.0, 0), Vector3(5.0, 5.0, 5.0), 3.0, Vector3(0.5, 0.7, 1.0), 0,Vector3.ONE, 0.8, 16.0, 2.0, Vector3(1, 0, 0.2), 0.0),
-		#ShaderObject.new().set_values(3, Vector3(0, 2.5, 0), Vector3(8.0, 8.0, 8.0), 5.0, Vector3(0.5, 0.7, 1.0), 0,Vector3.ONE, 0.8, 16.0, 2.0, Vector3(1, 0, 0.2), 0.0),
-		#Add Hex Prism
-		#ShaderObject.new().set_values(4, Vector3(0.0, 0.0, 0.0), Vector3(1, 1, 1), 0.3, Vector3(0.2, 1.0, 0.2),0),
-		#Add Octahedron
-		#ShaderObject.new().set_values(5, Vector3(1.9, 0.0, 0.0), Vector3(1, 1, 1), 1.0, Vector3(0.2, 1.0, 0.2),0),
-		#Add Ellipsoid
-		#ShaderObject.new().set_values(6, Vector3(-1.9, 0.0, 0.0), Vector3(1, 1, 1), 0.3, Vector3(0.2, 1.0, 0.2),0),
+	#Left Cart Diamonds(#1)
+	# Option 1: Classic White Diamond
+	ShaderObject.new().set_values(5, Vector3(-6.0, 3.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+	ShaderObject.new().set_values(5, Vector3(-4.0, 3.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+	#ShaderObject.new().set_values(5, Vector3(-4.0, 3.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+	ShaderObject.new().set_values(5, Vector3(-4.7, 4.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+	ShaderObject.new().set_values(5, Vector3(-6.7, 4.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
 
-	]
+	# Option 2: Blue Diamond (more colorful)
+	ShaderObject.new().set_values(5, Vector3(-8.0, 3.5, -4.0), Vector3(1, 1, 1), 1.0, Vector3(0.85, 0.9, 1.0), 0, Vector3(0.7, 0.75, 1.0), 0.98, 150.0),
+
+
+	#Cart_2
+	#Back-left wheel
+	ShaderObject.new().set_values(2, Vector3(3.5, 0.2, -5.0), Vector3(0.3, 1.5, 0.3), 0.1, Vector3(0.5, 0.3, 0.2), 2), # Cactus body	
+	# Rock pillar
+	ShaderObject.new().set_values(1, Vector3(6.0, 2.0, -4.0), Vector3(3.0, 1.0, 1.0), 0.1, Vector3(0.5, 0.3, 0.2), 1), 		
+	#Back-right wheel
+	ShaderObject.new().set_values(2, Vector3(3.5, 0.2, -3.0), Vector3(0.3, 1.5, 0.3), 0.1, Vector3(0.5, 0.3, 0.2), 2), 
+	
+	#Front-Left wheel
+	ShaderObject.new().set_values(2, Vector3(8.5, 0.2, -5.0), Vector3(0.3, 1.5, 0.3), 0.1, Vector3(0.5, 0.3, 0.2), 2), # Cactus body
+	#Front-right wheel
+	ShaderObject.new().set_values(2, Vector3(8.5, 0.2, -3.0), Vector3(0.3, 1.5, 0.3), 0.1, Vector3(0.5, 0.3, 0.2), 2), # Cactus body
+	
+	
+	#Right Cart Diamonds(#2)
+	# Option 1: Classic White Diamond
+	ShaderObject.new().set_values(5, Vector3(6.0, 3.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+	ShaderObject.new().set_values(5, Vector3(4.0, 3.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+	#ShaderObject.new().set_values(5, Vector3(4.0, 3.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+	ShaderObject.new().set_values(5, Vector3(4.7, 4.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+	ShaderObject.new().set_values(5, Vector3(6.7, 4.5, -4.0), Vector3(0.5, 0.5, 0.5), 1.0, Vector3(0.9, 0.95, 1.0), 0, Vector3(1.0, 1.0, 1.0), 0.95, 128.0),
+
+	# Option 2: Blue Diamond (more colorful)
+	ShaderObject.new().set_values(5, Vector3(8.0, 3.5, -4.0), Vector3(1, 1, 1), 1.0, Vector3(0.85, 0.9, 1.0), 0, Vector3(0.7, 0.75, 1.0), 0.98, 150.0),
+
+
+
+]
 
 	fill_shader_parameters(shader_objects)
 

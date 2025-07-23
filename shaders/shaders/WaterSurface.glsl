@@ -1,5 +1,6 @@
 // ==========================================
 // Shader: Procedural Water Surface Shader
+// Author: Xuetong Fu
 // Category: Surface Rendering & Reflections
 // Description: Generates a time-evolving water surface with procedural waves, SDF raymarching, and specular lighting. Adapted from "Dante's natty vessel" by evvvvil on ShaderToy
 // URL: https://www.shadertoy.com/view/Nds3W7

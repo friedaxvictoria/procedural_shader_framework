@@ -52,9 +52,15 @@ Examplary matrices that can be used as input to this function are [Camera Rotati
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/animation_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3x3 camMatrix;
+    getCameraMatrix_float(matA, matB, dist, targetPos, camMatrix);
+    ```
 
 ---
 
-This is an engine-specific implementation without a shader-basis.
+Find the original shader code [here](../../../shaders/animation/Camera_Anim.md).

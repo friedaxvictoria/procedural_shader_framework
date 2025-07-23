@@ -3,6 +3,7 @@
     <blockquote class="author">by Saeed Shamseldin</blockquote>
 </div>
 
+<img src="../../../static/images/images4Shaders/sunrise.gif" alt="general scene" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 
 ## Overview
 
@@ -194,3 +195,10 @@ vec3 applySunriseLighting(vec3 o, vec3 d, float L, vec3 Lo, SunriseLight light) 
 
 ```
 </details>
+
+
+## Engine Integrations
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/lighting/sunriseLight">Unity</a>
+</div>

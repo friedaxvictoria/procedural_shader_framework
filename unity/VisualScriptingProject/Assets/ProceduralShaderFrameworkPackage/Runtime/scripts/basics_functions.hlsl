@@ -26,7 +26,7 @@ void combinedColor_float(float4 hitPosition1, float3 color1, float4 hitPosition2
 
 
 //use before lighting function
-void getMinimum_float(float4 hitPosition1, float3 normal1, float hitIndex1, float4 hitPosition2, float3 normal2, float hitIndex2, out float4 hitPosition, out float3 normal, out float hitIndex)
+void getMinimum_float(float4 hitPosition1, float3 normal1, int hitIndex1, float4 hitPosition2, float3 normal2, int hitIndex2, out float4 hitPosition, out float3 normal, out int hitIndex)
 {
     if (hitPosition1.w < hitPosition2.w && hitPosition1.w < _raymarchStoppingCriterium)
     {

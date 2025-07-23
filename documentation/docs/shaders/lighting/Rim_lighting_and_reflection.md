@@ -1,7 +1,7 @@
 # 🧩 Rim Reflection Lighting Shader
 
-<img src="../../../../shaders/screenshots/lighting/RimReflectionLighting_black.png" alt="Rim Lighting on Black Background" width="400" height="225">
-<img src="../../../../shaders/screenshots/lighting/RimReflectionLighting_Bayer.png" alt="Reflection Highlight with Bayer Background" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/lighting/RimReflectionLighting_black.png?raw=true" alt="Rim Lighting on Black Background" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/lighting/RimReflectionLighting_Bayer.png?raw=true" alt="Reflection Highlight with Bayer Background" width="400" height="225">
 
 - **Category:** Lighting  
 - **Author:** Wanzhang He  

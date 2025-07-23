@@ -1,5 +1,6 @@
 // ==========================================
 // Shader: Boat and Flag SDF Viewer
+// Author: Xuetong Fu
 // Category: Modeling & Orbit Camera Visualization
 // Description: Renders a 3D boat and flag model using SDF raymarching with rim lighting and orbit controls.
 // Screenshot: screenshots/BoatAndFlag.png

@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Compute Occlusion Shader
+// Author: Xuetong Fu
 // Category: Volume Lighting / Occlusion
 // Description:
 //   Estimates light occlusion through a volume by raymarching from a point along the light direction.

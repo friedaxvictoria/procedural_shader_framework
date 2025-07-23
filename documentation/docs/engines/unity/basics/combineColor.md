@@ -54,8 +54,15 @@ The edgecase, that for a fragment both inputs did not yield a hit, is checked fo
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/basics_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3 resultColor;
+    combinedColor_float(hitPosition1, color1, hitPosition2, color2, resultColor)
+    ```
+
 
 ---
 

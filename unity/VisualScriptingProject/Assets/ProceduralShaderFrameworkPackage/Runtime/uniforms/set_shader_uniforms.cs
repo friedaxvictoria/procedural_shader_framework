@@ -22,11 +22,17 @@ public class set_shader_uniforms : MonoBehaviour
         Shader.SetGlobalVector("_Mouse", accumulatedMouseDelta);
     }
 
+    void onValidate()
+    {
+        Shader.SetGlobalVector("_rayOrigin", rayOrigin);
+    }
+
     void Update()
     {
         if (!allowMovement)
         {
-            return;
+            Shader.SetGlobalVector("_mousePoint", accumulatedMouseDelta);
+            Shader.SetGlobalVector("_Mouse", accumulatedMouseDelta);
         }
 
         // --- Mouse drag rotation ---

@@ -4,12 +4,14 @@
 </div>
 
 This function simulates a simple soft subsurface scattering (SSS) effect by adding light transmitted through the object’s surface. It enhances realism by combining standard Lambertian diffuse shading with a soft backlighting term.
-
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/examples/SSSLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code
 ```hlsl
-void applySoftSSLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
+void applySoftSSLighting_float(float4 hitPosition, float3 normal, int hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
@@ -40,7 +42,7 @@ float3 lightingColor)
 |-----------------|----------|-------------|
 | `hitPosition`   | float4   | World position of the surface hit; the w-component may be ignored |
 | `normal`        | float3   | Surface normal at the hit point |
-| `hitIndex`      | float    | Object/material index used to fetch shading parameters |
+| `hitIndex`      | int    | Object/material index used to fetch shading parameters |
 | `lightPosition` | float3   | World-space position of the light source |
 
 The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).

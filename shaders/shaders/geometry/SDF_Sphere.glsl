@@ -6,6 +6,7 @@
 //   Implements a scene defined by a signed distance field (a sphere), normal 
 //   estimation via central differences, and raymarching to detect surface hits.
 // screenshots/geometry/SDF_Sphere.png
+// From Wanzhang He
 // ==========================================
 
 /**

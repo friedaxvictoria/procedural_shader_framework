@@ -171,6 +171,17 @@ void addRock(inout int index, float3 position, float3 size, float3 axis, float a
 
 // PSFCODEADDCUSTOMSDFEND
 
+void addDesert(inout int index, float3 position, float3 axis, float angle, MaterialParams material)
+{
+    SDF newSDF;
+    newSDF.type = 8;
+    newSDF.position = position;
+    newSDF.radius = 0.0;
+    newSDF.size = 0;
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    addSDF(index, newSDF);
+}
 
 float evalSDF(int index, float3 p, float time = 0.0)
 {
@@ -210,9 +221,14 @@ float evalSDF(int index, float3 p, float time = 0.0)
         float noise = snoise(probePoint * 5.0) * 0.1;
         return base - noise * 0.3;
     }
+    else if (s.type == 8)
+    {
+        return mapDesert(p - s.position);
+    }
     // PSFCODEEVALCUSTOMSDFSTART
 
     // PSFCODEEVALCUSTOMSDFEND
+
 
     return 1e5;
 }
@@ -261,6 +277,11 @@ void raymarchAll(float condition, float3x3 cameraMatrix, float numberSDFs, float
             normal = get_normal(hitIndex, currentPosition);
             material = sdfArray[hitIndex].material;
             hitPosition.w = t;
+            if (sdfArray[hitIndex].type == 8)
+            {
+                normal = doBumpMap(hitPosition.xyz, normal, 0.07);
+                getDesertColor(hitPosition.xyz, material.baseColor);
+            }
             break;
         }
         if (t > _raymarchStoppingCriterium)

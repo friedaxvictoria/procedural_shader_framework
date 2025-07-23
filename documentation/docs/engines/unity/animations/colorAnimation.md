@@ -34,7 +34,7 @@ The computation of the root color is required to ensure that the seed color is w
 ### Outputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `color`   | float3   | Current color of the object which can directly be plugged into the inputs of SDF functions (e.g. [Sphere](unity/cameraMatrix.md)) or lighting functions (e.g. [Point Light](unity/cameraMatrix.md)).|
+| `color`   | float3   | Current color of the object|
 
 > To create organic and interesting effects, the function can also be applied to position parameters. See the tutorial on the [Safety Buoy](../tutorials/safetyBuoy.md) for this.
 
@@ -50,8 +50,15 @@ The computation of the root color is required to ensure that the seed color is w
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/animation_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3 color_temp;
+    changingColorSin_float(float3(0.8, 0.1, 0.1), 0.5, color_temp);
+    ```
+
 
 ---
 
