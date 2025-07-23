@@ -216,7 +216,7 @@ float evalSDF(int index, float3 p, float time = 0.0)
     }
     else if (s.type == 8)
     {
-        return mapDesert(probePoint);
+        return mapDesert(p - s.position);
     }
     return 1e5;
 }
