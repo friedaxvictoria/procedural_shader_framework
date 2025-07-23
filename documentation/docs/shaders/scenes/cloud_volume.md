@@ -8,7 +8,6 @@
 ---
 
 - **Category:** Scene
-- **Author:** Xuetong Fu
 - **Shader Type:** Full‑screen volumetric raymarch (simplex‑FBM density)
 - **Input Requirements:** `fragCoord`, `iTime`, `iMouse`, `iResolution`, `iChannel1` (blue‑noise)
 - **Output:**  `fragColor` RGBA color (grayscale cloud density in RGB, alpha = integrated opacity)
