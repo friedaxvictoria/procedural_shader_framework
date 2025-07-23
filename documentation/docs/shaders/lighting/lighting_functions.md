@@ -80,10 +80,7 @@ vec3 applyBlinnPhongLighting(LightingContext ctx, MaterialParams mat) {
 
 <div class="button-row">
   <a class="md-button" href="../../../engines/unity/lighting/blinnPhongLight">Unity</a>
-</div>
-
-<div class="button-row">
-  <a class="md-button" href="../../engines/unreal/lighting/blinnPhongLight.md">Unreal</a>
+    <a class="md-button" href="../../../engines/unreal/lighting/blinnPhongLight">Unreal</a>
 </div>
 
 ### 3. Lambert
@@ -104,10 +101,7 @@ vec3 lambertDiffuse(LightingContext ctx, MaterialParams mat) {
 
 <div class="button-row">
   <a class="md-button" href="../../../engines/unity/lighting/lambLight">Unity</a>
-</div>
-
-<div class="button-row">
-  <a class="md-button" href="../../engines/unreal/lighting/lambLight.md">Unreal</a>
+    <a class="md-button" href="../../../engines/unreal/lighting/lambLight">Unreal</a>
 </div>
 
 ### 4. Physically Based Rendering
@@ -155,7 +149,7 @@ vec3 applyPBRLighting(LightingContext ctx, MaterialParams mat) {
 #### Engine Integrations
 
 <div class="button-row">
-  <a class="md-button" href="../../engines/unreal/lighting/PBRLighting.md">Unreal</a>
+  <a class="md-button" href="../../../../engines/unreal/lighting/PBRLighting">Unreal</a>
 </div>
 
 ### 5. Rim Lighting
@@ -176,10 +170,7 @@ vec3 computeRimLighting(LightingContext ctx, MaterialParams mat, vec3 rimColor) 
 
 <div class="button-row">
   <a class="md-button" href="../../../engines/unity/lighting/rimLight">Unity</a>
-</div>
-
-<div class="button-row">
-  <a class="md-button" href="../../engines/unreal/lighting/rimLight.md">Unreal</a>
+    <a class="md-button" href="../../../engines/unreal/lighting/rimLight">Unreal</a>
 </div>
 
 ### 6. Fake Specular
@@ -200,7 +191,7 @@ vec3 computeFakeSpecular(LightingContext ctx, MaterialParams mat) {
 #### Engine Integrations
 
 <div class="button-row">
-  <a class="md-button" href="../../engines/unreal/lighting/fakeSpecular.md">Unreal</a>
+  <a class="md-button" href="../../../../engines/unreal/lighting/fakeSpecular">Unreal</a>
 </div>
 
 ---

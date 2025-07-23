@@ -201,8 +201,5 @@ vec3 applySunriseLighting(vec3 o, vec3 d, float L, vec3 Lo, SunriseLight light) 
 
 <div class="button-row">
   <a class="custom-button md-button" href="../../../../engines/unity/lighting/sunriseLight">Unity</a>
-</div>
-
-<div class="button-row">
-  <a class="md-button" href="../../engines/unreal/lighting/sunriseLight.md">Unreal</a>
+    <a class="custom-button md-button" href="../../../../engines/unreal/lighting/sunriseLight">Unreal</a>
 </div>
