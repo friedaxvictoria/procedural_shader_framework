@@ -168,3 +168,5 @@ usage example:
 */
 ```
 
+
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/rendering/volumetric.glsl)
