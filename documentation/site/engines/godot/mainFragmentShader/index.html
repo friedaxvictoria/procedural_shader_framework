@@ -245,6 +245,15 @@
   
     
     
+      
+  
+  
+  
+    
+  
+  
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../" class="md-tabs__link">
           
@@ -254,6 +263,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -426,9 +438,23 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -437,7 +463,65 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Shader Flow Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overall Structure
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -578,7 +662,30 @@
   
   
   <span class="md-ellipsis">
-    User Manual
+    User Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
     
   </span>
   
@@ -1964,6 +2071,75 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unity/tutorials/elevator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elevator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unity/tutorials/car/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Car
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unity/tutorials/shrine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shrine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2034,7 +2210,7 @@
 
 
 <div class="container">
-    <h1 class="main-heading">SMain Fragment Shader Analysis</h1>
+    <h1 class="main-heading">Main Fragment Shader Analysis</h1>
     <blockquote class="author">by Jeewan</blockquote>
 </div>
 <p>This document provides an analysis of the main fragment shader, which serves as the entry point for rendering a 3D scene using ray marching in Godot. The shader integrates the IntegrationFlexible method from <code>sdf_updated.gdshaderinc</code> to compute the final color for each pixel. Below, we describe the shader's purpose, structure, and usage of global variables, focusing on its role in the rendering pipeline.</p>
@@ -2063,12 +2239,15 @@
 <p>The <code>fragment()</code> function is the main entry point, executed for each pixel of the canvas item.</p>
 <h4 id="purpose">Purpose</h4>
 <p>Computes the final color (<code>COLOR</code>) for each pixel by calling <code>IntegrationFlexible</code>, which handles ray marching, terrain rendering, and lighting.</p>
-<h4 id="inputoutput">Input/Output</h4>
-<p><strong>Input:</strong>
-- <code>UV</code> (vec2): Built-in Godot variable providing normalized texture coordinates (0.0 to 1.0) for the current pixel.</p>
-<p><strong>Output:</strong>
-- <code>COLOR</code> (vec4): Built-in Godot variable set to the final RGBA color of the pixel.
-- <code>color</code> (vec4): Local variable to store the output of IntegrationFlexible.</p>
+<h4 id="input"><strong>Input:</strong></h4>
+<ul>
+<li><code>UV</code> (vec2): Built-in Godot variable providing normalized texture coordinates (0.0 to 1.0) for the current pixel.</li>
+</ul>
+<h4 id="output"><strong>Output:</strong></h4>
+<ul>
+<li><code>COLOR</code> (vec4): Built-in Godot variable set to the final RGBA color of the pixel.</li>
+<li><code>color</code> (vec4): Local variable to store the output of IntegrationFlexible.</li>
+</ul>
 <h4 id="process">Process</h4>
 <ol>
 <li>Declares a <code>vec4 color</code> variable to hold the computed color.</li>

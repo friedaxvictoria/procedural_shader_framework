@@ -250,6 +250,13 @@
   
     
     
+      
+  
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
         <a href="../../engines/godot/" class="md-tabs__link">
           
@@ -259,6 +266,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -436,9 +446,23 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../engines/godot/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -447,7 +471,65 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Shader Flow Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../engines/godot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overall Structure
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../engines/godot/structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -580,7 +662,30 @@
   
   
   <span class="md-ellipsis">
-    User Manual
+    User Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../engines/godot/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
     
   </span>
   
@@ -1966,6 +2071,75 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../engines/unity/tutorials/elevator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elevator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../engines/unity/tutorials/car/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Car
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../engines/unity/tutorials/shrine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shrine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2038,148 +2212,151 @@
 
 
 <h1 id="shader-library-overview">🧱 Shader Library Overview</h1>
-<p>Welcome to the <strong>Shader Library</strong>, a central hub for exploring all procedural shaders in this project.</p>
-<p><strong>🔍 Each shader includes:</strong></p>
-<ul>
-<li>📜 A brief description and visual preview  </li>
-<li>🧠 Algorithm or math explanation  </li>
-<li>💻 Source code with syntax highlighting  </li>
-<li>🖼️ Results and demo screenshots or videos  </li>
-</ul>
-<!-- - 🎛️ Customization parameters  -->
+<p>Welcome to the <strong>Shader Library</strong> — a central hub for exploring all procedural shaders used in this project.</p>
+<p>Each shader includes:
+- 📜 A brief description and visual preview<br />
+- 🧠 Algorithm or math explanation<br />
+- 💻 Source code with syntax highlighting<br />
+- 🖼️ Screenshots or demo videos  </p>
+<!-- - 🎛️ Customizable parameters -->
 
 <hr />
-<h2 id="shader-categories">📂 Shader Categories</h2>
-<h3 id="general-structure">🔭 General Structure</h3>
-<p>General structure of the shaders logic</p>
+<h2 id="shader-categories">📚 Shader Categories</h2>
+<h3 id="general-structure">🧩 General Structure</h3>
+<p>Foundational logic and architecture of the shader system.</p>
 <ul>
 <li><a href="../general_structure/">General Structure</a></li>
 </ul>
-<h3 id="signed-distance-field-sdf-system-shader">Signed Distance Field (SDF) System Shader</h3>
-<p>This documentation covers the Signed Distance Field (SDF) module used in the GLSL shader.</p>
+<h3 id="core-shader-systems">✳️ Core Shader Systems</h3>
+<h4 id="signed-distance-field-sdf">🔷 Signed Distance Field (SDF)</h4>
+<p>Distance-based geometry representation used in raymarching.</p>
 <ul>
 <li><a href="../geometry/SDF_Shader/">SDF System</a></li>
 </ul>
-<h3 id="lighting-and-material-system-shader">Lighting and Material System Shader</h3>
-<p>This documentation covers the Phong-based lighting model and material system used in the GLSL.</p>
+<h4 id="lighting-material-system">💡 Lighting &amp; Material System</h4>
+<p>Phong-based lighting and material representation in GLSL.</p>
 <ul>
-<li><a href="../lighting/Lighting_and_Material_System/">Lighting &amp; Material System</a></li>
+<li><a href="../lighting/Lighting_and_Material_System/">Lighting &amp; Material</a></li>
 </ul>
-<h3 id="animation-system-shader">Animation System Shader</h3>
-<p>This documentation covers the Animation module used in the GLSL shader.</p>
+<h4 id="animation-system">🕹️ Animation System</h4>
+<p>How shaders handle time-based movement and transformation.</p>
 <ul>
 <li><a href="../animation/Animation_System/">Animation System</a></li>
 </ul>
-<h3 id="noise-system-shader">Noise System Shader</h3>
-<p>The noise system in this shader provides procedural pattern generation for textures, terrain, and effects.</p>
+<h4 id="noise-system">🌐 Noise System</h4>
+<p>Procedural noise generation for textures, terrain, and effects.</p>
 <ul>
 <li><a href="../noise/Noise_System/">Noise System</a></li>
 </ul>
-<h3 id="animation-shaders">🌀 Animation Shaders</h3>
-<p>Shaders that control movement over time, often using sine/cosine functions or time-based interpolation.</p>
+<hr />
+<h3 id="animation-shaders">🎞️ Animation Shaders</h3>
+<p>Time-based visual motion using trigonometry, noise, or interpolation.</p>
 <ul>
 <li><a href="../animation/tie_fighter/">TIE Fighter</a></li>
-<li><a href="../animation/calcLookAtMatrix/">Camera Orientation Setup Shader</a></li>
+<li><a href="../animation/calcLookAtMatrix/">Camera Orientation</a></li>
 <li><a href="../animation/sdf_animation_shader/">SDF Animation</a></li>
 <li><a href="../animation/Camera_Anim/">Camera Animation</a></li>
 </ul>
+<hr />
 <h3 id="noise-shaders">☁️ Noise Shaders</h3>
-<p>Procedural textures using hash-based value, gradient, and fractal noise.<br />
-Grouped by functional type for clarity:</p>
-<h4 id="core-modules">Core Modules</h4>
-<p>Unified entry point and hash support.</p>
+<p>Modular procedural noise grouped by type and use-case.</p>
+<h4 id="core-modules">📦 Core Modules</h4>
 <ul>
-<li><a href="../noise/noise/">noise.glsl</a> — Main include file, collects all noise types  </li>
-<li><a href="../noise/hash/">hash.glsl</a> — Random number and hash utilities</li>
+<li><a href="../noise/noise/">noise.glsl</a> — Aggregates all noise types  </li>
+<li><a href="../noise/hash/">hash.glsl</a> — Hashing and pseudo-random tools  </li>
 </ul>
-<h4 id="classic-noise">Classic Noise</h4>
-<p>Basic, smooth procedural noise generators.</p>
+<h4 id="classic-noise">🌊 Classic Noise</h4>
 <ul>
-<li><a href="../noise/1d_noise/">1D_noise.glsl</a> — 1D interpolated value noise  </li>
-<li><a href="../noise/2d_noise/">2D_noise.glsl</a> — 2D grid-based value noise  </li>
-<li><a href="../noise/3d_perlin_noise/">3D_Perlin_noise.glsl</a> — Classic 3D gradient noise  </li>
-<li><a href="../noise/simplex_noise/">simplex_noise.glsl</a> — Fast, low-artifact simplex noise</li>
+<li><a href="../noise/1d_noise/">1D Noise</a>  </li>
+<li><a href="../noise/2d_noise/">2D Noise</a>  </li>
+<li><a href="../noise/3d_perlin_noise/">3D Perlin Noise</a>  </li>
+<li><a href="../noise/simplex_noise/">Simplex Noise</a>  </li>
 </ul>
-<h4 id="utility-noise">Utility Noise</h4>
-<p>Variants and helpers used for animation or visual variation.</p>
+<h4 id="utility-noise">⚙️ Utility Noise</h4>
 <ul>
-<li><a href="../noise/3d_noise/">3D_noise.glsl</a> — Time-varying pseudo 3D gradient noise  </li>
-<li><a href="../noise/grayScale_noise/">grayScale_noise.glsl</a> — Grayscale noise helper</li>
+<li><a href="../noise/3d_noise/">3D Noise (time varying)</a>  </li>
+<li><a href="../noise/grayScale_noise/">Grayscale Helper</a>  </li>
 </ul>
-<h4 id="spatial-noise">Spatial Noise</h4>
-<p>Noise patterns structured around space and proximity.</p>
+<h4 id="spatial-noise">🧭 Spatial Noise</h4>
 <ul>
-<li><a href="../noise/cell_noise/">cell_noise.glsl</a> — 2D Voronoi cell structure with jitter</li>
+<li><a href="../noise/cell_noise/">Cell Noise</a> — Voronoi-style patterning  </li>
 </ul>
-<h4 id="fractal-noise">Fractal Noise</h4>
-<p>Multi-octave patterns for natural surfaces.</p>
+<h4 id="fractal-noise">🌱 Fractal Noise</h4>
 <ul>
-<li><a href="../noise/fbm/">fbm.glsl</a> — Fractal Brownian Motion</li>
+<li><a href="../noise/fbm/">FBM</a> — Fractal Brownian Motion  </li>
 </ul>
-<h4 id="noise-based-effects">Noise-based Effects</h4>
-<p>Visual effects built using the above noise modules.</p>
+<h4 id="effects-using-noise">🔥 Effects Using Noise</h4>
 <ul>
-<li><a href="../noise/stylized_glow/">stylized_glow_and_star_shape.glsl</a> — Stylized star shape and bloom  </li>
-<li><a href="../noise/tie_fighter_noise/">TIE Fighter_noise.glsl</a> — Procedural engine trail + noise shading</li>
+<li><a href="../noise/stylized_glow/">Stylized Glow &amp; Star</a>  </li>
+<li><a href="../noise/tie_fighter_noise/">TIE Fighter Trail</a>  </li>
 </ul>
-<h3 id="geometry-shaders">🔷 Geometry Shaders</h3>
-<p>Shaders that generate or modify geometry procedurally.</p>
+<hr />
+<h3 id="geometry-shaders">🧱 Geometry Shaders</h3>
+<p>Procedural geometry generation and raymarching techniques.</p>
 <ul>
+<li><a href="../geometry/Geometry_SDFs/">Geometry SDFs</a></li>
 <li><a href="../geometry/raymarching_sdf/">SDF Raymarching</a></li>
 <li><a href="../geometry/SDF_Sphere/">SDF Sphere</a></li>
 <li><a href="../geometry/SDF_Square/">SDF Square</a></li>
 <li><a href="../geometry/SDF_Rock/">SDF Rock</a></li>
 <li><a href="../geometry/SDF_Cactus/">SDF Cactus</a></li>
 </ul>
-<h3 id="material-shaders">🧱 Material Shaders</h3>
-<p>Define the visual appearance of surfaces by specifying physical or stylized material properties such as color, roughness, metallicity, and transparency. Used alongside lighting models to produce realistic or artistic effect.</p>
+<hr />
+<h3 id="material-shaders">🎨 Material Shaders</h3>
+<p>Visual properties for stylized or physical material rendering.</p>
 <ul>
 <li><a href="../material/material_system/">Material System</a></li>
-<li><a href="../material/volume_material_system/">Volume Material System</a></li>
+<li><a href="../material/volume_material_system/">Volume Materials</a></li>
 </ul>
+<hr />
 <h3 id="lighting-shaders">💡 Lighting Shaders</h3>
-<p>Compute surface lighting effects including diffuse, specular, rim, and reflection. Often used in combination with geometry to produce realism or stylized appearances.</p>
+<p>Surface illumination techniques including specular, rim, and volume lighting.</p>
 <ul>
-<li><a href="../lighting/Rim_lighting_and_reflection/">Rim Reflection Lighting</a></li>
+<li><a href="../lighting/Rim_lighting_and_reflection/">Rim &amp; Reflection</a></li>
 <li><a href="../lighting/lighting_functions/">Lighting Functions</a></li>
 <li><a href="../lighting/lighting_context/">Lighting Context</a></li>
 <li><a href="../lighting/volume_lighting_functions/">Volume Lighting Functions</a></li>
 <li><a href="../lighting/volume_lighting_context/">Volume Lighting Context</a></li>
 <li><a href="../lighting/Sunrise/">Sunrise</a></li>
 </ul>
-<h3 id="rendering-shaders">Rendering Shaders</h3>
+<hr />
+<h3 id="rendering-shaders">🖥️ Rendering Shaders</h3>
+<p>Ray-based rendering algorithms and intersection methods.</p>
 <ul>
-<li><a href="../rendering/Ray_Marching/">Ray_Marching</a></li>
+<li><a href="../rendering/Ray_Marching/">Ray Marching</a></li>
 <li><a href="../rendering/Sphere_Intersection_Function/">Sphere Intersection</a></li>
 <li><a href="../rendering/VolumetricRayMarch/">Volumetric Ray Marching</a></li>
-<li><a href="../rendering/Heightfield_Ray_Intersection/">Heightfield Ray Intersection</a></li>
+<li><a href="../rendering/Heightfield_Ray_Intersection/">Heightfield Intersection</a></li>
 <li><a href="../rendering/Oriented_Box_Intersection/">Oriented Box Intersection</a></li>
 <li><a href="../rendering/Surface_Normal_Estimation/">Surface Normal Estimation</a></li>
 <li><a href="../rendering/Tetrahedral_adaptive_SDF_normal_estimation/">Advanced Normal Estimation</a></li>
 </ul>
-<h3 id="scenes-shaders">🔷 Scenes Shaders</h3>
-<p>Shaders that render complete background or environmental elements such as sky, sun, clouds, or horizon effects. These shaders are not limited to lighting or material computation but instead define the overall visual atmosphere of a scene.</p>
+<hr />
+<h3 id="scene-shaders">🌄 Scene Shaders</h3>
+<p>Complete visuals for environments, sky, terrain, or effects.</p>
 <ul>
-<li><a href="../scenes/SunAndHalo/">Sun And Halo</a></li>
+<li><a href="../scenes/SunAndHalo/">Sun &amp; Halo</a></li>
 <li><a href="../scenes/Cloud_fbm/">Volumetric FBM Cloud</a></li>
 <li><a href="../scenes/water_surface/">Water Surface</a></li>
-<li><a href="../scenes/boat_flag/">Boat And Flag</a></li>
+<li><a href="../scenes/boat_flag/">Boat &amp; Flag</a></li>
 <li><a href="../scenes/cloud_volume/">Cloud Volume</a></li>
-<li><a href="../scenes/cloud_ground/">Cloud And Ground</a></li>
-<li><a href="../scenes/cloud_water/">Cloud And Water</a></li>
-<li><a href="../scenes/terrain_castle/">Terrain And Castle</a></li>
+<li><a href="../scenes/cloud_ground/">Cloud &amp; Ground</a></li>
+<li><a href="../scenes/cloud_water/">Cloud &amp; Water</a></li>
+<li><a href="../scenes/terrain_castle/">Terrain &amp; Castle</a></li>
 <li><a href="../scenes/dolphin/">Dolphin</a></li>
+<li><a href="../scenes/desert/">Desert</a></li>
+<li><a href="../scenes/Snowy_Mountain/">Snowy Mountain</a></li>
 </ul>
 <hr />
-<p><strong>📘 How to Read a Shader Page</strong></p>
-<p>Every shader entry follows the same layout:</p>
+<h2 id="reading-a-shader-page">📘 Reading a Shader Page</h2>
+<p>Every shader page follows a consistent format:</p>
 <ul>
-<li><strong>Overview</strong> — What it is, what it does  </li>
-<li><strong>Algorithm</strong> — Description of logic and flow  </li>
-<li><strong>Code</strong> — Full GLSL/HLSL implementation  </li>
-<li><strong>Results</strong> — Previews, GIFs, or videos  </li>
+<li><strong>Overview</strong> — Summary and purpose  </li>
+<li><strong>Algorithm</strong> — Core logic and math involved  </li>
+<li><strong>Code</strong> — Full source with highlights  </li>
+<li><strong>Results</strong> — Screenshots or visual demos  </li>
 </ul>
-<!-- - **Parameters** — Inputs you can change  -->
+<!-- - **Parameters** — Optional customization inputs -->
 
 <hr />
 
