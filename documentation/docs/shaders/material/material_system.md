@@ -16,7 +16,6 @@
 ### 🔷 Core Concept
 This system organizes material appearance using a three-part module:
 
----
 ### 1. `MaterialParams` Struct
 Defines a data structure storing surface reflectance info (diffuse, specular, roughness, etc.)
 #### 🎛️ Parameters
@@ -67,7 +66,7 @@ Usage: `#include "materials/material/material_params.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/material_params.glsl)
 
----
+
 ### 2. Material Presets
 Defines helper functions to generate common materials like glass, plastic, metal, toon, etc.
 #### 🔧 Functions
@@ -196,7 +195,7 @@ Usage: `#include "materials/material/material_presets.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/material_presets.glsl)
 
----
+
 ### 3. Material Library
 This module maps int IDs to material presets, useful for assigning materials to objects using hit-ID or tag logic in SDF raymarching.
 
