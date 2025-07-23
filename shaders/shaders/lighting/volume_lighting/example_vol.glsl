@@ -1,3 +1,19 @@
+/*
+ * Example Shader: Volumetric Clouds with Cloud Shadow and Ground Lighting
+ *
+ * Author: Xuetong Fu
+ * Source:
+ *   - Adapted and modularized volumetric cloud rendering techniques from "Clouds" by Inigo Quilez (https://www.shadertoy.com/view/XslGRr)
+ *   - Lighting and material framework adapted from modular shader system
+ *
+ * Description:
+ *   This example renders a complete scene with the following key features:
+ *     - FBM-based volumetric cloud rendering using simplex noise
+ *     - Light scattering and cloud shadowing via density-driven occlusion
+ *     - Raymarched ground shading with ambient + Phong highlights
+ *     - Mouse-controlled fly camera through atmospheric layers
+ */
+
 // === CONFIGURATION ===
 const float planetRadius = 6360.0;
 const float atmosphereTop = 6420.0;
