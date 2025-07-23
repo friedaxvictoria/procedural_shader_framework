@@ -55,7 +55,7 @@ if you want to put small code snippet
 #### Engine Integrations
 
 <div class="button-row">
-  <a class="md-button" href="../../engines/unreal/lighting/PhongLighting.md">Unreal</a>
+  <a class="md-button" href="../../../engines/unreal/lighting/PhongLighting">Unreal</a>
 </div>
 
 ### 2. Blinn-phong
@@ -149,7 +149,7 @@ vec3 applyPBRLighting(LightingContext ctx, MaterialParams mat) {
 #### Engine Integrations
 
 <div class="button-row">
-  <a class="md-button" href="../../../../engines/unreal/lighting/PBRLighting">Unreal</a>
+  <a class="md-button" href="../../../engines/unreal/lighting/PBRLighting">Unreal</a>
 </div>
 
 ### 5. Rim Lighting
@@ -191,7 +191,7 @@ vec3 computeFakeSpecular(LightingContext ctx, MaterialParams mat) {
 #### Engine Integrations
 
 <div class="button-row">
-  <a class="md-button" href="../../../../engines/unreal/lighting/fakeSpecular">Unreal</a>
+  <a class="md-button" href="../../../engines/unreal/lighting/fakeSpecular">Unreal</a>
 </div>
 
 ---
