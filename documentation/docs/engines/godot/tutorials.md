@@ -1,5 +1,8 @@
-# SDF Scene Tutorial
 
+<div class="container">
+    <h1 class="main-heading">SDF Scene Tutorial</h1>
+    <blockquote class="author">by Jeewan Dhamala & Mona Elbatran</blockquote>
+</div>
 This tutorial is designed to illustrate the workflow of Godot's integration of the SDF framework. It showcases how user can get different SDFs scene while changing only one script file i.e. `includes/sdg_updated.gd`. 
 
 ## Scene 1: Desert Mining Cart
