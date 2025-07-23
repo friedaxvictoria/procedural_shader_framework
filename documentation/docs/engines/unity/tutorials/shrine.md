@@ -57,6 +57,8 @@ addTorus_float(index, float3(0, 2, 0), 1.0, 0.25, float3(0, 1, 0), 0,
 ### 4. Orbiting Spheres Around Torus
 
 ```hlsl
+
+[unroll(6)]
 for (int i = 0; i < 6; ++i)
 {
     float angle = i * 3.14159 * 2.0 / 6.0;
