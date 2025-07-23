@@ -11,11 +11,10 @@ This function applies simple Lambertian diffuse lighting with a fixed light sour
 
 ## The Code
 ```hlsl
-void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightPosition, out float3 lightingColor)
+void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightPosition, float3 lightColor, out float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
     float3 ambientColor = float3(0.05, 0.05, 0.05);
 
     float diffuseValue = max(dot(normal, lightDirection), 0.0);
@@ -36,6 +35,7 @@ void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightP
 | `hitPosition`   | float4   | World position of the surface hit; the w-component may be ignored |
 | `normal`        | float3   | Surface normal at the hit point |
 | `lightPosition` | float3   | World-space position of the directional light source |
+| `lightColor` | float3   | Color of the light  <br> <blockquote>*ShaderGraph default value*: float3(1,1,1)</blockquote>|
 
 The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).
 

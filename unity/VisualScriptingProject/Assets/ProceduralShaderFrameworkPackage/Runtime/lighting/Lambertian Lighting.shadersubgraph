@@ -11,6 +11,9 @@
         },
         {
             "m_Id": "151149d44ba845c195acf750c1d8c944"
+        },
+        {
+            "m_Id": "1bc2a4b7c74f4881b1d3754ea31c2e1f"
         }
     ],
     "m_Keywords": [],
@@ -35,11 +38,28 @@
         },
         {
             "m_Id": "c6e2d18bd5b048e19a6a1c64dbaa563e"
+        },
+        {
+            "m_Id": "35f12957decc4501979f0c3e6871765b"
         }
     ],
     "m_GroupDatas": [],
     "m_StickyNoteDatas": [],
     "m_Edges": [
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "35f12957decc4501979f0c3e6871765b"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "abd80333214742048f68d9dc13469757"
+                },
+                "m_SlotId": 4
+            }
+        },
         {
             "m_OutputSlot": {
                 "m_Node": {
@@ -152,6 +172,29 @@
 }
 
 {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "0cd1683ec4b9432e94321d852b3dd6c1",
+    "m_Id": 4,
+    "m_DisplayName": "lightColor",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "lightColor",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Vector4ShaderProperty",
     "m_ObjectId": "151149d44ba845c195acf750c1d8c944",
@@ -175,6 +218,34 @@
         "x": 0.0,
         "y": 0.0,
         "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector3ShaderProperty",
+    "m_ObjectId": "1bc2a4b7c74f4881b1d3754ea31c2e1f",
+    "m_Guid": {
+        "m_GuidSerialized": "7ddb5581-0e85-4142-a0de-27ae8775e998"
+    },
+    "m_Name": "lightColor",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "lightColor",
+    "m_DefaultReferenceName": "_lightColor",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
         "w": 0.0
     }
 }
@@ -238,6 +309,42 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "35f12957decc4501979f0c3e6871765b",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -639.0,
+            "y": 61.0,
+            "width": 127.5,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "b2698bdbdce048f9b46e33a21fc134ad"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "1bc2a4b7c74f4881b1d3754ea31c2e1f"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "664e5d1c8c99490694420b451e7ee6f6",
     "m_Name": "",
@@ -250,6 +357,9 @@
         },
         {
             "m_Id": "e826a7791ea94f24ae2fec8a95f0f7a8"
+        },
+        {
+            "m_Id": "1bc2a4b7c74f4881b1d3754ea31c2e1f"
         }
     ]
 }
@@ -409,9 +519,6 @@
     },
     "m_Slots": [
         {
-            "m_Id": "e3192e52a5fc49a099f61d854f9630cc"
-        },
-        {
             "m_Id": "c078ea866c904841a7545059be7981ac"
         },
         {
@@ -419,6 +526,12 @@
         },
         {
             "m_Id": "097889a00f4e4eb1896160f8c3ef0795"
+        },
+        {
+            "m_Id": "0cd1683ec4b9432e94321d852b3dd6c1"
+        },
+        {
+            "m_Id": "e3192e52a5fc49a099f61d854f9630cc"
         }
     ],
     "synonyms": [
@@ -436,6 +549,29 @@
     "m_FunctionName": "applyLambertLighting",
     "m_FunctionSource": "24cda223aa6b9d84f9c9b6ed3dcafc9a",
     "m_FunctionBody": "Enter function body here..."
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "b2698bdbdce048f9b46e33a21fc134ad",
+    "m_Id": 0,
+    "m_DisplayName": "lightColor",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
 }
 
 {

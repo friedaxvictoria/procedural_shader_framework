@@ -149,11 +149,10 @@ void pointLight_float(float4 hitPosition, float3 normal, int hitIndex, float3 ra
     lightingColor = ambientColor + diffuseColor + specularColor;
 }
 
-void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightPosition, out float3 lightingColor)
+void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightPosition, float3 lightColor, out float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
     float3 lightDirection = normalize(lightPosition - hitPosition.xyz);
-    float3 lightColor = float3(1.0, 1.0, 1.0);
     float3 ambientColor = float3(0.05, 0.05, 0.05);
 
     float diffuseValue = max(dot(normal, lightDirection), 0.0);

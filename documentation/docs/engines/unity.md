@@ -90,7 +90,7 @@ To easily include the integration of the framework into any Unity project, it is
             ![Unity Overview: Set Material Up As Fullscreen](unity/images/overview/setFullScreen.png){ width="400" }
         </figure>
 
-9. Integrate the [Uniforms](unity/uniformsAndCs.md) and start composing a custom shader.
+9. Start composing a custom shader.
 
 ---
 
@@ -109,17 +109,30 @@ To simplify some initial setups, nodes come with default parameters. For each de
 
 ## Standard Scipting
 
-Due to the requirement of noting the precision in ShaderGraph, all functions that were implemented as nodes for Visual Scripting are appended with an **_float**. 
+Due to the requirement of noting the precision in ShaderGraph, all functions that were implemented as nodes for the Visual Scripting are appended with an **_float**. 
 
-> Note that all other helper functions (e.g. [Helper Functions](unity/helperFunctions.md)) can still be called in ShaderLab and do not have the appendix.
+> All other helper functions (e.g. [Helper Functions](unity/helperFunctions.md)) can still be called in ShaderLab and do not have the appendix.
 
-In standard scripting, after including the appropriate libraries, users can directly call the functions within their ShaderLab shader files, typically in the fragment shader. This approach is better suited for those who prefer coding over using Shader Graph, and it becomes especially advantageous as the scene complexity increases, offering more control and clarity compared to a node-based setup.
+In Standard Scripting, after including the appropriate libraries, users can directly call the functions within their ShaderLab shader files, typically in the fragment shader. This approach is better suited for those who prefer coding over using ShaderGraph, and it becomes especially advantageous as the scene complexity increases, offering more control and clarity compared to a node-based setup.
 
 ---
+
+## User Shaders
 
 Find the [Tutorials](unity/tutorials/christmasTree.md) to discover in-depth explanations on how to construct custom procedural shaders in Unity and to better understand the relations between functions.
 
 Once the UPM has been installed: 
-    - All the user shaders can be found in their respective folders at `Packages/com.tudresden.proceduralshaderframeworkpackage/Samples~`.
+
+- The full implementation of Unity's integration can be found at: 
     
-    - The full implementation of Unity's integration can be found at `Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts`.
+    `Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts`
+
+- To get access to one of the samples, they need to be downloaded. For that, navigate to the UPM in the Package Manager. Locate the Samples-tab and download the desired one. 
+
+    <figure markdown="span">
+        ![Unity Overview: UPM Samples](unity/images/overview/UPMSamples.png){ width="400" }
+    </figure>
+
+    Once downloaded, the sample can be found at: 
+    
+    `Packages/com.tudresden.proceduralshaderframeworkpackage/Samples~`

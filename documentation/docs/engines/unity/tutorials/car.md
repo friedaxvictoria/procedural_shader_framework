@@ -132,14 +132,14 @@ return float4(colorOut, 1);
 
 The final animated car moves back and forth, featuring stylized wheels, body, lights, and a toon-shaded finish.
     <figure markdown="span">
-    ![Unity Elevator](../images/userShaders/car.gif){ width="900" }
+    ![Unity Car](../images/userShaders/car.gif){ width="900" }
     </figure>
 
 
 ## The Whole Code
-??? "Elevator User Shader"
+??? "Car User Shader"
     ```hlsl
-    Shader "Custom/Elevator"
+    Shader "Custom/Car"
     {
         Properties
         {

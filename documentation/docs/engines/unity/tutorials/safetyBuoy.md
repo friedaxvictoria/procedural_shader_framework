@@ -3,13 +3,13 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This tutorial is designed to illustrate the workflow of Unity's integration of the framework. It showcases relevant connections between functions and gives examplary usecases for them. 
+This tutorial is designed to illustrate the workflow of Unity's integration of the framework. It showcases relevant connections between functions and gives examplary use-cases for them. 
 
 The tutorial goes step-by-step through the creation of a scene containing the **ocean on which a safety buoy is floating**. In the **foreground a dolphin swims by** and the sky is illuminated by the **setting sun**.
 
 > To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
 
-Once the UPM ist installed, find the shader with a corresponding scene at `Packages/com.tudresden.proceduralshaderframeworkpackage/Samples~/Safety Buoy`.
+Once the UPM ist installed, this example can be [downloaded](../../unity.md#user-shaders).
 
 ---
 
@@ -110,13 +110,12 @@ Once the UPM ist installed, find the shader with a corresponding scene at `Packa
         ![Unity Safety Buoy: Minimum](../images/safetyBuoy/sbMinimum.png){ width="500" }
     </figure>
 
-13. To enable custom rotation within the scene, add [Rotate Via Mouse](../camera/mouseBasedMovement.md). 
-14. Add [Camera Matrix](../camera/cameraMatrix.md) and input the matrix from the previous function. Plug the resulting camera matrix into the inputs of the water surface and raymarching functions. By left-clicking the mouse, the scene can know be rotated. 
+13. To enable custom rotation within the scene, add [Rotate Via Mouse](../camera/mouseBasedMovement.md). Plug the resulting matrix into the inputs of the water surface and raymarching functions. By left-clicking the mouse, the scene can know be rotated. 
 
-    To move within the scene, enable the *Allow Movement* option in the prefab's inspector. Read more about it in [Uniforms and C#](../uniformsAndCs.md).
+    > To move within the scene, enable the *Allow Movement* option in the prefab's inspector. Read more about it in [Uniforms and C#](../uniformsAndCs.md).
 
     <figure markdown="span">
-        ![Unity Safety Buoy: Camera Movement](../images/safetyBuoy/sbCameraMatrix.png){ width="500" }
+        ![Unity Safety Buoy: Camera Movement](../images/safetyBuoy/sbCameraMatrix.png){ width="400" }
     </figure>
 
 ---

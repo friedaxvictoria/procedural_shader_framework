@@ -63,4 +63,4 @@ Examplary matrices that can be used as input to this function are [Camera Rotati
 
 ---
 
-Find the original shader code [here](../../../shaders/animation/Camera_Anim.md).
+Find the original shader code [here](../../../shaders/animation/Camera_Anim.md). It was expanded to allow the combination of multiple camera animations.

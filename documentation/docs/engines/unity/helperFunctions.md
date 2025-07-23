@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This sections gives an overview of the universal helper functions used across Unity's integration. Within the ShaderGraph implementation they are not exposed and solely used to implement the custom nodes. However, if the standard scripting with ShaderLab is used, they can be accessed and used for custom computations.
+This sections gives an overview of the universal helper functions used across Unity's integration. Within the ShaderGraph implementation they are not exposed and solely used to implement the custom nodes. However, if the Standard Scripting with ShaderLab is used, they can be accessed and used for custom computations.
 
 ---
 
@@ -27,7 +27,7 @@ float3x3 computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)
 | Name | Type     | Description |
 |-----------------------|----------|-------------|
 | `lookAtPosition` <img width=50/>| float3   | Focal point of the camera |
-| `eye`        | float3   | Position of the camera - It is generally recommended to use the global variable **_rayOrigin** for this computations |
+| `eye`        | float3   | Position of the camera - It is generally recommended to use the global variable **_rayOrigin** for this computation |
 | `mat`            | float3x3   | Transformation matrix |
 
 ### Outputs:

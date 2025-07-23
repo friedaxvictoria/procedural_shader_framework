@@ -1,9 +1,9 @@
 <div class="container">
-    <h1 class="main-heading">SDF Hexagonal Prism</h1>
-    <blockquote class="author">by Maximilian Lipski</blockquote>
+    <h1 class="main-heading">SDF Hexprism</h1>
+    <blockquote class="author">by Runtong Li</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based hexagonal prism. In order for the prism to be visible in the final output, [SDF Raymarching](...) and an arbitrary lighting function has to be included. 
+This function creates an internal instance of an SDF-based Hexprism. In order for the object to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
 For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
 
@@ -12,23 +12,30 @@ For further information of the implementations of SDFs in Unreal Engine refer to
 ## The Code
 
 ``` hlsl
-float sdHexPrism(float3 position, float2 height)
+float sdHexPrism(float3 p, float2 height)
 {
     const float3 k = float3(-0.8660254, 0.5, 0.57735);
-    position = abs(position);
-    position.xy -= 2.0 * min(dot(k.xy, position.xy), 0.0) * k.xy;
+    p = abs(p);
+    p.xy -= 2.0 * min(dot(k.xy, p.xy), 0.0) * k.xy;
     float2 d = float2(
-       length(position.xy - float2(clamp(position.x, -k.z * height.x, k.z * height.x), height.x)) * sign(position.y - height.x),
-       position.z - height.y);
+       length(p.xy - float2(clamp(p.x, -k.z * height.x, k.z * height.x), height.x)) * sign(p.y - height.x),
+       p.z - height.y);
     return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
 }
 
-void addHexPrism_float(int index, float3 position, float height, float3 axis, float angle, float3 baseColor, float3 specularColor, float specularStrength,
-float shininess, float noise, out int indexOut)
+void addHexPrism(inout int index, float3 position, float height, float3 axis, float angle, MaterialParams material)
 {
-    addSDF(index, 4, position, float3(0.0, 0.0, 0.0), height, axis, angle, noise, baseColor, specularColor, specularStrength, shininess, 0, 0);
-    indexOut = index + 1;
+    SDF newSDF;
+    newSDF.type = 3;
+    newSDF.position = position;
+    newSDF.radius = height;
+    newSDF.size = float3(0.0, 0.0, 0.0);
+    newSDF.rotation = computeRotationMatrix(normalize(axis), angle * PI / 180);
+    newSDF.material = material;
+    
+    addSDF(index, newSDF);
 }
+
 ```
 
 ---
@@ -36,26 +43,17 @@ float shininess, float noise, out int indexOut)
 ## The Parameters
 
 ### Inputs:
-- ```float index```: The index at which the hexagonal prism is stored 
-- ```float3 position```: The central position of the hexagonal prism
-- ```float height```: The height of the hexagonal prism
-> *ShaderGraph default value*: ```1```
-- ```float3 axis```: The axis determining the orientation of the hexagonal prism
-> *ShaderGraph default value*: ```float3(0,1,0)```
-- ```float angle```: The angle around the axis 
-- Material parameters
-    - ```float3 baseColor```: The underlying color of the hexagonal prism
-    > *ShaderGraph default value*: ```float3(0,1,0)```
-    - ```float3 specularColor```: The color of the highlights
-    - ```float3 specularStrength```: The intensity with which highlights are created
-    > *ShaderGraph default value*: ```1```
-    - ```float3 shininess```: The shape and sharpness of the highlights; the larger the value, the more focussed the highlight
-    > *ShaderGraph default value*: ```32```
-- ```float3 noise```: Noise that is added to the shape of the hexagonal prism
-
-
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
+| `index`        | int   | The index at which this object is stored <br> <blockquote> *Visual Scripting default value*: 1 </blockquote>|
+| `position`        | float3   | The central position of this object |
+| `height`        | float   | Height of this object | 
+| `axis`        | float3   | The axis determining the orientation of the object <br> <blockquote> *Visual Scripting default value*: float3(0, 0, 1) </blockquote> |
+| `angle`        | float   | The angle around the axis |
+| `material` | MaterialParams | The material which the SDF is rendered with |
+    
 ### Outputs:
-- ```float indexOut```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [SDF Raymarching](...).  
+- ```int index```: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the [RaymarchAll](raymarchAll.md).  
 
 ---
 
@@ -64,10 +62,17 @@ float shininess, float noise, out int indexOut)
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddHexPrism`
 
-    ![Unity Mouse-Based Camera Rotation](){ width="300" }
+<figure markdown="span">
+    ![Unreal hexprism](../images/sdfs/Hexprism.png){ width="300" }
+</figure>
 
 === "Standard Scripting"
-    Include ...
+    Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```
+
+    Example Usage
+    ```hlsl
+    addHexPrism(index, Position, Height, axis, angle, mat);
+    ```
 
 ---
 

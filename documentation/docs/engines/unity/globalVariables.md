@@ -3,11 +3,11 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-The global variables are an essential part of the integration in Unity. They are defined in a separate file and included in all hlsl-files that require them. They can easily distinguished by their signature underscore **_variableName**.
+The global variables are an essential part of the integration in Unity. They are defined in a separate file and included in all hlsl-files that require them. They can easily be distinguished by their signature underscore **_variableName**.
 
 The global variables define the maximum amount of SDFs that can be added to a single shader to be **20**. Read more about this setup in the [SDF General Information](sdfs/generalInformation.md). 
 
-Additionally, the hit-index for the water surface is defined to be the first available index after the SDF indices. More environments can be added by incrementing the water's index for each added environment and increasing the material array's size by the amount of added environments. Read more about the importance of the hit-indices in [Lighting General Information](lighting/generalInformation.md).
+Additionally, the hit-index for the water surface is defined to be the first available index after the SDFs' indices. *MAX_OBJECTS* may be used to access this index. More environments can be added by incrementing the water's index for each added environment and increasing the material array's size by the amount of added environments. Read more about the importance of the hit-indices in [Lighting General Information](lighting/generalInformation.md).
 
 ---
 
@@ -15,8 +15,6 @@ Additionally, the hit-index for the water surface is defined to be the first ava
 
 ``` hlsl
 #define MAX_OBJECTS 20
-//water index is the first value possible after the object indices
-#define WATER_INDEX 20
 
 //uniforms
 extern float2 _mousePoint;

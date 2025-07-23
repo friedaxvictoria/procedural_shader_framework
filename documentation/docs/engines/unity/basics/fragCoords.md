@@ -94,4 +94,4 @@ The required scaling-values depend on the object's extent as well as Unity's cam
 
 ---
 
-This is an engine-specific implementation without a shader-basis.
+This is an engine-specific implementation without a shader-basis. It was created as a reusuable, felxible function for the computation of fragment coordinates which is often used in the [Shader Library](../../../shaders/general_structure.md).

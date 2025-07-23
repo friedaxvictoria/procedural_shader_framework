@@ -25,7 +25,7 @@ void combinedColor_float(float4 hitPosition1, float3 color1, float4 hitPosition2
 }
 ```
 
-The edgecase, that for a fragment both inputs did not yield a hit, is checked for first. In such a case, the color is set to black. Thus, **removing any effects lighting might have** on those fragments.
+The edgecase, that for a fragment both inputs did not yield a hit, is checked for first. In such a case, the color is set to black, thus, **removing any effects lighting might have** on those fragments.
 
 ---
 
@@ -66,4 +66,4 @@ The edgecase, that for a fragment both inputs did not yield a hit, is checked fo
 
 ---
 
-This is an engine-specific implementation without a shader-basis.
+This is an engine-specific implementation without a shader-basis. It was created to allow for the combination of shader-library-code.

@@ -73,4 +73,4 @@ The outputs can be used for further computations using lighting functions (e.g. 
     ```
 ---
 
-This is an engine-specific implementation without a shader-basis.
+This is an engine-specific implementation without a shader-basis. It was created to allow for the combination of shader-library-code.
