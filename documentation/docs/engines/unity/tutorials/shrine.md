@@ -5,6 +5,10 @@
 
 This tutorial builds a magical shrine. The scene features a mystical floating torus, orbiting spheres, hovering octahedrons, tall prism pillars, animated ellipsoid "eggs," and even a glowing dolphin spirit.
 
+> This tutorial is for standard scripting only.
+
+Once the UPM ist installed, this example can be [downloaded](../../unity.md#user-shaders).
+
 ---
 
 ## Step-by-Step

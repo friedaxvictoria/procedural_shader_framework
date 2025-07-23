@@ -7,7 +7,7 @@ This tutorial is designed to illustrate the workflow of Unity's integration of t
 
 The tutorial goes step-by-step through the creation of a scene containing the **ocean on which a safety buoy is floating**. In the **foreground a dolphin swims by** and the sky is illuminated by the **setting sun**.
 
-> To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
+> This tutorial is for visual scripting only. To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
 
 Once the UPM ist installed, this example can be [downloaded](../../unity.md#user-shaders).
 
