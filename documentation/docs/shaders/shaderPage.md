@@ -140,6 +140,7 @@ Complete visuals for environments, sky, terrain, or effects.
 - [Dolphin](scenes/dolphin.md)
 - [Desert](scenes/desert.md)
 - [Snowy Mountain](scenes/Snowy_Mountain.md)
+- [TIE_Fighter](scenes/tie_fighter.md)
 
 ---
 
