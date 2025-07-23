@@ -192,6 +192,7 @@ nav:
         - Fresnel Lighting: engines/unreal/lighting/fresnelLight.md
         - UV Gradient Lighting: engines/unreal/lighting/uvGradientLight.md
         - UV Anisotropic Lighting: engines/unreal/lighting/uvAnisotropicLight.md
+    - Custom SDFs: engines/unreal/custom_sdfs/custom_sdfs.md
     - Tutorials:
       - Christmas Tree: engines/unreal/tutorials/christmasTree.md
       - Christmas Tree - HLSL: engines/unreal/tutorials/christmasTree_hlsl.md

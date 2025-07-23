@@ -81,10 +81,10 @@ To implement a shader with visual scripting, simple pick the required nodes from
 
 
 ## Standard Scipting
-For the Stardard Scripting approach, a trade-off between user-friendliness and true shader programming had to me made. Since Unreal Engine's graphics API is extremely low-level and would require the user to interact with C++ code, we decided to circumvent that and use Unreal Engine's ```Custom```-Node within the Material Editor, which allows the user to write HLSL code within the Engine. An possible setup, which would allow the user to implement most scenes, would look like above.
+For the Stardard Scripting approach, a trade-off between user-friendliness and true shader programming had to me made. Since Unreal Engine's graphics API is extremely low-level and would require the user to interact with C++ code, we decided to circumvent that and use Unreal Engine's ```Custom```-Node within the Material Editor, which allows the user to write HLSL code within the Engine. A possible setup, which would allow the user to implement most scenes, would look like above.
 
 *<figure markdown="span">
-![Unreal Engine ShaderPlayground Parameters](images/parameters.png){ width="400" }
+![Unreal Engine ShaderPlayground Parameters](images/examplehlsl.png){ width="1000" }
 </figure>*
 
 
@@ -92,4 +92,10 @@ For the Stardard Scripting approach, a trade-off between user-friendliness and t
 ---
 
 Find the [Tutorials](unreal/tutorials/christmasTree.md) to discover in-depth explanations on how to construct custom procedural shaders in Unreal Engine and to better understand the relations between functions.
+
+---
+
+## General notes
+
+Some Visual Scripting nodes are different to the HLSL Scripting version, due to limitations in the Material Editor. The most prominent example being the absense of a float3x3 datatype. In cases where this would be required, the matrix is split up into multiple vectors and thus require multiple pins to be connected instead of one.
 
