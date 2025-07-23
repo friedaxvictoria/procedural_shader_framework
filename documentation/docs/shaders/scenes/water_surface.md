@@ -1,9 +1,13 @@
-#  🧩 Procedural Water Surface Shader
+<div class="container">
+    <h1 class="main-heading">Procedural Water Surface Shader</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
 
-<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/WaterSurface.png" alt="Water Surface" width="400" height="225">
+<img src="../../../static/images/images4Shaders/water_surface.png" alt="Water Surface" width="400" height="225">
+
+---
 
 - **Category:** Scene
-- **Author:** Xuetong Fu
 - **Shader Type:** Animated water surface with hash noise and SDF raymarching
 - **Input Requirements:** `fragCoord`, `iTime`, `iMouse`, `iResolution`, `iChannel0 (noise texture)`
 - **Output:**  `fragColor` RGBA color (animated water surface with highlights and depth-based fog)
