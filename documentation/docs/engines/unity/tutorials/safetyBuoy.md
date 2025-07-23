@@ -9,6 +9,8 @@ The tutorial goes step-by-step through the creation of a scene containing the **
 
 > To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
 
+Once the UPM ist installed, find the shader with a corresponding scene at `Packages/com.tudresden.proceduralshaderframeworkpackage/Samples~/Safety Buoy`.
+
 ---
 
 ## Step-by-Step

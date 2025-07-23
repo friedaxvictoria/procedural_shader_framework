@@ -46,6 +46,12 @@ The sphere SDF is the simplest SDF function. It calculates the Euclidean distanc
 
 - Zero on the surface
 
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/sdfs/sphere">Unity</a>
+</div>
+
 ### 2. Rounded Box SDF (sdRoundBox)
 #### Function Signature:
 
@@ -73,6 +79,12 @@ return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
 2. Then applies rounding to the corners
 
 3. The function handles both inside and outside cases correctly
+
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/sdfs/cube">Unity</a>
+</div>
 
 ### 3. Torus SDF (sdTorus)
 
@@ -104,6 +116,11 @@ return length(q)-radius.y;
 
 3. Finally subtracts the minor radius to get the tube thickness
 
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../../../engines/unity/sdfs/torus">Unity</a>
+</div>
 
 ## Scene Integration
 

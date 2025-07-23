@@ -118,3 +118,8 @@ In standard scripting, after including the appropriate libraries, users can dire
 ---
 
 Find the [Tutorials](unity/tutorials/christmasTree.md) to discover in-depth explanations on how to construct custom procedural shaders in Unity and to better understand the relations between functions.
+
+Once the UPM has been installed: 
+    - All the user shaders can be found in their respective folders at `Packages/com.tudresden.proceduralshaderframeworkpackage/Samples~`.
+    
+    - The full implementation of Unity's integration can be found at `Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts`.

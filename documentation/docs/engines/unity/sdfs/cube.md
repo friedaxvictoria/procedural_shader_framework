@@ -71,4 +71,4 @@ float shininess, float noise, out int indexOut)
 
 ---
 
-Find the original shader code [here](..).
+Find the original shader code [here](../../../shaders/geometry/Geometry_SDFs.md).

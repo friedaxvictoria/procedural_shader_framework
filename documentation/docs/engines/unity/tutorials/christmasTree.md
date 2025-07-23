@@ -9,6 +9,8 @@ The tutorial goes step-by-step through the creation of a scene containing a **bo
 
 > To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
 
+Once the UPM ist installed, find the shader with a corresponding scene at `Packages/com.tudresden.proceduralshaderframeworkpackage/Samples~/Christmas Tree`.
+
 ---
 
 ## Step-by-Step
@@ -58,7 +60,7 @@ The tutorial goes step-by-step through the creation of a scene containing a **bo
     6.  Add noise to the SDFs for a more organic look, e.g.
 
         Hexagonal Prism: Unity's build-in *Gradient Noise Node* with *scale 30*
-        
+
         Ellipsoids: Unity's build-in *Voronoi Noise Node* with *angleOffset 2* and *cellDensity 100*
 
         > Be aware that these noises use UV-coordinates of the underlying object and are deterministic with regard to them. Therefore, once animation is added, the noise will move.

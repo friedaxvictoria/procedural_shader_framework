@@ -34,7 +34,7 @@ float shininess, float noise, out int indexOut)
 |-----------------|----------|-------------|
 | `index`  <img width=50/>  | int   | Index at which the torus is stored  |
 | `position`        | float3   | Central position |
-| `radius`        | float   | Radius of the torus from center to the start of the tube <br> <blockquote>*ShaderGraph default value*: 3</blockquote>|
+| `radius`        | float   | Radius of the torus from center to the middle of the tube <br> <blockquote>*ShaderGraph default value*: 3</blockquote>|
 | `thickness`        | float   | Thickness of the torus' tube <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
 | `axis`            | float3   | Axis determining the orientation <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|
 | `angle` | float   | World-space position of the light source |
@@ -73,4 +73,4 @@ float shininess, float noise, out int indexOut)
 
 ---
 
-Find the original shader code [here](..).
+Find the original shader code [here](../../../shaders/geometry/Geometry_SDFs.md).

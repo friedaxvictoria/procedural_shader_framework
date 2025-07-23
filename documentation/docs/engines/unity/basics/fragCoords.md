@@ -49,7 +49,9 @@ The required scaling-values depend on the object's extent as well as Unity's cam
 
 > If a cuboid is used that is differently scaled in each dimension, the procedural results can only be non-distorted for a combination of two axis.
 
-!ADD IMAGE
+<figure markdown="span">
+    ![Unity Distortion For Cuboids](../images/basics/distortion.png){ width="500" }
+</figure>
 
 ---
 
