@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Rim Lighting Shader
+// Author: Xuetong Fu
 // Category: Lighting
 // Description: 
 //   Computes rim (edge) lighting contribution based on the viewing

@@ -71,11 +71,10 @@ The project uses the main shader include file `sdf_updated.gdshaderinc` that con
 
 **Purpose**: This file contains the modularized shader logic, making it reusable and easier to maintain across different scenes.
 
+> **Note on Adding New Shaders:** To add a new shader (e.g., for Lambertian lighting effects) to `sdf_updated.gdshaderinc`, we should create a new function following the existing pattern like `Pseudo3dNoise`. Access global variables such as Tme, screen_resolution, or camera_position from `includes/global_variables/global_variables.gdshaderinc`, and leverage helper functions like rot2, n2D, or normalize from `includes/helper_functions/helper_func.gdshaderinc`. Finally, we should integrate this new shader function into the `IntegrationFlexible` method with its proper logic, like by adding conditional logic to check for the shader's activation condition, calling the function, comparing hit distances with other surfaces to select the closest one, and applying the lighting calculations and material properties similar to existing shaders. And at last,testing the implementation within the `sdf_updated.tscn` scene to ensure proper integration with camera animations and GDScript SDFs.
+
 📖 **[Learn More →](gdShaderInclude.md)**
 
-
-
-**Usage**: Referenced by the main `sdf_updated.gdshaderinc` file as needed.
 
 ### **5. Main Fragment Shader**
 

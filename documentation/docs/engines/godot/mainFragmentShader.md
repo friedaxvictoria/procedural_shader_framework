@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="main-heading">SMain Fragment Shader Analysis</h1>
+    <h1 class="main-heading">Main Fragment Shader Analysis</h1>
     <blockquote class="author">by Jeewan</blockquote>
 </div>
 This document provides an analysis of the main fragment shader, which serves as the entry point for rendering a 3D scene using ray marching in Godot. The shader integrates the IntegrationFlexible method from `sdf_updated.gdshaderinc` to compute the final color for each pixel. Below, we describe the shader's purpose, structure, and usage of global variables, focusing on its role in the rendering pipeline.
@@ -39,12 +39,10 @@ The `fragment()` function is the main entry point, executed for each pixel of th
 #### Purpose
 Computes the final color (`COLOR`) for each pixel by calling `IntegrationFlexible`, which handles ray marching, terrain rendering, and lighting.
 
-#### Input/Output
-
-**Input:**
+#### **Input:**
 - `UV` (vec2): Built-in Godot variable providing normalized texture coordinates (0.0 to 1.0) for the current pixel.
 
-**Output:**
+#### **Output:**
 - `COLOR` (vec4): Built-in Godot variable set to the final RGBA color of the pixel.
 - `color` (vec4): Local variable to store the output of IntegrationFlexible.
 

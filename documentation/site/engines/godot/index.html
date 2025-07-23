@@ -12,7 +12,7 @@
         <link rel="prev" href="../../shaders/shaderPage/">
       
       
-        <link rel="next" href="globalVariables/">
+        <link rel="next" href="structure/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Shader Flow Pipeline - Shader Documentation</title>
+        <title>Overall Structure - Shader Documentation</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Shader Flow Pipeline
+              Overall Structure
             
           </span>
         </div>
@@ -245,6 +245,15 @@
   
     
     
+      
+  
+  
+  
+    
+  
+  
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
         <a href="./" class="md-tabs__link">
           
@@ -254,6 +263,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -428,6 +440,49 @@
   
   
   
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Shader Flow Pipeline
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Shader Flow Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -439,12 +494,43 @@
   
   
   <span class="md-ellipsis">
-    Shader Flow Pipeline
+    Overall Structure
     
   </span>
   
 
       </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -578,7 +664,30 @@
   
   
   <span class="md-ellipsis">
-    User Manual
+    User Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
     
   </span>
   
@@ -1964,6 +2073,75 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity/tutorials/elevator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elevator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity/tutorials/car/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Car
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity/tutorials/shrine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shrine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2046,7 +2224,7 @@
 </ul>
 </li>
 <li><strong>Supported Render Pipelines:</strong> Default Scripting: GDScript with node lifecycle pipeline (_init(), _enter_tree(), 
-            _ready(),_process(), etc.)</li>
+ _ready(),_process(), etc.)</li>
 <li><strong>Supported Engine Versions:</strong> Comprehensive testing conducted on <em>Godot 4.2.1</em> </li>
 <li><strong>Implemented Shader Categories:</strong><ul>
 <li>CanvasItem Shaders (2D post-processing and UI effects)</li>
@@ -2059,17 +2237,17 @@
 <p>This framework structure showcases a Godot Engine setup for a rendering-focused application using GDScript 
 and GLSL shaders. Below is an overview of how the project is structured, including scripts, shaders, 
 and their interactions.</p>
-<h2 id="godot-vscode-addons-includes-global_variables-global_variablesgdshaderinc-helper_functions-helper_functionsgdshaderinc-sdf_updatedgdshaderinc-scripts-sdf_updatedgd-editorconfig-gitattributes-gitignore-iconsvg-iconsvgimport-projectgodot-readmemd-sdf_updatedgdshader-sdf_updatedtres-sdf_updatedtscn"><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>godot/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>godot/
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── 📁 .vscode/
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── 📁 addons/
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── 📁 includes/
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├── 📁 global_variables/
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   │   └── 📄 global_variables.gdshaderinc
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├── 📁 helper_functions/
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   │   └── 📄 helper_functions.gdshaderinc
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   └── 📄 sdf_updated.gdshaderinc
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>├── 📁 scripts/
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   └── 📄 sdf_updated.gd
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│    └── 📁 includes/
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│    │   ├── 📁 global_variables/
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│    │   │   └── 📄 global_variables.gdshaderinc
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│    │   ├── 📁 helper_functions/
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│    │   │   └── 📄 helper_functions.gdshaderinc
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│    │   └── 📄 sdf_updated.gdshaderinc
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│    └── 📁 scripts/
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│        └── 📄 sdf_updated.gd
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>├── ⚙️ .editorconfig
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>├── 📋 .gitattributes
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>├── 🚫 .gitignore
@@ -2080,17 +2258,18 @@ and their interactions.</p>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>├── 🎨 sdf_updated.gdshader
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>├── 🌳 sdf_updated.tres
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>└── 🎬 sdf_updated.tscn
-</code></pre></div></h2>
+</code></pre></div>
+<hr />
 <h2 id="getting-started">Getting Started</h2>
 <ol>
-<li>Clone or download the project files <strong><a href="https://github.com/friedaxvictoria/procedural_shader_framework.git">Click Here for Link</a></strong></li>
+<li>Clone or download the project files 📦 <strong><a href="https://github.com/friedaxvictoria/procedural_shader_framework.git">Download from GitHub</a></strong></li>
 <li>Open the project in Godot Engine</li>
 <li>Run the main scene (<code>sdf_updated.tscn</code>) to see the SDF rendering in action</li>
 <li>Modify the SDF Manager script (<code>sdf_updated.gd</code>) to add custom shapes and effects</li>
 <li>Experiment with shader parameters, through inspector, to achieve desired visual results</li>
 </ol>
 <hr />
-<h2 id="framework-workflow">Framework Workflow</h2>
+<h2 id="workflow-pipeline">Workflow Pipeline</h2>
 <ol>
 <li><strong>User Interaction</strong>: The user modifies the scene by adding or removing SDFs via scripts in the directory <code>scripts/sdf_updated.gd</code>, attached to nodes in <code>sdf_updated.tscn</code>.</li>
 <li><strong>Data Passing</strong>: The GDScript updates shader uniforms (e.g., SDF positions, sizes) through the global variables system.</li>
@@ -2107,82 +2286,7 @@ and their interactions.</p>
 <p><strong>Rendering</strong>: The shader outputs the final pixel colors, rendering the dynamic SDF scene in the <code>sdf_updated.tscn</code> scene.</p>
 </li>
 </ol>
-<p>👉 <strong><a href="shaderFlow/">View how it works→</a></strong></p>
-<hr />
-<h2 id="overal-structure-in-detail">Overal Structure in Detail</h2>
-<h3 id="1-global-variables"><strong>1. Global Variables</strong></h3>
-<p>Global variables are managed in the <code>includes/global_variables/</code> folder to store all shared variables used across the shaders, ensuring consistency and ease of access.</p>
-<ul>
-<li><strong>Location</strong>: <code>includes/global_variables/</code> folder</li>
-<li><strong>Purpose</strong>: Defines global constants and uniforms used throughout the shader pipeline.</li>
-</ul>
-<p><strong>Examples</strong>:</p>
-<ul>
-<li>uniform vec2 resolution: Screen resolution for rendering.</li>
-<li>uniform float time: Animation time for dynamic effects.</li>
-<li>uniform vec3 camera_pos: Camera position for raymarching.</li>
-<li>SDF-specific parameters (e.g., positions, sizes, or types of SDFs).</li>
-</ul>
-<p><strong>Usage</strong>: Included in the shader inclusive and helper function files to access shared variables.</p>
-<p>👉 <strong><a href="globalVariables/">View how it works→</a></strong></p>
-<h3 id="2-helper-functions-for-rendering"><strong>2. Helper Functions for Rendering</strong></h3>
-<p>Helper functions are stored in the <code>includes/helper_functions/</code> folder to support the main rendering logic. These are called within the main shader include files to perform specific tasks.</p>
-<ul>
-<li><strong>Location</strong>: <code>includes/helper_functions/</code> folder</li>
-<li><strong>Purpose</strong>: Contains utility functions for rendering, such as vector transformations, color manipulations, or mathematical utilities.</li>
-</ul>
-<p><strong>Examples</strong>:</p>
-<ul>
-<li>Normalizing vectors for lighting calculations.</li>
-<li>Converting coordinates for raymarching.</li>
-<li>Utility functions for blending or interpolating values.</li>
-</ul>
-<p>👉 <strong><a href="helperFunction/">View how it works→</a></strong></p>
-<h3 id="3-gdscript-file-for-dynamic-sdf-management"><strong>3. GDScript File for Dynamic SDF Management</strong></h3>
-<p>A GDScript file is attached to a Node2D to allow users to dynamically add or remove Signed Distance Fields (SDFs) on the screen. This script provides an interface for manipulating SDFs, which are then passed to the shader for rendering.</p>
-<ul>
-<li><strong>Location</strong>: <code>scripts/</code> folder</li>
-<li><strong>Purpose</strong>: Manages the creation, modification, and removal of SDFs. Users can interact with this script to customize the scene dynamically.</li>
-</ul>
-<p><strong>Key Functionality</strong>:</p>
-<ul>
-<li>Add SDFs (e.g., torus, dolphin) to the scene.</li>
-<li>Remove SDFs based on user input.</li>
-<li>Update shader parameters with SDF data for rendering.</li>
-</ul>
-<p>👉 <strong><a href="gdScript/">View how it works→</a></strong></p>
-<h3 id="4-main-gdshader-include-files"><strong>4. Main GDShader Include Files</strong></h3>
-<p>The project uses the main shader include file <code>sdf_updated.gdshaderinc</code> that contains core rendering logic, such as lighting, raymarching, and noise functions. This file is included in the main fragment shader to provide the complete rendering pipeline.</p>
-<p><strong>File</strong>:
-- <code>includes/sdf_updated.gdshaderinc</code>: Contains the complete rendering pipeline including lighting calculations, raymarching algorithms, and noise functions for procedural effects.</p>
-<p><strong>Purpose</strong>: This file contains the modularized shader logic, making it reusable and easier to maintain across different scenes.</p>
-<p>👉 <strong><a href="gdShaderInclude/">View how it works→</a></strong></p>
-<p><strong>Usage</strong>: Referenced by the main <code>sdf_updated.gdshaderinc</code> file as needed.</p>
-<h3 id="5-main-fragment-shader"><strong>5. Main Fragment Shader</strong></h3>
-<p>The main fragment shader orchestrates the rendering pipeline by calling the IntegrationFlexible method defined in the <code>sdf_updated.gdshaderinc</code> file.</p>
-<ul>
-<li><strong>File</strong>: <code>sdf_updated.gdshader</code></li>
-<li><strong>Scene</strong>: <code>sdf_updated.tscn</code></li>
-<li><strong>Resource</strong>: <code>sdf_updated.tres</code></li>
-<li><strong>Purpose</strong>: Combines all shader logic to produce the final pixel colors.</li>
-</ul>
-<p><strong>Key Functionality</strong>:</p>
-<ul>
-<li>Includes global variables for shared data.</li>
-<li>Includes the main <code>sdf_updated.gdshaderinc</code> file.</li>
-<li>Calls the IntegrationFlexible method, which integrates raymarching, lighting, and noise effects to render the scene.</li>
-</ul>
-<p><strong>Structure</strong>:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cp">#include &quot;includes/sdf_updated.gdshaderinc&quot;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntegrationFlexible</span><span class="p">(</span><span class="n">FRAGCOORD</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">camera_pos</span><span class="p">);</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
-</code></pre></div>
-👉 <strong><a href="mainFragmentShader/">View how it works→</a></strong></p>
+<p>🚀 <strong><a href="shaderFlow/">Explore the Complete Workflow →</a></strong></p>
 <hr />
 <h2 id="key-features">Key Features</h2>
 <ul>

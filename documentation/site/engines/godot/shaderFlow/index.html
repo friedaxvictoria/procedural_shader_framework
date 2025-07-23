@@ -12,7 +12,7 @@
         <link rel="prev" href="../mainFragmentShader/">
       
       
-        <link rel="next" href="../../unity/">
+        <link rel="next" href="../tutorials/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>User Manual - Shader Documentation</title>
+        <title>User Guide - Shader Documentation</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              User Manual
+              User Guide
             
           </span>
         </div>
@@ -245,6 +245,15 @@
   
     
     
+      
+  
+  
+  
+    
+  
+  
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../" class="md-tabs__link">
           
@@ -254,6 +263,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -426,9 +438,23 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -437,7 +463,65 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Shader Flow Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overall Structure
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -577,13 +661,36 @@
   
   
   <span class="md-ellipsis">
-    User Manual
+    User Guide
     
   </span>
   
 
       </a>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1964,6 +2071,75 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unity/tutorials/elevator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elevator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unity/tutorials/car/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Car
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unity/tutorials/shrine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shrine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2046,19 +2222,30 @@
 <div class="admonition info">
 <p class="admonition-title">🎮 Quick Start: Running the Existing Scene</p>
 <p>If we've cloned the project and want to see the final result immediately:</p>
-<div class="highlight"><pre><span></span><code>1. Open the Project in Godot
-    - Launch Godot Engine
-    - Select &quot;Import&quot; and navigate to the cloned project folder
-    - Open the project
-
-2. Run the Main Scene
-    - Select the main scene (sdf_updated.tscn)
-    - click the &quot;Play&quot; button
-
-3. Explore the Interactive Features
-    - In the inspector, experiment with real-time parameter adjustments
-    - Observe the SDF-based procedural rendering in action
-</code></pre></div>
+<ol>
+<li>
+<p>Open the Project in Godot</p>
+<ul>
+<li>Launch Godot Engine</li>
+<li>Select "Import" and navigate to the cloned project folder</li>
+<li>Open the project</li>
+</ul>
+</li>
+<li>
+<p>Run the Main Scene</p>
+<ul>
+<li>Select the main scene (sdf_updated.tscn)</li>
+<li>click the "Play" button</li>
+</ul>
+</li>
+<li>
+<p>Explore the Interactive Features</p>
+<ul>
+<li>In the inspector, experiment with real-time parameter adjustments</li>
+<li>Observe the SDF-based procedural rendering in action</li>
+</ul>
+</li>
+</ol>
 <p>The cloned project contains a complete, functional SDF rendering setup that we can immediately run and explore.</p>
 </div>
 <hr />
@@ -2206,7 +2393,7 @@
 </ul>
 <hr />
 <h3 id="script-integration-example">💾 Script Integration Example</h3>
-<p>Within the <code>_ready()</code> function of <code>sdf_updated.gd</code>, populate the scene by instantiating and configuring <code>ShaderObject</code> instances. <strong><a href="godot/gdScript.md">[Explore more on Godot Script]</a></strong></p>
+<p>Within the <code>_ready()</code> function of <code>sdf_updated.gd</code>, populate the scene by instantiating and configuring <code>ShaderObject</code> instances. <strong><a href="../gdScript/">[Explore more on Godot Script]</a></strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">shader_objects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="c1"># Sphere</span>

@@ -244,6 +244,13 @@
   
     
     
+      
+  
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
         <a href="../../../engines/godot/" class="md-tabs__link">
           
@@ -253,6 +260,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -420,9 +430,23 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../engines/godot/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -431,7 +455,65 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Shader Flow Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overall Structure
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -564,7 +646,30 @@
   
   
   <span class="md-ellipsis">
-    User Manual
+    User Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
     
   </span>
   
@@ -1950,6 +2055,75 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/elevator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elevator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/car/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Car
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/shrine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shrine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2022,7 +2196,7 @@
 
 
 <h1 id="volumetric-fbm-cloud-shader">🧩 Volumetric FBM Cloud Shader</h1>
-<p><img src="../../../../shaders/screenshots/cloud_fbm.png" alt="Volumetric FBM Cloud Output" width="400" height="225"></p>
+<p><img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/cloud_fbm.png?raw=true" alt="Volumetric FBM Cloud Output" width="400" height="225"></p>
 <ul>
 <li><strong>Category:</strong> Scene  </li>
 <li><strong>Author:</strong> Wanzhang He  </li>
@@ -2101,7 +2275,7 @@
 </table>
 <hr />
 <h2 id="shader-code">💻 Shader Code</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">hash</span><span class="p">(</span><span class="kt">vec3</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">hash</span><span class="p">(</span><span class="kt">vec3</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fract</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.3183099</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">));</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">17.0</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">fract</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">));</span>
@@ -2182,6 +2356,7 @@
 <a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a><span class="w">    </span><span class="n">fragColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.2</span><span class="p">)),</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
 <a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a><span class="p">}</span>
 </code></pre></div>
+🔗 <a href="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/scenes/cloud_fbm.glsl">View Full Shader Code on GitHub</a></p>
 
 
 

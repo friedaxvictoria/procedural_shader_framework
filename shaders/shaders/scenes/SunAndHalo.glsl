@@ -3,6 +3,7 @@
 // Category: Lighting & Atmospheric Scattering
 // Description: Computes a realistic sun appearance with core glow, halo, and atmospheric absorption.
 // Screenshot: screenshots/SunAndHalo.png
+// From Wanzhang He
 // ==========================================
 
 /*

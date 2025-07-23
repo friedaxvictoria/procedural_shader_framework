@@ -12,7 +12,7 @@
         <link rel="prev" href="../christmasTree/">
       
       
-        <link rel="next" href="../../../unreal/">
+        <link rel="next" href="../elevator/">
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
@@ -243,6 +243,13 @@
   
     
     
+      
+  
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
         <a href="../../../godot/" class="md-tabs__link">
           
@@ -252,6 +259,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -421,9 +431,23 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../godot/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -432,7 +456,65 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Shader Flow Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../godot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overall Structure
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../godot/structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -565,7 +647,30 @@
   
   
   <span class="md-ellipsis">
-    User Manual
+    User Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../godot/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
     
   </span>
   
@@ -1966,6 +2071,75 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elevator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elevator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../car/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Car
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shrine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shrine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2035,9 +2209,135 @@
 
 
 
-  <h1>Safety Buoy</h1>
+<div class="container">
+    <h1 class="main-heading">Tutorial: Safety Buoy</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
-
+<p>This tutorial is designed to illustrate the workflow of Unity's integration of the framework. It showcases relevant connections between functions and gives examplary usecases for them. </p>
+<p>The tutorial goes step-by-step through the creation of a scene containing the <strong>ocean on which a safety buoy is floating</strong>. In the <strong>foreground a dolphin swims by</strong> and the sky is illuminated by the <strong>setting sun</strong>.</p>
+<blockquote>
+<p>To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.</p>
+</blockquote>
+<p>Once the UPM ist installed, find the shader with a corresponding scene at <code>Packages/com.tudresden.proceduralshaderframeworkpackage/Samples~/Safety Buoy</code>.</p>
+<hr />
+<h2 id="step-by-step">Step-by-Step</h2>
+<ol>
+<li>Create and setup a Unity project with a material and shader as explained in the <a href="../../">Overview</a>. This tutorial uses a rectangular plane with a scaling of (20,1,10) to apply the material to.</li>
+<li>Navigate to the shader.</li>
+<li>
+<p>Set up the <a href="../../water/waterSurface/">Water Surface</a>.</p>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Water" src="../../images/safetyBuoy/sbWater.png" width="400" />
+</figure></p>
+</li>
+<li>
+<p>Create <a href="../../basics/fragCoords/">Fragment Coordinates</a> and connect it to the input of the water function.</p>
+<p>Since the material is applied to a rectangular plane, the <strong>scaling values</strong> have to be altered to fit the scaling of the plane. </p>
+<ol>
+<li>Add Unity's <em>Object Node</em> and <em>Split Node</em>.</li>
+<li>Connect the <em>scale</em> of the first to the latter.</li>
+<li>Use the values from the <em>Split Node</em> as input to the custom one: <em>R</em> as <em>scaleRight</em> and <em>B</em> as <em>scaleUp</em>.</li>
+</ol>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Fragment Coordinates" src="../../images/safetyBuoy/sbFragCoords.png" width="600" />
+</figure></p>
+</li>
+<li>
+<p>To illuminate the water, add a <a href="../../lighting/sunriseLight/">Sunrise</a>. Connect all the outputs of the water to the inputs of the sunrise.</p>
+<p>Connect all the outputs of the water to the inputs of the sunrise.</p>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Sunrise" src="../../images/safetyBuoy/sbSunrise.png" width="500" />
+</figure></p>
+</li>
+<li>
+<p>Connect the color-output of the sunrise to the fragment's <em>base color</em>.</p>
+<p>This creates a finished scene that shows the sun setting over the ocean. The camera position can be adjusted in the inspector of the prefab. Read more about it in <a href="../../uniformsAndCs/">Uniforms and C#</a>. </p>
+<p>The following image uses a camera at <code>float3(0,3,15)</code>.</p>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Intermediate" src="../../images/safetyBuoy/sbIntermediate.gif" width="600" />
+</figure></p>
+</li>
+<li>
+<p>Add a safety buoy by combining two tori.</p>
+<ol>
+<li>Add a major torus with <em>radius 2</em>, <em>thickness 0.8</em>, and a custom <em>color</em> (e.g. <em>#C20707</em>).</li>
+<li>In order to make the buoy look slightly beat up, add Unity's built-in <em>Simple Noise Node</em> with a <em>scale 50</em>.</li>
+<li>In the default implementation, a torus' hole faces the z-direction. Rotate both tori by setting <em>angle 90</em> and <em>axis (1,0,0)</em> so that their orientation aligns with the water.</li>
+<li>Add a thinner torus with <em>radius 2.75</em>, <em>tickness 0.2</em>, and a white <em>color</em>. The radius is chosen so that this thinner torus sits snuggly around the major one. This is achieved by adding the major torus' radius and thickness together. Subtract a fraction of the thinner torus' thickness to inset it into the major one.</li>
+<li>To make the buoy look slightly wet, set the <em>specularColor (1,1,1)</em>, <em>specularStrength 0.5</em>, and <em>shininess 50</em> for both tori.</li>
+</ol>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Buoy" src="../../images/safetyBuoy/sbTori.png" width="600" />
+</figure></p>
+</li>
+<li>
+<p>Place the buoy on the water.</p>
+<ol>
+<li>Add the <a href="../../water/waterHeight/">Water Height Field</a> and connect its output to the <em>position</em> values of both tori. </li>
+<li>To get a drifting look, <a href="../../animations/colorAnimation/">Cycle Color</a> can be used. It periodically goes through values from 0 to 1. Thus, making the buoy move within the coordinates from 0 to 1. Use its output as input to the water's height field node.</li>
+<li>As the waves should effect the orientation of the buoy, add <a href="../../water/waterNormal/">Water Normal</a>. Use the previously used <em>axis (1,0,0)</em> as offset and connect the normal function's output to the tori's <em>axis</em> instead.</li>
+<li>Due to the fact that the water's normal changes rapidly and to avoid large and unnatural movements of the buoy, set <em>influence 0.3</em> and <em>sampleRadius 3</em>.</li>
+</ol>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Place On Water" src="../../images/safetyBuoy/sbOnWater.png" width="600" />
+</figure></p>
+</li>
+<li>
+<p>Add a dolphin.</p>
+<ol>
+<li>Initialise the <a href="../../sdfs/dolphin/">Dolphin</a>.</li>
+<li>If desired, set its <em>color</em> to a custom one (e.g. <em>#516478</em>).</li>
+<li>Yet again, determine the <em>position</em> with <a href="../../water/waterHeight/">Water Height Field</a>. Use <em>seedPosition (5,0,10)</em> to make the dolphin come from the lower right corner (depending on the camera's position).</li>
+<li>Set <em>angle 80</em> to make the dolphin swim from the lower right corner to the upper left corner (depending on the camera's position).</li>
+</ol>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Dolphin" src="../../images/safetyBuoy/sbDolphin.png" width="400" />
+</figure></p>
+</li>
+<li>
+<p>Connect the instantiations of the SDFs in series. The order is irrelevant, this is an examplary order:</p>
+<p>Major Torus: <em>index 0</em></p>
+<p>Thin Torus: <em>major torus index</em> </p>
+<p>Dolphin: <em>thin torus index</em></p>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Connectivity" src="../../images/safetyBuoy/sbConnectivity.png" width="700" />
+</figure></p>
+</li>
+<li>
+<p>Plug the final SDF's index <em>dolphin index</em> into the <a href="../../sdfs/raymarching/">SDF Raymarching</a>. Add the previously computed fragment coordinates as input to the raymarching. </p>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Raymarching" src="../../images/safetyBuoy/sbRaymarch.png" width="400" />
+</figure></p>
+</li>
+<li>
+<p>To illuminate both the SDFs and the water with the sunrise, add a <a href="../../basics/minimum/">Minimum</a> function. Plug the outputs of the raymarching and the water surface into the two sets of inputs. Rearrange the graph so that instead of using the water surface's outputs for the sunrise, the minimum function's outputs are used. </p>
+<p>Whether the water's or the SDFs' <em>rayDirection</em> is used, is irrelevant. Both contain the same value.</p>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Minimum" src="../../images/safetyBuoy/sbMinimum.png" width="500" />
+</figure></p>
+</li>
+<li>
+<p>To enable custom rotation within the scene, add <a href="../../camera/mouseBasedMovement/">Rotate Via Mouse</a>. </p>
+</li>
+<li>
+<p>Add <a href="../../camera/cameraMatrix/">Camera Matrix</a> and input the matrix from the previous function. Plug the resulting camera matrix into the inputs of the water surface and raymarching functions. By left-clicking the mouse, the scene can know be rotated. </p>
+<p>To move within the scene, enable the <em>Allow Movement</em> option in the prefab's inspector. Read more about it in <a href="../../uniformsAndCs/">Uniforms and C#</a>.</p>
+<p><figure markdown="span">
+    <img alt="Unity Safety Buoy: Camera Movement" src="../../images/safetyBuoy/sbCameraMatrix.png" width="500" />
+</figure></p>
+</li>
+</ol>
+<hr />
+<h2 id="the-result">The Result</h2>
+<p>The finished ShaderGraph:
+    <figure markdown="span">
+    <img alt="Unity Safety Buoy: Final ShaderGraph" src="../../images/safetyBuoy/sbFinalResult.png" width="900" />
+    </figure></p>
+<p>The output with camera at <code>float3(0,3,15)</code>:
+    <figure markdown="span">
+    <img alt="Unity Safety Buoy: Final Output" src="../../images/safetyBuoy/finalResults.gif" width="500" />
+    </figure></p>
 
 
 

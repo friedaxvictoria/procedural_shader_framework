@@ -6,6 +6,7 @@
 //   for orbital motion around the origin and optional roll. This allows 
 //   the camera to animate smoothly around the scene.
 // Screenshot: screenshots/animation/RollingRefraction.gif
+// From Wanzhang He
 // ==========================================
 
 /**

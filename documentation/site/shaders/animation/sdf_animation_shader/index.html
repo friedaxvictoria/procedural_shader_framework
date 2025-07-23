@@ -244,6 +244,13 @@
   
     
     
+      
+  
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
         <a href="../../../engines/godot/" class="md-tabs__link">
           
@@ -253,6 +260,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -420,9 +430,23 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../engines/godot/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -431,7 +455,65 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Shader Flow Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overall Structure
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -564,7 +646,30 @@
   
   
   <span class="md-ellipsis">
-    User Manual
+    User Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
     
   </span>
   
@@ -1950,6 +2055,75 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/elevator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elevator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/car/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Car
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/shrine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shrine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2025,7 +2199,15 @@
 <ul>
 <li><strong>Category:</strong> Animation / SDF / Scene</li>
 <li><strong>Author:</strong> Wanzhang He</li>
+<li><strong>Version:</strong> v3 (final version)</li>
 </ul>
+<p>This is the <strong>final and most modular version</strong> of the SDF animation system.<br />
+It builds upon earlier versions:
+- <a href="sdf_animation_v1.md">SDF Animation v1</a> – initial prototype with basic animation
+- <a href="sdf_animation_v2.md">SDF Animation v2</a> – structured modular version using <code>SDF</code> and <code>Animation</code> structs
+  - 🔗 Example scene: <a href="sdf_animation_v2_example.md">SDF Animation v2 example</a> – demonstrates <code>translate</code>, <code>orbit</code>, and <code>pulseScale</code> in action<br />
+- <strong><code>sdf_animation_v3.glsl</code> (this file)</strong> – introduces array-based object batching and external parameter control via uniform arrays, ready for integration with real-time UI/scene systems</p>
+<hr />
 <h2 id="input-requirements">📥 Input Requirements</h2>
 <p>This shader animation module depends on the following inputs:</p>
 <h3 id="time-input">⏱ Time Input</h3>

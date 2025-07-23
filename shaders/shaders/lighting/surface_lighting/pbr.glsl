@@ -1,5 +1,6 @@
 // ==========================================
 // Module: PBR Lighting Shader (Cook-Torrance GGX)
+// Author: Xuetong Fu
 // Category: Lighting
 // Description: 
 //   Physically Based Rendering using Cook-Torrance BRDF with GGX distribution,

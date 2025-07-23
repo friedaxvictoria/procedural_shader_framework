@@ -1,6 +1,11 @@
-#  🧩 Cloud and Ground Integration Shader
+<div class="container">
+    <h1 class="main-heading">Cloud and Ground Integration Shader</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
 
-<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/CloudAndGround.png" alt="Cloud Ground" width="400" height="225">
+<img src="../../../static/images/images4Shaders/cloud_ground.png" alt="Cloud And Ground" width="400" height="225">
+
+---
 
 - **Category:** Scene
 - **Author:** Xuetong Fu

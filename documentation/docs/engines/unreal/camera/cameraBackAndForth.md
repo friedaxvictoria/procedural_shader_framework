@@ -40,7 +40,7 @@ void backAndForth(float speed, float time, out float3x3 mat)
     Find the node at `ProceduralShaderFramework/Camera/BackAndForth`
 
     <figure markdown="span">
-        ![Unity Back And Forth Camera](../images/camera/backAndForth.png){ width="400" }
+        ![Unreal Engine Back And Forth Camera](../images/camera/BackAndForth.png){ width="400" }
     </figure>
 
 === "Standard Scripting"

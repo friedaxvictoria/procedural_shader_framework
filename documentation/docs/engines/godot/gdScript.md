@@ -174,7 +174,7 @@ To remove an SDF, simply:
 ### Objects Not Appearing
 1. **Check the type number** - ensure it matches a supported SDF type
 2. **Verify position** - object might be outside the camera view
-3. **Check MAX_OBJECTS limit** - you might have too many objects
+3. **Check MAX_OBJECTS limit** - might have too many objects
 
 ### Color Issues
 1. **RGB values** should be between 0.0 and 1.0

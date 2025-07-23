@@ -86,6 +86,7 @@ nav:
     - GD Shader Include: engines/godot/gdShaderInclude.md
     - Main Fragment Shader: engines/godot/mainFragmentShader.md
     - User Guide: engines/godot/shaderFlow.md
+    - Tutorial: engines/godot/tutorials.md
 
   - Unity:
       - Overview: engines/unity.md

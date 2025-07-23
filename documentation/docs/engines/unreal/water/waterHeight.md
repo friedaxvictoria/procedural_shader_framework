@@ -92,10 +92,10 @@ void sampleHeightField_float(float3 seedPosition, out float3 heightPosition)
 ## Implementation
 
 === "Visual Scripting"
-    Find the node at `PSF/Environments/Water Height Field`
+    Find the node at `ProceduralShaderFramework/Environments/ComputerWaterHeight`
     
     <figure markdown="span">
-        ![Unity Water Height Field](../images/water/waterHeight.png){ width="500" }
+        ![Unreal Engine Water Height Field](../images/enironments/ComputeWaterHeight.png){ width="500" }
     </figure>
 
 === "Standard Scripting"

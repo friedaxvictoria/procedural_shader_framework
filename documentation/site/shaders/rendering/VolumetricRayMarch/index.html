@@ -17,6 +17,17 @@
     
       
         <title>VolumetricRayMarch - Shader Documentation</title>
+        <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+        </script>
+        <script type="text/javascript" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
       
     
     
@@ -244,6 +255,13 @@
   
     
     
+      
+  
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
         <a href="../../../engines/godot/" class="md-tabs__link">
           
@@ -253,6 +271,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -420,9 +441,23 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../engines/godot/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -431,7 +466,65 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Shader Flow Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overall Structure
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -564,7 +657,30 @@
   
   
   <span class="md-ellipsis">
-    User Manual
+    User Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/godot/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
     
   </span>
   
@@ -1950,6 +2066,75 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/elevator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elevator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/car/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Car
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engines/unity/tutorials/shrine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shrine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2051,7 +2236,7 @@
 t_b = \frac{\text{CLOUD\_BASE} - r_o.y}{r_d.y}, \quad
 t_t = \frac{\text{CLOUD\_TOP} - r_o.y}{r_d.y}
 \]</div>
-<p>The resulting integration segment <span class="arithmatex">\($$[t_{\min}, t_{\max}]$$\)</span> is derived depending on whether the ray starts above, inside, or below the cloud layer.</p>
+<p>The resulting integration segment <span class="arithmatex">\([t_{min}, t_{max}]\)</span> is derived depending on whether the ray starts above, inside, or below the cloud layer.</p>
 <hr />
 <ol>
 <li><strong>Apply blue-noise dithering to the initial sampling location:</strong></li>
@@ -2089,7 +2274,7 @@ t_t = \frac{\text{CLOUD\_TOP} - r_o.y}{r_d.y}
 <li>
 <p><strong>Early termination occurs when:</strong></p>
 </li>
-<li><span class="arithmatex">\( $$t &gt; t_{\max}$$ \)</span></li>
+<li><span class="arithmatex">\( t &gt; t_{max} \)</span></li>
 <li>or accumulated alpha exceeds <code>0.99</code></li>
 </ul>
 <hr />
@@ -2099,7 +2284,7 @@ t_t = \frac{\text{CLOUD\_TOP} - r_o.y}{r_d.y}
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">return</span><span class="w"> </span><span class="n">clamp</span><span class="p">(</span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
 </code></pre></div>
 <hr />
-<p>## 🎛️ Parameters</p>
+<h2 id="Parameters">🎛️ Parameters</h2>
 <table>
 <thead>
 <tr>

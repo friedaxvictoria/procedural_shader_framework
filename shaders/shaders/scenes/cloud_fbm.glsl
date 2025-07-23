@@ -3,6 +3,7 @@
 // Category: Sky Rendering / Pure Function-Based Cloud
 // Description: Raymarches soft FBM clouds using hash-based 3D noise.
 // Screenshot: screenshots/cloud_fbm.png
+// From Wanzhang He
 // ==========================================
 
 #define MIN_HEIGHT 5000.0

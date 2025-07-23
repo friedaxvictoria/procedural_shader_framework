@@ -43,7 +43,7 @@ See [Helper Functions](../helperFunctions.md) to find out more about ```computeR
     Find the node at `ProceduralShaderFramework/Camera/RotateCamera`
 
     <figure markdown="span">
-        ![Unity Rotate Camera](../images/camera/rotateCamera.png){ width="500" }
+        ![Unreal Engine Rotate Camera](../images/camera/RotateCamera.png){ width="500" }
     </figure>
 
 === "Standard Scripting"

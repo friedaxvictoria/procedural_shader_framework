@@ -1,5 +1,6 @@
 // lighting_context.glsl
 // --------------------------------------------------------------------
+// Author: Xuetong Fu
 // LightingContext: Geometric and lighting info used in shading.
 // --------------------------------------------------------------------
 

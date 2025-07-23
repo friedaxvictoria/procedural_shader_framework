@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Volume Material Library & Registry
+// Author：Xuetong Fu
 // Category: Volume Material
 // Description:
 //   Centralized registry mapping material IDs to volumetric

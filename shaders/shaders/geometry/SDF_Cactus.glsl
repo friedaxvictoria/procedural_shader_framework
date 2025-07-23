@@ -8,6 +8,7 @@
 //   and basic diffuse shading.
 //   Uses capsule primitives and combines multiple SDF branches to form a cactus.
 // Screenshots: shaders/screenshots/geometry/SDF_Cactus.png
+// From Wanzhang He
 // ==========================================
 
 /**

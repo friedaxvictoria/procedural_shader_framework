@@ -40,6 +40,9 @@ void computeUV(float2 fragCoord, float2 viewportSize, out float2 uv)
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/Basics/ComputeUV`
 
+     <figure markdown="span">
+        ![Unreal Engine Compute UV](../images/utils/ComputeUV.png){ width="500" }
+    </figure>
     
 
 === "Standard Scripting"

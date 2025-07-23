@@ -26,14 +26,14 @@ and their interactions.
 godot/
 ├── 📁 .vscode/
 ├── 📁 addons/
-├── 📁 includes/
-│   ├── 📁 global_variables/
-│   │   └── 📄 global_variables.gdshaderinc
-│   ├── 📁 helper_functions/
-│   │   └── 📄 helper_functions.gdshaderinc
-│   └── 📄 sdf_updated.gdshaderinc
-├── 📁 scripts/
-│   └── 📄 sdf_updated.gd
+│    └── 📁 includes/
+│    │   ├── 📁 global_variables/
+│    │   │   └── 📄 global_variables.gdshaderinc
+│    │   ├── 📁 helper_functions/
+│    │   │   └── 📄 helper_functions.gdshaderinc
+│    │   └── 📄 sdf_updated.gdshaderinc
+│    └── 📁 scripts/
+│        └── 📄 sdf_updated.gd
 ├── ⚙️ .editorconfig
 ├── 📋 .gitattributes
 ├── 🚫 .gitignore
@@ -49,7 +49,7 @@ godot/
 ---
 ## Getting Started
 
-1. Clone or download the project files **[Project Link](https://github.com/friedaxvictoria/procedural_shader_framework.git)**
+1. Clone or download the project files 📦 **[Download from GitHub](https://github.com/friedaxvictoria/procedural_shader_framework.git)**
 2. Open the project in Godot Engine
 3. Run the main scene (`sdf_updated.tscn`) to see the SDF rendering in action
 4. Modify the SDF Manager script (`sdf_updated.gd`) to add custom shapes and effects

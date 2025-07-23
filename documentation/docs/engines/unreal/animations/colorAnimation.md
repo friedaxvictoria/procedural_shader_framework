@@ -47,7 +47,7 @@ The computation of the root color is required to ensure that the seed color is w
     Find the node at `ProceduralShaderFramework/Animation/CycleColorSin`
 
     <figure markdown="span">
-        ![Unity Cycle Color](../images/animations/cycleColor.png){ width="500" }
+        ![Unreal Engine Cycle Color](../images/animations/CycleColorSin.png){ width="500" }
     </figure>
 
 === "Standard Scripting"

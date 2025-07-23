@@ -56,7 +56,7 @@ The edgecase, that for a fragment both inputs did not yield a hit, is checked fo
     Find the node at `ProceduralShaderFramework/Basics/CombineColor`
 
     <figure markdown="span">
-        ![Unity Combine Color](../images/basics/combineColor.png){ width="500" }
+        ![Unreal Engine Combine Color](../images/utils/CombineColor.png){ width="500" }
     </figure>
 
 === "Standard Scripting"
