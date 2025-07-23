@@ -57,7 +57,7 @@ The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphe
     Find the node at `ProceduralShaderFramework/Animation/OrbitObjectAroundPoint`
 
     <figure markdown="span">
-        ![Unity Orbit Object](../images/animations/orbitObject.png){ width="500" }
+        ![Unreal Engine Orbit Object](../images/animations/OrbitObjectAroundPoint.png){ width="500" }
     </figure>
 
 === "Standard Scripting"

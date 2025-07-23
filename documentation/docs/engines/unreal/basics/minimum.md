@@ -61,7 +61,7 @@ The outputs can be used for further computations using lighting functions (e.g. 
     Find the node at `ProceduralShaderFramework/Utils/Minimum`
 
     <figure markdown="span">
-        ![Unity Minimum](../images/basics/minimum.png){ width="500" }
+        ![Unreal Engine Minimum](../images/utils/Minimum.png){ width="500" }
     </figure>
 
 === "Standard Scripting"
