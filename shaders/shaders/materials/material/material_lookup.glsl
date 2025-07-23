@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Material Lookup by Geometry ID
+// Author：Xuetong Fu
 // Category: Material
 // Description:
 //   Forwards geometry hit ID and UV information to the centralized
