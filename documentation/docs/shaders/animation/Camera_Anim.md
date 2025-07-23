@@ -1,7 +1,9 @@
-# 🎥 Modular Camera Animation Shader
+<div class="container">
+    <h1 class="main-heading">Modular Camera Animation Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
 - **Category:** Animation
-- **Author:** Wanzhang He  
 - **Input Requirements:** `time`, `CameraAnimParams`  
 - **Output:** `CameraState` (eye, target, up) used for view matrix setup  
 
