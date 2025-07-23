@@ -1,7 +1,9 @@
-# 🧩 SDF Animation Shader
+<div class="container">
+    <h1 class="main-heading">SDF Animation Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
 - **Category:** Animation / SDF / Scene
-- **Author:** Wanzhang He
 - **Version:** v3 (final version)
   
 This is the **final and most modular version** of the SDF animation system.  
