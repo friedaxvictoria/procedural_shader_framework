@@ -1,9 +1,13 @@
-#  🧩 Terrain and Castle Integration Shader
+<div class="container">
+    <h1 class="main-heading">Terrain and Castle Integration Shader</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
 
-<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/TerrainAndCastle.png" alt="Terrain Castle" width="400" height="225">
+<img src="../../../static/images/images4Shaders/terrain_castle.png" alt="Terrain And Castle" width="400" height="225">
+
+---
 
 - **Category:** Scene
-- **Author:** Xuetong Fu
 - **Shader Type:** SDF-based raymarching scene
 - **Input Requirements:** `fragCoord`, `iTime`, `iMouse`, `iResolution`, `iChannel0`, `iChannel1`, `iChannel2`
 - **Output:** `fragColor` RGBA color (raymarched castle terrain scene)
