@@ -207,13 +207,12 @@ vec4 integrateDensity(vec3 ro, vec3 rd, ivec2 px) {
 ### **Full Code**
 
 ??? note "📄 CloudVolume.glsl"
-    '''
-    // ---------- Configuration Constants ----------
-    #define CAM_POS vec3(0.0, -1.0, -6.0)
-    #define CLOUD_BASE -3.0
-    #define CLOUD_TOP  0.6
+    ```
+    #define CAM_POS     vec3(0.0, -1.0, -6.0)
+    #define CLOUD_BASE  -3.0
+    #define CLOUD_TOP   0.6
     const float PI = 3.14159265;
-
+    
     // ---------- Simplex Noise Implementation ----------
     vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
     vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
