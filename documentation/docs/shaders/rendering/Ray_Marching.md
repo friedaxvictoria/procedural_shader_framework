@@ -1,8 +1,9 @@
-# Ray Marching Function
+<div class="container">
+    <h1 class="main-heading">Ray Marching Function</h1>
+    <blockquote class="author">by Ruimin Ma</blockquote>
+</div>
 
 - **Category:** Rendering
-
-- **Author:** Ruimin Ma
 
 - **Shader Type:** Signed Distance Function based ray traversal
 
@@ -77,4 +78,4 @@ if (hit) {
 }
 */
 ```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/rendering/Ray_Marching.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/rendering/raymarch.glsl)

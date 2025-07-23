@@ -3,6 +3,7 @@
 Welcome to the **Shader Library** — a central hub for exploring all procedural shaders used in this project.
 
 Each shader includes:
+
 - 📜 A brief description and visual preview  
 - 🧠 Algorithm or math explanation  
 - 💻 Source code with syntax highlighting  

@@ -1,8 +1,9 @@
-#  Surface Normal Estimation(advanced)
+<div class="container">
+    <h1 class="main-heading">Surface Normal Estimation(advanced)</h1>
+    <blockquote class="author">by Ruimin Ma</blockquote>
+</div>
 
 - **Category:** Rendering
-
-- **Author:** Ruimin Ma
 
 - **Shader Type:** Tetrahedral adaptive SDF normal estimation
 
@@ -108,4 +109,4 @@ vec3 calcNormal( vec3 pos, vec3 ray, float t )
     return normalize(grad);
 }
 ```
-🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/rendering/Tetrahedral_adaptive_SDF_normal_estimation.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/rendering/calcNormal.glsl)
