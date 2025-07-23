@@ -428,6 +428,7 @@ The `IntegrationFlexible` method computes the final color value for each screen-
 ## Technical Notes
 
 - All methods called within `IntegrationFlexible` are self-contained within the same `.gdshaderinc` file
+- User can add multiple shaders, like PhongLighting,  inside this `.gdshaderinc` file and integrate that shader functionality  inside the `IntegrationFlexible` method. 
 - The system supports up to 100 ray marching iterations for SDF objects
 - Water and desert use up to 128 iterations for higher precision
 - Maximum ray distance is 50.0 units for SDF objects, 43.0 for terrains

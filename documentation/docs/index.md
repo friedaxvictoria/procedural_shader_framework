@@ -86,6 +86,11 @@ Learn how to use shaders across different engines:
     <img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/lighting/sunrise.gif" width="100%" alt="Sunrise Lighting GIF">
   </div>
 
+  <div style="width: 30%;">
+    <h4>🛸 TIE Fighter</h4>
+    <img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/animation/TIE Fighter_animation.gif" width="100%" alt="TIE Fighter GIF">
+  </div>
+
 </div>
 
 <p align="center"><em>Animations provided by <strong>Shader Team</strong></em></p>

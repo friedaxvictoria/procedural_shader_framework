@@ -11,18 +11,18 @@
 !!! info "🎮 Quick Start: Running the Existing Scene"
     If we've cloned the project and want to see the final result immediately:
 
-        1. Open the Project in Godot
-            - Launch Godot Engine
-            - Select "Import" and navigate to the cloned project folder
-            - Open the project
+    1. Open the Project in Godot
+        - Launch Godot Engine
+        - Select "Import" and navigate to the cloned project folder
+        - Open the project
 
-        2. Run the Main Scene
-            - Select the main scene (sdf_updated.tscn)
-            - click the "Play" button
+    2. Run the Main Scene
+        - Select the main scene (sdf_updated.tscn)
+        - click the "Play" button
 
-        3. Explore the Interactive Features
-            - In the inspector, experiment with real-time parameter adjustments
-            - Observe the SDF-based procedural rendering in action
+    3. Explore the Interactive Features
+        - In the inspector, experiment with real-time parameter adjustments
+        - Observe the SDF-based procedural rendering in action
 
     The cloned project contains a complete, functional SDF rendering setup that we can immediately run and explore.
 ___
@@ -121,7 +121,7 @@ The **Dolphin** primitive supports additional animation parameters:
 
 ### 💾 Script Integration Example
 
-Within the `_ready()` function of `sdf_updated.gd`, populate the scene by instantiating and configuring `ShaderObject` instances. **[[Explore more on Godot Script]](godot/gdScript.md)**
+Within the `_ready()` function of `sdf_updated.gd`, populate the scene by instantiating and configuring `ShaderObject` instances. **[[Explore more on Godot Script]](gdScript.md)**
 
 ```gd
 func _ready():
