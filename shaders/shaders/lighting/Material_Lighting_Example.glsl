@@ -1,3 +1,11 @@
+/*
+ * Example Shader: Basic Raymarched Sphere with Material and Lighting System
+ * Author: Xuetong Fu
+ * Description:
+ * This shader demonstrates a simple raymarching setup to render a sphere using
+ * a modular material and lighting system. 
+ */
+
 // === Struct Definitions ===
 struct MaterialParams {
     vec3 baseColor;           // Diffuse/albedo base color
