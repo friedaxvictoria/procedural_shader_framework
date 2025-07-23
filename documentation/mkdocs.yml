@@ -145,12 +145,11 @@ nav:
     - Overview: engines/unreal.md
     - Global Variables: engines/unreal/globalVariables.md
     - Helper Functions: engines/unreal/helperFunctions.md
-    - Uniforms and C#: engines/unreal/uniformsAndCs.md
     - The Integration:
-      - Basics: 
-        - Fragment Coordinates: engines/unreal/basics/fragCoords.md
-        - Combine Color: engines/unity/unreal/combineColor.md
-        - Minimum: engines/unreal/basic/minimum.md
+      - Utility: 
+        - Fragment Coordinates: engines/unreal/utils/fragCoords.md
+        - Combine Color: engines/unreal/utils/combineColor.md
+        - Minimum: engines/unreal/utils/minimum.md
       - Camera:
         - Camera Matrix: engines/unreal/camera/cameraMatrix.md
         - Rotation: engines/unreal/camera/cameraRotation.md
