@@ -1,6 +1,6 @@
 #  🧩Boat and Flag Shader
 
-<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/BoatAndFlag.png" alt="Boat and Flag" width="400" height="225">
+<img src="../../static/images/images4Shaders/BoatAndFlag.png" alt="Boat and Flag" width="400" height="225">
 
 - **Category:** Scene
 - **Author:** Xuetong Fu
