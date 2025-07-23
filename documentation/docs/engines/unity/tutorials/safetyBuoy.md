@@ -3,11 +3,9 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This tutorial is designed to illustrate the workflow of Unity's integration of the framework. It showcases relevant connections between functions and gives examplary use-cases for them. 
-
 The tutorial goes step-by-step through the creation of a scene containing the **ocean on which a safety buoy is floating**. In the **foreground a dolphin swims by** and the sky is illuminated by the **setting sun**.
 
-> This tutorial is for visual scripting only. To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
+> This tutorial is for Visual Scripting only. To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
 
 Once the UPM ist installed, this example can be [downloaded](../../unity.md#user-shaders).
 
@@ -122,7 +120,7 @@ The finished ShaderGraph:
     ![Unity Safety Buoy: Final ShaderGraph](../images/safetyBuoy/sbFinalResult.png){ width="900" }
     </figure>
 
-The output with camera at `float3(0,3,15)`:
+Finally, the shader shows the safety buoy peacefully floating on the ocean. This output uses a camera at `float3(0,3,15)`:
     <figure markdown="span">
     ![Unity Safety Buoy: Final Output](../images/safetyBuoy/finalResults.gif){ width="700" }
     </figure>

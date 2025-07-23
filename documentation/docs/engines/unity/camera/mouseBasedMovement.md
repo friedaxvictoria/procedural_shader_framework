@@ -5,7 +5,7 @@
 
 This function imitates a camera rotation based on the mouse position. With a left mouse-click the world can be rotated in the x- and y-direction. 
 
-> Other than the other camera animations, this mouse-based rotation should not be connected to the [Camera Matrix](cameraMatrix.md). The usage of *lookAtPosition* breaks the usability of this function.
+> In contrast to the other camera animations, this mouse-based rotation should not be connected to the [Camera Matrix](cameraMatrix.md). The usage of *lookAtPosition* would break the usability of this function.
 
 ---
 

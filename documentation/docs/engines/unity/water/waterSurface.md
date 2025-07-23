@@ -158,7 +158,7 @@ Read about setting the water's material-values and hit-index at [Lighting Genera
 | `hitIndex` | int  |  A value determining what surface has been hit. The water gets a hard-coded hitIndex.|
 | `rayDirection` | float3   |  Ray direction dependant on the current fragment coordinates |
 
-All outputs are to be plugged into a [Combine Color](../basics/combineColor.md) or an arbitrary [Lighting Function](../lighting/generalInformation.md).
+The outputs are to be plugged into a [Combine Color](../basics/combineColor.md) or an arbitrary [Lighting Function](../lighting/generalInformation.md).
 
 ---
 

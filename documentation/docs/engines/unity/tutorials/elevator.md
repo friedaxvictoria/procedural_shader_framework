@@ -3,9 +3,9 @@
     <blockquote class="author">by Utku Alkan</blockquote>
 </div>
 
-This tutorial walks you through building an elevator scene. The scene includes a moving elevator, walls, a simple passenger, lighting, and animated motion via `tween1D_float`.
+This tutorial walks you through building an elevator scene. The scene includes a **moving elevator**, walls, **a simple passenger**, lighting, and **animated motion** via `tween1D_float`.
 
-> This tutorial is for standard scripting only.
+> This tutorial is for Standard Scripting only.
 
 Once the UPM ist installed, this example can be [downloaded](../../unity.md#user-shaders).
 

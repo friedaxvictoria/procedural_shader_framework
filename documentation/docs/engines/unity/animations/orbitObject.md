@@ -36,7 +36,7 @@ void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axi
 | `axis`   | float3   | Axis around which the object rotates <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|
 | `radius`   | float   | Distance at which the object rotates around the centre point|
 | `speed`   | float   | Speed with which the rotation is applied <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
-| `angleOffset`   | float   | =ptional offset to the rotation defined in degrees. This allows objects to use the same rotation at different starting positions.|
+| `angleOffset`   | float   | Optional offset to the rotation defined in degrees. This allows objects to use the same rotation at different starting positions.|
 
 > By setting the radius to 0, a self-rotation of the object can be achieved.
 
@@ -46,7 +46,7 @@ void orbitObjectAroundPoint_float(float3 seedPosition, float3 center, float3 axi
 | `position`   | float3   | Current position of the object |
 | `angle`        | float   | Angle defining the self-rotation of the object |
 
-The outputs can directly be plugged into the inputs of SDF functions (e.g. [Sphere](../sdfs/sphere.md)) or lighting functions (e.g. [Point Light](../lighting/pointLight.md)). As lighting functions are not susceptible to changes of the angle, it only requires the **position** as input.
+The outputs can directly be plugged into the inputs of [SDF Functions](../sdfs/generalInformation.md) or [Lighting Functions](../lighting/generalInformation.md). As lighting functions are not susceptible to changes of the angle, they only require the **position** as input.
 
 ---
 

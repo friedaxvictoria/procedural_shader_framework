@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function computes the height of the water environment using raymarching. It takes an arbitrary input position and returns that very position moved to the correct height. This is useful to place objects on the [Water Surface](waterSurface.md).
+This function computes the height of the water environment using raymarching. It takes an arbitrary input position and returns that very position moved to the correct height. This is useful for placing objects on the [Water Surface](waterSurface.md).
 
 ---
 
@@ -85,7 +85,7 @@ void sampleHeightField_float(float3 seedPosition, out float3 heightPosition)
 ### Outputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `heightPosition`  <img width=100/>  | float3   |  Original position moved to the correct height of the water. This position can be plugged into the position-input of an SDF function (e.g. [Sphere](../sdfs/sphere.md)) or lighting functions (e.g. [Point Light](../lighting/pointLight.md)) in order to place then on top of the water's surface. |
+| `heightPosition`  <img width=100/>  | float3   |  Original position moved to the correct height of the water. This position can be plugged into the position-input of an [SDF](../sdfs/generalInformation.md) or [Lighting Function](../lighting/generalInformation.md) in order to place then on top of the water's surface. |
 
 ---
 

@@ -3,9 +3,9 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based dolphin. In order for the cube to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
+This function creates an internal instance of an SDF-based dolphin. In order for the dolphin to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
 
-The animation of the dolphin utilises modulo to avoid the dolphin swimming further and further away. Therefore, after a set amount of time, the dolphin disappears and reappears at its starting position.
+> The animation of the dolphin utilises modulo to avoid the dolphin swimming further and further away. Therefore, after a set amount of time, the dolphin disappears and reappears at its starting position.
 
 ---
 
@@ -188,7 +188,7 @@ float shininess, out int indexOut)
 ### Inputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `index`  <img width=50/>  | int   | Index at which the dolphin is stored  |
+| `index`  <img width=100/>  | int   | Index at which the dolphin is stored  |
 | `position`        | float3   | Central position |
 | `timeOffset`        | float   | Time at which the dolphin is first seen in the sceen |
 | `speed`        | float   | Speed at which the dolphin moves <br> <blockquote>*ShaderGraph default value*: 1</blockquote> |
@@ -229,4 +229,4 @@ float shininess, out int indexOut)
 
 ---
 
-Find the original shader code [here](../../../shaders/scenes/dolphin.md). Simplifications such as removing custom coloring were made to integrate the dolphin better into the SDF-framework.
+Find the original shader code [here](../../../shaders/scenes/dolphin.md). Simplifications such as removing custom coloring were made to integrate the dolphin into the SDF-framework.

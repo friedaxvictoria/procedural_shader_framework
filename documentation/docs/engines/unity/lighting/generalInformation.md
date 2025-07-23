@@ -11,10 +11,10 @@ The lighting functions are an essential part of the framework. They return the f
 
 There are two major types of lighting implemented. Make sure to use the one that fits the scene the best or combine them. 
 
-1. Lighting that effect the atmosphere. Even if the fragment does not contain a hit, the fragment is effected by the light.  
+1. **Lighting that effect the atmosphere:** Even if the fragment does not contain a hit, the fragment is effected by the light.  
     1. [Sunrise](sunriseLight.md)
     2. [Point Light](pointLight.md)
-2. Lighting that does not effect the atmosphere. The lighting only effects objects within the scene and changes the visual output of their surface. 
+2. **Lighting that does not effect the atmosphere:** The lighting only effects objects within the scene and changes the visual output of their surface. 
     1. [Lambertian Lighting](lambLight.md)
     2. [Blinn Phong Lighting](blinnPhongLight.md)
     3. [Toon Lighting](toonLight.md)
@@ -38,20 +38,25 @@ To allow the application of lighting functions to the [Water Surface](../water/w
 
 ## How to Combine Lighting Functions
 
-To combine lighting functions simply add the resulting colors together. For ShaderGraph the Unity's *Add Node* can be used for convenience. 
+To combine lighting functions simply add the resulting colors together. 
+
+=== "Visual Scripting"  
+    In ShaderGraph, Unity's built-in *Add Node* can be used for convenience. 
+
     <figure markdown="span">
     ![Unity Add Lighting](../images/lighting/addLight.png){ width="400" }
     </figure>
 
-For the standart scripting users can combine the lights by simply adding the outputs.
-```hlsl
-pointLight_float(hitPos, normal, hitID, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05,  colorOut1);
-applyToonLighting_float(hitPos, normal, hitID, _LightPosition, colorOut2);
-sunriseLight_float(hitPos, normal, hitID, rayDir1, colorOut3);
+=== "Standard Scripting"  
+    ```hlsl
+    pointLight_float(hitPos, normal, hitID, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05,  colorOut1);
+    applyToonLighting_float(hitPos, normal, hitID, _LightPosition, colorOut2);
+    sunriseLight_float(hitPos, normal, hitID, rayDir1, colorOut3);
 
-colorOut = colorOut1 + colorOut2 + colorOut3;
-```
-Example output
-    <figure markdown="span">
-    ![Unity Add Lighting](../images/lighting/examples/PointToonSunrise.png){ width="400" }
-    </figure>
+    colorOut = colorOut1 + colorOut2 + colorOut3;
+    ```
+
+    Examplary output:
+        <figure markdown="span">
+        ![Unity Add Lighting](../images/lighting/examples/PointToonSunrise.png){ width="400" }
+        </figure>

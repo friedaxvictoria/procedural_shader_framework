@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based hexagonal prism. In order for the cube to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
+This function creates an internal instance of an SDF-based hexagonal prism. In order for the hexagonal prism to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
 
 ---
 
@@ -36,7 +36,7 @@ float shininess, float noise, out int indexOut)
 ### Inputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `index`  <img width=50/>  | int   | Index at which the hexagonal prism is stored  |
+| `index`  <img width=100/>  | int   | Index at which the hexagonal prism is stored  |
 | `position`        | float3   | Central position |
 | `height`        | float   | Height of the hexagonal prism <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|
 | `axis`            | float3   | Axis determining the orientation <br> <blockquote>*ShaderGraph default value*: float3(0,1,0)</blockquote>|

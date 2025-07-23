@@ -3,9 +3,9 @@
     <blockquote class="author">by Utku Alkan and Frieda Hentschel</blockquote>
 </div>
 
-This tutorial walks you through building a stylized car. The scene features a red car with windows and wheels, smoothly driving across a platform, with additional details like lighting and subtle shake using `shakeObject_float` (currently there is no shake).
+This tutorial walks you through building a stylized car. The scene features a **red car with windows and wheels**, smoothly **driving across a platform**, with additional details like lighting and subtle shake using `shakeObject_float` (currently there is no shake).
 
-> Both visual scripting and standard scripting are explained. To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
+> Both Visual Scripting and Standard Scripting are explained. To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
 
 Once the UPM ist installed, this example can be [downloaded](../../unity.md#user-shaders). To change whether the ShaderGraph or the ShaderLab shader is applied to the material, drag-and-drop the desired one onto the corresponding material.
 
@@ -195,14 +195,14 @@ Once the UPM ist installed, this example can be [downloaded](../../unity.md#user
 
 ## The Result
 
-The final animated car moves back and forth, featuring stylized wheels, body, lights, and a toon-shaded finish.
-    <figure markdown="span">
-    ![Unity Car](../images/userShaders/car.gif){ width="900" }
-    </figure>
-
 The finished ShaderGraph:
     <figure markdown="span">
     ![Unity Car: Final ShaderGraph](../images/car/carFinalResults.png){ width="900" }
+    </figure>
+
+The final animated car moves back and forth, featuring stylized wheels, body, lights, and a toon-shaded finish.
+    <figure markdown="span">
+    ![Unity Car](../images/userShaders/car.gif){ width="900" }
     </figure>
 
 ## The Whole Code

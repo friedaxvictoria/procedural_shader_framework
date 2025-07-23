@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function creates a linear shaking animation on objects by changing its position.
+This function creates a linear shaking animation on an object by changing its position.
 
 ---
 
@@ -40,7 +40,7 @@ void shakeObject_float(float3 seedPosition, float intensity, float speed, out fl
 ### Outputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `position`   | float3   |  Current position of the object which can directly be plugged into the inputs of an SDF function (e.g. [Sphere](../sdfs/sphere.md)) or lighting functions (e.g. [Point Light](../lighting/pointLight.md)). |
+| `position`   | float3   |  Current position of the object which can directly be plugged into the inputs of [SDF Functions](../sdfs/generalInformation.md) or [Lighting Functions](../lighting/generalInformation.md). |
 
 ---
 

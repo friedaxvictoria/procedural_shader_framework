@@ -157,7 +157,7 @@ nav:
         - Back And Forth: engines/unreal/camera/cameraBackAndForth.md
         - Mouse-Based Rotation: engines/unreal/camera/mouseBasedMovement.md
       - Basic:
-        -Material: engines/unreal/basics/material.md
+        - Material: engines/unreal/basics/material.md
       - SDFs: 
         - Sphere: engines/unreal/sdfs/sphere.md
         - Rock: engines/unreal/sdfs/rock.md

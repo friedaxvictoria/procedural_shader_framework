@@ -62,4 +62,4 @@ The computation of the root color is required to ensure that the seed color is w
 
 ---
 
-This is an engine-specific implementation without a shader-basis. It is inspired by this [shadertoy shader](https://www.shadertoy.com/view/fl3fRf){target="_blank"}.
+This is an engine-specific implementation without a shader-basis. It is inspired by this [Shadertoy Shader](https://www.shadertoy.com/view/fl3fRf){target="_blank"}.

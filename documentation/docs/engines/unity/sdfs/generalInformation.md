@@ -17,9 +17,9 @@ Arrays in their very nature are not modifyable in their size. Thus, a pre-define
 
 ## Instantiation 
 
-Furthermore, ShaderGraph does not allow the access of arrays using input parameters, non-static, and non-constant variables. Thus, to fill the arrays, a work-around using for-loops was implemented. Each SDF uses an **index** to determine the location that it will be stored in. Subsequently, a loop iterates over all possible indices and writes the inputs once the correct index has been reached.
+Furthermore, ShaderGraph does not allow the access of arrays using input parameters, non-static, and non-constant variables. Each SDF uses an **index** to determine the location that it will be stored in. However, this function input is not accepted to access an array. Thus, to fill the arrays, a work-around using for-loops was implemented. A loop iterates over all possible indices and writes the inputs once the correct index has been reached.
 
-To allow for proper processing, the output-indices should be used as input-indices for the following SDF thus connecting the functions in series. The last SDF's output-index should be connected to the **number of SDFs** in the [SDF Raymarching](raymarching.md). This setup also ensures that, in case ShaderGraph is used, all nodes are connected to the graph.
+To allow for proper processing, the output-indices should be used as input-indices for the following SDF thus connecting the functions in series. The last SDF's output-index should be connected to the **number of SDFs** in the [SDF Raymarching](raymarching.md). This setup also ensures that, in case ShaderGraph is used, all nodes are connected in the graph.
 
 Additionally, each SDF is defined by a type. The values for the types can be found in the code for the respective SDFs and the [SDF Raymarching](raymarching.md).
 
@@ -53,6 +53,8 @@ float shininess, float timeOffset, float speed){
 ```
 
 ## Example Connectivity
+
+The examples below showcase how multiple SDFs should be connected in series via their indices.
 
 === "Visual Scripting"
 

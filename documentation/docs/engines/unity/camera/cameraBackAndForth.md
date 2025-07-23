@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function imitates a camera translation by changing the ray origin and the camera matrix. The translation occurs along the z-axis going from 0 to 1 using a sinus function.
+This function imitates a camera translation by changing the ray origin and the camera matrix. The translation occurs along the z-axis and cycles between 0 to 1 using a sinus function.
 
 ---
 

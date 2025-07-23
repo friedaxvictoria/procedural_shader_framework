@@ -3,11 +3,9 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This tutorial is designed to illustrate the workflow of Unity's integration of the framework. It showcases relevant connections between functions and gives examplary use-cases for them. 
-
 The tutorial goes step-by-step through the creation of a scene containing a **bouncing christmas tree** using animated SDFs and **some lights**.
 
-> This tutorial is for visual scripting only. To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
+> This tutorial is for Visual Scripting only. To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.
 
 Once the UPM ist installed, this example can be [downloaded](../../unity.md#user-shaders).
 
@@ -175,7 +173,7 @@ The finished ShaderGraph:
     ![Unity Christmas Tree: Final ShaderGraph](../images/christmasTree/christmasTree.png){ width="900" }
     </figure>
 
-The output with camera at `float3(0,-2,10)`:
+Finally, the final shader shows an excited christmas tree. This output uses a camera at `float3(0,-2,10)`:
     <figure markdown="span">
     ![Unity Christmas Tree: Final Output](../images/christmasTree/finalResult.gif){ width="700" }
     </figure>

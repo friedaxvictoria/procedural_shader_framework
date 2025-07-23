@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function creates an internal instance of an SDF-based torus. In order for the cube to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
+This function creates an internal instance of an SDF-based torus. In order for the torus to be visible in the final output, [SDF Raymarching](raymarching.md) and an arbitrary [Lighting Function](../lighting/generalInformation.md) have to be included. 
 
 ---
 
@@ -32,7 +32,7 @@ float shininess, float noise, out int indexOut)
 ### Inputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `index`  <img width=50/>  | int   | Index at which the torus is stored  |
+| `index`  <img width=100/>  | int   | Index at which the torus is stored  |
 | `position`        | float3   | Central position |
 | `radius`        | float   | Radius of the torus from center to the middle of the tube <br> <blockquote>*ShaderGraph default value*: 3</blockquote>|
 | `thickness`        | float   | Thickness of the torus' tube <br> <blockquote>*ShaderGraph default value*: 1</blockquote>|

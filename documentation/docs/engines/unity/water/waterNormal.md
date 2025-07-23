@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function computes the normal of the water surface at a given position. It can be used to adjust an objects orientation to match up with the water. 
+This function computes the normal of the water surface at a given position. It can be used to adjust an objects orientation to match up with the water's. 
 
 > Due to the normal of the water surface changing very rapidly, an approach was implemented that samples four normals with a distance of **sampleRadius** to the position in the x-z-plane. Their average is taken. To additionally smooth out the rapid change, the normal's influence can be adjusted.
 

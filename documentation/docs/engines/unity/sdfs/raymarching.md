@@ -75,6 +75,8 @@ void raymarch_float(int condition, float3x3 cameraMatrix, int numberSDFs, float2
 }
 ```
 
+See [Helper Functions](../helperFunctions.md) to find out more about ```computeCameraMatrix(float3 lookAtPosition, float3 eye, float3x3 mat)```.
+
 ---
 
 ## The Parameters
@@ -95,6 +97,8 @@ void raymarch_float(int condition, float3x3 cameraMatrix, int numberSDFs, float2
 | `hitIndex` | int  |  A value determining which SDF surface is the first to be hit|
 | `rayDirection` | float3   |  Ray direction dependant on the current fragment coordinates |
 
+The outputs are to be plugged into a [Combine Color](../basics/combineColor.md) or an arbitrary [Lighting Function](../lighting/generalInformation.md).
+
 ---
 
 ## Implementation
@@ -107,6 +111,8 @@ void raymarch_float(int condition, float3x3 cameraMatrix, int numberSDFs, float2
     </figure>
 
     >Due to internal workings of the node, the condition-input is not required. Within the SubGraph a *Branch On Input Connection* node is used to determine whether a camera matrix was connected to its respective input. This in turn determines the condition-value.
+
+    > The SubGraph:
 
     <figure markdown="span">
         ![Unity Inner Raymarching](../images/sdfs/innerRaymarching.png){ width="700" }

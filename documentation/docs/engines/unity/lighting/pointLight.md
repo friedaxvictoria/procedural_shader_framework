@@ -6,9 +6,10 @@
 This function simulates a point light source with distance-based attenuation and optional atmospheric decay. It casts a ray through the scene and accumulates light color based on distance from the point light, then applies Phong-based shading at the surface hit point.
 
 > The function does not check for objects between a point in space and the light. Therefore, it does not reproduce shadows. 
-    <figure markdown="span">
-        ![Unity Point Light](../images/lighting/examples/pointLight.png){ width="500" }
-    </figure>
+    
+*<figure markdown="span">
+    ![Unity Point Light](../images/lighting/examples/pointLight.png){ width="500" }
+</figure>*
 
 ---
 

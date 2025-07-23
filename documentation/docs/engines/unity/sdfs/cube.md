@@ -31,7 +31,7 @@ float shininess, float noise, out int indexOut)
 ### Inputs:
 | Name            | Type     | Description |
 |-----------------|----------|-------------|
-| `index`  <img width=50/>  | int   | Index at which the cube is stored  |
+| `index`  <img width=100/>  | int   | Index at which the cube is stored  |
 | `position`        | float3   | Central position |
 | `size`        | float3   | Expand in each of the three dimensions <br> <blockquote>*ShaderGraph default value*: float3(1,1,1)</blockquote>|
 | `radius`        | float   | Radius with which the corners are rounded |

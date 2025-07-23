@@ -215,8 +215,6 @@ void tween1D(float start, float end, float duration, int tweenType, float startT
 |--------------|--------|-------------|
 | `value`  | float3/float  | Interpolated value at current time |
 
-The output can be used for an arbitrary input parameter. It is the most suitable for animating an SDF's parameters such as *Position*, *Color*, *Scale*, ...
-
 
 ## Tween Types
 
@@ -276,7 +274,7 @@ To check the easings of the tween types [here](https://easings.net/).
         ![Unity 3D Tweening](../images/animations/3DTweening.png){ width="400" }
     </figure>
 
-    > The tween type can be provided by the tween value as a ``float``.
+    > The tween type can be provided as the enum's corresponding ``integer``.
 
 === "Standard Scripting"
     Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/tween_functions.hlsl"```
