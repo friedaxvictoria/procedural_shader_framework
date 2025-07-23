@@ -51,7 +51,7 @@ void shakeObject(float3 seedPosition, float intensity, float speed, float time, 
     Find the node at `ProceduralShaderFramework/Animation/ShakeObject`
 
     <figure markdown="span">
-        ![Unity Shake Object](../images/animations/shakeObject.png){ width="500" }
+        ![Unreal Engine Shake Object](../images/animations/ShakeObject.png){ width="500" }
     </figure>
 
 === "Standard Scripting"

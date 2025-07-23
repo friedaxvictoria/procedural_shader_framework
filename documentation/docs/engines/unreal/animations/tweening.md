@@ -268,13 +268,13 @@ To check the easings of the tween types [here](https://easings.net/).
     Find the node for 1D Tweening at ```ProceduralShaderFramework/Animation/Tween1D```
 
     <figure markdown="span">
-        ![Unity 1D Tweening](../images/animations/1DTweening.png){ width="300" }
+        ![Unreal Engine 1D Tweening](../images/animations/Tween1D.png){ width="300" }
     </figure>
 
     Find the node for 3D Tweening at ```ProceduralShaderFramework/Animation/Tween3D```
 
     <figure markdown="span">
-        ![Unity 3D Tweening](../images/animations/3DTweening.png){ width="400" }
+        ![Unreal Engine 3D Tweening](../images/animations/Tween3D.png){ width="400" }
     </figure>
 
     > The tween type can be provided by the tween value as a ``float``.
