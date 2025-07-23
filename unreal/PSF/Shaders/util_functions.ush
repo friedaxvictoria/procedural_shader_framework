@@ -3,9 +3,10 @@
 
 #include "global_variables.ush"
 
-void computeUV(float2 fragCoord, out float2 uv)
+void computeUV(float2 fragCoord, float2 viewportSize, out float2 uv)
 {
-    uv = (fragCoord.xy * 2.0 - 1.0) / float2(screenSize.y / screenSize.x, 1.);
+    float2 flippedUv = float2(fragCoord.x, -fragCoord.y + 1);
+    uv = flippedUv * 2 - 1;
 }
 
 // after lighting function
@@ -27,19 +28,20 @@ void combinedColor(float4 hitPosition0, float3 color0, float4 hitPosition1, floa
 
 
 // before lighting function
-void getMinimum(float4 hitPosition0, float4 hitPosition1, float3 normal1, float3 normal2, float hitIndex1, float hitIndex2, out float4 hitPos, out float3 normal, out float hitIndex)
+void getMinimum(float4 hitPosition0, float3 normal0, MaterialParams material0, float4 hitPosition1, float3 normal1, MaterialParams material1, out float4 hitPos, out float3 normal, out MaterialParams material)
 {
     if (hitPosition0.w < hitPosition1.w && hitPosition0.w < _raymarchStoppingCriterium)
     {
         hitPos = hitPosition0;
-        normal = normal1;
-        hitIndex = hitIndex1;
+        normal = normal0;
+        material = material0;
+        
     }
     else
     {
         hitPos = hitPosition1;
-        normal = normal2;
-        hitIndex = hitIndex2;
+        normal = normal1;
+        material = material1;
     }
 }
 

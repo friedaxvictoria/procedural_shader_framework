@@ -14,6 +14,7 @@
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
 	"Installed": false,
+	"Name": "ProceduralShaderFramework",
 	"Modules": [
 		{
 			"Name": "ProceduralShaderFramework",

@@ -4,12 +4,13 @@
 #include "global_variables.ush"
 #include "helper_functions.ush"
 #include "sdf_functions.ush"
-#include "basic_functions.ush"
+#include "util_functions.ush"
 #include "animation_functions.ush"
+#include "camera_functions.ush"
 #include "lighting_functions.ush"
 #include "material_functions.ush"
 #include "noise_functions.ush"
-#include "water_surface.ush"
+#include "water_functions.ush"
 #include "tween_functions.ush"
 
 #endif

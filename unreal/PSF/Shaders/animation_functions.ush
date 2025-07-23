@@ -3,43 +3,12 @@
 
 #include "global_variables.ush"
 #include "helper_functions.ush"
+#include "noise_functions.ush"
 
-void rotateCamera(float3 axis, float speed, float time, out float3x3 mat)
+void changingColorSin(float3 seedColor, float speed, float time, out float3 color)
 {
-    float angle = time * speed;
-    mat = computeRotationMatrix(normalize(axis), angle);
-}
-
-void backAndForth(float speed, float time, out float3x3 mat)
-{
-    float t = time * speed;
-    mat = half3x3(1, 0, 0, 0, 1, 0, 0, 0, abs(sin(t)));
-}
-
-// from https://www.shadertoy.com/view/NsS3Ww
-void moveViaMouse(float2 mousePosition, float2 screenSize, out float3x3 mat)
-{
-    
-    float2 mouse = mousePosition.xy / screenSize.xy;
-
-    mouse = mouse - 0.25;
-
-    // Convert to yaw and pitch
-    float yaw = lerp(-PI, PI, -mouse.x + 0.5); // == PI * mouse.x when centered
-    float pitch = lerp(-PI / 2, PI / 2, mouse.y + 0.5); // invert Y axis
-
-    float3x3 rotY = computeRotationMatrix(float3(1, 0, 0), yaw);
-    float3x3 rotX = computeRotationMatrix(float3(0, 1, 0), pitch);
-
-    mat = mul(-rotY, rotX); // yaw first, then pitch
-}
-
-// a camera animation ALWAYS has to end with this node!!
-void getCameraMatrix(float3x3 mat1, float3x3 mat2, float distance, float3 lookAtPos, out float3x3 camMatrix)
-{
-    float3x3 combinedMat = mul(mat1, mat2);
-    _rayOrigin = mul(float3(0, 0, distance), combinedMat);
-    camMatrix = computeCameraMatrix(lookAtPos, _rayOrigin, combinedMat);
+    float3 rootColor = asin(2 * seedColor - 1);
+    color = 0.5 + 0.5 * sin(time * speed * rootColor);
 }
 
 void translateObject(float time, float3 seedPosition, float3 dir, float speed, out float3 position)
@@ -60,18 +29,6 @@ void orbitObjectAroundPoint(float3 seedPosition, float3 center, float3 axis, flo
     angle = angle * 180 / PI;
 }
 
-void pulseObject(float time, float3 seedSize, float seedRadius, float freq, float amp, out float3 size, out float radius)
-{
-    float scale = 1.0 + sin(time * freq) * amp;
-    
-    size = seedSize * scale;
-    radius = seedRadius * scale;
-}
-
-float hash11(float x)
-{
-    return frac(sin(x * 17.23) * 43758.5453);
-}
 
 void shakeObject(float3 seedPosition, float intensity, float speed, float time, out float3 position)
 {
@@ -94,13 +51,6 @@ void cycleColor(float3 seedColor, float speed, float time, out float3 color)
     float3 rgb = saturate(abs(frac(hsv.x + float3(0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0);
     
     color = rgb * seedColor;
-}
-
-// inspo: https://www.shadertoy.com/view/fl3fRf 
-void changingColorSin(float3 seedColor, float speed, float time, out float3 color)
-{
-    float3 rootColor = asin(2 * seedColor - 1);
-    color = 0.5 + 0.5 * sin(time * speed * rootColor);
 }
 
 float3 animateUpDown(float3 pos, float time, float amplitude = 0.5, float frequency = 2.0)

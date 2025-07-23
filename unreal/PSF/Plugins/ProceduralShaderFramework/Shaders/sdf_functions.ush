@@ -4,6 +4,9 @@
 #include "helper_functions.ush"
 #include "global_variables.ush"
 #include "material_functions.ush"
+// PSFCODEINCLUDECUSTOMSDFSTART
+
+// PSFCODEINCLUDECUSTOMSDFEND
 
 struct SDF
 {
@@ -164,6 +167,10 @@ void addRock(inout int index, float3 position, float3 size, float3 axis, float a
     addSDF(index, newSDF);
 }
 
+// PSFCODEADDCUSTOMSDFSTART
+
+// PSFCODEADDCUSTOMSDFEND
+
 
 float evalSDF(int index, float3 p, float time = 0.0)
 {
@@ -203,6 +210,9 @@ float evalSDF(int index, float3 p, float time = 0.0)
         float noise = snoise(probePoint * 5.0) * 0.1;
         return base - noise * 0.3;
     }
+    // PSFCODEEVALCUSTOMSDFSTART
+
+    // PSFCODEEVALCUSTOMSDFEND
 
     return 1e5;
 }

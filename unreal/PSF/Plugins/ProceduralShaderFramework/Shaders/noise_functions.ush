@@ -89,6 +89,10 @@ float4 hash44(float4 p)
     return frac((p.xxyz + p.yzzw) * p.zywx);
 }
 
+float hash11(float x)
+{
+    return frac(sin(x * 17.23) * 43758.5453);
+}
 
 float n31(float3 p)
 {
