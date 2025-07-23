@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Volumetric Phase Functions
+// Author: Xuetong Fu
 // Category: Volumetric Lighting
 // Description: 
 //   Provides a collection of common phase functions used in volumetric 
@@ -34,7 +35,7 @@ float computePhaseIsotropic() {
 // ------------------------------------------------------
 // Henyey-Greenstein Phase Function
 // Description: Models anisotropic scattering based on a 
-//   single anisotropy parameter g ¡Ê [-1, 1].
+//   single anisotropy parameter g[-1, 1].
 // Use: Natural media like clouds, fog, flame, and smoke.
 // Pros: Widely used, physically plausible, tunable directionality.
 // Cons: Slightly more expensive than isotropic.
@@ -49,7 +50,7 @@ float computePhaseHG(float cosTheta, float g) {
 // Schlick Phase Function (Approximate HG)
 // Description: Fast approximation of HG phase function.
 // Use: Real-time engines or when performance is critical.
-// Pros: Cheaper than HG, reasonable approximation for g ¡Ê [0, 0.8].
+// Pros: Cheaper than HG, reasonable approximation for g[0, 0.8].
 // Cons: Less accurate at extreme anisotropy values.
 // ------------------------------------------------------
 float computePhaseSchlick(float cosTheta, float g) {
