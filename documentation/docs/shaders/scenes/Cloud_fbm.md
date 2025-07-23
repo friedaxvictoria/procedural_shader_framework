@@ -1,6 +1,6 @@
 # 🧩 Volumetric FBM Cloud Shader
 
-<img src="../../../../shaders/screenshots/cloud_fbm.png" alt="Volumetric FBM Cloud Output" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/cloud_fbm.png?raw=true" alt="Volumetric FBM Cloud Output" width="400" height="225">
 
 - **Category:** Scene  
 - **Author:** Wanzhang He  
@@ -130,3 +130,4 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     fragColor = vec4(pow(color, vec3(1.0 / 2.2)), 1.0);
 }
 ```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/scenes/cloud_fbm.glsl)

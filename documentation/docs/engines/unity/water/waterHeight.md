@@ -99,8 +99,15 @@ void sampleHeightField_float(float3 seedPosition, out float3 heightPosition)
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/water_surface.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    sampleHeightField_float(float3(0,0,0), waterSurfacePos);
+    ```
+
 
 ---
 

@@ -3,6 +3,7 @@
 // Category: Geometry
 // Description: Draws a centered red square using an SDF approach.
 // Screenshot: screenshots/geometry/square.png
+// From Wanzhang He
 // ==========================================
 
 /*

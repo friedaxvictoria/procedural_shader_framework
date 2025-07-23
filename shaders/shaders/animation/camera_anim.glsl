@@ -1,5 +1,6 @@
 // camera_anim.glsl
 // Modular camera animation system (SDF-style)
+// From Wanzhang He
 
 // ==========================
 // === Camera state struct ==

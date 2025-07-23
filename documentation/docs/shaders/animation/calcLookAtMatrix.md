@@ -1,6 +1,6 @@
 # 🧩 Camera Orientation Setup Shader
 
-<img src="../../../../shaders/screenshots/animation/RollingRefraction.gif" alt="Rolling Camera Preview" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/animation/RollingRefraction.gif?raw=true" alt="Rolling Camera Preview" width="400" height="225">
 
 - **Category:** Animation / Camera  
 - **Author:** Wanzhang He  

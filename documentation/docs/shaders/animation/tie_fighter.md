@@ -1,102 +1,85 @@
-# 🧩 SDF Animation Shader
+# 🧩 TIE Fighter Animation Shader
 
-- **Category:** Animation / SDF / Scene
+- **Category:** Animation 
 - **Author:** Wanzhang He
+
+---
+
 ## 📥 Input Requirements
 
-This shader animation module depends on the following inputs:
+This shader relies on a **looped time input** `T` ranging approximately from `0` to `40`, which drives both the object and camera animation.
 
 ### ⏱ Time Input
-- `iTime` (`float`) – global shader time (in seconds)
-- `timeMode` (`int`) – animation time modulation mode
-  - `0`: linear time
-  - `1`: `sin(t)`
-  - `2`: `abs(sin(t))`
-
-### 🎛 Animation Control Parameters
-- `animationType` (`int`) – selects the animation type:
-  - 1 = Translate
-  - 2 = Orbit
-  - 3 = Self Rotate
-  - 4 = Pulse Scale
-  - 5 = TIE Path
-- `translateParam` (`vec4`) – direction (xyz), speed (w)
-- `orbitParam` (`vec4`) – center (xyz), angular speed (w)
-- `selfRotateParam` (`vec4`) – axis (xyz), angular speed (w)
-- `pulseParam` (`vec2`) – frequency, amplitude
-
-### 🧩 SDF Object Parameters
-- `_sdfTypeFloat[]` (`float`) – object type (0=Sphere, 1=Box, etc.)
-- `_sdfPositionFloat[]` (`vec3`) – object positions
-- `_sdfSizeFloat[]` (`vec3`) – size/scale per object
-- `_sdfRadiusFloat[]` (`float`) – object radius (for spheres, torus)
-
-> These parameters define the structure and behavior of the animated SDF objects. The animation matrix is applied to these objects dynamically during rendering.
+- `T` (`float`) – scene time in seconds, typically looped over `[0‥40]`
 
 ---
 
-## 🧠 Algorithm
+## ✈️ Fighter Animation: `tiePos(vec3 p, float t)`
 
-This shader implements a modular animation system for SDF-based objects.
-It supports several animation types with matrix-based transformations.
+This function applies stylized, non-linear movement to the TIE Fighter body:
 
-### 1. Animation Modes
+- **Lateral sway**: `cos(t * 0.7)` affects X position  
+- **Vertical bob**: `cos(t)` affects Y position  
+- **Depth sway**: `sin(t * 1.1)` affects Z position  
+- **Roll**: `mat2` rotation applied in the X–Y plane, scaled by `-x * 0.1`
 
-Supported animation types:
-- **Translate**: sinusoidal movement along a direction
-- **Orbit**: rotate around a given point
-- **Self Rotate**: spin around own axis
-- **Pulse Scale**: object expands/contracts periodically
-- **TIE Path**: figure-8 path with additional rotation
-
-### 2. Time Modulation
-
-Time is modulated with three modes:
-- `t` (linear)
-- `sin(t)`
-- `abs(sin(t))`
-
-This allows for smooth, oscillatory, or one-direction movement patterns.
-
-### 3. Matrix Composition
-
-Each animation mode returns a `mat4` transformation matrix.
-These are composed in `getAnimationMatrix(...)` to produce:
-- `animationMatrix`: applied to SDF object
-- `inverseAnimationMatrix`: used for raymarching transform
-
-### 4. SDF Integration
-
-Objects are described by arrays like `_sdfTypeFloat`, `_sdfPositionFloat`, etc.
-Each object's ray is transformed by the matrix before raymarching, enabling animation.
+These effects combine into a figure-8–like flight pattern with gentle roll, creating a more cinematic, natural feel.
 
 ---
 
-## 💻 Code
+## 🎥 Camera Animation: `getCamera(float T, out vec3 ro, out vec3 lookAt)`
 
-### 1. SDF Object Configuration
+The camera follows the fighter dynamically, with two phases:
+
+1. **Close follow** (0–5s):  
+   - `lookAt` targets the animated fighter's position  
+   - `ro` (camera origin) is just behind the target
+
+2. **Pull-back transition** (after 5s):  
+   - `lookAt` transitions to a fixed point  
+   - `ro` moves into an orbiting camera path
+
+This is achieved using `smoothstep(0.0, 5.0, T)` to blend between the two states.
+
+---
+
+## 🧠 Algorithm Summary
+
+| Function       | Purpose                    |
+|----------------|----------------------------|
+| `tiePos(...)`  | Animate fighter motion     |
+| `getCamera(...)` | Animate cinematic camera  |
+
+These are **not part of the general animation system**, but instead define a **scene-specific animation pipeline** for demonstration or cinematic shots.
+
+---
+
+## 💻 Shader Code
 
 ```glsl
-// ===== SDF Variables =====
-#define SDF_COUNT 10
-float _sdfTypeFloat[SDF_COUNT];
-vec3 _sdfPositionFloat[SDF_COUNT];
-vec3 _sdfSizeFloat[SDF_COUNT];
-float _sdfRadiusFloat[SDF_COUNT];
+/** Fighter body motion */
+vec3 tiePos(vec3 p, float t)
+{
+    float x = cos(t * 0.7);
+    p += vec3(x, cos(t), sin(t * 1.1));
+    p.xy *= mat2(cos(-x*0.1), sin(-x*0.1),
+                -sin(-x*0.1), cos(-x*0.1));
+    return p;
+}
 
+/** Camera path: follow then pull out */
+void getCamera(float T, out vec3 ro, out vec3 lookAt)
+{
+    float t = smoothstep(0.0, 5.0, T);
+
+    lookAt = mix(vec3(0,0,6) - tiePos(vec3(0), T-0.2),
+                 vec3(2.5,0,0), t);
+
+    ro = mix(lookAt - vec3(0,0,1),
+             vec3(4.0 + cos(T),
+                  0.2 * sin(T),
+                 -8.0 + 6.0 * cos(T * 0.2)),
+             t);
+}
 ```
-
-### 2. Animation Parameters
-
-```glsl
-// ===== Animation Variables =====
-int animationType = 1;
-int timeMode = 1;
-
-vec4 translateParam = vec4(1.0, 0.0, 0.0, 2.0);
-vec4 orbitParam     = vec4(0.0, 0.0, 0.0, 1.0);
-vec4 selfRotateParam = vec4(0.0, 1.0, 0.0, 1.5);
-vec2 pulseParam     = vec2(3.0, 0.2);
-
-```
-
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/animation/TIE%20Fighter_animation.glsl)

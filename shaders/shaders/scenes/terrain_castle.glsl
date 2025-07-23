@@ -1,3 +1,17 @@
+/*
+ * Example Shader: Terrain and Castle Integration
+ *
+ * Author: Xuetong Fu
+ *
+ * Description:
+ *   This example combines procedurally generated heightmap terrain with
+ *   modular SDF-based structures (houses and towers) to form a stylized castle scene.
+ *   It includes:
+ *     - Terrain height computation using blurred texture and FBM
+ *     - Parametric SDF modeling for houses and towers with rotation & placement
+ *     - Material assignment and lighting using Blinn-Phong, AO, and soft shadows
+ */
+
 #define FARCLIP    100.0         // Maximum raymarch distance (scene render depth limit)
 
 #define MARCHSTEPS 1000           // Maximum number of raymarching steps
@@ -526,7 +540,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     // === Scene SDF objects ===
     SDF terrain = SDF(0, vec3(0.0), vec3(0.0), 0.0);
     SDF castle1 = SDF(1, vec3(0.0), vec3(0.0), 0.0);
-    SDF castle2 = SDF(1, vec3(3.0, 0.0, 5.0), vec3(0.0), 15.0);
+    SDF castle2 = SDF(1, vec3(3.0, 0.0, 5.0), vec3(0.0), radians(15.0));
     sdfArray[0] = terrain;
     sdfArray[1] = castle1;
     sdfArray[2] = castle2;

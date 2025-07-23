@@ -1,6 +1,11 @@
-#  🧩 Cloud and Ground Integration Shader
+<div class="container">
+    <h1 class="main-heading">Cloud and Ground Integration Shader</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
 
-<img src="../../../../shaders/screenshots/CloudAndGround.png" alt="Cloud Ground" width="400" height="225">
+<img src="../../../static/images/images4Shaders/cloud_ground.png" alt="Cloud And Ground" width="400" height="225">
+
+---
 
 - **Category:** Scene
 - **Author:** Xuetong Fu
@@ -22,18 +27,80 @@ It blends:
 
 and uses reusable modules from the project to handle:
 
-- Noise
-- Cloud volume
-- Volume lighting context
-- Volume lighting functions
-- Volume material system
-- Material systems
-- Lighting context
-- Lighting functions
+- **Procedural Components**
+    - Noise
+
+- **Volumetric Modules**
+    - Cloud volume
+    - Volume material system
+    - Volume lighting context
+    - Volume lighting functions
+
+- **Surface Modules**
+    - Material systems
+    - Lighting context
+    - Lighting functions
+
+---
+
+## 🔗 Integration Strategy
+
+This shader demonstrates how **lighting**, **surface material**, and **volumetric cloud** modules are combined into a cohesive rendering pipeline. Each module is responsible for a distinct visual effect, but they are integrated through a shared lighting context and coordinated call order.
+
+### 1. Shared Setup: Consistent Lighting Across Modules
+
+A global lighting configuration is defined at the top of `mainImage()` — including `lightDir`, `lightColor`, and `ambient`. These values are reused throughout the pipeline by both:
+
+- **Surface shading** (Phong lighting)
+- **Volumetric scattering** (cloud raymarching)
+
+This ensures visual consistency in light direction and tone across terrain and clouds.
+
+### 2. Independent Evaluation: Surface and Volume Modules
+
+The shader evaluates each visual domain separately:
+
+- **Ground Surface**  
+  When the ray hits the planet:
+    - Surface color is defined with a `makePlastic()` material
+    - Lighting is computed using `applyPhongLighting()`
+    - Cloud density above the surface is queried via `computeCloudOcclusion()` and used to darken the terrain
+
+- **Cloud Volume**  
+  Regardless of ray direction:
+    - A volumetric cloud material is created using `makeCloud()`
+    - Cloud density is integrated using `integrateCloud()`
+
+Each module operates independently, but uses the **same light input** to ensure global coherence.
+
+### 3. Unified Output: Alpha-Guided Blending
+
+Finally, the surface, cloud, and sky contributions are blended:
+
+- If the ray passes through cloud, `cloudCol.a` controls blending
+- If no cloud is hit, surface or sky is shown directly
+- If camera is inside cloud, smooth cloud–sky or cloud–ground transitions are applied
+
+### **Summary of Interactions**
+
+| Module             | Input Shared                   | Interaction Type                          |
+|--------------------|-------------------------------|-------------------------------------------|
+| Lighting (core)    | `lightDir`, `lightColor`, `ambient` | Shared between surface and volume modules |
+| Surface Material   | `MaterialParams`               | Affects terrain shading via Phong         |
+| Volume Material    | `VolMaterialParams`            | Affects cloud scattering & absorption     |
+| Bridge (Occlusion) | Density via `computeCloudOcclusion()` | Volume affects ground via shadowing  |
+
+> This structure enables reusable, swappable modules while maintaining synchronized lighting and unified rendering. It's suitable for extensible scenes with terrain, fog and more.
 
 ---
 
 ## 🎛️ Parameters
+
+### Universal Constants
+
+| Name            | Value     | Description                                    |
+|-----------------|-----------|------------------------------------------------|
+| `PI`                 | `3.14159265359` | Mathematical constant used in phase calculations and normalization     |
 
 ### ☁️ Cloud Configuration
 
@@ -48,7 +115,6 @@ and uses reusable modules from the project to handle:
 | `CLOUD_BASE`    | `planetRadius + cloudBase`  | World height for cloud bottom |
 | `CLOUD_TOP`     | `planetRadius + cloudBase + cloudThickness`  | World height for cloud top                     |
 | `stepCount`     | `96.0`    | Total steps for volume integration             |
-| `PI`                 | `3.14159265359` | Mathematical constant used in phase calculations and normalization     |
 
 ### 💡 Lighting Configuration
 

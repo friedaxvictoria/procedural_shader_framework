@@ -1,10 +1,9 @@
 # 🧩 SDF Rock Shader
 
-<img src="../../../../shaders/screenshots/geometry/SDF_Rock.png" alt="Rock Shader Output" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/geometry/SDF_Rock.png?raw=true" alt="Rock Shader Output" width="400" height="225">
 
 - **Category:** Geometry  
 - **Author:** Wanzhang He  
-- **Shader Type:** Grometry 
 - **Input Requirements:** `fragCoord`, `iResolution`  
 - **Output:** Noisy procedural rock rendered via SDF and raymarching  
 
@@ -145,4 +144,4 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     }
 }
 ```
-🔗 [View Full Shader Code on GitHub](../../../../shaders/shaders/geometry/SDF_Rock.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/geometry/SDF_Rock.glsl)

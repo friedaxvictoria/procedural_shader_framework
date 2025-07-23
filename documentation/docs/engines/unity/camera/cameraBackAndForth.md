@@ -43,10 +43,15 @@ void backAndForth_float(float speed, out float3x3 mat)
     </figure>
 
 === "Standard Scripting"
-    !Utku Input
-    Include ...
+    Include - ```#include "Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts/animation_functions.hlsl"```
+
+    Example Usage
+
+    ```hlsl
+    float3x3 transformMatrix;
+    backAndForth_float(2.0, transformMatrix);
+    ```
 
 ---
 
-ADD LINK
-Find the original shader code [here](unity/cameraMatrix.md).
+Find the original shader code [here](../../../shaders/animation/Camera_Anim.md) as **mode 2**.

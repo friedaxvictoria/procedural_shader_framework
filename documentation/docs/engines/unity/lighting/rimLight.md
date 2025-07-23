@@ -4,12 +4,14 @@
 </div>
 
 This function implements rim lighting, a non-photorealistic effect that highlights the edges of an object based on the view angle. It enhances silhouettes by boosting brightness where the view direction is nearly perpendicular to the surface normal. The effect is combined with ambient and base lighting, and uses the specular color to tint the rim.
-
+    <figure markdown="span">
+        ![Unity Point Light](../images/lighting/examples/rimLight.png){ width="500" }
+    </figure>
 ---
 
 ## The Code
 ```hlsl
-void applyRimLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
+void applyRimLighting_float(float4 hitPosition, float3 normal, int hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
@@ -41,7 +43,7 @@ float3 lightingColor)
 |-----------------|----------|-------------|
 | `hitPosition`  <img width=50/>  | float4   | World position of the surface hit; the w-component holds the raymarch distance |
 | `normal`        | float3   | Surface normal at the hit point |
-| `hitIndex`      | float    | Object/material index used to fetch shading parameters |
+| `hitIndex`      | int    | Object/material index used to fetch shading parameters |
 | `lightPosition` | float3   | World-space position of the light source |
 
 The inputs are typically provided by the functions [SDF Raymarching](../sdfs/raymarching.md) or [Water Surface](../water/waterSurface.md).

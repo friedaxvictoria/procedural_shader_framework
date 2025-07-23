@@ -1,5 +1,6 @@
 // ===============================================================
 // Module: VolumeLightingContext
+// Author: Xuetong Fu
 // Category: Volume Lighting
 // Description:
 //   Defines lighting context structures for volumetric shading.

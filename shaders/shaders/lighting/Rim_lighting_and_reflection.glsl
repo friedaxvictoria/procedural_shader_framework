@@ -8,6 +8,7 @@
 //       screenshots/lighting/RimReflectionLighting_black.png
 //   (2) Bayer background to highlight reflection contribution.
 //       screenshots/lighting/RimReflectionLighting_Bayer.png
+// From Wanzhang He
 // ==========================================
 
 /**

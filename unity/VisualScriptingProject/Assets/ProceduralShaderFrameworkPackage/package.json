@@ -7,8 +7,13 @@
     "samples": [
     {
         "displayName": "Christmas Tree",
-        "description": "Demonstrates a simple sample shader",
-        "path": "Samples~/ChristmasTree"
+        "description": "Demonstrates a simple sample shader containing a bouncing christmas tree",
+        "path": "Samples~/Christmas Tree"
+    },
+    {
+        "displayName": "Safety Buoy",
+        "description": "Demonstrates a simple sample shader containing a safety buoy floating on the ocean",
+        "path": "Samples~/Safety Buoy"
     }
     ]
 }

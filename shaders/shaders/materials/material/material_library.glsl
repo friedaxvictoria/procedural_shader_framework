@@ -1,10 +1,11 @@
 // ==========================================
 // Module: Material Library & Registry
+// Author：Xuetong Fu
 // Category: Material
 // Description:
 //   Centralized material registration system mapping material IDs
 //   to constructed MaterialParams using standardized presets.
-//   Designed for use with ID-based scene descriptions (e.g. SDF hit IDs).
+//   Designed for use with ID-based scene (e.g. SDF hit IDs).
 //
 // Dependencies:
 //   - MaterialParams (from material_params.glsl)

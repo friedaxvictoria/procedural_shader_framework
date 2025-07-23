@@ -1,10 +1,8 @@
 # 🧩 Glowing Star Overlay Shader
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/GlowingStarOverlay.png" alt="Glowing Star Overlay Example" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/GlowingStarOverlay.png?raw=true" alt="Glowing Star Overlay Example" width="400" height="225">
 
----
-
-- **Category:** Noise / Emissive / Decorative  
+- **Category:** Noise 
 - **Author:** Wanzhang He 
 - **Shader Type:** screen-space overlay  
 - **Input Requirements:** `vec2 uv`, `iTime`, `iResolution`
@@ -67,3 +65,4 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     fragColor = overlay;
 }
 ```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/noise/stylized_glow_and_star_shape.glsl)

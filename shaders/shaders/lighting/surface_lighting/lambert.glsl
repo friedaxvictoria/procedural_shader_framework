@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Lambertian Diffuse Shader
+// Author: Xuetong Fu
 // Category: Lighting
 // Description: 
 //   Computes Lambertian diffuse reflection, a simple and widely-used

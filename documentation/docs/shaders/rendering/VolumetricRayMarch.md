@@ -30,7 +30,7 @@ t_b = \frac{\text{CLOUD\_BASE} - r_o.y}{r_d.y}, \quad
 t_t = \frac{\text{CLOUD\_TOP} - r_o.y}{r_d.y}
 $$
 
-The resulting integration segment \($$[t_{\min}, t_{\max}]$$\) is derived depending on whether the ray starts above, inside, or below the cloud layer.
+The resulting integration segment\( [t_{min}, t_{max}]\) is derived depending on whether the ray starts above, inside, or below the cloud layer.
 
 ---
 

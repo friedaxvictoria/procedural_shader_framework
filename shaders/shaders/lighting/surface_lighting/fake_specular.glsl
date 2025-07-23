@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Fake Specular Highlight Shader
+// Author: Xuetong Fu
 // Category: Stylized Lighting
 // Description: 
 //   Generates a stylized non-physically-based specular highlight using

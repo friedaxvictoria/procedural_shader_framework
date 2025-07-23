@@ -1,6 +1,6 @@
 # 🧩 SDF Square Shader
 
-<img src="../../../../shaders/screenshots/geometry/square.png" alt="Square Shader Output" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/geometry/square.png?raw=true" alt="Square Shader Output" width="400" height="225">
 
 
 - **Category:** Geometry

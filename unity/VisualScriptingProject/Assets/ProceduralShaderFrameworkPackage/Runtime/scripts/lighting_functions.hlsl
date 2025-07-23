@@ -76,7 +76,7 @@ float3 applySunriseLighting(float3 position, float3 direction, float atmospheric
 
 
 //CUSTOM NODE FUNCTIONS
-void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 rayDirection, out float3 lightingColor)
+void sunriseLight_float(float4 hitPosition, float3 normal, int hitIndex, float3 rayDirection, out float3 lightingColor)
 {
     SunriseLight sunrise;
     sunrise.sundir = normalize(float3(0.5, 0.4 * (1. + sin(0.5 * _Time.y)), -1.));
@@ -110,7 +110,7 @@ void sunriseLight_float(float4 hitPosition, float3 normal, float hitIndex, float
 }
 
 
-void pointLight_float(float4 hitPosition, float3 normal, float hitIndex, float3 rayDirection, float3 lightPosition, float3 lightColor, float dropPower, float atmosphericDecay, out float3 lightingColor)
+void pointLight_float(float4 hitPosition, float3 normal, int hitIndex, float3 rayDirection, float3 lightPosition, float3 lightColor, float dropPower, float atmosphericDecay, out float3 lightingColor)
 {
     //raymarch the environment    
     float t = 0;
@@ -162,7 +162,7 @@ void applyLambertLighting_float(float4 hitPosition, float3 normal, float3 lightP
     lightingColor = ambientColor + diffuseColor;
 }
 
-void applyBlinnPhongLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
+void applyBlinnPhongLighting_float(float4 hitPosition, float3 normal, int hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
@@ -180,7 +180,7 @@ float3 lightingColor)
     lightingColor = ambientColor + diffuseColor + specular;
 }
 
-void applyToonLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
+void applyToonLighting_float(float4 hitPosition, float3 normal, int hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
@@ -208,7 +208,7 @@ float3 lightingColor)
     lightingColor = ambientColor + toonDiff * _objectBaseColor[hitIndex] * lightColor;
 }
 
-void applyRimLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
+void applyRimLighting_float(float4 hitPosition, float3 normal, int hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
@@ -229,7 +229,7 @@ float3 lightingColor)
     lightingColor = ambientColor + baseColor * lightColor + rim * _objectSpecularColor[hitIndex];
 }
 
-void applySoftSSLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out
+void applySoftSSLighting_float(float4 hitPosition, float3 normal, int hitIndex, float3 lightPosition, out
 float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);
@@ -249,7 +249,7 @@ float3 lightingColor)
     lightingColor = ambientColor + diffuseColor + sss;
 }
 
-void applyFresnelLighting_float(float4 hitPosition, float3 normal, float hitIndex, float3 lightPosition, out float3 lightingColor)
+void applyFresnelLighting_float(float4 hitPosition, float3 normal, int hitIndex, float3 lightPosition, out float3 lightingColor)
 {
     if (hitPosition.w > _raymarchStoppingCriterium)
     {
@@ -289,7 +289,7 @@ void applyUVGradientLighting_float(float4 hitPosition, float3 normal, float2 uv,
     lightingColor = ambientColor + diffuseValue * gradientColor * lightColor;
 }
 
-void applyUVAnisotropicLighting_float(float4 hitPosition, float3 normal, float hitIndex, float2 uv, float3 lightPosition, out
+void applyUVAnisotropicLighting_float(float4 hitPosition, float3 normal, int hitIndex, float2 uv, float3 lightPosition, out
 float3 lightingColor)
 {
     float3 viewDirection = normalize(_rayOrigin - hitPosition.xyz);

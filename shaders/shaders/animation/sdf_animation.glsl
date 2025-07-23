@@ -5,6 +5,7 @@
 // SDF Animation Module
 // Provides time-driven object-level transformations for SDFs.
 // Supports translation, scaling, local/global rotation, and custom path animations.
+// From Wanzhang He
 // ====================
 
 // === SDF & Animation Structs ===

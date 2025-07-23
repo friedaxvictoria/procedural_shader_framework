@@ -1,11 +1,9 @@
 # 🧩 3D Noise Shader Functions
 
----
-
-<img src="../../../../shaders/screenshots/noise/3D_noise.png" alt="3D Noise Example" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/3D_noise.png?raw=true" alt="3D Noise Example" width="400" height="225">
 
 - **Category:** Noise  
-- **Author:** Xuetong Fu  
+- **Author:** Wanzhang He
 - **Shader Type:** 3D procedural noise + texture sampling  
 - **Input Requirements:** `vec3`, `sampler3D`, `sampler2D`, `scales[]`, `iTime`
 

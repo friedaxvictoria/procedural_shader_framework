@@ -1,9 +1,13 @@
-#  🧩Boat and Flag Shader
+<div class="container">
+    <h1 class="main-heading">Boat and Flag Shader</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
 
-<img src="../../../../shaders/screenshots/BoatAndFlag.png" alt="Boat and Flag" width="400" height="225">
+<img src="../../../static/images/images4Shaders/boat_flag.png" alt="Boat and Flag" width="400" height="225">
+
+---
 
 - **Category:** Scene
-- **Author:** Xuetong Fu
 - **Shader Type:** raymarch (SDF-based geometry)
 - **Input Requirements:** `fragCoord`, `iTime`, `iMouse`, `iResolution`
 - **Output:**  `fragColor` RGBA color

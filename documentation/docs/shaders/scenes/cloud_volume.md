@@ -1,6 +1,11 @@
-#  🧩 Grayscale Volumetric Cloud Shader
+<div class="container">
+    <h1 class="main-heading">Grayscale Volumetric Cloud Shader</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
 
-<img src="../../../../shaders/screenshots/VolumetricCloud.png" alt="Volumetric Cloud" width="400" height="225">
+<img src="../../../static/images/images4Shaders/volumetric_cloud.png" alt="Volumetric Cloud" width="400" height="225">
+
+---
 
 - **Category:** Scene
 - **Author:** Xuetong Fu

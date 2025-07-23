@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Reflection Shader
+// Author: Xuetong Fu
 // Category: Lighting
 // Description: 
 //   Computes environment reflection based on the reflected view 

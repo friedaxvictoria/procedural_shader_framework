@@ -82,7 +82,7 @@ float4 traceWater(float3 rayDirection)
 }
 
 //CUSTOM NODE FUNCTIONS
-void computeWater_float(float condition, float3x3 cameraMatrix, float2 fragmentCoordinates, out float4 hitPosition, out float3 normal, out float hitIndex, out float3 rayDirection)
+void computeWater_float(int condition, float3x3 cameraMatrix, float2 fragmentCoordinates, out float4 hitPosition, out float3 normal, out int hitIndex, out float3 rayDirection)
 {
     if (condition == 0)
     {

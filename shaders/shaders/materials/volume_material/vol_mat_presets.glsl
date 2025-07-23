@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Volume Material Presets
+// Author：Xuetong Fu
 // Category: Volume Material
 // Description:
 //   Provides factory functions for constructing VolMaterialParams

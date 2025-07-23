@@ -1,7 +1,7 @@
 // ==========================================
-// Shader: Grayscale Volumetric Cloud Shader
+// Shader: Modular Grayscale Volumetric Cloud Core
+// Author: Xuetong Fu
 // Category: Volume Rendering & Procedural Noise
-// Description: Generates density-based cloud structures using simplex noise and volumetric raymarching
 // Screenshot: screenshots/VolumetricCloud.png
 // ==========================================
 
@@ -9,6 +9,13 @@
  * This shader renders a 3D volume of procedural clouds using simplex noise and FBM,
  * combined with height-based shaping and volumetric integration.
  * Designed for lighting-independent density visualization.
+ *
+ * Description:
+ *   Modularized density-only volumetric cloud shader extracted from 
+ *   Inigo Quilez‚Äôs ‚ÄúClouds‚Äù (https://www.shadertoy.com/view/XslGRr).
+ *   Uses FBM-based simplex noise, height shaping, and volumetric integration.
+ *   Outputs structural cloud density without lighting, serving as a reusable
+ *   volume core for external lighting modules.
  *
  * Main Components:
  * - snoise(): 3D simplex noise generator (Ashima Arts)
@@ -28,7 +35,7 @@
  *   vec4 : grayscale cloud color + alpha (accumulated density)
  *
  * Notes:
- * - No lighting or shading is applied °™ this is purely structural density output
+ * - No lighting is applied; this shader is for visualizing cloud structure only.
  * - Designed as a reusable cloud volume core for lighting modules to be added externally
  */
 

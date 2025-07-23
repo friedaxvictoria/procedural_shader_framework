@@ -1,11 +1,12 @@
 // ==========================================
 // Module: Refraction Color Shader
+// Authorï¼šXuetong Fu
 // Category: Material
 // Description: 
 //   Computes the refracted background color by tracing the view direction
-//   through the surface using Snell¡¯s law (via GLSL's `refract()` function).
+//   through the surface using Snell's law (via GLSL's `refract()` function).
 //   The result is sampled from a background texture and modulated by the
-//   material¡¯s refraction tint and strength, simulating translucent materials
+//   material's refraction tint and strength, simulating translucent materials
 //   like glass or liquid.
 // Input:
 //   LightingContext ctx:
