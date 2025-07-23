@@ -1,5 +1,6 @@
 // ==========================================
 // Module: Phong Lighting Shader
+// Author: Xuetong Fu
 // Category: Lighting
 // Description: 
 //   Implements the Phong lighting model, combining ambient,
