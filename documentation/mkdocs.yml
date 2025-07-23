@@ -145,6 +145,7 @@ nav:
     - Overview: engines/unreal.md
     - Global Variables: engines/unreal/globalVariables.md
     - Helper Functions: engines/unreal/helperFunctions.md
+    - ShaderPlayground: engines/unreal/basics/ShaderPlayground.md
     - The Integration:
       - Utility: 
         - Fragment Coordinates: engines/unreal/utils/fragCoords.md
@@ -193,4 +194,4 @@ nav:
         - UV Anisotropic Lighting: engines/unreal/lighting/uvAnisotropicLight.md
     - Tutorials:
       - Christmas Tree: engines/unreal/tutorials/christmasTree.md
-      - Safety Buoy: engines/unreal/tutorials/safetyBuoy.md
+      - Christmas Tree - HLSL: engines/unreal/tutorials/christmasTree_hlsl.md
