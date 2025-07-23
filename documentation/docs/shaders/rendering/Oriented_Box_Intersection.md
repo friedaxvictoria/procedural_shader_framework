@@ -1,8 +1,9 @@
-#  Oriented Box Intersection
+<div class="container">
+    <h1 class="main-heading">Oriented Box Intersection</h1>
+    <blockquote class="author">by Ruimin Ma</blockquote>
+</div>
 
 - **Category:** Rendering
-
-- **Author:** Ruimin Ma
 
 - **Shader Type:** Oriented bounding box ray intersection
 
