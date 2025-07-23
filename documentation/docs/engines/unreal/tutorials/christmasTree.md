@@ -16,9 +16,8 @@ This tutorial based on the Unity team's [christmasTree](../../unity/tutorials/ch
 
 ## Step-by-Step
 
-1. Create and setup an empty Unreal project with only actor PostProcessVolume which used to show shader as a full screen quad.
-2. Navigate to the content drawer and create a material. Then Open it.
-3. Creation of the tree around the world origin
+1. [Create](../../unreal.md) a new Unreal Project and Shader 
+2. Creation of the tree around the world origin
     1. Create the trunk as a [Hexagonal Prism](../sdfs/hexprism.md) with *height 1* and place it just below the world origin at *position (0,-5,-10)*
     2. Create the three out of five [Ellipsoids](../sdfs/ellipsoid.md) of varying sizes
    
