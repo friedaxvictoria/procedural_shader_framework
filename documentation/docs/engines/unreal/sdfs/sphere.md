@@ -5,7 +5,6 @@
 
 This function creates an internal instance of an SDF-based sphere. In order for the sphere to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
-For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
 
 ---
 
@@ -56,9 +55,9 @@ void addSphere(inout int index, float3 position, float radius, float3 axis, floa
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddSphere`
-<figure markdown="span">
-    ![Unreal sphere](../images/sdfs/sphere.png){ width="300" }
-</figure>
+    <figure markdown="span">
+        ![Unreal sphere](../images/sdfs/sphere.png){ width="300" }
+    </figure>
 
 === "Standard Scripting"
     Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```

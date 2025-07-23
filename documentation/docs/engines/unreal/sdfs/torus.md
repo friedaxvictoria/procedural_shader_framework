@@ -5,8 +5,6 @@
 
 This function creates an internal instance of an SDF-based torus. In order for the torus to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary lighting function has to be included. 
 
-For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
-
 ---
 
 ## The Code
@@ -57,9 +55,9 @@ void addTorus(inout int index, float3 position, float radius, float thickness, f
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddTorus`
-<figure markdown="span">
-    ![Unreal torus](../images/sdfs/torus.png){ width="300" }
-</figure>
+    <figure markdown="span">
+        ![Unreal torus](../images/sdfs/torus.png){ width="300" }
+    </figure>
 
 === "Standard Scripting"
     Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```
@@ -71,4 +69,4 @@ void addTorus(inout int index, float3 position, float radius, float thickness, f
 
 ---
 
-Find the original shader code [here](../../../shaders/geometry/).
+Find the original shader code [here](../../../shaders/geometry/Geometry_SDFs.md).

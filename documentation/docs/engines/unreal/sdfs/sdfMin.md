@@ -75,9 +75,9 @@ if(smaller == 0.0f) {
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddTorus`
-<figure markdown="span">
-    ![Unreal sdfMin](../images/sdfs/sdfmin.png){ width="300" }
-</figure>
+    <figure markdown="span">
+        ![Unreal sdfMin](../images/sdfs/sdfmin.png){ width="300" }
+    </figure>
 
 === "Standard Scripting"
     No Standard Scripting for this funcion. 

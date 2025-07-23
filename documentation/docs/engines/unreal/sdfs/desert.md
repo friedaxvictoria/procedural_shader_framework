@@ -5,8 +5,6 @@
 
 This function creates an internal instance of an SDF-based desert. In order for the object to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
-For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
-
 ---
 
 ## The Code
@@ -171,10 +169,9 @@ void addDesert(inout int index, float3 position, float3 axis, float angle, Mater
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddDesert`
-
-<figure markdown="span">
+    <figure markdown="span">
     ![unreal desert](../images/sdfs/desert.png){ width="300" }
-</figure>
+    </figure>
 
 === "Standard Scripting"
     Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```

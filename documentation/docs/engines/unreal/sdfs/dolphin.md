@@ -5,8 +5,6 @@
 
 This function creates an internal instance of an SDF-based Dolphin. In order for the object to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
-For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
-
 ---
 
 ## The Code
@@ -219,10 +217,9 @@ For further information of the implementations of SDFs in Unreal Engine refer to
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddDolphin`
-
-<figure markdown="span">
+    <figure markdown="span">
     ![Unreal Dophin](../images/sdfs/dolphin.png){ width="300" }
-</figure>
+    </figure>
 
 === "Standard Scripting"
     Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```

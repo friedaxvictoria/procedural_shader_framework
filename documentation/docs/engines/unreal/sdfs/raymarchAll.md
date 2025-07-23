@@ -116,7 +116,7 @@ This function performs raymarching considering all previously instantiated SDFs.
 | `condition`           | int       | A value that is used to check whether the default camera matrix should be computed or a custom camera matrix has been put in <br> <blockquote> condition = 0: The default camera matrix should be computed </blockquote><blockquote> condition = 1: A custom camera matrix has been added </blockquote>|
 | `cameraMatrix`        | float3x3    | Camera matrix <br> <blockquote> Can be aquired using [moveViaMouse](../camera/mouseBasedMovement.md) </blockquote>|
 | `numberSDFs`      | float     | Number of all sdfs <br> <blockquote> Should be aquired as the output of the SDF which is instanciated last </blockquote>|
-| `uv`           | float2     | The fragment's coordinates <br> <blockquote> can be aquired by [ComputeUV](../basics/fragCoords.md) </blockquote>|
+| `uv`           | float2     | The fragment's coordinates <br> <blockquote> can be aquired by [ComputeUV](../utils//fragCoords.md) </blockquote>|
 
     
 ### Outputs:
@@ -134,9 +134,9 @@ This function performs raymarching considering all previously instantiated SDFs.
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/RayMarchAll`
-<figure markdown="span">
+    <figure markdown="span">
     ![Unreal raymarchAll](../images/sdfs/raymarchall.png){ width="300" }
-</figure>
+    </figure>
 
 === "Standard Scripting"
     Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```

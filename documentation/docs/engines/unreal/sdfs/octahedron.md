@@ -5,7 +5,6 @@
 
 This function creates an internal instance of an SDF-based octahedron. In order for the object to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
-For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
 
 ---
 
@@ -55,9 +54,9 @@ void addOctahedron(inout int index, float3 position, float size, float3 axis, fl
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddOctahedorn`
-<figure markdown="span">
+    <figure markdown="span">
     ![Unreal octahedron](../images/sdfs/octahedron.png){ width="300" }
-</figure>
+    </figure>
 
 === "Standard Scripting"
     Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```

@@ -5,8 +5,6 @@
 
 This function creates an internal instance of an SDF-based rock. In order for the rock to be visible in the final output, [RaymarchAll](raymarchAll.md) and an arbitrary Lighting Function have to be included.
 
-For further information of the implementations of SDFs in Unreal Engine refer to [General Information](generalInformation.md).
-
 ---
 
 ## The Code
@@ -87,9 +85,9 @@ float evalSDF(int index, float3 p, float time = 0.0)
 
 === "Visual Scripting"
     Find the node at `ProceduralShaderFramework/SDFs/AddRock`
-<figure markdown="span">
-    ![Unreal rock](../images/sdfs/rock.png){ width="300" }
-</figure>
+    <figure markdown="span">
+        ![Unreal rock](../images/sdfs/rock.png){ width="300" }
+    </figure>
 
 === "Standard Scripting"
     Include - ```#include "ProceduralShaderFramework/Shaders/sdf_functions.ush"```
