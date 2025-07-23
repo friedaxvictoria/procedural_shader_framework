@@ -1,5 +1,6 @@
 // Pure Snowy Mountain Shader with Mouse-Controlled Camera
 // Based on original by Alexander Alekseev aka TDM
+// Screenshot: screenshots/Snowy_Mountain.png
 // From Wanzhang He
 
 const int NUM_STEPS = 64;
