@@ -1,9 +1,11 @@
-# 🧩 SDF Sphere Raymarch Shader
+<div class="container">
+    <h1 class="main-heading">SDF Sphere Raymarch Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/geometry/SDF_Sphere.png?raw=true" alt="SDF Sphere Output" width="400" height="225">
+<img src="../../../static/images/images4Shaders/SDF_Sphere.png" alt="SDF Sphere Output" width="400" height="225">
 
 - **Category:** Geometry 
-- **Author:** Wanzhang He
 - **Shader Type:** 3D primitive via signed distance field  
 - **Input Requirements:** `fragCoord`, `iResolution`  
 - **Output:** Raymarched red sphere with basic diffuse lighting
