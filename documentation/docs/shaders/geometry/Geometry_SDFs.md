@@ -49,8 +49,8 @@ The sphere SDF is the simplest SDF function. It calculates the Euclidean distanc
 #### Engine Integrations
 
 <div class="button-row">
-  <a class="custom-button md-button" href="../../../../engines/unity/sdfs/sphere">Unity</a>
-    <a class="custom-button md-button" href="../../../../engines/unreal/sdfs/sphere">Unreal</a>
+  <a class="custom-button md-button" href="../../engines/unity/sdfs/sphere">Unity</a>
+    <a class="custom-button md-button" href="../../engines/unreal/sdfs/sphere">Unreal</a>
 </div>
 
 ### 2. Rounded Box SDF (sdRoundBox)
