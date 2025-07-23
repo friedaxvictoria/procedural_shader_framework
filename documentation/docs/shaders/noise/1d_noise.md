@@ -2,11 +2,8 @@
 
 <img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/1d%20noise.png?raw=true" alt="1D FBM Noise Output" width="400" height="225">
 
----
-
 - **Category:** Noise  
-- **Author:** Morgan McGuire ([morgan3d](http://graphicscodex.com))  
-- **License:** BSD License — reuse permitted  
+- **Author:** Wanzhang He
 - **Shader Type:** 1D Value Noise + Fractal FBM  
 - **Input Requirements:** `fragCoord`, `iTime`, `iResolution`
 

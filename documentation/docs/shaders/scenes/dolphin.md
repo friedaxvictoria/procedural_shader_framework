@@ -1,31 +1,10 @@
-<!-- this one is to display the shader output either by locally storing in the directory under static/images/...
-or, external link like of a github can be added -->
-
-<!-- this is for locally stored images -->
-<!-- <img src="image directory stored locally inside project" alt="TIE Fighter" width="400" height="225"> -->
-<!-- this is for external  link  -->
-<!-- <img src="https://......." width="400" alt="TIE Fighter Animation"> -->
-
-
-
-<!-- this is for locally stored videos -->
-<!-- <video controls width="640" height="360" > -->
-  <!-- <source src="video path stored locally" type="video/mp4"> -->
-  <!-- Your browser does not support the video tag. -->
-<!-- </video> -->
-
-<!-- this is for external link, copy the embed code for given video and paste it here -->
-<!-- <iframe width="640" height="360"  -->
-  <!-- src="https://www.youtube.com/embed/VIDEO_ID"  -->
-  <!-- title="TIE Fighter Shader Demo" -->
-  <!-- frameborder="0" allowfullscreen></iframe> -->
-
-
-
 <div class="container">
     <h1 class="main-heading">Dolphin Shader</h1>
     <blockquote class="author">by Saeed Shamseldin</blockquote>
 </div>
+
+
+<img src="../../../static/images/images4Shaders/swimming_dolphin.gif" alt="general scene" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 
 ---
 

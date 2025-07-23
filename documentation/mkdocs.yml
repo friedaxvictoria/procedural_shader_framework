@@ -36,7 +36,7 @@ plugins:
 
 markdown_extensions:
   - toc:
-      toc_depth : "1-1"
+      toc_depth: "1-1"
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.superfences
@@ -55,10 +55,10 @@ copyright: Copyright &copy; 2025 TU DRESDEN FAKULTÄT INFORMATIK
 extra:
   #generator: false
   social:
-    - icon: fontawesome/brands/mastodon 
+    - icon: fontawesome/brands/mastodon
       link: https://tu-dresden.de/ing/informatik
 
-    - icon: fontawesome/brands/github 
+    - icon: fontawesome/brands/github
       link: https://github.com/friedaxvictoria/procedural_shader_framework.git
 
 extra_css:
@@ -68,74 +68,76 @@ nav:
   - Home: index.md
 
   #-- - Shaders:
-     # - Overview: shaders/shaderPage.md
-     # - Animation:
-      #    - TIE Fighter: shaders/animation/tie_fighter.md
-      # You can add more categories like this:
-      # - Noise:
-      #     - Cloud FBM: shaders/noise/cloud_fbm.md -->
-      
+  # - Overview: shaders/shaderPage.md
+  # - Animation:
+  #    - TIE Fighter: shaders/animation/tie_fighter.md
+  # You can add more categories like this:
+  # - Noise:
+  #     - Cloud FBM: shaders/noise/cloud_fbm.md -->
+
   - Shaders: shaders/shaderPage.md
   - Godot: 
-    - Overal Structure: engines/godot.md
+    - Shader Flow Pipeline: 
+      - Overall Structure: engines/godot.md
+      - Framework Workflow: engines/godot/structure.md
     - Global Variables: engines/godot/globalVariables.md
     - Helper Functions: engines/godot/helperFunction.md
     - GD Script: engines/godot/gdScript.md
     - GD Shader Include: engines/godot/gdShaderInclude.md
     - Main Fragment Shader: engines/godot/mainFragmentShader.md
-    - Shader Flow Pipeline: engines/godot/shaderFlow.md
+    - User Guide: engines/godot/shaderFlow.md
 
   - Unity:
-    - Overview: engines/unity.md
-    - Global Variables: engines/unity/globalVariables.md
-    - Helper Functions: engines/unity/helperFunctions.md
-    - Uniforms and C#: engines/unity/uniformsAndCs.md
-    - The Integration:
-      - Basics: 
-        - Fragment Coordinates: engines/unity/basics/fragCoords.md
-        - Combine Color: engines/unity/basics/combineColor.md
-        - Minimum: engines/unity/basics/minimum.md
-      - Camera:
-        - Camera Matrix: engines/unity/camera/cameraMatrix.md
-        - Rotation: engines/unity/camera/cameraRotation.md
-        - Back And Forth: engines/unity/camera/cameraBackAndForth.md
-        - Mouse-Based Rotation: engines/unity/camera/mouseBasedMovement.md
-      - SDFs: 
-        - General Information: engines/unity/sdfs/generalInformation.md
-        - Sphere: engines/unity/sdfs/sphere.md
-        - RoundBox: engines/unity/sdfs/cube.md
-        - Torus: engines/unity/sdfs/torus.md
-        - Ellipsoid: engines/unity/sdfs/ellipsoid.md
-        - Hexagonal Prism: engines/unity/sdfs/hexPrism.md
-        - Octahedron: engines/unity/sdfs/octahedron.md
-        - Dolphin: engines/unity/sdfs/dolphin.md
-        - SDF Raymarching: engines/unity/sdfs/raymarching.md
-      - Environments: 
-        - Water Surface: engines/unity/water/waterSurface.md
-        - Water Height: engines/unity/water/waterHeight.md
-        - Water Normal: engines/unity/water/waterNormal.md
-      - Animations: 
-        - General Information: engines/unity/animations/generalInformation.md
-        - Orbit Object Around Point: engines/unity/animations/orbitObject.md
-        - Shake Object: engines/unity/animations/shakeObject.md
-        - Tweening: engines/unity/animations/tweening.md
-        - Cycle Color: engines/unity/animations/colorAnimation.md
-      - Lighting:
-        - General Information: engines/unity/lighting/generalInformation.md
-        - Sunrise: engines/unity/lighting/sunriseLight.md 
-        - Point Light: engines/unity/lighting/pointLight.md
-        - Lambertian Lighting: engines/unity/lighting/lambLight.md
-        - Blinn Phong Lighting: engines/unity/lighting/blinnPhongLight.md
-        - Toon Lighting: engines/unity/lighting/toonLight.md
-        - Rim Lighting: engines/unity/lighting/rimLight.md
-        - Soft Subsurface Scattering: engines/unity/lighting/softSubsurfaceScattering.md
-        - Fresnel Lighting: engines/unity/lighting/fresnelLight.md
-        - UV Gradient Lighting: engines/unity/lighting/uvGradientLight.md
-        - UV Anisotropic Lighting: engines/unity/lighting/uvAnisotropicLight.md
-    - Tutorials:
-      - Christmas Tree: engines/unity/tutorials/christmasTree.md
-      - Safety Buoy: engines/unity/tutorials/safetyBuoy.md
-      - Elevator: engines/unity/tutorials/elevator.md
-      - Car: engines/unity/tutorials/car.md
+      - Overview: engines/unity.md
+      - Global Variables: engines/unity/globalVariables.md
+      - Helper Functions: engines/unity/helperFunctions.md
+      - Uniforms and C#: engines/unity/uniformsAndCs.md
+      - The Integration:
+          - Basics:
+              - Fragment Coordinates: engines/unity/basics/fragCoords.md
+              - Combine Color: engines/unity/basics/combineColor.md
+              - Minimum: engines/unity/basics/minimum.md
+          - Camera:
+              - Camera Matrix: engines/unity/camera/cameraMatrix.md
+              - Rotation: engines/unity/camera/cameraRotation.md
+              - Back And Forth: engines/unity/camera/cameraBackAndForth.md
+              - Mouse-Based Rotation: engines/unity/camera/mouseBasedMovement.md
+          - SDFs:
+              - General Information: engines/unity/sdfs/generalInformation.md
+              - Sphere: engines/unity/sdfs/sphere.md
+              - RoundBox: engines/unity/sdfs/cube.md
+              - Torus: engines/unity/sdfs/torus.md
+              - Ellipsoid: engines/unity/sdfs/ellipsoid.md
+              - Hexagonal Prism: engines/unity/sdfs/hexPrism.md
+              - Octahedron: engines/unity/sdfs/octahedron.md
+              - Dolphin: engines/unity/sdfs/dolphin.md
+              - SDF Raymarching: engines/unity/sdfs/raymarching.md
+          - Environments:
+              - Water Surface: engines/unity/water/waterSurface.md
+              - Water Height: engines/unity/water/waterHeight.md
+              - Water Normal: engines/unity/water/waterNormal.md
+          - Animations:
+              - General Information: engines/unity/animations/generalInformation.md
+              - Orbit Object Around Point: engines/unity/animations/orbitObject.md
+              - Shake Object: engines/unity/animations/shakeObject.md
+              - Tweening: engines/unity/animations/tweening.md
+              - Cycle Color: engines/unity/animations/colorAnimation.md
+          - Lighting:
+              - General Information: engines/unity/lighting/generalInformation.md
+              - Sunrise: engines/unity/lighting/sunriseLight.md
+              - Point Light: engines/unity/lighting/pointLight.md
+              - Lambertian Lighting: engines/unity/lighting/lambLight.md
+              - Blinn Phong Lighting: engines/unity/lighting/blinnPhongLight.md
+              - Toon Lighting: engines/unity/lighting/toonLight.md
+              - Rim Lighting: engines/unity/lighting/rimLight.md
+              - Soft Subsurface Scattering: engines/unity/lighting/softSubsurfaceScattering.md
+              - Fresnel Lighting: engines/unity/lighting/fresnelLight.md
+              - UV Gradient Lighting: engines/unity/lighting/uvGradientLight.md
+              - UV Anisotropic Lighting: engines/unity/lighting/uvAnisotropicLight.md
+      - Tutorials:
+          - Christmas Tree: engines/unity/tutorials/christmasTree.md
+          - Safety Buoy: engines/unity/tutorials/safetyBuoy.md
+          - Elevator: engines/unity/tutorials/elevator.md
+          - Car: engines/unity/tutorials/car.md
+          - Shrine: engines/unity/tutorials/shrine.md
   - Unreal Engine: engines/unreal.md
-    

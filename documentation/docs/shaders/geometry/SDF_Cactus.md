@@ -1,6 +1,6 @@
 # 🧩 SDF Cactus Shader
 
-<img src="../../../../shaders/screenshots/geometry/SDF_Cactus.png" alt="Cactus Shader Output" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/geometry/SDF_Cactus.png?raw=true" alt="Cactus Shader Output" width="400" height="225">
 
 - **Category:** Geometry  
 - **Author:** Wanzhang He   
@@ -155,4 +155,4 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     }
 }
 ```
-🔗 [View Full Shader Code on GitHub](../../../../shaders/shaders/geometry/SDF_Cactus.glsl)
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/geometry/SDF_Cactus.glsl)

@@ -427,7 +427,7 @@
   
   
   <span class="md-ellipsis">
-    Overal Structure
+    Shader Flow Pipeline
     
   </span>
   
@@ -565,7 +565,7 @@
   
   
   <span class="md-ellipsis">
-    Shader Flow Pipeline
+    User Manual
     
   </span>
   
@@ -2035,9 +2035,181 @@
 
 
 
-  <h1>Christmas Tree</h1>
+<div class="container">
+    <h1 class="main-heading">Tutorial: Christmas Tree</h1>
+    <blockquote class="author">by Frieda Hentschel</blockquote>
+</div>
 
-
+<p>This tutorial is designed to illustrate the workflow of Unity's integration of the framework. It showcases relevant connections between functions and gives examplary usecases for them. </p>
+<p>The tutorial goes step-by-step through the creation of a scene containing a bouncing christmas tree using animated SDFs and some lights.</p>
+<blockquote>
+<p>To keep the visual results of the ShaderGraph a bit clearer, all nodes were folded and do not show the visual preview.</p>
+</blockquote>
+<hr />
+<h2 id="step-by-step">Step-by-Step</h2>
+<ol>
+<li>Create and setup a Unity project with a material and shader as explained in the <a href="../../">Overview</a>. This tutorial uses a cube to apply the material to.</li>
+<li>Navigate to the shader.</li>
+<li>
+<p>Creation of the tree around the world origin</p>
+<ol>
+<li>Create the trunk as a <a href="../../sdfs/hexPrism/">Hexagonal Prism</a> with <em>height 1</em> and place it just below the world origin at <em>position (0,-5,0)</em></li>
+<li>
+<p>Create the three out of five <a href="../../sdfs/ellipsoid/">Ellipsoids</a> of varying sizes</p>
+<p>Start with an ellipsoid of <em>size (5,1.5,5)</em>; locate it above the trunk by placing its central position at <em>position (0,-3,0)</em></p>
+<p>Continue by decrementing the size in x- and z-direction by one, and incrementing the position in y-position by 1.5 four more times.</p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: First Ellipsoid" src="../../images/christmasTree/ctEllipsoid.png" width="400" />
+</figure></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Connect the instantiations of the SDFs in series:</p>
+<p>Hexagonal Prism: <em>index 0</em></p>
+<p>Ellipsoid 1: <em>hexagonal prism index</em> </p>
+<p>Ellipsoid 2: <em>ellipsoid 1 index</em></p>
+<p>Ellipsoid 3: <em>ellipsoid 2 index</em></p>
+<p>Ellipsoid 4: <em>ellipsoid 3 index</em></p>
+<p>Ellipsoid 5: <em>ellipsoid 4 index</em></p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Connectivity" src="../../images/christmasTree/ctConnectivity.png" width="700" />
+</figure></p>
+</li>
+<li>
+<p>Add fitting colors to the SDFs, e.g.
+    Hexagonal Prism: <em>#453535</em>
+    Ellipsoids: <em>#18631B</em></p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Color" src="../../images/christmasTree/ctColor.png" width="700" />
+</figure></p>
+</li>
+<li>
+<p>Add noise to the SDFs for a more organic look, e.g.
+    Hexagonal Prism: Unity's build in <em>Gradient Noise</em> with <em>scale 30</em>
+    Ellipsoids: Unity's build in <em>Voronoi Noise</em> with <em>angleOffset 2</em> and <em>cellDensity 100</em></p>
+<blockquote>
+<p>Be aware that these noises use UV-coordinates of the underlying object and are deterministic with regard to them. Therefore, once animation is added, the noise will move.</p>
+</blockquote>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Noise" src="../../images/christmasTree/ctNoise.png" width="500" />
+</figure></p>
+</li>
+<li>
+<p>Plug the final SDF's index <em>ellipsoid 5 index</em> into the <a href="../../sdfs/raymarching/">SDF Raymarching</a>. </p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Raymarching" src="../../images/christmasTree/ctRaymarching.png" width="500" />
+</figure></p>
+</li>
+<li>
+<p>Create <a href="../../basics/fragCoords/">Fragment Coordinates</a> and connect it to the input of the raymarching.</p>
+<blockquote>
+<p>Since the material will be applied to a cube, the <strong>scaling values</strong> can remain 1.</p>
+</blockquote>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Fragment Coordinates" src="../../images/christmasTree/ctFragCoords.png" width="400" />
+</figure></p>
+</li>
+<li>
+<p>Create a <a href="../../lighting/pointLight/">Point Light</a> at <em>position (10,0,0)</em> and with a custom <em>dropPower 2</em></p>
+<p>Connect all of the raymarching's outputs to the inputs of the point light.</p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Point Light" src="../../images/christmasTree/ctPointLight.png" width="600" />
+</figure></p>
+</li>
+<li>
+<p>Connect the color-output of the point light to the fragment's <em>base color</em>.</p>
+<p>This creates a finished static scene that shows a christmas tree being illuminated by a single point light from above. The camera position can be adjusted in the inspector of the prefab. Read more about it in <a href="../../uniformsAndCs/">Uniforms and C#</a>. </p>
+<p>The following image uses a camera at <code>float3(0,-2,10)</code>.</p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Intermediate Result" src="../../images/christmasTree/intermediateResult.png" width="500" />
+</figure></p>
+</li>
+<li>
+<p>To create the animation, add <a href="../../animations/tweening/">3D Tweening</a> functions to every single SDF. Insert the SDF's current position as the <em>startValue</em>. Add 2 to the y-value of that starting position and use it as the <em>endValue</em>. Use an arbitrary integer as the <em>duration</em> and <em>tweenType</em>.</p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Tweening" src="../../images/christmasTree/ctTweening.png" width="700" />
+</figure></p>
+<blockquote>
+<p>Exposed variables can be created in the <strong>Blackboard</strong> can are changable in the material's inspector during runtime. They can be dragged into the ShaderGraph.</p>
+</blockquote>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Blackboard 1" src="../../images/christmasTree/blackboard1.png" width="200" />
+</figure></p>
+</li>
+<li>
+<p>Add an ornament to the top of the tree.</p>
+<ol>
+<li>Create a <a href="../../sdfs/sphere/">Sphere</a>.</li>
+<li>
+<p>Add a <a href="../../animations/tweening/">3D Tweening</a> and use its output as the position.</p>
+<p>Increment the last ellipsoid's y-value by 1.5 again to get a <em>startValue (0,4.5,0)</em> </p>
+<p>Increment the starting position by 3 in the y-direction to the the <em>endPosition (0,7.5,0)</em></p>
+</li>
+<li>
+<p>Decrease the size of the sphere to <em>radius 0.3</em>.</p>
+</li>
+<li>Set <em>specularColor (1,1,1)</em>, <em>specularPower 0.8</em>, <em>shininess 40</em> to get bright and sharp highlights.</li>
+<li>Create a <a href="../../animations/colorAnimation/">Cylce Color</a> function and plug the output into <em>color</em>. Use a festive red as the <em>seedColor</em>.</li>
+<li>Reorganise the graph so that <em>ellipsoid 5 index</em> goes into the sphere's input index, and the <em>sphere index</em> is fed into the raymarching.</li>
+</ol>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Ornament" src="../../images/christmasTree/ctOrnament.png" width="700" />
+</figure></p>
+</li>
+<li>
+<p>Add more lights.</p>
+<ol>
+<li>Add two more <a href="../../lighting/pointLight/">Point Lights</a>.</li>
+<li>Connect all of them to the outputs of the raymarching. </li>
+<li>To arrange the lights in a circular manner <strong>compute the positions manually</strong> or use one animation function <a href="../../animations/orbitObject/">Orbit Around Point</a> for each light.</li>
+<li>Set the <em>speed 0</em> so that only the positinal offset is used.</li>
+<li>Use <em>seedPosition (0,5,0)</em> and <em>radius 3</em> to place the lights around the tree at height 5 with a distance of three to the centre.</li>
+<li>For an even distribution on the circle use <em>0</em>, <em>120</em>, <em>240</em> as the respective <em>angleOffsets</em>. </li>
+<li>Combine the lights by adding their resulting colors together. </li>
+</ol>
+<blockquote>
+<p>Visual Scripting: Unity's <em>Add Node</em> can be used. </p>
+</blockquote>
+<ol>
+<li>Reorganise the graph so that the final output of the addition is used as the fragment's <em>base color</em>.</li>
+</ol>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Add More Lights" src="../../images/christmasTree/ctMoreLights.png" width="700" />
+</figure></p>
+</li>
+<li>
+<p>To move the camera around the tree, add <a href="../../camera/cameraRotation/">Camera Rotation</a>.</p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Rotate Camera" src="../../images/christmasTree/ctRotateCamera.png" width="400" />
+</figure></p>
+<blockquote>
+<p>Another exposed variable via the <strong>Blackboard</strong> may be used to adjust the camera's speed during runtime.</p>
+</blockquote>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Blackboard 2" src="../../images/christmasTree/blackboard2.png" width="200" />
+</figure></p>
+</li>
+<li>
+<p>Add a <a href="../../camera/cameraMatrix/">Camera Matrix</a>. Add the outputted matrix of the rotation as input the the function. The second transformation matrix is a simple identity matrix as no combination of multiple animations is necessary. </p>
+</li>
+<li>
+<p>Use the computed camera matrix as input to the raymarching function.</p>
+<p><figure markdown="span">
+    <img alt="Unity Christmas Tree: Camera Matrix" src="../../images/christmasTree/ctCameraMatrix.png" width="500" />
+</figure></p>
+</li>
+</ol>
+<hr />
+<h2 id="the-result">The Result</h2>
+<p>The finished ShaderGraph:
+    <figure markdown="span">
+    <img alt="Unity Christmas Tree: Final ShaderGraph" src="../../images/christmasTree/christmasTree.png" width="900" />
+    </figure></p>
+<p>The output with camera at <code>float3(0,-2,10)</code>:
+    <figure markdown="span">
+    <img alt="Unity Christmas Tree: Final Output" src="../../images/christmasTree/finalResult.gif" width="500" />
+    </figure></p>
 
 
 

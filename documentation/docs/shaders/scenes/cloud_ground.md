@@ -23,19 +23,18 @@ It blends:
 and uses reusable modules from the project to handle:
 
 - **Procedural Components**
-  - Noise
+    - Noise
 
 - **Volumetric Modules**
-  - Cloud volume
-  - Volume material system
-  - Volume lighting context
-  - Volume lighting functions
+    - Cloud volume
+    - Volume material system
+    - Volume lighting context
+    - Volume lighting functions
 
 - **Surface Modules**
-  - Material systems
-  - Lighting context
-  - Lighting functions
-
+    - Material systems
+    - Lighting context
+    - Lighting functions
 
 ---
 
@@ -58,14 +57,14 @@ The shader evaluates each visual domain separately:
 
 - **Ground Surface**  
   When the ray hits the planet:
-  - Surface color is defined with a `makePlastic()` material
-  - Lighting is computed using `applyPhongLighting()`
-  - Cloud density above the surface is queried via `computeCloudOcclusion()` and used to darken the terrain
+    - Surface color is defined with a `makePlastic()` material
+    - Lighting is computed using `applyPhongLighting()`
+    - Cloud density above the surface is queried via `computeCloudOcclusion()` and used to darken the terrain
 
 - **Cloud Volume**  
   Regardless of ray direction:
-  - A volumetric cloud material is created using `makeCloud()`
-  - Cloud density is integrated using `integrateCloud()`
+    - A volumetric cloud material is created using `makeCloud()`
+    - Cloud density is integrated using `integrateCloud()`
 
 Each module operates independently, but uses the **same light input** to ensure global coherence.
 

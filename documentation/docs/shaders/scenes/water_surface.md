@@ -1,6 +1,6 @@
 #  🧩 Procedural Water Surface Shader
 
-<img src="../../../../shaders/screenshots/WaterSurface.png" alt="Water Surface" width="400" height="225">
+<img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/WaterSurface.png" alt="Water Surface" width="400" height="225">
 
 - **Category:** Scene
 - **Author:** Xuetong Fu

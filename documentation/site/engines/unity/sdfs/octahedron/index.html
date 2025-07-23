@@ -427,7 +427,7 @@
   
   
   <span class="md-ellipsis">
-    Overal Structure
+    Shader Flow Pipeline
     
   </span>
   
@@ -565,7 +565,7 @@
   
   
   <span class="md-ellipsis">
-    Shader Flow Pipeline
+    User Manual
     
   </span>
   
@@ -2061,40 +2061,84 @@
 <hr />
 <h2 id="the-parameters">The Parameters</h2>
 <h3 id="inputs">Inputs:</h3>
-<ul>
-<li><code>float index</code>: The index at which the octahedron is stored </li>
-<li><code>float3 position</code>: The central position of the octahedron</li>
-<li><code>float radius</code>: The radius of the octahedron<blockquote>
-<p><em>ShaderGraph default value</em>: <code>1</code></p>
-</blockquote>
-</li>
-<li><code>float3 axis</code>: The axis determining the orientation of the octahedron<blockquote>
-<p><em>ShaderGraph default value</em>: <code>float3(0,1,0)</code></p>
-</blockquote>
-</li>
-<li><code>float angle</code>: The angle around the axis </li>
-<li>Material parameters<ul>
-<li><code>float3 baseColor</code>: The underlying color of the octahedron<blockquote>
-<p><em>ShaderGraph default value</em>: <code>float3(0,1,0)</code></p>
-</blockquote>
-</li>
-<li><code>float3 specularColor</code>: The color of the highlights</li>
-<li><code>float3 specularStrength</code>: The intensity with which highlights are created<blockquote>
-<p><em>ShaderGraph default value</em>: <code>1</code></p>
-</blockquote>
-</li>
-<li><code>float3 shininess</code>: The shape and sharpness of the highlights; the larger the value, the more focussed the highlight<blockquote>
-<p><em>ShaderGraph default value</em>: <code>32</code></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><code>float3 noise</code>: Noise that is added to the shape of the octahedron</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index</code>  <img width=50/></td>
+<td>int</td>
+<td>Index at which the octahedron is stored</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>float3</td>
+<td>Central position</td>
+</tr>
+<tr>
+<td><code>radius</code></td>
+<td>float</td>
+<td>Radius of the octahedron <br> <blockquote><em>ShaderGraph default value</em>: 1</blockquote></td>
+</tr>
+<tr>
+<td><code>axis</code></td>
+<td>float3</td>
+<td>Axis determining the orientation <br> <blockquote><em>ShaderGraph default value</em>: float3(0,1,0)</blockquote></td>
+</tr>
+<tr>
+<td><code>angle</code></td>
+<td>float</td>
+<td>World-space position of the light source</td>
+</tr>
+<tr>
+<td><code>baseColor</code></td>
+<td>float3</td>
+<td>Underlying color <br> <blockquote><em>ShaderGraph default value</em>: float3(0,0,1)</blockquote></td>
+</tr>
+<tr>
+<td><code>specularColor</code></td>
+<td>float3</td>
+<td>Color of the highlights</td>
+</tr>
+<tr>
+<td><code>specularStrength</code></td>
+<td>float</td>
+<td>Intensity with which highlights are created <br> <blockquote><em>ShaderGraph default value</em>: 1</blockquote></td>
+</tr>
+<tr>
+<td><code>shininess</code></td>
+<td>float</td>
+<td>Shape and sharpness of the highlights; the larger the value, the more focussed the highlight  <br> <blockquote><em>ShaderGraph default value</em>: 32</blockquote></td>
+</tr>
+<tr>
+<td><code>noise</code></td>
+<td>float</td>
+<td>Noise that is added to the shape of the octahedron</td>
+</tr>
+</tbody>
+</table>
 <h3 id="outputs">Outputs:</h3>
-<ul>
-<li><code>float indexOut</code>: The incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the <a href="...">SDF Raymarching</a>.  </li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>indexOut</code></td>
+<td>int</td>
+<td>Incremented input index that can be used as either the input index to another SDF function or as the amount of SDFs in the scene to the <a href="../raymarching/">SDF Raymarching</a></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="implementation">Implementation</h2>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Visual Scripting</label><label for="__tabbed_1_2">Standard Scripting</label></div>
@@ -2102,7 +2146,7 @@
 <div class="tabbed-block">
 <p>Find the node at <code>PSF/SDFs/Octahedron</code></p>
 <p><figure markdown="span">
-    <img alt="Unity Octahedron" src="../images/sdfs/octahedron.png" width="500" />
+    <img alt="Unity Octahedron" src="../../images/sdfs/octahedron.png" width="500" />
 </figure></p>
 </div>
 <div class="tabbed-block">

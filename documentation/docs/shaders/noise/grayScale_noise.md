@@ -1,11 +1,10 @@
 # 🧩 Grayscale Noise Shader
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/grayScale_noise.png" alt="Grayscale Noise Example" width="400" height="225">
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/grayScale_noise.png?raw=true" alt="Grayscale Noise Example" width="400" height="225">
 
----
 
 - **Category:** Noise  
-- **Author:** Saeed Shamseldin  
+- **Author:** Wanzhang He
 - **Shader Type:** 2D static noise  
 - **Input Requirements:** `vec2`, `iTime`, `iResolution`
 
@@ -54,3 +53,4 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     fragColor = vec4(col, 1.0);
 }
 ```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/noise/grayScale_noise.glsl)

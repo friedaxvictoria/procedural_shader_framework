@@ -1,11 +1,9 @@
 # 🧩 Simplex Noise Shader
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/simplex2d_noise.png" alt="Simplex Noise Example" width="400" height="225">
-
----
+<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/simplex2d_noise.png?raw=true" alt="Simplex Noise Example" width="400" height="225">
 
 - **Category:** Noise  
-- **Author:** Xunyu Zhang  
+- **Author:** Wanzhang He
 - **Shader Type:** simplex noise functions  
 - **Input Requirements:** `vec2`, `vec3`
 
