@@ -62,7 +62,7 @@ The inputs are typically provided by the functions [SDF Raymarching](../sdfs/ray
 
     ```hlsl
     float3 lightColor;
-    applyLambertLighting_float(hitPos, surfaceNormal, float3(2, 5, -2), lightColor);
+    applyLambertLighting_float(hitPos, surfaceNormal, float3(2, 5, -2), float3(1,1,1), lightColor);
     ```
 
 ---

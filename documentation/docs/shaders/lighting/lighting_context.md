@@ -1,10 +1,11 @@
-#  🧩 Lighting Context Header
+<div class="container">
+    <h1 class="main-heading">Lighting Context Header</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
 
-<!-- this one is to display the shader output either by locally storing in the directory under static/images/...
-or, external link like of a github can be added -->
+---
 
 - **Category:** Lighting
-- **Author:** Xuetong Fu
 - **Shader Type:** Utility header (struct + helper)
 - **Input Requirements:** N/A (header only)
 ---

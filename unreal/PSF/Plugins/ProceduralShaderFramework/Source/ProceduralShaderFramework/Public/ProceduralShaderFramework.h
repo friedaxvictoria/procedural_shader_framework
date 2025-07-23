@@ -7,6 +7,11 @@
 #include "HAL/FileManager.h"
 #include "Misc/FileHelper.h"
 #include "Interfaces/IPluginManager.h"
+#include "Widgets/Input/SMultiLineEditableTextBox.h"
+
+
+class FToolBarBuilder;
+class FMenuBuilder;
 
 class FProceduralShaderFrameworkModule : public IModuleInterface
 {
@@ -16,6 +21,23 @@ public:
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
 
+private:
+    /** This function will be bound to Command (by default it will bring up plugin window) */
+    void PluginButtonClicked();
+    TSharedPtr<SMultiLineEditableTextBox> MultiLineTextBox;
+    FString ShaderDir;
+private:
+
+    void RegisterMenus();
+
+    TSharedRef<class SDockTab> OnSpawnPluginTab(const class FSpawnTabArgs &SpawnTabArgs);
+
+private:
+    TSharedPtr<class FUICommandList> PluginCommands;
+
+    void WriteShaderFunctionToFile();
+    void GenerateMaterialFunction();
+    void ReplaceBetweenMarkers(const FString &StartMarker, const FString &EndMarker, const FString &Replacement);
 
 };
 

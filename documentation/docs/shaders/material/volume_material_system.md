@@ -1,7 +1,11 @@
-#  🧩 Volume Material System Documentation
+<div class="container">
+    <h1 class="main-heading">Volume Material System Documentation</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
+
+---
 
 - **Category:** Material
-- **Author:** Xuetong Fu
 - **Shader Type:** Utility header
 - **Input Requirements:** Volume material ID; material property parameters (see the table below for details)
 
@@ -12,10 +16,9 @@
 ### 🔷 Core Concept
 This system organizes material appearance using a three-part module:
 
----
-## 1. `VolMaterialParams` Struct
+### 1. `VolMaterialParams` Struct
 Defines a data structure storing surface reflectance info (diffuse, specular, roughness, etc.)
-### 🎛️ Parameters
+#### 🎛️ Parameters
 
 | Member             | Type   | Description                                       |
 |--------------------|--------|---------------------------------------------------|
@@ -29,7 +32,7 @@ Defines a data structure storing surface reflectance info (diffuse, specular, ro
 | `temperature`      | float  | Optional scalar used for color remapping or animation (e.g., flame ramp)  |
 | `noiseStrength`    | float  | Optional density modulation by procedural noise                  |
 
-### 💻 Code
+#### 💻 Code
 <!--
 if you want to put small code snippet
 -->
@@ -54,10 +57,9 @@ Usage: `#include "materials/volume_material/vol_mat_params.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/volume_material/vol_mat_params.glsl)
 
----
-## 2. Volume Material Presets
+### 2. Volume Material Presets
 Defines helper functions to generate common volume materials like fog, clouds, etc.
-### 🔧 Functions
+#### 🔧 Functions
 
 | Function                  | Description                          |
 |---------------------------|-------------------------------------|
@@ -72,7 +74,7 @@ Defines helper functions to generate common volume materials like fog, clouds, e
 > - All functions return a `VolMaterialParams` struct
 > - These presets are meant to showcase possible material types, but they may not reflect the actual materials used in later shaders.
 
-### 💻 Code
+#### 💻 Code
 <!--
 if you want to put small code snippet and make it appereable and dissapear
 -->
@@ -194,11 +196,10 @@ Usage: `#include "materials/volume_material/vol_mat_presets.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/volume_material/vol_mat_presets.glsl)
 
----
-## 3. Material Library
+### 3. Material Library
 This module maps int IDs to material presets, useful for assigning materials to objects using hit-ID or tag logic in SDF raymarching.
 
-### 🏷️ Common IDs
+#### 🏷️ Common IDs
 
 | ID      | ID Macro              | Meaning                    |
 |---------|-----------------------|----------------------------|
@@ -213,7 +214,7 @@ This module maps int IDs to material presets, useful for assigning materials to 
 > - Scene-specific materials should use IDs starting from 100 to avoid conflicts.
 > - The current list is illustrative only; actual materials may be added, removed, or remapped as the library evolves.
 
-### 💻 Code
+#### 💻 Code
 <!--
 if you want to put small code snippet and make it appereable and dissapear
 -->

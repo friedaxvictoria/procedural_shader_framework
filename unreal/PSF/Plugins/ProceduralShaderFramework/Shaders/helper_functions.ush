@@ -17,7 +17,7 @@ float smoothUnion(float distance1, float distance2, float smoothFactor)
     return lerp(distance2, distance1, h) - smoothFactor * h * (1.0 - h);
 }
 
-float2 dolphinAnimation(float position, float timeOffset, float time)
+float2 dolphinAnimation(float position, float timeOffset, double time)
 {
     float adjustedTime = time + timeOffset;
     float angle1 = 0.9 * (0.5 + 0.2 * position) * cos(5.0 * position - 3.0 * adjustedTime + 6.2831 / 4.0);
@@ -28,7 +28,7 @@ float2 dolphinAnimation(float position, float timeOffset, float time)
     return float2(finalAngle, thickness);
 }
 
-float3 dolphinMovement(float timeOffset, float3 basePosition, float speed, float time)
+float3 dolphinMovement(float timeOffset, float3 basePosition, float speed, double time)
 {
     if (speed == 0)
         return basePosition;
@@ -41,14 +41,14 @@ float3 dolphinMovement(float timeOffset, float3 basePosition, float speed, float
     finalMovement.y *= 0.5;
     finalMovement.x += 0.1 * sin(0.1 - 1.0 * adjustedTime) * (1.0 - jumping);
     
-    float3 worldOffset = float3(0.0, 0.0, fmod(-speed * time, 20.0) - 5.0);
+    float3 worldOffset = float3(0.0, 0.0, fmod(-speed * time, 50.0) - 5.0);
     
     return basePosition + finalMovement + worldOffset;
 }
 
 
 //returning: res.x: The signed distance from point p to the dolphin. res.y: A parameter h that stores a normalized position along the dolphin's body (used for further shaping/decorating).
-float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed, float time)
+float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed, double time)
 {
 
 	//initialize the result to a very large distance and an auxiliary value of 0. We'll minimize this value over the dolphin's body parts.
@@ -65,7 +65,7 @@ float2 dolphinDistance(float3 p, float3 position, float timeOffset, float speed,
     float3 direction2 = float3(0.0, 0.0, 0.0);
     float3 direction3 = float3(0.0, 0.0, 0.0);
     float3 closestPoint = startPoint;
-
+   
     for (int i = 0; i < segmentNumber; i++)
     {
         float segmentPosition = float(i) / segmentNumberFloat;

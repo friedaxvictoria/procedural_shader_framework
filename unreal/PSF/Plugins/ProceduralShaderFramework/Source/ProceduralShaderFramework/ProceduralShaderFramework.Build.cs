@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using UnrealBuildTool.Rules;
 
 public class ProceduralShaderFramework : ModuleRules
 {
@@ -30,7 +31,8 @@ public class ProceduralShaderFramework : ModuleRules
 			new string[]
 			{
 				"Core",
-				"MaterialEditor"
+				"MaterialEditor",
+                "EditorScriptingUtilities"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -49,7 +51,9 @@ public class ProceduralShaderFramework : ModuleRules
                 "ShaderCompilerCommon",
 				"MaterialShaderQualitySettings",
 				"Renderer",
-				"MaterialEditor"
+				"MaterialEditor",
+                "ToolMenus",
+                "EditorScriptingUtilities"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
@@ -61,5 +65,14 @@ public class ProceduralShaderFramework : ModuleRules
 				// ... add any modules that your module loads dynamically here ...
 			}
 			);
-	}
+
+        // Add this if not already set
+        if (Target.bBuildEditor == true)
+        {
+            PrivateDependencyModuleNames.Add("UnrealEd");
+        }
+
+        // Optional but recommended
+        PublicDefinitions.Add("WITH_EDITOR=1");
+    }
 }

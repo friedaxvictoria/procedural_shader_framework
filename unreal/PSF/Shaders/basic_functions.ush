@@ -9,35 +9,35 @@ void computeUV(float2 fragCoord, out float2 uv)
 }
 
 // after lighting function
-void combinedColour(float4 hitPos1, float4 hitPos2, float3 colour1, float3 colour2, out float3 colour)
+void combinedColor(float4 hitPosition0, float3 color0, float4 hitPosition1, float3 color1, out float3 color)
 {
-    if (hitPos1.w > _raymarchStoppingCriterium && hitPos2.w > _raymarchStoppingCriterium)
+    if (hitPosition0.w > _raymarchStoppingCriterium && hitPosition1.w > _raymarchStoppingCriterium)
     {
-        colour = float3(0, 0, 0);
+        color = float3(0, 0, 0);
     }
-    else if (hitPos1.w < hitPos2.w)
+    else if (hitPosition0.w < hitPosition1.w)
     {
-        colour = colour1;
+        color = color0;
     }
     else
     {
-        colour = colour2;
+        color = color1;
     }
 }
 
 
 // before lighting function
-void getMinimum(float4 hitPos1, float4 hitPos2, float3 normal1, float3 normal2, float hitIndex1, float hitIndex2, out float4 hitPos, out float3 normal, out float hitIndex)
+void getMinimum(float4 hitPosition0, float4 hitPosition1, float3 normal1, float3 normal2, float hitIndex1, float hitIndex2, out float4 hitPos, out float3 normal, out float hitIndex)
 {
-    if (hitPos1.w < hitPos2.w && hitPos1.w < _raymarchStoppingCriterium)
+    if (hitPosition0.w < hitPosition1.w && hitPosition0.w < _raymarchStoppingCriterium)
     {
-        hitPos = hitPos1;
+        hitPos = hitPosition0;
         normal = normal1;
         hitIndex = hitIndex1;
     }
     else
     {
-        hitPos = hitPos2;
+        hitPos = hitPosition1;
         normal = normal2;
         hitIndex = hitIndex2;
     }

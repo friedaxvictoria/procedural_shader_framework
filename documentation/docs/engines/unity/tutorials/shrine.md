@@ -137,14 +137,14 @@ return float4(colorOut, 1);
 
 This shrine scene brings together symmetrical geometry and elegant animation.
     <figure markdown="span">
-    ![Unity Elevator](../images/userShaders/shrine.gif){ width="900" }
+    ![Unity Shrine](../images/userShaders/shrine.gif){ width="900" }
     </figure>
 
 
 ## The Whole Code
 ??? "Shrine User Shader"
     ```hlsl
-    Shader "Custom/Elevator"
+    Shader "Custom/Shrine"
     {
         Properties
         {

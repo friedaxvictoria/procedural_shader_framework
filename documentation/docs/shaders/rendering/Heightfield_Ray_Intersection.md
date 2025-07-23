@@ -65,8 +65,8 @@ $$
 
 3. **Return `t` as the hit distance:**
 
-- If \($$ t \geq t_{\text{max}} $$\): the ray missed the terrain.
-- If \( $$t < t_{\text{max}} $$\): the ray hit the surface.
+- If \( t \geq t_{max} \): the ray missed the terrain.
+- If \( t < t_{max}\): the ray hit the surface.
 
 ---
 
@@ -134,4 +134,4 @@ vec4 render(in vec3 ro, in vec3 rd)
 }
 */
 ```
-
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/rendering/height_field_raycast.glsl)

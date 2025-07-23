@@ -8,7 +8,6 @@
 ---
 
 - **Category:** Scene
-- **Author:** Xuetong Fu
 - **Shader Type:** Full‑screen volumetric raymarch (simplex‑FBM density)
 - **Input Requirements:** `fragCoord`, `iTime`, `iMouse`, `iResolution`, `iChannel1` (blue‑noise)
 - **Output:**  `fragColor` RGBA color (grayscale cloud density in RGB, alpha = integrated opacity)
@@ -208,6 +207,7 @@ vec4 integrateDensity(vec3 ro, vec3 rd, ivec2 px) {
 ### **Full Code**
 
 ??? note "📄 CloudVolume.glsl"
+    '''
     // ---------- Configuration Constants ----------
     #define CAM_POS vec3(0.0, -1.0, -6.0)
     #define CLOUD_BASE -3.0

@@ -1,0 +1,45 @@
+#ifndef PROCEDURAL_SHADER_FRAMEWORK_CAMERA_H
+#define PROCEDURAL_SHADER_FRAMEWORK_CAMERA_H
+
+#include "global_variables.ush"
+#include "helper_functions.ush"
+
+void rotateCamera(float3 axis, float speed, float time, out float3x3 mat)
+{
+    float angle = time * speed;
+    mat = computeRotationMatrix(normalize(axis), angle);
+}
+
+void backAndForth(float speed, float time, out float3x3 mat)
+{
+    float t = time * speed;
+    mat = half3x3(1, 0, 0, 0, 1, 0, 0, 0, abs(sin(t)));
+}
+
+// from https://www.shadertoy.com/view/NsS3Ww
+void rotateViaMouse(float2 mousePosition, float2 screenSize, out float3x3 mat)
+{
+    
+    float2 mouse = mousePosition.xy / screenSize.xy;
+
+    mouse = mouse - 0.25;
+
+    // Convert to yaw and pitch
+    float yaw = lerp(-PI, PI, -mouse.x + 0.5); // == PI * mouse.x when centered
+    float pitch = lerp(-PI / 2, PI / 2, mouse.y + 0.5); // invert Y axis
+
+    float3x3 rotY = computeRotationMatrix(float3(1, 0, 0), yaw);
+    float3x3 rotX = computeRotationMatrix(float3(0, 1, 0), pitch);
+
+    mat = mul(-rotY, rotX); // yaw first, then pitch
+}
+
+// a camera animation ALWAYS has to end with this node!!
+void getCameraMatrix(float3x3 mat0, float3x3 mat1, float3 lookAtPosition, out float3x3 cameraMatrix)
+{
+    float3x3 combinedMatrix = mul(mat0, mat1);
+    _rayOrigin = mul(_rayOrigin, combinedMatrix);
+    cameraMatrix = computeCameraMatrix(lookAtPosition, _rayOrigin, combinedMatrix);
+}
+
+#endif

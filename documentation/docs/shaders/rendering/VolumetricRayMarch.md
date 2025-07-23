@@ -66,7 +66,7 @@ float dt = max(0.05, 0.02 * t);
     $$
 
 - **Early termination occurs when:**
-  - \( $$t > t_{\max}$$ \)
+  - \(t > t_{max}\)
   - or accumulated alpha exceeds `0.99`
 
 ---

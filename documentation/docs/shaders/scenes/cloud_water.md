@@ -8,7 +8,6 @@
 ---
 
 - **Category:** Scene
-- **Author:** Xuetong Fu
 - **Shader Type:** Volumetric cloud & fog rendering integrated with surface lighting
 - **Input Requirements:** `fragCoord`, `iTime`, `iMouse`, `iResolution`, `iChannel0` (noise texture)
 - **Output:**  `fragColor` RGBA color (volumetric cloud with light occlusion and dynamic terrain shading)

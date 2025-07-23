@@ -117,13 +117,14 @@ addTorus_float(index, position_temp + float3(-1, wheelY, -0.95), wheelRadius, wh
 ```hlsl
 raymarch_float(1, camMat, index, uv, hitPos1, normal1, hitID1, rayDir1);
 
-pointLight_float(hitPos1, normal1, hitID1, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05, colorOut1);
-sunriseLight_float(hitPos1, normal1, hitID1, rayDir1, colorOut3);
-applyToonLighting_float(hitPos1, normal1, hitID1, _LightPosition, colorOut2);
+pointLight_float(hitPos1, normal1, hitID1, rayDir1, float3(17, 6.5, 3.7), float3(1,1,0), 4, 0.01,  colorOut1);
+pointLight_float(hitPos1, normal1, hitID1, rayDir1, float3(17, 6.5, -3.7), float3(1,1,0), 4, 0.01,  colorOut2);
+
+applyToonLighting_float(hitPos1, normal1, hitID1, _LightPosition, colorOut3);
 
 colorOut = colorOut1 + colorOut2 + colorOut3;
 
-return float4(colorOut, 1);
+return float4(colorOut,1);
 ```
 
 ---
@@ -218,8 +219,8 @@ The final animated car moves back and forth, featuring stylized wheels, body, li
                     float3 colorOut3;
 
                     float3 colorOut;
-                    
-                    
+
+
                     // all temps
                     float temp;
                     float3 size_temp;
@@ -230,7 +231,7 @@ The final animated car moves back and forth, featuring stylized wheels, body, li
                     rotateViaMouse_float(camMat);
 
                     computeFragmentCoordinates_float(IN.uv, 10, 10, uv);
-                
+
                     float3 carRoot;
                     float3 offset;
 
@@ -272,11 +273,16 @@ The final animated car moves back and forth, featuring stylized wheels, body, li
                     addTorus_float(index, position_temp + float3(1.2, wheelY, -0.95), wheelRadius, wheelThickness, float3(0,0,1), 90, float3(0.1,0.1,0.1), float3(0.3,0.3,0.3), 0.1, 32, 0, index);
                     addTorus_float(index, position_temp + float3(-1, wheelY, -0.95), wheelRadius, wheelThickness, float3(0,0,1), 90, float3(0.1,0.1,0.1), float3(0.3,0.3,0.3), 0.1, 32, 0, index);
 
+                    addRoundBox_float(index, float3(17, 2, 3.7), float3(0.2, 4, 0.2), 0.1, float3(0,1,0), 0, float3(0.2, 0.2, 0.2), float3(1,1,1), 0.3, 32, 0, index);
+                    addRoundBox_float(index, float3(17, 2, -3.7), float3(0.2, 4, 0.2), 0.1, float3(0,1,0), 0, float3(0.2, 0.2, 0.2), float3(1,1,1), 0.3, 32, 0, index);
+
+
                     raymarch_float(1, camMat, index, uv, hitPos1, normal1, hitID1, rayDir1);
 
-                    pointLight_float(hitPos1, normal1, hitID1, rayDir1, _LightPosition, float3(1,1,1), 5, 0.05,  colorOut1);
-                    sunriseLight_float(hitPos1, normal1, hitID1, rayDir1, colorOut3);
-                    applyToonLighting_float(hitPos1, normal1, hitID1, _LightPosition, colorOut2);
+                    pointLight_float(hitPos1, normal1, hitID1, rayDir1, float3(17, 6.5, 3.7), float3(1,1,0), 4, 0.01,  colorOut1);
+                    pointLight_float(hitPos1, normal1, hitID1, rayDir1, float3(17, 6.5, -3.7), float3(1,1,0), 4, 0.01,  colorOut2);
+                    
+                    applyToonLighting_float(hitPos1, normal1, hitID1, _LightPosition, colorOut3);
 
                     colorOut = colorOut1 + colorOut2 + colorOut3;
 

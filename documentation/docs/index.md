@@ -76,22 +76,26 @@ Learn how to use shaders across different engines:
 
 <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; text-align: center;">
 
-  <div style="width: 45%;">
+  <div style="width: 30%;">
     <h4>🐬 Swimming Dolphin</h4>
-    <img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/swimming_dolphin.gif" width="100%" alt="Swimming Dolphin GIF">
+    <img src="../../../static/videos/swimming_dolphin.gif
+        " alt="Swimming Dolphin GIF" width="640" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
   </div>
 
-  <div style="width: 45%;">
+  <div style="width: 30%;">
     <h4>🌅 Sunrise Lighting</h4>
-    <img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/lighting/sunrise.gif" width="100%" alt="Sunrise Lighting GIF">
+    <img src="../../../static/videos/sunrise.gif
+      " alt="Sunrise Lighting GIF" width="640" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
   </div>
 
   <div style="width: 30%;">
     <h4>🛸 TIE Fighter</h4>
-    <img src="https://raw.githubusercontent.com/friedaxvictoria/procedural_shader_framework/main/shaders/screenshots/animation/TIE Fighter_animation.gif" width="100%" alt="TIE Fighter GIF">
+     <img src="../../../static/videos/demo_tf.gif
+      " alt="Tie Fighter" width="640" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
   </div>
 
 </div>
 
 <p align="center"><em>Animations provided by <strong>Shader Team</strong></em></p>
 
+ Want to see more animations? 🎬 [Explore the Gallery](https://github.com/friedaxvictoria/procedural_shader_framework/tree/main/shaders/screenshots)
