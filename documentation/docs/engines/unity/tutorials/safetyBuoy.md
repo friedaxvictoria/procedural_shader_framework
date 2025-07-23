@@ -47,11 +47,6 @@ Once the UPM ist installed, this example can be [downloaded](../../unity.md#user
     
     This creates a finished scene that shows the sun setting over the ocean. The camera position can be adjusted in the inspector of the prefab. Read more about it in [Uniforms and C#](../uniformsAndCs.md). 
 
-    The following image uses a camera at `float3(0,3,15)`.
-
-    <figure markdown="span">
-        ![Unity Safety Buoy: Intermediate](../images/safetyBuoy/sbIntermediate.gif){ width="600" }
-    </figure>
 
 7. Add a safety buoy by combining two tori.
     1. Add a major torus with *radius 2*, *thickness 0.8*, and a custom *color* (e.g. *#C20707*).
@@ -129,5 +124,5 @@ The finished ShaderGraph:
 
 The output with camera at `float3(0,3,15)`:
     <figure markdown="span">
-    ![Unity Safety Buoy: Final Output](../images/safetyBuoy/finalResults.gif){ width="500" }
+    ![Unity Safety Buoy: Final Output](../images/safetyBuoy/finalResults.gif){ width="700" }
     </figure>

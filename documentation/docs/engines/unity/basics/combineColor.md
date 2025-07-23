@@ -7,7 +7,7 @@ This function can be used to combine the output of different raymarching-based f
 
 > This function has been added for completion's sake but is not recommended. It can only combine hit objects but it **cannot maintain** lighting effects that affect the environment such as the [Sunrise](../lighting/sunriseLight.md) or the [Point Light](../lighting/pointLight.md). For the prefered method to combine results, refer to [Minimum](minimum.md). 
 
-> However, it may be used for experimental shaders that compare the effect of different lighting functions.
+> However, this function may be used for experimental shaders that compare the effect of different lighting functions.
 
 ---
 
@@ -40,6 +40,8 @@ The edgecase, that for a fragment both inputs did not yield a hit, is checked fo
 | `color2`        | float3   | Color of the second input|
 
 ### Outputs:
+| Name            | Type     | Description |
+|-----------------|----------|-------------|
 | `color`        | float3   | Combined color of both inputs based on which hit is closer to the camera|
 
 ---
@@ -66,4 +68,4 @@ The edgecase, that for a fragment both inputs did not yield a hit, is checked fo
 
 ---
 
-This is an engine-specific implementation without a shader-basis. It was created to allow for the combination of shader-library-code.
+This is an engine-specific implementation without a shader-basis. It was created to enable the combination of shader-library-code.

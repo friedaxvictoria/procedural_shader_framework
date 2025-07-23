@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="main-heading">Tutorial: Car</h1>
-    <blockquote class="author">by Utku Alkan</blockquote>
+    <blockquote class="author">by Utku Alkan and Frieda Hentschel</blockquote>
 </div>
 
 This tutorial walks you through building a stylized car. The scene features a red car with windows and wheels, smoothly driving across a platform, with additional details like lighting and subtle shake using `shakeObject_float` (currently there is no shake).

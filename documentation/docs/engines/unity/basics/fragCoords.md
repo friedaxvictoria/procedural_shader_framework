@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function computes fragment coordinates ranging from 0 to 1 based on input coordinates. As this function is responsible for computing the coordinates at which a fragement is computed, it is the basis for all others. **It should always be included in a shader.**
+This function computes fragment coordinates ranging from 0 to 1 based on input coordinates. As this function is responsible for computing the coordinates at which a fragement is computed, it is the basis on which all other functions operate. **It should always be included in a shader.**
 
 ---
 
@@ -40,18 +40,18 @@ void computeFragmentCoordinates_float(float2 inputCoordinates, float scaleUp, fl
 
 ## Notes on Non-Uniformly Shaped Objects
 
-If a square-shaped object is used to apply the shader to, both the **scaleUp** and the **scaleRight** can be disregarded in the ShaderGraph oder simply be set to *1* for the Standard Scripting. However, if rectangles (e.g. fullscreen shaders) or cuboids are utilised, the scaling parameters are necessary to ensure that no distortion occurs. This is done by applying the ratio of the scales to the coordinates.
+If a square-shaped object is used to apply the shader to, both the **scaleUp** and the **scaleRight** can be disregarded in the ShaderGraph oder simply be set to 1 for the Standard Scripting. However, if rectangles (e.g. fullscreen shaders) or cuboids are utilised, the scaling parameters are necessary to ensure that no distortion occurs. This is done by applying the ratio of the scales to the coordinates.
 
 The required scaling-values depend on the object's extent as well as Unity's camera:
 
 - For a rectangle choose the vertical scale as **scaleUp** and the horizontal scale as **scaleRight**.
-- For a cuboid choose the scaling-values as above taking Unity's camera into account. If the camera looks along the z-axis and the y-axis defines the upwards vector, choose the y-scale as **scaleUp** and the x-scale as **scaleRight**.
+- For a cuboid choose the scaling-values as above, taking Unity's camera into account. If the camera looks along the z-axis and the y-axis defines the upwards vector, choose the y-scale as **scaleUp** and the x-scale as **scaleRight**.
 
 > If a cuboid is used that is differently scaled in each dimension, the procedural results can only be non-distorted for a combination of two axis.
 
-<figure markdown="span">
-    ![Unity Distortion For Cuboids](../images/basics/distortion.png){ width="500" }
-</figure>
+*<figure markdown="span">
+    ![Unity Distortion For Cuboids](../images/basics/distortion.png){ width="400" }
+</figure>*
 
 ---
 
@@ -62,7 +62,7 @@ The required scaling-values depend on the object's extent as well as Unity's cam
 
     To easily get access to the scale:
 
-    - For objects: Add Unity's *Object Node*, connect the scale-parameter to Unity's *Splitter Node*, and choose the required dimensions to connect to the custom node's inputs. 
+    - For objects: Add Unity's *Object Node*, connect the scale-parameter to Unity's *Split Node*, and choose the required dimensions to connect to the custom node's inputs. 
 
         <figure markdown="span">
             ![Unity Object's Fragment Coordinates](../images/basics/objectFragCoords.png){ width="500" }

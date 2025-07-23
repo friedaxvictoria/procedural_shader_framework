@@ -3,7 +3,7 @@
     <blockquote class="author">by Frieda Hentschel</blockquote>
 </div>
 
-This function computes the camera matrix based on two input matrices. This allows the combination of two or more camera animations. It is **required after a camera animation** is applied. 
+This function computes the camera matrix based on two input matrices. This enables the combination of two or more camera animations. It is **required after a camera animation** is applied. 
 
 ---
 

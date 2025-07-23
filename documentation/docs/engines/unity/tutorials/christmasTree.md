@@ -177,5 +177,5 @@ The finished ShaderGraph:
 
 The output with camera at `float3(0,-2,10)`:
     <figure markdown="span">
-    ![Unity Christmas Tree: Final Output](../images/christmasTree/finalResult.gif){ width="500" }
+    ![Unity Christmas Tree: Final Output](../images/christmasTree/finalResult.gif){ width="700" }
     </figure>

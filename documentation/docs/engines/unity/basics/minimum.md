@@ -50,7 +50,7 @@ void getMinimum_float(float4 hitPosition1, float3 normal1, int hitIndex1, float4
 | `normal`        | float3   | Normal corresponding to the closest hit-position|
 | `hitIndex`        | int   | Hit-index corresponding to the closest hit-position|
 
-The outputs can be used for further computations using lighting functions (e.g. [Sunrise](../lighting/sunriseLight.md)).
+The outputs can be used for further computations using [Lighting Functions](../lighting/generalInformation.md).
 
 ---
 
@@ -73,4 +73,4 @@ The outputs can be used for further computations using lighting functions (e.g. 
     ```
 ---
 
-This is an engine-specific implementation without a shader-basis. It was created to allow for the combination of shader-library-code.
+This is an engine-specific implementation without a shader-basis. It was created to enable the combination of shader-library-code.

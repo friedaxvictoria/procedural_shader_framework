@@ -6,8 +6,9 @@
 Unity is a versatile real-time engine known for its **ShaderGraph system**, **cross-platform support**, and ease of integration for custom shaders.
 
 - **Integration Methods:** 
-    - Visual Scripting: ShaderGraph
-    - Standard Scripting: ShaderLab 
+    - Visual Scripting: ShaderGraph using custom nodes based
+    - Standard Scripting: ShaderLab using custom include-files
+- **Shader Language:** HLSL
 - **Supported Render Pipelines:** URP (Universal Render Pipeline), others may work but were not tested 
 - **Supported Unity Versions:** All functions were tested on *Unity 2022.3.50* and *Unity 6000.0.41* 
 - **Supported Shader Types:**
@@ -21,9 +22,9 @@ Unity is a versatile real-time engine known for its **ShaderGraph system**, **cr
 
 To easily include the integration of the framework into any Unity project, it is available as a UPM. The following gives a step by step guide on how to set up a project with it:
 
-1. Create a URP project (Universal Render Pipeline) in Unity
+1. Create a URP project (Universal Render Pipeline) in Unity.
 
-2. Navigate to *Window/Package Manager*
+2. Navigate to *Window/Package Manager*.
 
     <figure markdown="span">
         ![Unity Overview: Find Package Manager](unity/images/overview/packageManager.png){ width="300"}
@@ -50,6 +51,8 @@ To easily include the integration of the framework into any Unity project, it is
         Create a ShaderGraph via a right-click in the project *Create/Shader Graph/URP/...*. 
         Decide what kind of shader is required. 
 
+        > Unity's ShaderGraph supports ```half floating point``` and ```floating point``` as its precision. This framework only supports the later. Thus, ensure that in the Graph's inspector under *Graph Settings/Precision* **Single** is chosen. This is typically the default.
+
         <figure markdown="span">
             ![Unity Overview: Create ShaderGraph](unity/images/overview/createShaderGraph.png){ width="500" }
         </figure>
@@ -68,11 +71,9 @@ To easily include the integration of the framework into any Unity project, it is
         ![Unity Overview: Create Material](unity/images/overview/createMaterial.png){ width="400" }
     </figure>
 
-    > Unity's ShaderGraph supports ```half floating point``` and ```floating point``` as its precision. This framework only supports the later. Thus, ensure that in the Graph's inspector under *Graph Settings/Precision* **Single** is chosen. This is typically the default.
-
 7. Apply the shader to a Unity material by dragging it onto the material.
 
-8. Apply the material to an object of choice or set it up as a full screen material.
+8. Apply the material to an object of choice or set it up as a fullscreen material.
 
     - Object Material: Drag the Material into the Material-section of the object in the inspector.
 
@@ -125,7 +126,7 @@ Once the UPM has been installed:
 
 - The full implementation of Unity's integration can be found at: 
     
-    `Packages/com.tudresden.proceduralshaderframeworkpackage/Runtime/scripts`
+    `Packages/ProceduralShaderFrameworkpackage/Runtime/scripts`
 
 - To get access to one of the samples, they need to be downloaded. For that, navigate to the UPM in the Package Manager. Locate the Samples-tab and download the desired one. 
 
@@ -133,6 +134,6 @@ Once the UPM has been installed:
         ![Unity Overview: UPM Samples](unity/images/overview/UPMSamples.png){ width="400" }
     </figure>
 
-    Once downloaded, the sample can be found at: 
+    Once downloaded, the samples can be found at: 
     
-    `Packages/com.tudresden.proceduralshaderframeworkpackage/Samples~`
+    `Packages/ProceduralShaderFrameworkpackage/Samples~`
