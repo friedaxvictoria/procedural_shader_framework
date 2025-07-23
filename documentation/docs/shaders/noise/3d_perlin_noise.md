@@ -1,9 +1,11 @@
-# 🧩 3D Perlin Gradient Noise Shader
+<div class="container">
+    <h1 class="main-heading">3D Perlin Gradient Noise Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/saeedelsayed/Procedural-Shaders/blob/main/screenshots/noise/3d%20perlin%20noise.png?raw=true" alt="3D Perlin Noise Output" width="400" height="225">
+<img src="../../../static/images/images4Shaders/3d%20perlin%20noise.png" alt="3D Perlin Noise Output" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 
 - **Category:** Noise  
-- **Author:** Wanzhang He
 - **Input Requirements:** `vec3 pos (xy + time)`, `fragCoord`, `iTime`, `iResolution`  
 - **Output:** Animated grayscale gradient noise
 
