@@ -55,7 +55,7 @@ CHECK THIS
     Find the node at `ProceduralShaderFramework/Camera/RotateViaMouse`
 
     <figure markdown="span">
-        ![Unity Mouse-Based Camera Rotation](../images/camera/rotateViaMouse.png){ width="300" }
+        ![Unreal Engine Mouse-Based Camera Rotation](../images/camera/RotateViaMouse.png){ width="300" }
     </figure>
 
 === "Standard Scripting"

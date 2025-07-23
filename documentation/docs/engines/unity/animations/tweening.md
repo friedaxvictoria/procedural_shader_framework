@@ -35,6 +35,7 @@ This header provides a library for easing (tweening) functions to interpolate va
             return 0.5 * BounceEaseOut(p * 2.0 - 1.0) + 0.5;
     }
 
+    
     float applyTweenFunction(float t, int tweenType)
     {
         if (tweenType == TWEEN_LINEAR)
@@ -155,9 +156,11 @@ This header provides a library for easing (tweening) functions to interpolate va
         return t; // fallback
     }
 
-    float getTweenProgress(float startTime, float duration, bool pingpong)
+
+    
+    float getTweenProgress(float startTime, float duration, bool pingpong, float time)
     {
-        float t = (_Time.y - startTime) / duration;
+        float t = (time - startTime) / duration;
 
         if (t < 0)
             return 0;
@@ -176,17 +179,17 @@ This header provides a library for easing (tweening) functions to interpolate va
     ```
 
 ``` hlsl
-void tween3D_float(float3 start, float3 end, float duration, int tweenType, float startTime, bool pingpong, out float3 value)
+void tween3D(float3 start, float3 end, float duration, int tweenType, float startTime, bool pingpong, float time, out float3 value)
 {
-    float t = getTweenProgress(startTime, duration, pingpong);
+    float t = getTweenProgress(startTime, duration, pingpong, time);
 
     float eased = applyTweenFunction(t, tweenType);
     value = lerp(start, end, eased);
 }
 
-void tween1D_float(float start, float end, float duration, int tweenType, float startTime, bool pingpong, out float value)
+void tween1D(float start, float end, float duration, int tweenType, float startTime, bool pingpong, float time, out float value)
 {
-    float t = getTweenProgress(startTime, duration, pingpong);
+    float t = getTweenProgress(startTime, duration, pingpong, time);
 
     float eased = applyTweenFunction(t, tweenType);
     value = lerp(start, end, eased);

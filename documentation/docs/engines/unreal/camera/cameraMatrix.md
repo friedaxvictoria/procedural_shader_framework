@@ -50,7 +50,7 @@ Examplary matrices that can be used as input to this function are [Camera Rotati
     Find the node at `ProceduralShaderFramework/Camera/Camera Matrix`
 
     <figure markdown="span">
-        ![Unity Camera Matrix](../images/camera/cameraMatrix.png){ width="500" }
+        ![Unreal Engine Camera Matrix](../images/camera/CameraMatrix.png){ width="500" }
     </figure>
 
 === "Standard Scripting"
