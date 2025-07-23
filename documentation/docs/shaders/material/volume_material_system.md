@@ -1,7 +1,11 @@
-#  🧩 Volume Material System Documentation
+<div class="container">
+    <h1 class="main-heading">Volume Material System Documentation</h1>
+    <blockquote class="author">by Xuetong Fu</blockquote>
+</div>
+
+---
 
 - **Category:** Material
-- **Author:** Xuetong Fu
 - **Shader Type:** Utility header
 - **Input Requirements:** Volume material ID; material property parameters (see the table below for details)
 
