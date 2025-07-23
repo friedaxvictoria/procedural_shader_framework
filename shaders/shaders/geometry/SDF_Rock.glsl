@@ -7,6 +7,7 @@
 //   rotation transformation, surface normal estimation, and basic diffuse shading.
 //   Supports multiple SDF shapes stored in arrays for extensibility.
 // Screenshots: shaders/screenshots/geometry/SDF_Rock.png
+// From Wanzhang He
 // ==========================================
 
 /**
