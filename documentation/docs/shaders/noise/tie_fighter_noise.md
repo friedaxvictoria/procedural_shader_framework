@@ -1,8 +1,9 @@
-# 🧩 TIE Fighter Noise Shader
-
+<div class="container">
+    <h1 class="main-heading">TIE Fighter Noise Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
 - **Category:** Noise  
-- **Author:** Wanzhang He
 - **Shader Type:** utility / hash / value noise  
 - **Input Requirements:** `vec3`, `vec4`
 
