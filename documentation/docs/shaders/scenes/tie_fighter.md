@@ -7,8 +7,6 @@
 
 - **Category:** Scene
 
-- **Author:** Ruimin Ma
-
 - **Shader Type:** TIE_Fighter
 
 - **Input:** 

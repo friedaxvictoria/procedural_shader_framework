@@ -65,3 +65,4 @@ vec3 GetNormal(vec3 p) {
     return normalize(vec3(dx, dy, dz));
 }
 ```
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/rendering/GetNormal.glsl)

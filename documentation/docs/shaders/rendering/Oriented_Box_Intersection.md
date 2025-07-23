@@ -231,3 +231,4 @@ vec2 rm_traceBox(in vec3 ro, in vec3 rd,
 #endif // RAY_BOX_INTERSECT_GLSL
 ```
 
+🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/rendering/ray_box_intersect.glsl)
