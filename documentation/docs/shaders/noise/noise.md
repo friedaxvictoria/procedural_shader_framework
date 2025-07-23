@@ -1,7 +1,10 @@
-# 🧩 Noise Shader Collection
+
+<div class="container">
+    <h1 class="main-heading">Noise Shader Collection</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
 - **Category:** Noise
-- **Author:** Wanzhang He
 - **Shader Type:** noise functions
 - **Input Requirements:** `float`, `vec2`, `vec3`, `time`
 
