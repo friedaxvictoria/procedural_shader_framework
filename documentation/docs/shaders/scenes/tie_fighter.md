@@ -1,4 +1,9 @@
-#  TIE_Fighter
+<div class="container">
+    <h1 class="main-heading">TIE Fighter</h1>
+    <blockquote class="author">by Ruimin Ma</blockquote>
+</div>
+
+<img src="../../../static/images/images4Shaders/tie_fighter.gif" alt="tie_fighter" width="400" height="225">
 
 - **Category:** Scene
 
