@@ -9,7 +9,7 @@ Unity is a versatile real-time engine known for its **ShaderGraph system**, **cr
     - Visual Scripting: ShaderGraph
     - Standard Scripting: ShaderLab 
 - **Supported Render Pipelines:** URP (Universal Render Pipeline), others may work but were not tested 
-- **Supported Unity Versions:** All functions were tested on *Unity 2022.3.50* and *Unity 6000.0.4* 
+- **Supported Unity Versions:** All functions were tested on *Unity 2022.3.50* and *Unity 6000.0.41* 
 - **Supported Shader Types:**
     - Unlit Shader
     - Lit Shader/Standard Surface Shader

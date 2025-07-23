@@ -1,5 +1,7 @@
 # Unity Submission by Utku Alkan and Frieda Hentschel
 
-This zip-file contains a DemoProject: It is a URP project containing the *ProceduralShaderFrameworkPackage* amongst the assets. 
+This zip-file contains a project called **UnityPSFDemo**: It is a URP project in which the UPM package *ProceduralShaderFrameworkPackage* was installed. The workflow on how to include this package can be found in the documentation. 
 
-This is the folder that is used to create the UPM package. It was used to build the mentioned user shaders. Upon locating the Samples-folder, the corresponding user shader can be viewed in its scene. **Note that all #include-paths are different compared to the ones noted in the documentation. They should now be `#include "Assets/ProceduralShaderFrameworkPackage/Runtime/scripts/..."`.
+The project was created with **Unity 6000.0.41**.
+
+All sample-scenes have been downloaded and can be found at *Assets/Samples/ProceduralShaderFrameworkPackage/2.2.0*. To view them, navigate to a folder and double-click on the *{Name}Scene*. View the scene in Game-Mode by clicking the *Play-Button*.
