@@ -161,6 +161,11 @@ mat4 getTranslateMatrix(float t, int mode) {
   <a class="custom-button md-button" href="../../../../engines/unity/animations/tweening">Unity</a>
 </div>
 
+<div class="button-row">
+  <a class="custom-button md-button" href="../../engines/unreal/animations/tweening.md">Unreal</a>
+</div>
+
+
 #### 5.3 Orbit Animation
 
 ```glsl
@@ -201,6 +206,9 @@ mat4 getOrbitMatrix(float t, int mode) {
   <a class="custom-button md-button" href="../../../../engines/unity/animations/orbitObject">Unity</a>
 </div>
 
+<div class="button-row">
+  <a class="custom-button md-button" href="../../engines/unreal/animations/orbitObject.md">Unreal</a>
+</div>
 #### 5.3 Self-Rotate Animation
 
 ```glsl
@@ -226,6 +234,10 @@ mat4 getSelfRotateMatrix(float t, int mode) {
   <a class="custom-button md-button" href="../../../../engines/unity/animations/orbitObject">Unity</a>
 </div>
 
+<div class="button-row">
+  <a class="custom-button md-button" href="../../engines/unreal/animations/orbitObject.md">Unreal</a>
+</div>
+
 #### 5.4 Pulse Scale Animation
 
 ```glsl
@@ -246,6 +258,10 @@ mat4 getPulseScaleMatrix(float t, int mode) {
 
 <div class="button-row">
   <a class="custom-button md-button" href="../../../../engines/unity/animations/tweening">Unity</a>
+</div>
+
+<div class="button-row">
+  <a class="custom-button md-button" href="../../engines/unreal/animations/tweening.md">Unreal</a>
 </div>
 
 #### 5.5 TIE Path Animation
