@@ -16,7 +16,6 @@
 ### 🔷 Core Concept
 This system organizes material appearance using a three-part module:
 
----
 ### 1. `VolMaterialParams` Struct
 Defines a data structure storing surface reflectance info (diffuse, specular, roughness, etc.)
 #### 🎛️ Parameters
@@ -58,7 +57,6 @@ Usage: `#include "materials/volume_material/vol_mat_params.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/volume_material/vol_mat_params.glsl)
 
----
 ### 2. Volume Material Presets
 Defines helper functions to generate common volume materials like fog, clouds, etc.
 #### 🔧 Functions
@@ -197,8 +195,6 @@ if we want to link the github repo
 Usage: `#include "materials/volume_material/vol_mat_presets.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/volume_material/vol_mat_presets.glsl)
-
----
 
 ### 3. Material Library
 This module maps int IDs to material presets, useful for assigning materials to objects using hit-ID or tag logic in SDF raymarching.
