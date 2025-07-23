@@ -17,9 +17,9 @@
 This system organizes material appearance using a three-part module:
 
 ---
-## 1. `MaterialParams` Struct
+### 1. `MaterialParams` Struct
 Defines a data structure storing surface reflectance info (diffuse, specular, roughness, etc.)
-### 🎛️ Parameters
+#### 🎛️ Parameters
 
 | Member             | Type  | Description                                       |
 |--------------------|-------|---------------------------------------------------|
@@ -36,7 +36,7 @@ Defines a data structure storing surface reflectance info (diffuse, specular, ro
 | `refractionStrength`| float| Blending factor for refracted background             |
 | `refractionTint`   | vec3  | Tint color applied to refracted background             |
 
-### 💻 Code
+#### 💻 Code
 <!--
 if you want to put small code snippet
 -->
@@ -68,9 +68,9 @@ Usage: `#include "materials/material/material_params.glsl"`
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/material_params.glsl)
 
 ---
-## 2. Material Presets
+### 2. Material Presets
 Defines helper functions to generate common materials like glass, plastic, metal, toon, etc.
-### 🔧 Functions
+#### 🔧 Functions
 
 | Function               | Description                         |
 |------------------------|-------------------------------------|
@@ -86,7 +86,7 @@ Defines helper functions to generate common materials like glass, plastic, metal
 > - All functions return a `MaterialParams` struct
 > - These presets are meant to showcase possible material types, but they may not reflect the actual materials used in later shaders.
 
-### 💻 Code
+#### 💻 Code
 <!--
 if you want to put small code snippet and make it appereable and dissapear
 -->
@@ -197,10 +197,10 @@ Usage: `#include "materials/material/material_presets.glsl"`
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/material_presets.glsl)
 
 ---
-## 3. Material Library
+### 3. Material Library
 This module maps int IDs to material presets, useful for assigning materials to objects using hit-ID or tag logic in SDF raymarching.
 
-### 🏷️ Common IDs
+#### 🏷️ Common IDs
 
 | ID      | ID Macro              | Meaning                    |
 |---------|-----------------------|----------------------------|
@@ -215,7 +215,7 @@ This module maps int IDs to material presets, useful for assigning materials to 
 > - Scene-specific materials should use IDs starting from 101 to avoid conflicts.
 > - The current list is illustrative only; actual materials may be added, removed, or remapped as the library evolves.
 
-### 💻 Code
+#### 💻 Code
 <!--
 if you want to put small code snippet and make it appereable and dissapear
 -->
@@ -339,7 +339,7 @@ if you want to put small code snippet and make it appereable and dissapear
 if we want to link the github repo
 -->
 
-Usage: `#include "materials/material//material_library.glsl"`
+Usage: `#include "materials/material/material_library.glsl"`
 
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/materials/material/material_library.glsl)
 
