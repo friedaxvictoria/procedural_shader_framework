@@ -1,9 +1,12 @@
-# 🧩 Glowing Star Overlay Shader
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/noise/GlowingStarOverlay.png?raw=true" alt="Glowing Star Overlay Example" width="400" height="225">
+<div class="container">
+    <h1 class="main-heading">Glowing Star Overlay Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
+
+<img src="../../../static/images/images4Shaders/GlowingStarOverlay.png" alt="Glowing Star Overlay Example" width="500" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 
 - **Category:** Noise 
-- **Author:** Wanzhang He 
 - **Shader Type:** screen-space overlay  
 - **Input Requirements:** `vec2 uv`, `iTime`, `iResolution`
 
