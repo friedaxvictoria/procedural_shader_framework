@@ -7,8 +7,7 @@ This tutorial is designed to illustrate the workflow of Godot's integration of t
 This scene demonstrates creating a desert environment with **two mining carts equipped with wheels** and **precious gems** using basic SDF shapes.
 
 <div align="center">
-<img src="../../../static/images/images4Godot/Desert.png
-" alt="Camera Controls" width="640" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <img src="../../../static/videos/desertCart.gif" width="640" height="360" alt="Scene 2 Demo">
 </div>
 
 ### Step 1: Setting Up the Cart Wheels
