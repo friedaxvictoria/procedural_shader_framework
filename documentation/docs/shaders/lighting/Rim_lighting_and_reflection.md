@@ -78,3 +78,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/Rim_lighting_and_reflection.glsl)
+
+
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../engines/unreal/lighting/rimLight.md">Unreal</a>
+</div>

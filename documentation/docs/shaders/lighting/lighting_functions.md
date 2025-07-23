@@ -52,6 +52,11 @@ if you want to put small code snippet
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/phong.glsl)
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../engines/unreal/lighting/PhongLighting.md">Unreal</a>
+</div>
 
 ### 2. Blinn-phong
 The Blinn-Phong lighting model calculates diffuse and specular highlights using the halfway vector between the light and view directions. It provides a smoother and more efficient alternative to the classic Phong model, making it suitable for real-time rendering with stylized or semi-realistic surfaces.
@@ -77,6 +82,10 @@ vec3 applyBlinnPhongLighting(LightingContext ctx, MaterialParams mat) {
   <a class="md-button" href="../../../engines/unity/lighting/blinnPhongLight">Unity</a>
 </div>
 
+<div class="button-row">
+  <a class="md-button" href="../../engines/unreal/lighting/blinnPhongLight.md">Unreal</a>
+</div>
+
 ### 3. Lambert
 Implements a classic Lambertian diffuse model. It computes the intensity of reflected light based on the angle between surface normal and light direction, producing soft, angle-dependent shading.
 
@@ -95,6 +104,10 @@ vec3 lambertDiffuse(LightingContext ctx, MaterialParams mat) {
 
 <div class="button-row">
   <a class="md-button" href="../../../engines/unity/lighting/lambLight">Unity</a>
+</div>
+
+<div class="button-row">
+  <a class="md-button" href="../../engines/unreal/lighting/lambLight.md">Unreal</a>
 </div>
 
 ### 4. Physically Based Rendering
@@ -139,6 +152,12 @@ vec3 applyPBRLighting(LightingContext ctx, MaterialParams mat) {
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/pbr.glsl)
 
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../engines/unreal/lighting/PBRLighting.md">Unreal</a>
+</div>
+
 ### 5. Rim Lighting
 Adds a soft glow around the edges of objects by highlighting areas where the surface normal is nearly perpendicular to the view direction.
 
@@ -159,6 +178,10 @@ vec3 computeRimLighting(LightingContext ctx, MaterialParams mat, vec3 rimColor) 
   <a class="md-button" href="../../../engines/unity/lighting/rimLight">Unity</a>
 </div>
 
+<div class="button-row">
+  <a class="md-button" href="../../engines/unreal/lighting/rimLight.md">Unreal</a>
+</div>
+
 ### 6. Fake Specular
 Simulates stylized highlights without relying on physical material properties. 
 
@@ -173,5 +196,11 @@ vec3 computeFakeSpecular(LightingContext ctx, MaterialParams mat) {
 }
 ```
 🔗 [View Full Shader Code on GitHub](https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/shaders/lighting/surface_lighting/fake_specular.glsl)
+
+#### Engine Integrations
+
+<div class="button-row">
+  <a class="md-button" href="../../engines/unreal/lighting/fakeSpecular.md">Unreal</a>
+</div>
 
 ---
