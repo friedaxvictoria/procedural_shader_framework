@@ -4,7 +4,7 @@
 </div>
 
 - **Category:** Animation
-- **Version:** v2 (initial version)
+- **Version:** v2 
 
 This is the **second modular version** of the SDF animation system.  
 Compared to v1, it introduces a **unified `Animation` struct with two vec4 fields**, **time modulation modes**, and **cleaner orbit/rotation helpers**.  
