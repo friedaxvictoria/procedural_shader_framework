@@ -1,7 +1,16 @@
-# 🧩 TIE Fighter Animation Shader
+<div class="container">
+    <h1 class="main-heading">TIE Fighter Animation Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
+
+<img src="../../../static/images/images4Shaders/tie_fighter.gif" alt="TIE Fighter Animation" width="400" height="225">
 
 - **Category:** Animation 
-- **Author:** Wanzhang He
+- **Shader Type:** utility (time-based motion helper)  
+- **Input Requirements:** `T` (float, time in 0–40 range)  
+- **Output:**  
+  - `vec3` from `tiePos(vec3 p, float t)` — fighter position  
+  - `ro`, `lookAt` from `getCamera(float T, out vec3 ro, out vec3 lookAt)` — camera path  
 
 ---
 
