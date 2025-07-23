@@ -1,9 +1,11 @@
-# 🧩 Sun and Halo Shader
+<div class="container">
+    <h1 class="main-heading">Sun and Halo Shader</h1>
+    <blockquote class="author">by Wanzhang He</blockquote>
+</div>
 
-<img src="https://github.com/friedaxvictoria/procedural_shader_framework/blob/main/shaders/screenshots/SunAndHalo.png?raw=true" alt="Sun and Halo Shader Output" width="400" height="225">
+<img src="../../../static/images/images4Shaders/SunAndHalo.png" alt="Sun and Halo Shader Output" width="400" height="225">
 
 - **Category:** Scene / Atmospheric Effect  
-- **Author:** Wanzhang He
 - **Input Requirements:** `fragCoord`, `iMouse`, `iResolution`  
 - **Output:** HDR-tone-mapped sun disk and scattering halo over sky gradient
 
